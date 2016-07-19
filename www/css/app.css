@@ -260,6 +260,8 @@ body {
   bottom: 0px;
   left: 0px;
   background-color: #fff;
+  overflow: hidden;
+
   -webkit-transition: transform 400ms ease;
   -moz-transition: transform 400ms ease;
   -o-transition: transform 400ms ease;
@@ -270,6 +272,7 @@ body {
   -ms-transform: translate3d(-100%,0,0);
   -o-transform: translate3d(-100%,0,0);
   transform: translate3d(-100%,0,0);
+
 }
 
 .app .menu.open .backdrop{
@@ -283,6 +286,81 @@ body {
   -ms-transform: translate3d(0,0,0);
   -o-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
+}
+
+.app .menu .content .header{
+  width: 100%;
+  height: 150px;
+  background-color: #ccc;
+  position: relative;
+  overflow: hidden;
+  padding-top: 10px;
+}
+
+.app .menu .content .header img{
+  width: 90px;
+  height: 90px;
+  border-radius: 90px;
+  float: left;
+  margin-left: 10px;
+}
+
+.app .menu .content .header h4{
+  width: 190px;
+  text-align: right;
+  margin: 0px;
+  margin-top: 10px;
+  padding: 0px;
+  font-size: 16px;
+  float: left;
+}
+
+.app .menu .content .header h5{
+  width: 100%;
+  text-align: left;
+  margin: 0px;
+  margin-top: 10px;
+  padding: 0px;
+  padding-left: 10px;
+  font-size: 18px;
+  float: left;
+}
+
+.app .menu .content .list{
+  width: 100%;
+}
+
+.app .menu .content .item{
+  width: 100%;
+  height: 60px;
+}
+
+.app .menu .content .item .icon{
+  width: 40px;
+  height: 60px;
+  float: left;
+  line-height: 65px;
+  margin-left: 15px;
+}
+
+.app .menu .content .item .icon i{
+  font-size: 30px;
+  color: #aaa;
+  margin-top: 5px;
+}
+
+.app .menu .content .item .label{
+  height: 40px;
+  float: left;
+  line-height: 60px;
+}
+
+.app .menu .content .item.active{
+  background-color: #eee;
+}
+
+.app .menu .content .item.active .icon i{
+  color: #555;
 }
 
 /* SCREENS */
@@ -549,4 +627,113 @@ body {
     bottom: 30px;
     right: 30px;
   }
+}
+
+.app .content .page .authorization-form-family{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app .content .page .form-horizontal{
+  width: 100%;
+}
+
+.app .content .page .form-horizontal .input-number{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 20px;
+}
+
+.app .content .page .form-horizontal .input-number label{
+  width: 100%;
+  height: 60px;
+  display: block;
+  font-size: 20px;
+  line-height: 60px;
+  color: #bbb;
+}
+
+.app .content .page .form-horizontal .input-number input{
+  width: 1px;
+  height: 1px;
+  border: none;
+  outline: none;
+}
+
+.app .content .page .form-horizontal .input-number.focus label{
+  display: none;
+}
+
+.app .content .page .form-horizontal .input-number.focus input{
+  width: 100%;
+  height: 58px;
+  margin-top: 1px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+
+.app .content .page .form-horizontal .input{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 20px;
+}
+
+
+.app .content .page .form-horizontal .input input, .app .content .page .form-horizontal .input select{
+  width: 100%;
+  height: 58px;
+  margin-top: 1px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  background-color: #fff;
+}
+
+.app .content .page .form-horizontal .input-date{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 20px;
+}
+
+.app .content .page .form-horizontal .input-date label{
+  width: 100%;
+  height: 60px;
+  display: block;
+  font-size: 20px;
+  line-height: 60px;
+  color: #bbb;
+}
+
+.app .content .page .form-horizontal .input-date input{
+  /*width: 1px;
+  height: 1px;*/
+  font-size: 1px;
+  border: none;
+  outline: none;
+  opacity: 0;
+}
+
+.app .content .page .form-horizontal .input-date.focus label{
+  display: none;
+}
+
+.app .content .page .form-horizontal .input-date.focus input{
+  width: 100%;
+  height: 58px;
+  margin-top: 1px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  background-color: #fff;
+  opacity: 1;
 }

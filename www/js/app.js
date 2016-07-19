@@ -10,6 +10,16 @@ var app = {
       section_name: "Autorizaciones",
       html: "authorizations"
     },
+    AUTHORIZATION_FORM_FAMILY: {
+      icon_left: {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      },
+      section_name: "Familiar",
+      html: "authorization_form_family"
+    },
     TEST: {
       icon_left: {
         icon: "user",
@@ -37,7 +47,7 @@ var app = {
       StatusBar.backgroundColorByHexString("#ff0000");
     }
 
-    app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+    app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
@@ -47,6 +57,14 @@ var app = {
   },
   pageLoading: function(x){
     x == 'show' ? $('.app .content .loading').show() : $('.app .content .loading').hide();
+  },
+  liActive: function(x){
+    $('.app .menu .list .item').removeClass('active');
+    $('.app .menu .list .item[data-li="' + x + '"]').addClass('active');
+  },
+  selectLiMenu: function(x){
+    app.closeMenu();
+    app.loadScreen(x);
   },
   iconLeftClick: function(){},
   loadScreen: function(x_screen){

@@ -1,0 +1,88 @@
+<div class="authorization-form-family">
+  <form class="form-horizontal">
+    <div class="input">
+      <input type="text" placeholder="Nombre...">
+    </div>
+    <div class="input">
+      <input type="text" placeholder="Apellido...">
+    </div>
+    <div class="input-number">
+      <label>DNI...</label>
+      <input type="number">
+    </div>
+    <div class="input">
+      <select>
+        <option value="">Selecciona sexo por favor...</option>
+        <option value="m">Masculino</option>
+        <option value="f">Femenino</option>
+        <option value="o">Otros</option>
+      </select>
+    </div>
+    <div class="input-date">
+      <label>Fecha de nacimiento...</label>
+      <input type="date">
+    </div>
+    <div class="input">
+      <input type="phone" placeholder="Teléfono de contacto...">
+    </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.last_screen_height = 0;
+
+    this.start = function(){
+
+      $(window).resize(function(){
+        $('.authorization-form-family').scrollTop(($('.authorization-form-family').scrollTop() + $(':focus').offset().top) - window.innerHeight + 60);
+      });
+
+      $('.input-number').each(function(){
+        $(this).find('label').click(function(){
+          $(this).parent().addClass('focus');
+          $(this).parent().find('input').focus();
+        });
+
+        $(this).find('input').focus(function(){
+          $(this).parent().addClass('focus');
+        });
+
+        $(this).find('input').blur(function(){
+          if($(this).val() == ""){
+            $(this).parent().removeClass('focus');
+          }
+        });
+      });
+
+      $('.input-date').each(function(){
+        $(this).find('label').click(function(){
+          $(this).parent().find('input[type="date"]').click();
+          $(this).parent().find('input[type="date"]').focus();
+        });
+
+        $(this).find('input').bind('input', function() {
+          if($(this).val() == ""){
+            $(this).parent().removeClass('focus');
+          }else{
+            $(this).parent().addClass('focus');
+          }
+        });
+      });
+
+      app.liActive('authorizations');
+      app.pageLoading('hide');
+
+      navigator.camera.getPicture(function(){},function(){}, { quality: 50,
+          destinationType: Camera.DestinationType.DATA_URL
+      });
+    }
+
+    this.back = function(){
+      console.log($('#test').val());
+      app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+    }
+
+  }
+</script>
