@@ -1,0 +1,245 @@
+<div class="sub-header col-3">
+  <div class="item active" data-item="0" onclick="cs.selectTab(this);">
+    <i class="fa fa-users"></i>
+  </div>
+  <div class="item" data-item="1" onclick="cs.selectTab(this);">
+    <i class="fa fa-user"></i>
+  </div>
+  <div class="item" data-item="2" onclick="cs.selectTab(this);">
+    <i class="fa fa-user-secret"></i>
+  </div>
+  <div class="line">
+    <div class="pointer"></div>
+  </div>
+</div>
+<div class="list authorizations families">
+  <div class="item" data-id="0">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Familiar</h4>
+    </div>
+  </div>
+  <div class="item" data-id="1">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Familiar</h4>
+    </div>
+  </div>
+  <div class="item" data-id="2">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Familiar</h4>
+    </div>
+  </div>
+</div>
+<div class="list authorizations visits">
+  <div class="item" data-id="4">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Visita</h4>
+    </div>
+  </div>
+</div>
+<div class="list authorizations employees">
+  <div class="item" data-id="10">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Empleado</h4>
+    </div>
+  </div>
+  <div class="item" data-id="11">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Empleado</h4>
+    </div>
+  </div>
+  <div class="item" data-id="12">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Empleado</h4>
+    </div>
+  </div>
+  <div class="item" data-id="13">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Empleado</h4>
+    </div>
+  </div>
+  <div class="item" data-id="14">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Empleado</h4>
+    </div>
+  </div>
+  <div class="item" data-id="15">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Empleado</h4>
+    </div>
+  </div>
+  <div class="item" data-id="16">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Empleado</h4>
+    </div>
+  </div>
+  <div class="item" data-id="17">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Empleado</h4>
+    </div>
+  </div>
+  <div class="item" data-id="18">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Empleado</h4>
+    </div>
+  </div>
+  <div class="item" data-id="19">
+    <img src="img/avatar_example.png">
+    <div class="info">
+      <h5>Giuliana Giovanella</h5>
+      <h4>Empleado</h4>
+    </div>
+  </div>
+</div>
+
+<div class="header-actions">
+  <div class="icon" onclick="cs.desSelectAll();">
+    <i class="fa fa-chevron-left"></i>
+  </div>
+  <div class="section-name" id="number_selected"></div>
+   <div class="icon right" onclick="cs.confirmErased();">
+    <i class="fa fa-trash"></i>
+  </div>
+</div>
+
+<div class="new-authorization-buttons">
+  <div class="backdrop" onclick="cs.closeMenuNew();"></div>
+  <button class="new" onclick="cs.openMenuNew();">
+    <i class="fa fa-plus"></i>
+  </button>
+  <div class="add-button new-family">
+    <button>
+      <i class="fa fa-users"></i>
+    </button>
+    <h5>Nuevo Familiar</h5>
+  </div>
+  <div class="add-button new-visit">
+    <button>
+      <i class="fa fa-user"></i>
+    </button>
+    <h5>Nueva Visita</h5>
+  </div>
+  <div class="add-button new-employee">
+    <button>
+      <i class="fa fa-user-secret"></i>
+    </button>
+    <h5>Nuevo Empleado</h5>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.mode = 'list';
+    this.selectedItems = [];
+
+    this.start = function(){
+      $('.authorizations .item').longTap(function(){
+        cs.selectItem($(this).data('id'));
+      });
+
+      $('.authorizations .item').tap(function(){
+        if(cs.mode == 'select'){
+          cs.selectItem($(this).data('id'));
+        }
+      });
+
+      app.pageLoading('hide');
+    }
+
+    this.selectItem = function(id){
+      var i = this.selectedItems.indexOf(id);
+
+      if(i > -1){
+        this.selectedItems.splice(i,1);
+        $('.authorizations .item[data-id="' + id + '"]').removeClass('selected');
+      }else{
+        $('.authorizations .item[data-id="' + id + '"]').addClass('selected');
+        this.selectedItems.push(id);
+      }
+
+      this.checkMode();
+    };
+
+    this.desSelectAll = function(){
+      $('.authorizations .item').removeClass('selected');
+      this.selectedItems = [];
+
+      this.checkMode();
+    };
+
+    this.checkMode = function(){
+      if(this.selectedItems.length > 0){
+        this.mode = 'select';
+
+        $('.header-actions #number_selected').html(this.selectedItems.length);
+        $('.header-actions').show();
+      }else{
+        this.mode = 'list';
+        $('.header-actions').hide();
+      }
+    };
+
+    this.confirmErased = function(){
+      Confirm.open("¿Estas seguro que deseas eliminar los elementos seleccionados?",function(){
+        cs.desSelectAll();
+      });
+    }
+
+    this.selectTab = function(x){
+      this.desSelectAll();
+
+      var item = $(x).data('item');
+      $('.sub-header .item').removeClass('active');
+      $('.sub-header .item[data-item="' + item + '"]').addClass('active');
+      $('.sub-header .line .pointer').css({
+        '-webkit-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-moz-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-ms-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-o-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        'transform': 'translate3d(' + (100 * item) + '%,0,0)'
+      });
+
+      $('.list.authorizations').css({
+        '-webkit-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-moz-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-ms-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-o-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        'transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)'
+      });
+    }
+
+    this.openMenuNew = function(){
+      $('.new-authorization-buttons').addClass('open');
+    };
+
+    this.closeMenuNew = function(){
+      $('.new-authorization-buttons').removeClass('open');
+    };
+
+  }
+</script>
