@@ -1,4 +1,53 @@
 <div class="chat-list">
+  <div class="chat-message">
+    <div class="arrow-right"></div>
+    <div class="content">
+      <h4><b>Silva Agustin</b> (A 05)</h4>
+      <h5>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </h5>
+      <h6>
+        <i class="fa fa-check"></i>
+        <span>2016-02-13 23:24 hrs</span>
+      </h6>
+    </div>
+  </div>
+  <div class="chat-message">
+    <div class="arrow-right"></div>
+    <div class="content">
+      <h5>
+        Lorem ipsum dol
+      </h5>
+      <h6>
+        <i class="fa fa-check"></i>
+        <span>2016-02-13 23:24 hrs</span>
+      </h6>
+    </div>
+  </div>
+  <div class="chat-message left">
+    <div class="arrow-left"></div>
+    <div class="arrow-right"></div>
+    <div class="content">
+      <h4><b>Silva Agustin</b> (A 05)</h4>
+      <h5>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </h5>
+      <h6>
+        <i class="fa fa-clock-o"></i>
+        <span>2016-02-13 23:24 hrs</span>
+      </h6>
+    </div>
+  </div>
 </div>
 <div class="chat-input">
   <div class="content-parent">
@@ -18,6 +67,9 @@
   function c(){
 
     this.start = function(){
+
+      $('.chat-list').scrollTop(99999999);
+
       app.liActive('communications');
       app.pageLoading('hide');
     }

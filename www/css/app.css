@@ -861,8 +861,8 @@ button.btn-block{
 }
 
 .app>.content .page .form-horizontal .input-avatar img{
-  width: 128px;
-  height: 128px;
+  width: 160px;
+  height: 160px;
   border-radius: 128px;
   border: 2px solid #ccc;
 }
@@ -909,6 +909,9 @@ button.btn-block{
   left: 0px;
   right: 0px;
   background-color: #eee;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 10px;
 }
 
 .app>.content .page .chat-input{
@@ -958,4 +961,79 @@ button.btn-block{
   border: none;
   font-size: 20px;
   color: #bbb;
+}
+
+.app>.content .page .chat-list .chat-message{
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.app>.content .page .chat-list .chat-message>.content{
+  max-width: 90%;
+  min-height: 60px;
+  background-color: #fff;
+  padding: 10px;
+  float: right;
+}
+
+.app>.content .page .chat-list .chat-message.left>.content{
+  float: left;
+}
+
+.app>.content .page .chat-list .chat-message>.arrow-right{
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #fff;
+  float: right;
+  margin-top: 10px;
+  margin-right: 5px;
+  display: block;
+}
+
+.app>.content .page .chat-list .chat-message.left>.arrow-right{
+  display: none;
+}
+
+.app>.content .page .chat-list .chat-message>.arrow-left{
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #fff;
+  float: left;
+  margin-top: 10px;
+  display: none;
+}
+
+.app>.content .page .chat-list .chat-message.left>.arrow-left{
+  display: block;
+}
+
+.app>.content .page .chat-list .chat-message>.content h5{
+  font-weight: normal;
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  color: #555;
+}
+
+.app>.content .page .chat-list .chat-message>.content h4{
+  font-weight: normal;
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .chat-list .chat-message>.content h6{
+  text-align: right;
+  font-weight: normal;
+  font-size: 12px;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 10px;
+  color: #555;
 }

@@ -11,7 +11,7 @@
 </div>
 
 <div class="list communications normal">
-  <div class="item pending" data-id="0">
+  <div class="item pending" data-id="0" data-type="normal">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -20,7 +20,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item pending" data-id="1">
+  <div class="item pending" data-id="1" data-type="normal">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -29,7 +29,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item pending" data-id="2">
+  <div class="item pending" data-id="2" data-type="normal">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -38,7 +38,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item pending view" data-id="3">
+  <div class="item pending view" data-id="3" data-type="normal">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -47,7 +47,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item pending view" data-id="4">
+  <div class="item pending view" data-id="4" data-type="normal">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -56,7 +56,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item pending view" data-id="5">
+  <div class="item pending view" data-id="5" data-type="normal">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -65,7 +65,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item success view" data-id="6">
+  <div class="item success view" data-id="6" data-type="normal">
     <div class="icon">
       <i class="fa fa-check"></i>
     </div>
@@ -74,7 +74,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item success view" data-id="7">
+  <div class="item success view" data-id="7" data-type="normal">
     <div class="icon">
       <i class="fa fa-check"></i>
     </div>
@@ -83,7 +83,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item success view" data-id="8">
+  <div class="item success view" data-id="8" data-type="normal">
     <div class="icon">
       <i class="fa fa-times"></i>
     </div>
@@ -98,7 +98,7 @@
 </div>
 
 <div class="list communications guard">
-  <div class="item pending" data-id="0">
+  <div class="item pending" data-id="15" data-type="guard">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -107,7 +107,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item success view" data-id="0">
+  <div class="item success view" data-id="16" data-type="guard">
     <div class="icon">
       <i class="fa fa-check"></i>
     </div>
@@ -142,6 +142,9 @@
         if(cs.mode == 'select'){
           cs.selectItem($(this).data('id'));
         }else if(cs.mode == 'list'){
+          if($(this).data('type') == 'normal'){
+            app.loadScreen(app.SCREENS.VIEW_COMMUNICATION);
+          }
         }
       });
 
