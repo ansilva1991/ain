@@ -11,7 +11,7 @@
 </div>
 
 <div class="list communications normal">
-  <div class="item pending" data-id="0" data-type="family">
+  <div class="item pending" data-id="0">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -20,7 +20,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item pending" data-id="0" data-type="family">
+  <div class="item pending" data-id="1">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -29,7 +29,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item pending" data-id="0" data-type="family">
+  <div class="item pending" data-id="2">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -38,7 +38,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item pending view" data-id="0" data-type="family">
+  <div class="item pending view" data-id="3">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -47,7 +47,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item pending view" data-id="0" data-type="family">
+  <div class="item pending view" data-id="4">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -56,7 +56,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item pending view" data-id="0" data-type="family">
+  <div class="item pending view" data-id="5">
     <div class="icon">
       <i class="fa fa-clock-o"></i>
     </div>
@@ -65,7 +65,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item success view" data-id="0" data-type="family">
+  <div class="item success view" data-id="6">
     <div class="icon">
       <i class="fa fa-check"></i>
     </div>
@@ -74,7 +74,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item success view" data-id="0" data-type="family">
+  <div class="item success view" data-id="7">
     <div class="icon">
       <i class="fa fa-check"></i>
     </div>
@@ -83,7 +83,7 @@
       <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
     </div>
   </div>
-  <div class="item success view" data-id="0" data-type="family">
+  <div class="item success view" data-id="8">
     <div class="icon">
       <i class="fa fa-times"></i>
     </div>
@@ -95,6 +95,27 @@
   <button class="btn btn-block">
     Cargar anteriores
   </button>
+</div>
+
+<div class="list communications guard">
+  <div class="item pending" data-id="0">
+    <div class="icon">
+      <i class="fa fa-clock-o"></i>
+    </div>
+    <div class="info">
+      <h5>Giuliana Giovanella (A 05)</h5>
+      <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
+    </div>
+  </div>
+  <div class="item success view" data-id="0">
+    <div class="icon">
+      <i class="fa fa-check"></i>
+    </div>
+    <div class="info">
+      <h5>Giuliana Giovanella (A 05)</h5>
+      <h4>Lorem ipsum dolor sit amet, consectetur...</h4>
+    </div>
+  </div>
 </div>
 
 <div class="header-actions">
@@ -113,25 +134,14 @@
     this.selectedItems = [];
 
     this.start = function(){
-      $('.authorizations .item').longTap(function(){
+      $('.communications .item').longTap(function(){
         cs.selectItem($(this).data('id'));
       });
 
-      $('.authorizations .item').tap(function(){
+      $('.communications .item').tap(function(){
         if(cs.mode == 'select'){
           cs.selectItem($(this).data('id'));
         }else if(cs.mode == 'list'){
-          if($(this).data('type') == 'family'){
-            app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY);
-          }
-
-          if($(this).data('type') == 'visit'){
-            app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_VISIT);
-          }
-
-          if($(this).data('type') == 'employee'){
-            app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
-          }
         }
       });
 
@@ -144,9 +154,9 @@
 
       if(i > -1){
         this.selectedItems.splice(i,1);
-        $('.authorizations .item[data-id="' + id + '"]').removeClass('selected');
+        $('.communications .item[data-id="' + id + '"]').removeClass('selected');
       }else{
-        $('.authorizations .item[data-id="' + id + '"]').addClass('selected');
+        $('.communications .item[data-id="' + id + '"]').addClass('selected');
         this.selectedItems.push(id);
       }
 
@@ -154,7 +164,7 @@
     };
 
     this.desSelectAll = function(){
-      $('.authorizations .item').removeClass('selected');
+      $('.communications .item').removeClass('selected');
       this.selectedItems = [];
 
       this.checkMode();
@@ -192,7 +202,7 @@
         'transform': 'translate3d(' + (100 * item) + '%,0,0)'
       });
 
-      $('.list.authorizations').css({
+      $('.list.communications').css({
         '-webkit-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
         '-moz-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
         '-ms-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',

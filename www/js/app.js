@@ -1,72 +1,114 @@
 var app = {
   SCREENS: {
     AUTHORIZATIONS: {
-      icon_left: {
-        icon: "bars",
-        func: function(){
-          app.openMenu();
+      icon_left: [
+        {
+          icon: "bars",
+          func: function(){
+            app.openMenu();
+          }
         }
-      },
+      ],
       section_name: "Autorizaciones",
       html: "authorizations"
     },
     AUTHORIZATION_FORM_FAMILY: {
-      icon_left: {
-        icon: "chevron-left",
-        func: function(){
-          cs.back();
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
         }
-      },
-      icon_right: {
-        icon: "check",
-        func: function(){
-          cs.submit();
+      ],
+      icon_right: [
+        {
+          icon: "check",
+          func: function(){
+            cs.submit();
+          }
         }
-      },
+      ],
       section_name: "Familiar",
       html: "authorization_form_family"
     },
     AUTHORIZATION_FORM_VISIT: {
-      icon_left: {
-        icon: "chevron-left",
-        func: function(){
-          cs.back();
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
         }
-      },
-      icon_right: {
-        icon: "check",
-        func: function(){
-          cs.submit();
+      ],
+      icon_right: [
+        {
+          icon: "check",
+          func: function(){
+            cs.submit();
+          }
         }
-      },
+      ],
       section_name: "Visita",
       html: "authorization_form_visit"
     },
     AUTHORIZATION_FORM_EMPLOYEE: {
-      icon_left: {
-        icon: "chevron-left",
-        func: function(){
-          cs.back();
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
         }
-      },
-      icon_right: {
-        icon: "check",
-        func: function(){
-          cs.submit();
+      ],
+      icon_right: [
+        {
+          icon: "check",
+          func: function(){
+            cs.submit();
+          }
         }
-      },
+      ],
       section_name: "Empleado",
       html: "authorization_form_employee"
     },
     COMMUNICATIONS: {
-      icon_left: {
-        icon: "bars",
-        func: function(){
-          app.openMenu();
+      icon_left: [
+        {
+          icon: "bars",
+          func: function(){
+            app.openMenu();
+          }
         }
-      },
+      ],
       section_name: "Comunicaciones",
       html: "communications"
+    },
+    VIEW_COMMUNICATION: {
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
+        }
+      ],
+      icon_right: [
+        {
+          icon: "user-plus",
+          func: function(){
+            cs.addParticipant();
+          }
+        },
+        {
+          icon: "info-circle",
+          func: function(){
+            cs.communicationInfo();
+          }
+        }
+      ],
+      section_name: "Comunicación",
+      html: "view_communication"
     },
     TEST: {
       icon_left: {
@@ -81,6 +123,7 @@ var app = {
   },
   load_screen_ajax: false,
   current_screen: false,
+  header_icon_clicks: {},
   initialize: function() {
     this.bindEvents();
   },
@@ -95,7 +138,7 @@ var app = {
       StatusBar.backgroundColorByHexString("#ff0000");
     }
 
-    app.loadScreen(app.SCREENS.COMMUNICATIONS);
+    app.loadScreen(app.SCREENS.VIEW_COMMUNICATION);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
@@ -114,8 +157,6 @@ var app = {
     app.closeMenu();
     app.loadScreen(x);
   },
-  iconLeftClick: function(){},
-  iconRightClick: function(){},
   takeFromCamera: function(success,error,options){
 
     onPhotoDataSuccess = success;
@@ -123,21 +164,46 @@ var app = {
 
     navigator.camera.getPicture(onPhotoDataSuccess, onPhotoDataFail,options);
   },
+  headerIconClick: function(function_id){
+    app.header_icon_clicks[function_id]();
+  },
   loadScreen: function(x_screen){
-    if(x_screen.icon_left){
-      $('.header .icon i').show();
-      $('.header .icon i').attr('class','fa fa-' + x_screen.icon_left.icon);
-      app.iconLeftClick = x_screen.icon_left.func;
-    }else{
-      $('.header .icon i').hide();
+    $('.header .icon_end').remove();
+    app.header_icon_clicks = {};
+
+    if(x_screen.icon_left && x_screen.icon_left.length > 0){
+
+      for(var i in x_screen.icon_left){
+        var tmp = $('.header .icon.example').clone().insertBefore('.header .section-name');
+        tmp.addClass('icon_end');
+        tmp.removeClass('example');
+        tmp.children().attr('class','fa fa-' + x_screen.icon_left[i].icon);
+        var function_id = Math.round(Math.random() * 99999999999);
+
+        tmp.attr('onclick','app.headerIconClick(' + function_id + ')');
+
+        tmp.show();
+
+        app.header_icon_clicks[function_id] = x_screen.icon_left[i].func;
+      }
     }
 
-    if(x_screen.icon_right){
-      $('.header .icon.right i').show();
-      $('.header .icon.right i').attr('class','fa fa-' + x_screen.icon_right.icon);
-      app.iconRightClick = x_screen.icon_right.func;
-    }else{
-      $('.header .icon.right i').hide();
+    if(x_screen.icon_right && x_screen.icon_right.length > 0){
+
+      for(var i in x_screen.icon_right){
+        var tmp = $('.header .icon.example').clone().insertAfter('.header .section-name');
+        tmp.addClass('icon_end');
+        tmp.addClass('right');
+        tmp.removeClass('example');
+        tmp.children().attr('class','fa fa-' + x_screen.icon_right[i].icon);
+        var function_id = Math.round(Math.random() * 99999999999);
+
+        tmp.attr('onclick','app.headerIconClick(' + function_id + ')');
+
+        tmp.show();
+
+        app.header_icon_clicks[function_id] = x_screen.icon_right[i].func;
+      }
     }
 
     $('.header .section-name').html(x_screen.section_name);

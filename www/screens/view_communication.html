@@ -1,0 +1,30 @@
+<div class="chat-list">
+</div>
+<div class="chat-input">
+  <div class="content-parent">
+    <div class="content">
+      <div clas="input">
+        <input type="text" placeholder="Escribir mensaje">
+      </div>
+      <div class="button">
+        <button>
+          <i class="fa fa-camera"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+      app.liActive('communications');
+      app.pageLoading('hide');
+    }
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.COMMUNICATIONS);
+    };
+
+  }
+</script>

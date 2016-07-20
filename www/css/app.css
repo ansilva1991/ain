@@ -215,46 +215,49 @@ button.btn-block{
   width: 100%;
 }
 
-.app .header{
+.app>.header{
   width: 100%;
   height: 60px;
   background-color: #bbb;
   position: fixed;
   top: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.app .header .icon{
-  width: 50px;
+.app>.header .icon{
+  width: 40px;
   height: 50px;
   font-size: 30px;
   color: #fff;
-  margin-left: 20px;
   padding-top: 13px;
   float: left;
 }
 
-.app .header .icon.right{
-  margin-left: 0px;
-  margin-right: 20px;
+.app>.header .icon.right{
   float: right;
   text-align: right;
 }
 
-.app .header .section-name{
+.app>.header .icon.example{
+  display: none;
+}
+
+.app>.header .section-name{
   line-height: 58px;
   font-size: 20px;
   color: #fff;
   float: left;
 }
 
-.app .content{
+.app>.content{
   width: 100%;
   position: fixed;
   top: 60px;
   bottom: 0px;
 }
 
-.app .content .loading{
+.app>.content .loading{
   width: 100%;
   display: none;
   margin-top: 40px;
@@ -388,7 +391,7 @@ button.btn-block{
 
 /* SCREENS */
 
-.app .content .page .sub-header{
+.app>.content .page .sub-header{
   width: 100%;
   height: 54px;
   position: fixed;
@@ -397,7 +400,7 @@ button.btn-block{
   background-color: #ccc;
 }
 
-.app .content .page .sub-header .item{
+.app>.content .page .sub-header .item{
   width: 100%;
   height: 50px;
   color: #B4B4B4;
@@ -407,23 +410,23 @@ button.btn-block{
   float: left;
 }
 
-.app .content .page .sub-header .item.active{
+.app>.content .page .sub-header .item.active{
   color: #fff;
 }
 
-.app .content .page .sub-header .line{
+.app>.content .page .sub-header .line{
   width: 100%;
   height: 4px;
   float: left;
 }
 
-.app .content .page .sub-header .line .pointer{
+.app>.content .page .sub-header .line .pointer{
   width: 100%;
   height: 4px;
   background: #fff;
 }
 
-.app .content .page .sub-header.col-2 .item, .app .content .page .sub-header.col-2 .line .pointer{
+.app>.content .page .sub-header.col-2 .item, .app>.content .page .sub-header.col-2 .line .pointer{
   width: 50%;
   -webkit-transition: transform 400ms ease;
   -moz-transition: transform 400ms ease;
@@ -431,7 +434,7 @@ button.btn-block{
   transition: transform 400ms ease;
 }
 
-.app .content .page .sub-header.col-3 .item, .app .content .page .sub-header.col-3 .line .pointer{
+.app>.content .page .sub-header.col-3 .item, .app>.content .page .sub-header.col-3 .line .pointer{
   width: 33.3333333333333333333%;
   -webkit-transition: transform 400ms ease;
   -moz-transition: transform 400ms ease;
@@ -439,7 +442,7 @@ button.btn-block{
   transition: transform 400ms ease;
 }
 
-.app .content .page .list{
+.app>.content .page .list{
   width: 100%;
   position: fixed;
   top: 0px;
@@ -451,7 +454,7 @@ button.btn-block{
   overflow-y: auto;
 }
 
-.app .content .page .list.authorizations{
+.app>.content .page .list.authorizations{
   top: 114px;
   -webkit-transition: transform 400ms ease;
   -moz-transition: transform 400ms ease;
@@ -459,30 +462,30 @@ button.btn-block{
   transition: transform 400ms ease;
 }
 
-.app .content .page .list.authorizations.families{
+.app>.content .page .list.authorizations.families{
   left: 0px;
 }
 
-.app .content .page .list.authorizations.visits{
+.app>.content .page .list.authorizations.visits{
   left: 100%;
 }
 
-.app .content .page .list.authorizations.employees{
+.app>.content .page .list.authorizations.employees{
   left: 200%;
 }
 
-.app .content .page .list.authorizations .item{
+.app>.content .page .list.authorizations .item{
   width: 100%;
   height: 80px;
   border-top: 1px solid #cfcfcf;
 }
 
 
-.app .content .page .list.authorizations .item:active{
+.app>.content .page .list.authorizations .item:active{
   background-color: #eee;
 }
 
-.app .content .page .list.authorizations .item img{
+.app>.content .page .list.authorizations .item img{
   width: 60px;
   height: 60px;
   border-radius: 60px;
@@ -491,13 +494,13 @@ button.btn-block{
   float: left;
 }
 
-.app .content .page .list.authorizations .item .info{
+.app>.content .page .list.authorizations .item .info{
   height: 80px;
   float: left;
   margin-left: 10px;
 }
 
-.app .content .page .list.authorizations .item .info h5{
+.app>.content .page .list.authorizations .item .info h5{
   font-size: 16px;
   padding: 0px;
   margin: 0px;
@@ -506,7 +509,7 @@ button.btn-block{
   margin-top: 15px;
 }
 
-.app .content .page .list.authorizations .item .info h4{
+.app>.content .page .list.authorizations .item .info h4{
   font-size: 14px;
   padding: 0px;
   margin: 0px;
@@ -515,11 +518,11 @@ button.btn-block{
   margin-top: 5px;
 }
 
-.app .content .page .list.authorizations .item.selected{
+.app>.content .page .list.authorizations .item.selected{
   background-color: #ff0000;
 }
 
-.app .content .page .list.communications{
+.app>.content .page .list.communications{
   top: 114px;
   -webkit-transition: transform 400ms ease;
   -moz-transition: transform 400ms ease;
@@ -527,22 +530,26 @@ button.btn-block{
   transition: transform 400ms ease;
 }
 
-.app .content .page .list.communications.normal{
+.app>.content .page .list.communications.normal{
   left: 0px;
 }
 
-.app .content .page .list.communications .item{
+.app>.content .page .list.communications.guard{
+  left: 100%;
+}
+
+.app>.content .page .list.communications .item{
   width: 100%;
   height: 80px;
   border-top: 1px solid #cfcfcf;
 }
 
 
-.app .content .page .list.communications .item:active{
+.app>.content .page .list.communications .item:active{
   background-color: #eee;
 }
 
-.app .content .page .list.communications .item .icon{
+.app>.content .page .list.communications .item .icon{
   width: 60px;
   height: 60px;
   border-radius: 60px;
@@ -555,21 +562,21 @@ button.btn-block{
   color: #fff;
 }
 
-.app .content .page .list.communications .item.pending .icon{
+.app>.content .page .list.communications .item.pending .icon{
   background-color: #ccc;
 }
 
-.app .content .page .list.communications .item.success .icon{
+.app>.content .page .list.communications .item.success .icon{
   background-color: #eee;
 }
 
-.app .content .page .list.communications .item .info{
+.app>.content .page .list.communications .item .info{
   height: 80px;
   float: left;
   margin-left: 10px;
 }
 
-.app .content .page .list.communications .item .info h5{
+.app>.content .page .list.communications .item .info h5{
   font-size: 16px;
   padding: 0px;
   margin: 0px;
@@ -578,7 +585,7 @@ button.btn-block{
   margin-top: 15px;
 }
 
-.app .content .page .list.communications .item .info h4{
+.app>.content .page .list.communications .item .info h4{
   font-size: 14px;
   padding: 0px;
   margin: 0px;
@@ -587,11 +594,11 @@ button.btn-block{
   margin-top: 5px;
 }
 
-.app .content .page .list.communications .item.view .info h5,.app .content .page .list.communications .item.view .info h4{
+.app>.content .page .list.communications .item.view .info h5,.app>.content .page .list.communications .item.view .info h4{
   color: #bbb;
 }
 
-.app .content .page .list.communications .item.selected{
+.app>.content .page .list.communications .item.selected{
   background-color: #ff0000;
 }
 
@@ -625,10 +632,10 @@ button.btn-block{
   float: left;
 }
 
-.app .content .page .new-authorization-buttons{
+.app>.content .page .new-authorization-buttons{
 }
 
-.app .content .page .new-authorization-buttons .backdrop{
+.app>.content .page .new-authorization-buttons .backdrop{
   width: 100%;
   position: fixed;
   top: 0px;
@@ -640,12 +647,12 @@ button.btn-block{
   transition: opacity 0.3s;
 }
 
-.app .content .page .new-authorization-buttons.open .backdrop{
+.app>.content .page .new-authorization-buttons.open .backdrop{
   bottom: 0px;
   opacity: 1;
 }
 
-.app .content .page .new-authorization-buttons button.new{
+.app>.content .page .new-authorization-buttons button.new{
   width: 60px;
   height: 60px;
   background-color: #bbb;
@@ -660,11 +667,11 @@ button.btn-block{
   right: 20px;
 }
 
-.app .content .page .new-authorization-buttons.open button.new{
+.app>.content .page .new-authorization-buttons.open button.new{
   display: none;
 }
 
-.app .content .page .new-authorization-buttons .add-button{
+.app>.content .page .new-authorization-buttons .add-button{
   width: 100%;
   position: fixed;
   bottom: 20px;
@@ -681,7 +688,7 @@ button.btn-block{
   transform: translate3d(0,0,0);
 }
 
-.app .content .page .new-authorization-buttons .add-button h5{
+.app>.content .page .new-authorization-buttons .add-button h5{
   font-size: 20px;
   line-height: 0px;
   margin-right: 10px;
@@ -690,7 +697,7 @@ button.btn-block{
   display: none;
 }
 
-.app .content .page .new-authorization-buttons .add-button button{
+.app>.content .page .new-authorization-buttons .add-button button{
   width: 60px;
   height: 60px;
   background-color: #bbb;
@@ -704,11 +711,11 @@ button.btn-block{
   display: none;
 }
 
-.app .content .page .new-authorization-buttons.open .add-button h5, .app .content .page .new-authorization-buttons.open .add-button button{
+.app>.content .page .new-authorization-buttons.open .add-button h5, .app>.content .page .new-authorization-buttons.open .add-button button{
   display: block;
 }
 
-.app .content .page .new-authorization-buttons.open .add-button.new-visit{
+.app>.content .page .new-authorization-buttons.open .add-button.new-visit{
   -webkit-transform: translate3d(0,-100%,0);
   -moz-transform: translate3d(0,-100%,0);
   -ms-transform: translate3d(0,-100%,0);
@@ -716,7 +723,7 @@ button.btn-block{
   transform: translate3d(0,-100%,0);
 }
 
-.app .content .page .new-authorization-buttons.open .add-button.new-employee{
+.app>.content .page .new-authorization-buttons.open .add-button.new-employee{
   -webkit-transform: translate3d(0,-200%,0);
   -moz-transform: translate3d(0,-200%,0);
   -ms-transform: translate3d(0,-200%,0);
@@ -725,18 +732,18 @@ button.btn-block{
 }
 
 @media screen and (min-width: 480px){
-  .app .content .page .new-authorization-buttons button.new{
+  .app>.content .page .new-authorization-buttons button.new{
     bottom: 30px;
     right: 30px;
   }
 
-  .app .content .page .new-authorization-buttons .add-button{
+  .app>.content .page .new-authorization-buttons .add-button{
     bottom: 30px;
     right: 30px;
   }
 }
 
-.app .content .page .authorization-form-family{
+.app>.content .page .authorization-form-family{
   width: 100%;
   position: fixed;
   top: 60px;
@@ -748,18 +755,18 @@ button.btn-block{
   padding-bottom: 20px;
 }
 
-.app .content .page .form-horizontal{
+.app>.content .page .form-horizontal{
   width: 100%;
 }
 
-.app .content .page .form-horizontal .input-number{
+.app>.content .page .form-horizontal .input-number{
   width: 100%;
   height: 60px;
   border-bottom: 1px solid #ccc;
   padding-left: 20px;
 }
 
-.app .content .page .form-horizontal .input-number label{
+.app>.content .page .form-horizontal .input-number label{
   width: 100%;
   height: 60px;
   display: block;
@@ -768,18 +775,18 @@ button.btn-block{
   color: #bbb;
 }
 
-.app .content .page .form-horizontal .input-number input{
+.app>.content .page .form-horizontal .input-number input{
   width: 1px;
   height: 1px;
   border: none;
   outline: none;
 }
 
-.app .content .page .form-horizontal .input-number.focus label{
+.app>.content .page .form-horizontal .input-number.focus label{
   display: none;
 }
 
-.app .content .page .form-horizontal .input-number.focus input{
+.app>.content .page .form-horizontal .input-number.focus input{
   width: 100%;
   height: 58px;
   margin-top: 1px;
@@ -788,7 +795,7 @@ button.btn-block{
   font-size: 20px;
 }
 
-.app .content .page .form-horizontal .input{
+.app>.content .page .form-horizontal .input{
   width: 100%;
   height: 60px;
   border-bottom: 1px solid #ccc;
@@ -796,7 +803,7 @@ button.btn-block{
 }
 
 
-.app .content .page .form-horizontal .input input, .app .content .page .form-horizontal .input select{
+.app>.content .page .form-horizontal .input input, .app>.content .page .form-horizontal .input select{
   width: 100%;
   height: 58px;
   margin-top: 1px;
@@ -806,14 +813,14 @@ button.btn-block{
   background-color: #fff;
 }
 
-.app .content .page .form-horizontal .input-date{
+.app>.content .page .form-horizontal .input-date{
   width: 100%;
   height: 60px;
   border-bottom: 1px solid #ccc;
   padding-left: 20px;
 }
 
-.app .content .page .form-horizontal .input-date label{
+.app>.content .page .form-horizontal .input-date label{
   width: 100%;
   height: 60px;
   display: block;
@@ -822,7 +829,7 @@ button.btn-block{
   color: #bbb;
 }
 
-.app .content .page .form-horizontal .input-date input{
+.app>.content .page .form-horizontal .input-date input{
   /*width: 1px;
   height: 1px;*/
   font-size: 1px;
@@ -831,11 +838,11 @@ button.btn-block{
   opacity: 0;
 }
 
-.app .content .page .form-horizontal .input-date.focus label{
+.app>.content .page .form-horizontal .input-date.focus label{
   display: none;
 }
 
-.app .content .page .form-horizontal .input-date.focus input{
+.app>.content .page .form-horizontal .input-date.focus input{
   width: 100%;
   height: 58px;
   margin-top: 1px;
@@ -846,26 +853,26 @@ button.btn-block{
   opacity: 1;
 }
 
-.app .content .page .form-horizontal .input-avatar{
+.app>.content .page .form-horizontal .input-avatar{
   width: 100%;
   text-align: center;
   margin-top: 20px;
   overflow: hidden;
 }
 
-.app .content .page .form-horizontal .input-avatar img{
+.app>.content .page .form-horizontal .input-avatar img{
   width: 128px;
   height: 128px;
   border-radius: 128px;
   border: 2px solid #ccc;
 }
 
-.app .content .page .form-horizontal .input-avatar .buttons{
+.app>.content .page .form-horizontal .input-avatar .buttons{
   width: 128px;
   margin: auto;
 }
 
-.app .content .page .form-horizontal .input-avatar .buttons button{
+.app>.content .page .form-horizontal .input-avatar .buttons button{
   width: 64px;
   height: 50px;
   float: left;
@@ -875,21 +882,80 @@ button.btn-block{
   color: #fff;
 }
 
-.app .content .page .form-horizontal .input-avatar .buttons button:last-child{
+.app>.content .page .form-horizontal .input-avatar .buttons button:last-child{
   background-color: #ccc;
 }
 
-.app .content .page center{
+.app>.content .page center{
   width: 100%;
   padding: 0px 10px;
 }
 
-.app .content .page center h4{
+.app>.content .page center h4{
   font-size: 20px;
   font-weight: normal;
 }
 
-.app .content .page center h5{
+.app>.content .page center h5{
   font-size: 16px;
   font-weight: normal;
+}
+
+.app>.content .page .chat-list{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 60px;
+  left: 0px;
+  right: 0px;
+  background-color: #eee;
+}
+
+.app>.content .page .chat-input{
+  width: 100%;
+  height: 60px;
+  background-color: #ccc;
+  position: fixed;
+  bottom: 0px;
+  padding: 7px;
+}
+
+.app>.content .page .chat-input .content-parent{
+  width: 100%;
+  display: table;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.app>.content .page .chat-input .content{
+  display: table-row;
+  background-color: #fff;
+}
+
+.app>.content .page .chat-input .content .input{
+  width: 100%;
+  display: table-cell;
+}
+
+.app>.content .page .chat-input .content .button{
+  width: 50;
+  display: table-cell;
+}
+
+.app>.content .page .chat-input input{
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  height: 45px;
+  padding-left: 10px;
+  font-size: 18px;
+}
+
+.app>.content .page .chat-input button{
+  width: 100%;
+  height: 45px;
+  background-color: #fff;
+  border: none;
+  font-size: 20px;
+  color: #bbb;
 }
