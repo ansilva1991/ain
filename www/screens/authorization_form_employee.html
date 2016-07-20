@@ -1,0 +1,64 @@
+<div class="authorization-form-employee">
+  <form class="form-horizontal">
+    <div class="input">
+      <input type="text" placeholder="Nombre...">
+    </div>
+    <div class="input">
+      <input type="text" placeholder="Apellido...">
+    </div>
+    <div class="input-number">
+      <label>DNI...</label>
+      <input type="number">
+    </div>
+    <div class="input-date">
+      <label>Fecha de vencimiento...</label>
+      <input type="date">
+    </div>
+    <div class="input">
+      <select>
+        <option value="">¿Empleado de obra?</option>
+        <option value="0">No</option>
+        <option value="1">Si</option>
+      </select>
+    </div>
+    <div class="input-date">
+      <label>Vencimiento ART...</label>
+      <input type="date">
+    </div>
+    <div class="input-date">
+      <label>Vencimiento seguro del vehículo...</label>
+      <input type="date">
+    </div>
+    <div class="input-date">
+      <label>Vencimiento cert. buena conducta...</label>
+      <input type="date">
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.authorization-form-employee');
+      });
+
+      Extends.inputNumber('.input-number');
+      Extends.inputDate('.input-date');
+
+      app.liActive('authorizations');
+      app.pageLoading('hide');
+    }
+
+    this.submit = function(){
+      app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+    };
+
+  }
+</script>

@@ -34,8 +34,15 @@
       <input type="date">
     </div>
     <div class="input">
-      <input type="phone" placeholder="Teléfono de contacto...">
+      <input type="tel" placeholder="Teléfono de contacto...">
     </div>
+    <center>
+      <h4>¿Darle acceso al sistema?</h4>
+      <h5>
+        Al permitirle acceso al sistema, podra gestionar visitas y empleados, crear eventos, enviar y responder comunicaciones, entre otras funciones.
+      </h5>
+      <button type="button" class="btn btn-block">Permitir acceso al sistema</button>
+    </center>
   </form>
 </div>
 
@@ -46,40 +53,11 @@
     this.start = function(){
 
       $(window).resize(function(){
-        $('.authorization-form-family').scrollTop(($('.authorization-form-family').scrollTop() + $(':focus').offset().top) - window.innerHeight + 60);
+        Extends.scrollToInputFocus('.authorization-form-family');
       });
 
-      $('.input-number').each(function(){
-        $(this).find('label').click(function(){
-          $(this).parent().addClass('focus');
-          $(this).parent().find('input').focus();
-        });
-
-        $(this).find('input').focus(function(){
-          $(this).parent().addClass('focus');
-        });
-
-        $(this).find('input').blur(function(){
-          if($(this).val() == ""){
-            $(this).parent().removeClass('focus');
-          }
-        });
-      });
-
-      $('.input-date').each(function(){
-        $(this).find('label').click(function(){
-          $(this).parent().find('input[type="date"]').click();
-          $(this).parent().find('input[type="date"]').focus();
-        });
-
-        $(this).find('input').bind('input', function() {
-          if($(this).val() == ""){
-            $(this).parent().removeClass('focus');
-          }else{
-            $(this).parent().addClass('focus');
-          }
-        });
-      });
+      Extends.inputNumber('.input-number');
+      Extends.inputDate('.input-date');
 
       app.liActive('authorizations');
       app.pageLoading('hide');

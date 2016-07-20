@@ -26,6 +26,48 @@ var app = {
       section_name: "Familiar",
       html: "authorization_form_family"
     },
+    AUTHORIZATION_FORM_VISIT: {
+      icon_left: {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      },
+      icon_right: {
+        icon: "check",
+        func: function(){
+          cs.submit();
+        }
+      },
+      section_name: "Visita",
+      html: "authorization_form_visit"
+    },
+    AUTHORIZATION_FORM_EMPLOYEE: {
+      icon_left: {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      },
+      icon_right: {
+        icon: "check",
+        func: function(){
+          cs.submit();
+        }
+      },
+      section_name: "Empleado",
+      html: "authorization_form_employee"
+    },
+    COMMUNICATIONS: {
+      icon_left: {
+        icon: "bars",
+        func: function(){
+          app.openMenu();
+        }
+      },
+      section_name: "Comunicaciones",
+      html: "communications"
+    },
     TEST: {
       icon_left: {
         icon: "user",
@@ -53,7 +95,7 @@ var app = {
       StatusBar.backgroundColorByHexString("#ff0000");
     }
 
-    app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY);
+    app.loadScreen(app.SCREENS.COMMUNICATIONS);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
@@ -144,6 +186,5 @@ var Confirm = {
   }
 }
 
-
-  function onPhotoDataSuccess(i){};
-  function onPhotoDataFail(i){};
+function onPhotoDataSuccess(i){};
+function onPhotoDataFail(i){};

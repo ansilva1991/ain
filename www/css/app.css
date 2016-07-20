@@ -14,6 +14,19 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+button.btn{
+  border: none;
+  background-color: #bbb;
+  height: 50px;
+  color: #fff;
+  font-size: 18px;
+}
+
+button.btn-block{
+  width: 100%;
+  display: block;
+}
+
 .modal-alert{
   width: 100%;
   position: fixed;
@@ -362,6 +375,7 @@ body {
   height: 40px;
   float: left;
   line-height: 60px;
+  margin-left: 10px;
 }
 
 .app .menu .content .item.active{
@@ -409,7 +423,15 @@ body {
   background: #fff;
 }
 
-.app .content .page .sub-header.col-3 .item, .app .content .page .sub-header .line .pointer{
+.app .content .page .sub-header.col-2 .item, .app .content .page .sub-header.col-2 .line .pointer{
+  width: 50%;
+  -webkit-transition: transform 400ms ease;
+  -moz-transition: transform 400ms ease;
+  -o-transition: transform 400ms ease;
+  transition: transform 400ms ease;
+}
+
+.app .content .page .sub-header.col-3 .item, .app .content .page .sub-header.col-3 .line .pointer{
   width: 33.3333333333333333333%;
   -webkit-transition: transform 400ms ease;
   -moz-transition: transform 400ms ease;
@@ -494,6 +516,82 @@ body {
 }
 
 .app .content .page .list.authorizations .item.selected{
+  background-color: #ff0000;
+}
+
+.app .content .page .list.communications{
+  top: 114px;
+  -webkit-transition: transform 400ms ease;
+  -moz-transition: transform 400ms ease;
+  -o-transition: transform 400ms ease;
+  transition: transform 400ms ease;
+}
+
+.app .content .page .list.communications.normal{
+  left: 0px;
+}
+
+.app .content .page .list.communications .item{
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid #cfcfcf;
+}
+
+
+.app .content .page .list.communications .item:active{
+  background-color: #eee;
+}
+
+.app .content .page .list.communications .item .icon{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+  text-align: center;
+  font-size: 40px;
+  line-height: 60px;
+  color: #fff;
+}
+
+.app .content .page .list.communications .item.pending .icon{
+  background-color: #ccc;
+}
+
+.app .content .page .list.communications .item.success .icon{
+  background-color: #eee;
+}
+
+.app .content .page .list.communications .item .info{
+  height: 80px;
+  float: left;
+  margin-left: 10px;
+}
+
+.app .content .page .list.communications .item .info h5{
+  font-size: 16px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  color: #000;
+  margin-top: 15px;
+}
+
+.app .content .page .list.communications .item .info h4{
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  color: #555;
+  margin-top: 5px;
+}
+
+.app .content .page .list.communications .item.view .info h5,.app .content .page .list.communications .item.view .info h4{
+  color: #bbb;
+}
+
+.app .content .page .list.communications .item.selected{
   background-color: #ff0000;
 }
 
@@ -647,6 +745,7 @@ body {
   right: 0px;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-bottom: 20px;
 }
 
 .app .content .page .form-horizontal{
@@ -778,4 +877,19 @@ body {
 
 .app .content .page .form-horizontal .input-avatar .buttons button:last-child{
   background-color: #ccc;
+}
+
+.app .content .page center{
+  width: 100%;
+  padding: 0px 10px;
+}
+
+.app .content .page center h4{
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.app .content .page center h5{
+  font-size: 16px;
+  font-weight: normal;
 }
