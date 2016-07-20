@@ -133,7 +133,7 @@
     <i class="fa fa-plus"></i>
   </button>
   <div class="add-button new-family">
-    <button>
+    <button type="button" onclick="cs.newFamily();">
       <i class="fa fa-users"></i>
     </button>
     <h5>Nuevo Familiar</h5>
@@ -165,6 +165,8 @@
       $('.authorizations .item').tap(function(){
         if(cs.mode == 'select'){
           cs.selectItem($(this).data('id'));
+        }else if(cs.mode == 'list'){
+          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY);
         }
       });
 
@@ -240,6 +242,10 @@
 
     this.closeMenuNew = function(){
       $('.new-authorization-buttons').removeClass('open');
+    };
+
+    this.newFamily = function(){
+      app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY);
     };
 
   }

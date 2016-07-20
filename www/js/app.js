@@ -17,6 +17,12 @@ var app = {
           cs.back();
         }
       },
+      icon_right: {
+        icon: "check",
+        func: function(){
+          cs.submit();
+        }
+      },
       section_name: "Familiar",
       html: "authorization_form_family"
     },
@@ -67,12 +73,36 @@ var app = {
     app.loadScreen(x);
   },
   iconLeftClick: function(){},
+  iconRightClick: function(){},
+  takeFromCamera: function(success,error,options){
+
+    onPhotoDataSuccess = success;
+    onPhotoDataFail = error;
+
+    navigator.camera.getPicture(onPhotoDataSuccess, onPhotoDataFail,options);
+  },
   loadScreen: function(x_screen){
-    $('.header .icon i').attr('class','fa fa-' + x_screen.icon_left.icon);
+    if(x_screen.icon_left){
+      $('.header .icon i').show();
+      $('.header .icon i').attr('class','fa fa-' + x_screen.icon_left.icon);
+      app.iconLeftClick = x_screen.icon_left.func;
+    }else{
+      $('.header .icon i').hide();
+    }
+
+    if(x_screen.icon_right){
+      $('.header .icon.right i').show();
+      $('.header .icon.right i').attr('class','fa fa-' + x_screen.icon_right.icon);
+      app.iconRightClick = x_screen.icon_right.func;
+    }else{
+      $('.header .icon.right i').hide();
+    }
+
     $('.header .section-name').html(x_screen.section_name);
 
     $('.app .content .loading').show();
-    app.iconLeftClick = x_screen.icon_left.func;
+
+    $('.content .page').empty();
 
     $('.content .page').load('screens/' + x_screen.html + '.html',function(data,status,xhr){
       app.current_screen = new c();
@@ -113,3 +143,7 @@ var Confirm = {
     $('.modal-confirm').removeClass('open');
   }
 }
+
+
+  function onPhotoDataSuccess(i){};
+  function onPhotoDataFail(i){};

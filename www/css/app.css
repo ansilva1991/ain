@@ -157,9 +157,9 @@ body {
 }
 
 .spinner {
-  margin: 30px auto 0;
   width: 70px;
   text-align: center;
+  margin: auto;
 }
 
 .spinner > div {
@@ -220,6 +220,13 @@ body {
   float: left;
 }
 
+.app .header .icon.right{
+  margin-left: 0px;
+  margin-right: 20px;
+  float: right;
+  text-align: right;
+}
+
 .app .header .section-name{
   line-height: 58px;
   font-size: 20px;
@@ -235,7 +242,9 @@ body {
 }
 
 .app .content .loading{
+  width: 100%;
   display: none;
+  margin-top: 40px;
 }
 
 .app .menu{
@@ -736,4 +745,37 @@ body {
   font-size: 20px;
   background-color: #fff;
   opacity: 1;
+}
+
+.app .content .page .form-horizontal .input-avatar{
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.app .content .page .form-horizontal .input-avatar img{
+  width: 128px;
+  height: 128px;
+  border-radius: 128px;
+  border: 2px solid #ccc;
+}
+
+.app .content .page .form-horizontal .input-avatar .buttons{
+  width: 128px;
+  margin: auto;
+}
+
+.app .content .page .form-horizontal .input-avatar .buttons button{
+  width: 64px;
+  height: 50px;
+  float: left;
+  font-size: 30px;
+  border: none;
+  background-color: #bbb;
+  color: #fff;
+}
+
+.app .content .page .form-horizontal .input-avatar .buttons button:last-child{
+  background-color: #ccc;
 }

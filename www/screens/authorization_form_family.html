@@ -1,5 +1,16 @@
 <div class="authorization-form-family">
   <form class="form-horizontal">
+    <div class="input-avatar">
+      <img src="img/avatar.png" id="avatar">
+      <div class="buttons">
+        <button type="button" onclick="cs.avatarFrom('gallery');">
+          <i class="fa fa-image"></i>
+        </button>
+        <button type="button" onclick="cs.avatarFrom('camera');">
+          <i class="fa fa-camera"></i>
+        </button>
+      </div>
+    </div>
     <div class="input">
       <input type="text" placeholder="Nombre...">
     </div>
@@ -24,7 +35,6 @@
     </div>
     <div class="input">
       <input type="phone" placeholder="Teléfono de contacto...">
-    </div>
     </div>
   </form>
 </div>
@@ -73,16 +83,29 @@
 
       app.liActive('authorizations');
       app.pageLoading('hide');
-
-      navigator.camera.getPicture(function(){},function(){}, { quality: 50,
-          destinationType: Camera.DestinationType.DATA_URL
-      });
     }
+
+    this.submit = function(){
+      app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+    };
 
     this.back = function(){
-      console.log($('#test').val());
       app.loadScreen(app.SCREENS.AUTHORIZATIONS);
-    }
+    };
+
+    this.avatarFrom = function(type){
+      app.takeFromCamera(function(imageData){
+        $('img#avatar').attr('src',"data:image/jpeg;base64," + imageData);
+      },function(errorMessage){
+      },{
+        quality: 50,
+        sourceType: (type == 'camera') ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY,
+        destinationType: Camera.DestinationType.DATA_URL,
+        allowEdit : true,
+        targetWidth: 128,
+        targetHeight: 128
+      });
+    };
 
   }
 </script>
