@@ -1,0 +1,23 @@
+<div class="login">
+  <form>
+    <img src="img/big_logo.png">
+    <input type="email" placeholder="Email...">
+    <input type="password" placeholder="Contraseña...">
+    <button class="btn btn-block" type="button" onclick="app.loadScreen(app.SCREENS.AUTHORIZATIONS)">INGRESAR</button>
+    <h5>No recuerdo mi contraseña</h5>
+  </form>
+</div>
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      app.windowResize = function(){
+        Extends.scrollToInputFocus('.login');
+      };
+
+      app.pageLoading('hide');
+    }
+
+  }
+</script>

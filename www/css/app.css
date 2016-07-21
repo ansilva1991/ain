@@ -211,6 +211,51 @@ button.btn-block{
   }
 }
 
+.login{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.login form{
+  width: 80%;
+  margin: auto;
+  max-width: 400px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.login form img{
+  width: 100%;
+  max-width: 310px;
+}
+
+.login form input{
+  width: 100%;
+  height: 60px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #bbb;
+  padding-left: 10px;
+}
+
+.login form button{
+  margin-top: 10px;
+}
+
+.login form h5{
+  font-weight: bold;
+  font-size: 14px;
+  color: #bbb;
+}
+
 .app{
   width: 100%;
 }
@@ -1036,4 +1081,117 @@ button.btn-block{
   margin: 0px;
   margin-top: 10px;
   color: #555;
+}
+
+.app>.content .page .list-configurations{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app>.content .page .list-configurations .item{
+  width: 100%;
+  height: 70px;
+  border-bottom: 1px solid #ccc;
+}
+
+.app>.content .page .list-configurations .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list-configurations .item .icon{
+  width: 40px;
+  height: 70px;
+  float: left;
+  margin-left: 20px;
+  line-height: 70px;
+  text-align: center;
+  font-size: 20px;
+  color: #555;
+}
+
+.app>.content .page .list-configurations .item .label{
+  height: 70px;
+  line-height: 70px;
+  float: left;
+  margin-left: 10px;
+  color: #555;
+  font-size: 20px;
+}
+
+.app>.content .page .list-configurations .input{
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  display: table;
+  padding: 10px 20px;
+}
+
+.app>.content .page .list-configurations .input .content{
+  width: 100%;
+  display: table-row;
+}
+
+.app>.content .page .list-configurations .input .content .label{
+  width: 100%;
+  display: table-cell;
+}
+
+.app>.content .page .list-configurations .input .content .label h4{
+  margin: 0px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.app>.content .page .list-configurations .input .content .label h5{
+  margin: 0px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #555;
+  margin-top: 10px;
+}
+
+.app>.content .page .list-configurations .input .content .checkbox{
+  width: 50px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .list-configurations .input .content .checkbox>.box{
+  width: 50px;
+  height: 30px;
+  margin: auto;
+  background-color: #ccc;
+  border-radius: 30px;
+}
+
+.app>.content .page .list-configurations .input .content .checkbox>.box>.pointer{
+  width: 30px;
+  height: 30px;
+  background-color: #e69090;
+  border-radius: 30px;
+
+  -webkit-transition: transform 400ms ease;
+  -moz-transition: transform 400ms ease;
+  -o-transition: transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .list-configurations .input .content .checkbox.checked>.box>.pointer{
+  background-color: #90e697;
+
+  -webkit-transform: translate3d(20px,0,0);
+  -moz-transform: translate3d(20px,0,0);
+  -ms-transform: translate3d(20px,0,0);
+  -o-transform: translate3d(20px,0,0);
+  transform: translate3d(20px,0,0);
 }

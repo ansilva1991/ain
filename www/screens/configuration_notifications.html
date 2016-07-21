@@ -1,0 +1,47 @@
+<div class="list-configurations">
+  <div class="input">
+    <div class="content">
+      <div class="label">
+        <h4>Nueva comunicación</h4>
+        <h5>Enviarme una alerta cuando reciba una nueva comunicación</h5>
+      </div>
+      <div class="checkbox checked">
+        <div class="box">
+          <div class="pointer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="input">
+    <div class="content">
+      <div class="label">
+        <h4>Actualizacón de comunicación</h4>
+        <h5>Enviarme una alerta cuando se envie un nuevo mensaje o algun cambio en las comunicaciones.</h5>
+      </div>
+      <div class="checkbox checked">
+        <div class="box">
+          <div class="pointer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      $('.checkbox .box').tap(function(){
+        $(this).parent().toggleClass('checked');
+      });
+
+      app.liActive('configurations');
+      app.pageLoading('hide');
+    }
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.CONFIGURATIONS);
+    }
+
+  }
+</script>

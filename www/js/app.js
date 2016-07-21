@@ -1,5 +1,8 @@
 var app = {
   SCREENS: {
+    LOGIN: {
+      html: "login"
+    },
     AUTHORIZATIONS: {
       icon_left: [
         {
@@ -110,6 +113,30 @@ var app = {
       section_name: "Comunicación",
       html: "view_communication"
     },
+    CONFIGURATIONS: {
+      icon_left: [
+        {
+          icon: "bars",
+          func: function(){
+            app.openMenu();
+          }
+        }
+      ],
+      section_name: "Configuración",
+      html: "configurations"
+    },
+    CONFIGURATION_NOTIFICATIONS: {
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
+        }
+      ],
+      section_name: "Notificaciones",
+      html: "configuration_notifications"
+    },
     TEST: {
       icon_left: {
         icon: "user",
@@ -138,7 +165,11 @@ var app = {
       StatusBar.backgroundColorByHexString("#ff0000");
     }
 
-    app.loadScreen(app.SCREENS.VIEW_COMMUNICATION);
+    $(window).resize(function(){
+      app.windowResize();
+    });
+
+    app.loadScreen(app.SCREENS.LOGIN);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
@@ -167,7 +198,9 @@ var app = {
   headerIconClick: function(function_id){
     app.header_icon_clicks[function_id]();
   },
+  windowResize: function(){},
   loadScreen: function(x_screen){
+    app.windowResize = function(){};
     $('.header .icon_end').remove();
     app.header_icon_clicks = {};
 
@@ -206,7 +239,7 @@ var app = {
       }
     }
 
-    $('.header .section-name').html(x_screen.section_name);
+    $('.header .section-name').html(x_screen.section_name || "");
 
     $('.app .content .loading').show();
 
