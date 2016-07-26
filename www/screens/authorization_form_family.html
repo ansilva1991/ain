@@ -36,12 +36,21 @@
     <div class="input">
       <input type="tel" placeholder="Teléfono de contacto...">
     </div>
-    <center>
+    <div class="input system-access-granted">
+      <input type="email" placeholder="Email...">
+    </div>
+    <center class="system-access-granted">
+      <h5>
+        Se le enviará una notificación al email ingresado con las instrucciones de uso.
+      </h5>
+    </center>
+    <button type="button" class="btn btn-block system-access-granted" onclick="cs.removeAccess();">Quitar acceso al sistema</button>
+    <center class="system-access-denied">
       <h4>¿Darle acceso al sistema?</h4>
       <h5>
         Al permitirle acceso al sistema, podra gestionar visitas y empleados, crear eventos, enviar y responder comunicaciones, entre otras funciones.
       </h5>
-      <button type="button" class="btn btn-block">Permitir acceso al sistema</button>
+      <button type="button" class="btn btn-block" onclick="cs.giveAccess();">Permitir acceso al sistema</button>
     </center>
   </form>
 </div>
@@ -61,6 +70,8 @@
 
       app.liActive('authorizations');
       app.pageLoading('hide');
+
+      this.removeAccess();
     }
 
     this.submit = function(){
@@ -83,6 +94,16 @@
         targetWidth: 128,
         targetHeight: 128
       });
+    };
+
+    this.giveAccess = function(){
+      $('.system-access-granted').show();
+      $('.system-access-denied').hide();
+    };
+
+    this.removeAccess = function(){
+      $('.system-access-granted').hide();
+      $('.system-access-denied').show();
     };
 
   }

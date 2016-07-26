@@ -3,12 +3,23 @@ var app = {
     LOGIN: {
       html: "login"
     },
+    REGISTER: {
+      html: "register"
+    },
     AUTHORIZATIONS: {
       icon_left: [
         {
           icon: "bars",
           func: function(){
             app.openMenu();
+          }
+        }
+      ],
+      icon_right: [
+        {
+          icon: "question-circle",
+          func: function(){
+            cs.help();
           }
         }
       ],
@@ -84,6 +95,14 @@ var app = {
           }
         }
       ],
+      icon_right: [
+        {
+          icon: "question-circle",
+          func: function(){
+            cs.help();
+          }
+        }
+      ],
       section_name: "Comunicaciones",
       html: "communications"
     },
@@ -98,12 +117,6 @@ var app = {
       ],
       icon_right: [
         {
-          icon: "user-plus",
-          func: function(){
-            cs.addParticipant();
-          }
-        },
-        {
           icon: "info-circle",
           func: function(){
             cs.communicationInfo();
@@ -112,6 +125,18 @@ var app = {
       ],
       section_name: "Comunicación",
       html: "view_communication"
+    },
+    INFO_COMMUNICATION: {
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
+        }
+      ],
+      section_name: "Comunicación",
+      html: "info_communication"
     },
     CONFIGURATIONS: {
       icon_left: [
@@ -160,16 +185,17 @@ var app = {
   },
   onDeviceReady: function() {
     console.log('deviceready');
+    console.log(cordova.platformId);
 
     if (cordova.platformId == 'android') {
-      StatusBar.backgroundColorByHexString("#ff0000");
+      StatusBar.backgroundColorByHexString("#DC9929");
     }
 
     $(window).resize(function(){
       app.windowResize();
     });
 
-    app.loadScreen(app.SCREENS.LOGIN);
+    app.loadScreen(app.SCREENS.INFO_COMMUNICATION);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');

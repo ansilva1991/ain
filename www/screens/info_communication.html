@@ -1,0 +1,39 @@
+<div class="info_communication">
+  <div class="block">
+    <h4>Creada el</h4>
+    <h5>20 de Julio del 2016 a las 13:24 hrs</h5>
+    <h4>Estado</h4>
+    <h5>Pendiente</h5>
+  </div>
+  <div class="block">
+    <h4>Participantes</h4>
+    <div class="participant">
+      <img src="img/avatar_example.png">
+      <div class="info">
+        <h5>Giuliana Giovanella</h5>
+        <h4>A 05</h4>
+      </div>
+    </div>
+    <div class="participant">
+      <img src="img/avatar_example.png">
+      <div class="info">
+        <h5>Giuliana Giovanella</h5>
+        <h4>A 05</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      app.liActive('communications');
+      app.pageLoading('hide');
+    }
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.VIEW_COMMUNICATION);
+    };
+  }
+</script>

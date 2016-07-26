@@ -14,6 +14,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+button{
+  outline: none;
+}
+
 button.btn{
   border: none;
   background-color: #bbb;
@@ -25,6 +29,10 @@ button.btn{
 button.btn-block{
   width: 100%;
   display: block;
+}
+
+button.btn-semitransparent{
+  background-color: rgba(0,0,0,0.25);
 }
 
 .modal-alert{
@@ -222,6 +230,17 @@ button.btn-block{
   text-align: center;
   overflow-x: hidden;
   overflow-y: auto;
+
+  -webkit-transition: transform 200ms ease;
+  -moz-transition: transform 200ms ease;
+  -o-transition: transform 200ms ease;
+  transition: transform 200ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
 }
 
 .login form{
@@ -256,6 +275,345 @@ button.btn-block{
   color: #bbb;
 }
 
+.forgot-password{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  -webkit-transition: transform 200ms ease;
+  -moz-transition: transform 200ms ease;
+  -o-transition: transform 200ms ease;
+  transition: transform 200ms ease;
+
+  -webkit-transform: translate3d(-100%,0,0);
+  -moz-transform: translate3d(-100%,0,0);
+  -ms-transform: translate3d(-100%,0,0);
+  -o-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+}
+
+.forgot-password form{
+  width: 80%;
+  margin: auto;
+  max-width: 400px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.forgot-password form img{
+  width: 100%;
+  max-width: 310px;
+}
+
+.forgot-password form input{
+  width: 100%;
+  height: 60px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #bbb;
+  padding-left: 10px;
+}
+
+.forgot-password form button{
+  margin-top: 10px;
+}
+
+.forgot-password form h4{
+  font-weight: normal;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.forgot-password form h5{
+  font-weight: bold;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.register-code{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  -webkit-transition: transform 200ms ease;
+  -moz-transition: transform 200ms ease;
+  -o-transition: transform 200ms ease;
+  transition: transform 200ms ease;
+
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.register-code form{
+  width: 80%;
+  margin: auto;
+  max-width: 400px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.register-code form img{
+  width: 100%;
+  max-width: 310px;
+}
+
+.register-code form input{
+  width: 100%;
+  height: 60px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #bbb;
+  padding-left: 10px;
+}
+
+.register-code form button{
+  margin-top: 10px;
+}
+
+.register-code form h4{
+  font-weight: normal;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.register-code form h5{
+  font-weight: bold;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.login.active-forgot-password{
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.forgot-password.active-forgot-password{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.register-code.active-forgot-password{
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.login.active-register-code{
+  -webkit-transform: translate3d(-100%,0,0);
+  -moz-transform: translate3d(-100%,0,0);
+  -ms-transform: translate3d(-100%,0,0);
+  -o-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+}
+
+.forgot-password.active-register-code{
+  -webkit-transform: translate3d(-100%,0,0);
+  -moz-transform: translate3d(-100%,0,0);
+  -ms-transform: translate3d(-100%,0,0);
+  -o-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+}
+
+.register-code.active-register-code{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.register{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  -webkit-transition: transform 200ms ease;
+  -moz-transition: transform 200ms ease;
+  -o-transition: transform 200ms ease;
+  transition: transform 200ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.register form{
+  width: 80%;
+  margin: auto;
+  max-width: 400px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.register form img{
+  width: 100%;
+  max-width: 310px;
+}
+
+.register form>input, .register form>select{
+  width: 100%;
+  height: 60px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #bbb;
+  padding-left: 10px;
+}
+
+.register form> .input-checkbox{
+  width: 100%;
+  height: 60px;
+  padding-left: 10px;
+  overflow: hidden;
+  text-align: left;
+  display: table;
+}
+
+.register form> .input-checkbox>.row{
+  display: table-row;
+}
+
+.register form> .input-checkbox .checkbox{
+  width: 32px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.register form> .input-checkbox input{
+  width: 32px;
+  height: 32px;
+  margin: 0px;
+}
+
+.register form> .input-checkbox label{
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 10px;
+  font-size: 12px;
+  color: #555;
+}
+
+.register form button{
+  margin-top: 10px;
+}
+
+.register form h5{
+  font-weight: bold;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.register>form .input-number{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 10px;
+}
+
+.register>form .input-number label{
+  width: 100%;
+  height: 60px;
+  display: block;
+  font-size: 14px;
+  line-height: 60px;
+  color: #bbb;
+  text-align: left;
+}
+
+.register>form .input-number input{
+  width: 1px;
+  height: 1px;
+  border: none;
+  outline: none;
+}
+
+.register>form .input-number.focus label{
+  display: none;
+}
+
+.register>form .input-number.focus input{
+  width: 100%;
+  height: 58px;
+  margin-top: 1px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+
+.register>form .input-date{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 10px;
+}
+
+.register>form .input-date label{
+  width: 100%;
+  height: 60px;
+  display: block;
+  font-size: 14px;
+  line-height: 60px;
+  color: #bbb;
+  text-align: left;
+}
+
+.register>form .input-date input{
+  /*width: 1px;
+  height: 1px;*/
+  font-size: 1px;
+  border: none;
+  outline: none;
+  opacity: 0;
+}
+
+.register>form .input-date.focus label{
+  display: none;
+}
+
+.register>form .input-date.focus input{
+  width: 100%;
+  height: 58px;
+  margin-top: 1px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  background-color: #fff;
+  opacity: 1;
+}
+
 .app{
   width: 100%;
 }
@@ -263,7 +621,7 @@ button.btn-block{
 .app>.header{
   width: 100%;
   height: 60px;
-  background-color: #bbb;
+  background-color: #f8b13a;
   position: fixed;
   top: 0px;
   padding-left: 20px;
@@ -308,10 +666,10 @@ button.btn-block{
   margin-top: 40px;
 }
 
-.app .menu{
+.app>.menu{
 }
 
-.app .menu .backdrop{
+.app>.menu .backdrop{
   width: 100%;
   position: fixed;
   top: 0px;
@@ -323,7 +681,7 @@ button.btn-block{
   transition: opacity 0.3s;
 }
 
-.app .menu .content{
+.app>.menu .content{
   width: 300px;
   position: fixed;
   top: 0px;
@@ -345,12 +703,12 @@ button.btn-block{
 
 }
 
-.app .menu.open .backdrop{
+.app>.menu.open .backdrop{
   bottom: 0px;
   opacity: 1;
 }
 
-.app .menu.open .content{
+.app>.menu.open .content{
   -webkit-transform: translate3d(0,0,0);
   -moz-transform: translate3d(0,0,0);
   -ms-transform: translate3d(0,0,0);
@@ -358,7 +716,7 @@ button.btn-block{
   transform: translate3d(0,0,0);
 }
 
-.app .menu .content .header{
+.app>.menu .content .header{
   width: 100%;
   height: 150px;
   background-color: #ccc;
@@ -367,7 +725,7 @@ button.btn-block{
   padding-top: 10px;
 }
 
-.app .menu .content .header img{
+.app>.menu .content .header img{
   width: 90px;
   height: 90px;
   border-radius: 90px;
@@ -375,7 +733,7 @@ button.btn-block{
   margin-left: 10px;
 }
 
-.app .menu .content .header h4{
+.app>.menu .content .header h4{
   width: 190px;
   text-align: right;
   margin: 0px;
@@ -385,7 +743,7 @@ button.btn-block{
   float: left;
 }
 
-.app .menu .content .header h5{
+.app>.menu .content .header h5{
   width: 100%;
   text-align: left;
   margin: 0px;
@@ -396,16 +754,16 @@ button.btn-block{
   float: left;
 }
 
-.app .menu .content .list{
+.app>.menu .content .list{
   width: 100%;
 }
 
-.app .menu .content .item{
+.app>.menu .content .item{
   width: 100%;
   height: 60px;
 }
 
-.app .menu .content .item .icon{
+.app>.menu .content .item .icon{
   width: 40px;
   height: 60px;
   float: left;
@@ -413,24 +771,24 @@ button.btn-block{
   margin-left: 15px;
 }
 
-.app .menu .content .item .icon i{
+.app>.menu .content .item .icon i{
   font-size: 30px;
   color: #aaa;
   margin-top: 5px;
 }
 
-.app .menu .content .item .label{
+.app>.menu .content .item .label{
   height: 40px;
   float: left;
   line-height: 60px;
   margin-left: 10px;
 }
 
-.app .menu .content .item.active{
+.app>.menu .content .item.active{
   background-color: #eee;
 }
 
-.app .menu .content .item.active .icon i{
+.app>.menu .content .item.active .icon i{
   color: #555;
 }
 
@@ -501,10 +859,10 @@ button.btn-block{
 
 .app>.content .page .list.authorizations{
   top: 114px;
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
-  transition: transform 400ms ease;
+  -webkit-transition: transform 200ms ease;
+  -moz-transition: transform 200ms ease;
+  -o-transition: transform 200ms ease;
+  transition: transform 200ms ease;
 }
 
 .app>.content .page .list.authorizations.families{
@@ -568,25 +926,18 @@ button.btn-block{
 }
 
 .app>.content .page .list.communications{
-  top: 114px;
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
-  transition: transform 400ms ease;
-}
-
-.app>.content .page .list.communications.normal{
-  left: 0px;
-}
-
-.app>.content .page .list.communications.guard{
-  left: 100%;
+  top: 60px;
 }
 
 .app>.content .page .list.communications .item{
   width: 100%;
   height: 80px;
   border-top: 1px solid #cfcfcf;
+  display: table;
+}
+
+.app>.content .page .list.communications .item .row{
+  display: table-row;
 }
 
 
@@ -594,13 +945,17 @@ button.btn-block{
   background-color: #eee;
 }
 
+.app>.content .page .list.communications .item .icon-column{
+  display: table-cell;
+  width: 60px;
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
 .app>.content .page .list.communications .item .icon{
   width: 60px;
   height: 60px;
   border-radius: 60px;
-  margin-top: 10px;
-  margin-left: 10px;
-  float: left;
   text-align: center;
   font-size: 40px;
   line-height: 60px;
@@ -617,8 +972,9 @@ button.btn-block{
 
 .app>.content .page .list.communications .item .info{
   height: 80px;
-  float: left;
-  margin-left: 10px;
+  padding-left: 10px;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .app>.content .page .list.communications .item .info h5{
@@ -627,10 +983,10 @@ button.btn-block{
   margin: 0px;
   line-height: 20px;
   color: #000;
-  margin-top: 15px;
 }
 
 .app>.content .page .list.communications .item .info h4{
+  width: 90%;
   font-size: 14px;
   padding: 0px;
   margin: 0px;
@@ -646,6 +1002,84 @@ button.btn-block{
 .app>.content .page .list.communications .item.selected{
   background-color: #ff0000;
 }
+
+.app>.content .page .send-attachment-menu{
+}
+
+.app>.content .page .send-attachment-menu.open .backdrop{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: rgba(0,0,0,0.1);
+}
+
+.app>.content .page .send-attachment-menu .menu{
+  width: 100%;
+  height: 100px;
+  background: #fff;
+  position: fixed;
+  bottom: 60px;
+  border-top: 1px solid #ccc;
+
+  -webkit-transition: transform 200ms ease;
+  -moz-transition: transform 200ms ease;
+  -o-transition: transform 200ms ease;
+  transition: transform 200ms ease;
+
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.app>.content .page .send-attachment-menu.open .menu{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .send-attachment-menu .menu .content{
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.app>.content .page .send-attachment-menu .menu .content .type{
+  width: 50%;
+  float: left;
+  text-align: center;
+  padding-top: 16px;
+}
+
+.app>.content .page .send-attachment-menu .menu .content .type:active{
+  background: rgba(0,0,0,0.1);
+}
+
+.app>.content .page .send-attachment-menu .menu .content .icon{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background: #709BF1;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 24px;
+  line-height: 50px;
+  color: #fff;
+  margin: auto;
+}
+
+.app>.content .page .send-attachment-menu .menu .content h5{
+  margin: 0px;
+  margin-top: 5px;
+  color: #555;
+}
+
 
 .app .header-actions{
   width: 100%;
@@ -686,10 +1120,8 @@ button.btn-block{
   top: 0px;
   left: 0px;
   right: 0px;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(255,255,255,0.75);
   opacity: 0;
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s;
 }
 
 .app>.content .page .new-authorization-buttons.open .backdrop{
@@ -717,7 +1149,7 @@ button.btn-block{
 }
 
 .app>.content .page .new-authorization-buttons .add-button{
-  width: 100%;
+  width: 250px;
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -954,6 +1386,8 @@ button.btn-block{
   left: 0px;
   right: 0px;
   background-color: #eee;
+  background-image: url(../img/communications_back.jpg);
+  background-size: cover;
   overflow-x: hidden;
   overflow-y: auto;
   padding-bottom: 10px;
@@ -1057,7 +1491,7 @@ button.btn-block{
   display: block;
 }
 
-.app>.content .page .chat-list .chat-message>.content h5{
+.app>.content .page .chat-list .chat-message>.content>h5{
   font-weight: normal;
   font-size: 14px;
   padding: 0px;
@@ -1065,7 +1499,7 @@ button.btn-block{
   color: #555;
 }
 
-.app>.content .page .chat-list .chat-message>.content h4{
+.app>.content .page .chat-list .chat-message>.content>h4{
   font-weight: normal;
   font-size: 14px;
   padding: 0px;
@@ -1073,7 +1507,7 @@ button.btn-block{
   margin-bottom: 10px;
 }
 
-.app>.content .page .chat-list .chat-message>.content h6{
+.app>.content .page .chat-list .chat-message>.content>h6{
   text-align: right;
   font-weight: normal;
   font-size: 12px;
@@ -1081,6 +1515,121 @@ button.btn-block{
   margin: 0px;
   margin-top: 10px;
   color: #555;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.img{
+  width: 100%;
+  padding: 10px 0px;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.img img{
+  overflow: hidden;
+  border: 1px solid #555;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.file{
+  width: 100%;
+  background: rgba(0,0,0,0.08);
+  padding: 10px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.file i{
+  width: 25px;
+  display: block;
+  float: left;
+  font-size: 25px;
+  color: #3EA0F9;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.file h5{
+  display: block;
+  float: left;
+  font-size: 12px;
+  color: #555;
+  margin: 0px;
+  padding: 0px;
+  line-height: 25px;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment:active{
+  background: rgba(0,0,0,0.1);
+}
+
+.app>.content .page .info_communication{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  overflow: auto;
+  padding: 10px;
+  background: #eee;
+}
+
+.app>.content .page .info_communication .block{
+  width: 100%;
+  background: #fff;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.app>.content .page .info_communication .block>h4{
+  margin: 0px;
+  font-size: 18px;
+  color: #555;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.app>.content .page .info_communication .block>h5{
+  margin: 0px;
+  font-size: 16px;
+  color: #999;
+}
+
+.app>.content .page .info_communication .block .participant{
+  width: 100%;
+  height: 80px;
+}
+
+.app>.content .page .info_communication .block .participant img{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+}
+
+.app>.content .page .info_communication .block .participant .info{
+  height: 80px;
+  float: left;
+  margin-left: 10px;
+}
+
+.app>.content .page .info_communication .block .participant .info h5{
+  font-size: 16px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  color: #000;
+  margin-top: 15px;
+}
+
+.app>.content .page .info_communication .block .participant .info h4{
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  color: #555;
+  margin-top: 5px;
+}
+
+.app>.content .page .info_communication .block .participant.selected{
+  background-color: #ff0000;
 }
 
 .app>.content .page .list-configurations{

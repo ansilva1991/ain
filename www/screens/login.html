@@ -1,22 +1,60 @@
-<div class="login">
+<div class="forgot-password layer">
+  <form>
+    <img src="img/big_logo_without_legend.png">
+    <h4>Se le enviará un email con los pasos para el recupero de su contraseña. Cualquier duda o consulta comuniquese a soporte@accessin.net</h4>
+    <input type="email" placeholder="Email...">
+    <button class="btn btn-block" type="button" onclick="app.loadScreen(app.SCREENS.AUTHORIZATIONS)">ENVIAR</button>
+    <h5 onclick="cs.forgotPasswordBack();">Volver</h5>
+  </form>
+</div>
+
+<div class="login layer">
   <form>
     <img src="img/big_logo.png">
     <input type="email" placeholder="Email...">
     <input type="password" placeholder="Contraseña...">
     <button class="btn btn-block" type="button" onclick="app.loadScreen(app.SCREENS.AUTHORIZATIONS)">INGRESAR</button>
-    <h5>No recuerdo mi contraseña</h5>
+    <h5 onclick="cs.forgotPassword();">No recuerdo mi contraseña</h5>
+    <h5 onclick="cs.registerCode();">¿Primera vez en AccessIN?</h5>
   </form>
 </div>
+
+<div class="register-code layer">
+  <form>
+    <img src="img/big_logo_without_legend.png">
+    <h4>Ingrese el código proporcionado por su administrador</h4>
+    <input type="text" placeholder="Código...">
+    <button class="btn btn-block" type="button" onclick="app.loadScreen(app.SCREENS.REGISTER)">PROCESAR</button>
+    <h5 onclick="cs.registerCodeBack();">Volver</h5>
+  </form>
+</div>
+
 <script type="text/javascript">
   function c(){
 
     this.start = function(){
 
       app.windowResize = function(){
-        Extends.scrollToInputFocus('.login');
+        Extends.scrollToInputFocus('.layer');
       };
 
       app.pageLoading('hide');
+    }
+
+    this.forgotPassword = function(){
+      $('.layer').addClass('active-forgot-password');
+    }
+
+    this.forgotPasswordBack = function(){
+      $('.layer').removeClass('active-forgot-password');
+    }
+
+    this.registerCode = function(){
+      $('.layer').addClass('active-register-code');
+    }
+
+    this.registerCodeBack = function(){
+      $('.layer').removeClass('active-register-code');
     }
 
   }

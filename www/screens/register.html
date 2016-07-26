@@ -1,0 +1,57 @@
+<div class="register">
+  <form>
+    <img src="img/big_logo_without_legend.png">
+    <input type="text" placeholder="Nombre...">
+    <input type="text" placeholder="Apellido...">
+    <div class="input-number">
+      <label>DNI...</label>
+      <input type="number">
+    </div>
+    <select>
+      <option value="">Selecciona sexo por favor...</option>
+      <option value="m">Masculino</option>
+      <option value="f">Femenino</option>
+      <option value="o">Otros</option>
+    </select>
+    <div class="input-date">
+      <label>Fecha de nacimiento...</label>
+      <input type="date">
+    </div>
+    <input type="email" placeholder="Email...">
+    <input type="password" placeholder="Contraseña...">
+    <input type="password" placeholder="Repita Contraseña...">
+    <div class="input-checkbox">
+      <div class="row">
+        <div class="checkbox">
+          <input type="checkbox" placeholder="Repita Contraseña...">
+        </div>
+        <label>Acepto las Condiciones del servicio y la Política de privacidad de AccessIn.</label>
+      </div>
+    </div>
+    <button class="btn btn-block" type="button" onclick="app.loadScreen(app.SCREENS.AUTHORIZATIONS)">FINALIZAR</button>
+    <h5 onclick="cs.back();">Volver</h5>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      app.windowResize = function(){
+        Extends.scrollToInputFocus('.register');
+
+      };
+
+      Extends.inputNumber('.input-number');
+      Extends.inputDate('.input-date');
+
+      app.pageLoading('hide');
+    }
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.LOGIN);
+    };
+
+  }
+</script>

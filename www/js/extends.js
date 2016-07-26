@@ -2,6 +2,7 @@ var Extends = {
   inputNumber : function(selector_css){
     $(selector_css).each(function(){
       $(this).find('label').click(function(){
+        console.log(222);
         $(this).parent().addClass('focus');
         $(this).parent().find('input').focus();
       });

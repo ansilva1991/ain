@@ -1,4 +1,7 @@
 <div class="chat-list">
+  <button class="btn btn-block btn-semitransparent">
+    Cargar anteriores
+  </button>
   <div class="chat-message">
     <div class="arrow-right"></div>
     <div class="content">
@@ -17,9 +20,11 @@
       </h6>
     </div>
   </div>
-  <div class="chat-message">
+  <div class="chat-message left">
     <div class="arrow-right"></div>
+    <div class="arrow-left"></div>
     <div class="content">
+      <h4><b>Silva Agustin</b> (Administrador)</h4>
       <h5>
         Lorem ipsum dol
       </h5>
@@ -29,21 +34,35 @@
       </h6>
     </div>
   </div>
-  <div class="chat-message left">
-    <div class="arrow-left"></div>
+  <div class="chat-message">
     <div class="arrow-right"></div>
     <div class="content">
       <h4><b>Silva Agustin</b> (A 05)</h4>
       <h5>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </h5>
+      <div class="attachment img">
+        <img src="img/communication_attachment_example_thumb.png">
+      </div>
       <h6>
-        <i class="fa fa-clock-o"></i>
+        <i class="fa fa-check"></i>
+        <span>2016-02-13 23:24 hrs</span>
+      </h6>
+    </div>
+  </div>
+  <div class="chat-message">
+    <div class="arrow-right"></div>
+    <div class="content">
+      <h4><b>Silva Agustin</b> (A 05)</h4>
+      <h5>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      </h5>
+      <div class="attachment file">
+        <i class="fa fa-file-text"></i>
+        <h5>Documento 234234 Reservas</h5>
+      </div>
+      <h6>
+        <i class="fa fa-check"></i>
         <span>2016-02-13 23:24 hrs</span>
       </h6>
     </div>
@@ -56,9 +75,29 @@
         <input type="text" placeholder="Escribir mensaje">
       </div>
       <div class="button">
-        <button>
+        <button type="button" onclick="cs.openAttachmentMenu();">
           <i class="fa fa-camera"></i>
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="send-attachment-menu">
+  <div class="backdrop" onclick="cs.closeAttachmentMenu();"></div>
+  <div class="menu">
+    <div class="content">
+      <div class="type" onclick="cs.addAttachmentFromGallery();">
+        <div class="icon">
+          <i class="fa fa-photo"></i>
+        </div>
+        <h5>Galería</h5>
+      </div>
+      <div class="type" onclick="cs.addAttachmentFromCamera();">
+        <div class="icon">
+          <i class="fa fa-camera"></i>
+        </div>
+        <h5>Cámara</h5>
       </div>
     </div>
   </div>
@@ -78,5 +117,38 @@
       app.loadScreen(app.SCREENS.COMMUNICATIONS);
     };
 
+    this.openAttachmentMenu = function(){
+      $('.send-attachment-menu').addClass('open');
+    };
+
+    this.closeAttachmentMenu = function(){
+      $('.send-attachment-menu').removeClass('open');
+    };
+
+    this.addAttachmentFromCamera = function(){
+      app.takeFromCamera(function(imageData){
+
+      },function(errorMessage){
+      },{
+        quality: 50,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        destinationType: Camera.DestinationType.DATA_URL,
+      });
+    }
+
+    this.addAttachmentFromGallery = function(){
+      app.takeFromCamera(function(imageData){
+
+      },function(errorMessage){
+      },{
+        quality: 50,
+        sourceType:  Camera.PictureSourceType.PHOTOLIBRARY,
+        destinationType: Camera.DestinationType.DATA_URL,
+      });
+    }
+
+    this.communicationInfo = function(){
+      app.loadScreen(app.SCREENS.INFO_COMMUNICATION);
+    };
   }
 </script>
