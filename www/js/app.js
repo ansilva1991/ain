@@ -138,6 +138,78 @@ var app = {
       section_name: "Comunicación",
       html: "info_communication"
     },
+    EVENTS: {
+      icon_left: [
+        {
+          icon: "bars",
+          func: function(){
+            app.openMenu();
+          }
+        }
+      ],
+      icon_right: [
+        {
+          icon: "info-circle",
+          func: function(){
+            cs.eventInfo();
+          }
+        }
+      ],
+      section_name: "Eventos",
+      html: "events"
+    },
+    EVENT_GUEST_LIST_FORM: {
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
+        }
+      ],
+      icon_right: [
+        {
+          icon: "check",
+          func: function(){
+            cs.submit();
+          }
+        }
+      ],
+      section_name: "Lista",
+      html: "event_guest_list_form"
+    },
+    EVENT_GUEST_FORM: {
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
+        }
+      ],
+      icon_right: [
+        {
+          icon: "check",
+          func: function(){
+            cs.submit();
+          }
+        }
+      ],
+      section_name: "Invitado",
+      html: "event_guest_form"
+    },
+    EVENTS_CALENDAR: {
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
+        }
+      ],
+      section_name: "ago. de 2017",
+      html: "events_calendar"
+    },
     CONFIGURATIONS: {
       icon_left: [
         {
@@ -195,7 +267,7 @@ var app = {
       app.windowResize();
     });
 
-    app.loadScreen(app.SCREENS.INFO_COMMUNICATION);
+    app.loadScreen(app.SCREENS.EVENTS_CALENDAR);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');

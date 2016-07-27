@@ -800,13 +800,13 @@ button.btn-semitransparent{
   position: fixed;
   top: 60px;
   left: 0px;
-  background-color: #ccc;
+  background-color: #EFA730;
 }
 
 .app>.content .page .sub-header .item{
   width: 100%;
   height: 50px;
-  color: #B4B4B4;
+  color: #F5DAAE;
   font-size: 30px;
   text-align: center;
   line-height: 50px;
@@ -1001,6 +1001,192 @@ button.btn-semitransparent{
 
 .app>.content .page .list.communications .item.selected{
   background-color: #ff0000;
+}
+
+.app>.content .page .list.events{
+  top: 114px;
+  -webkit-transition: transform 200ms ease;
+  -moz-transition: transform 200ms ease;
+  -o-transition: transform 200ms ease;
+  transition: transform 200ms ease;
+}
+
+.app>.content .page .list.events.event_places{
+  left: 0px;
+}
+
+.app>.content .page .list.events.guest_lists{
+  left: 100%;
+}
+
+.app>.content .page .list.events.event_places .item{
+  width: 100%;
+  height: 100px;
+  background-image: url(../img/back_event_place_soccer.png);
+  background-position: center;
+  background-size: cover;
+  border-bottom: 2px solid #fff;
+}
+
+.app>.content .page .list.events.event_places .item i{
+  width: 80px;
+  text-align: center;
+  color: #fff;
+  font-size: 70px;
+  line-height: 100px;
+  float: right;
+  padding-right: 10px;
+}
+
+.app>.content .page .list.events.event_places .item h4{
+  margin: 0px;
+  line-height: 100px;
+  float: left;
+  font-size: 20px;
+  color: #fff;
+  padding-left: 10px;
+}
+
+
+.app>.content .page .list.events.guest_lists .item{
+  width: 100%;
+  height: 80px;
+  display: table;
+  border-top: 1px solid #ccc;
+}
+
+.app>.content .page .list.events.guest_lists .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list.events.guest_lists .item.selected{
+  background-color: #ff0000;
+}
+
+.app>.content .page .list.events.guest_lists .item .row{
+  display: table-row;
+}
+
+.app>.content .page .list.events.guest_lists .item .row .icon{
+  width: 60px;
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 10px;
+}
+
+.app>.content .page .list.events.guest_lists .item .row .icon i{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  background-color: #ccc;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+  font-size: 25px;
+}
+
+.app>.content .page .list.events.guest_lists .item .row .info{
+  width: 100%;
+  display: table-cell;
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
+.app>.content .page .list.events.guest_lists .item .row .info h4{
+  margin: 0px;
+  color: #555;
+}
+
+.app>.content .page .list.events.guest_lists .item .row .info h5{
+  margin: 0px;
+  margin-top: 5px;
+  color: #999;
+}
+
+.app>.content .page .new-event-guest-lists{
+  width: 60px;
+  height: 60px;
+  background-color: #bbb;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  text-align: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .event-guest-list-form{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  overflow: auto;
+}
+
+.app>.content .page .event-guest-list-form .guest{
+  width: 100%;
+  height: 60px;
+  border-top: 1px solid #ccc;
+  padding-left: 20px;
+}
+
+.app>.content .page .event-guest-list-form .guest h4{
+  width: 100%;
+  margin: 0px;
+  margin-top: 10px;
+  color: #555;
+}
+
+.app>.content .page .event-guest-list-form .guest h5{
+  width: 100%;
+  margin: 0px;
+  margin-top: 5px;
+  color: #999;
+}
+
+.app>.content .page .event-calendar{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+}
+
+.app>.content .page .event-calendar .calendar{
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+.app>.content .page .event-calendar .calendar .week{
+  display: table-row;
+}
+
+.app>.content .page .event-calendar .calendar .week .day{
+  display: table-cell;
+  padding-top: 10px;
+  padding-left: 10px;
+  color: #555;
+  border-bottom: 1px solid #eee;
+}
+
+.app>.content .page .event-calendar .calendar .week .day-letter{
+  height: 20px;
+  display: table-cell;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  color: #555;
+  font-weight: bold;
 }
 
 .app>.content .page .send-attachment-menu{

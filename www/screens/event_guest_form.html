@@ -1,0 +1,40 @@
+<div class="event-guest-form">
+  <form class="form-horizontal">
+    <div class="input">
+      <input type="text" placeholder="Nombre...">
+    </div>
+    <div class="input">
+      <input type="text" placeholder="Apellido...">
+    </div>
+    <div class="input-number">
+      <label>DNI...</label>
+      <input type="number">
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.authorization-form-visit');
+      });
+
+      Extends.inputNumber('.input-number');
+
+      app.liActive('events');
+      app.pageLoading('hide');
+    }
+
+    this.submit = function(){
+      app.loadScreen(app.SCREENS.EVENT_GUEST_LIST_FORM);
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.EVENT_GUEST_LIST_FORM);
+    };
+
+  }
+</script>

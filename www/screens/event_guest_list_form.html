@@ -1,0 +1,82 @@
+<div class="event-guest-list-form">
+  <form class="form-horizontal">
+    <div class="input">
+      <input type="text" placeholder="Nombre de la lista...">
+    </div>
+    <center>
+      <h4>Invitados</h4>
+    </center>
+    <div class="guest">
+      <h4>Silva Agustin</h4>
+      <h5>36582407</h5>
+    </div>
+    <div class="guest">
+      <h4>Silva Agustin</h4>
+      <h5>DNI no ingresado</h5>
+    </div>
+    <div class="guest">
+      <h4>Silva Agustin</h4>
+      <h5>36582407</h5>
+    </div>
+    <div class="guest">
+      <h4>Silva Agustin</h4>
+      <h5>DNI no ingresado</h5>
+    </div>
+    <div class="guest">
+      <h4>Silva Agustin</h4>
+      <h5>36582407</h5>
+    </div>
+    <div class="guest">
+      <h4>Silva Agustin</h4>
+      <h5>DNI no ingresado</h5>
+    </div>
+    <div class="guest">
+      <h4>Silva Agustin</h4>
+      <h5>36582407</h5>
+    </div>
+    <div class="guest">
+      <h4>Silva Agustin</h4>
+      <h5>DNI no ingresado</h5>
+    </div>
+    <div class="guest">
+      <h4>Silva Agustin</h4>
+      <h5>36582407</h5>
+    </div>
+    <div class="guest">
+      <h4>Silva Agustin</h4>
+      <h5>DNI no ingresado</h5>
+    </div>
+  </form>
+</div>
+
+<button class="new-event-guest-lists" onclick="cs.newEventGuest();">
+  <i class="fa fa-user-plus"></i>
+</button>
+
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.authorization-form-visit');
+      });
+
+      app.liActive('events');
+      app.pageLoading('hide');
+    }
+
+    this.submit = function(){
+      app.loadScreen(app.SCREENS.EVENTS);
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.EVENTS);
+    };
+
+    this.newEventGuest = function(){
+      app.loadScreen(app.SCREENS.EVENT_GUEST_FORM);
+    }
+
+  }
+</script>
