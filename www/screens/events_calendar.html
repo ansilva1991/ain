@@ -10,16 +10,7 @@
       <div class="day-letter">S</div>
     </div>
     <div class="week">
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-      <div class="day"></div>
-    </div>
-    <div class="week">
-      <div class="day"></div>
+      <div class="day disabled"></div>
       <div class="day"></div>
       <div class="day"></div>
       <div class="day"></div>
@@ -37,12 +28,21 @@
       <div class="day"></div>
     </div>
     <div class="week">
+      <div class="day disabled"></div>
       <div class="day"></div>
       <div class="day"></div>
       <div class="day"></div>
       <div class="day"></div>
       <div class="day"></div>
       <div class="day"></div>
+    </div>
+    <div class="week">
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day disabled"></div>
       <div class="day"></div>
     </div>
     <div class="week">
@@ -148,6 +148,11 @@
 
       if(this.current_month == 11){
         this.current_year -= 1;
+      }
+
+      if(this.old_calendar != undefined){
+        this.old_calendar.remove();
+        this.old_calendar = undefined;
       }
 
       this.old_calendar = $('.event-calendar').clone();

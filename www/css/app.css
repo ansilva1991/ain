@@ -1216,6 +1216,11 @@ button.btn-semitransparent{
   background: #eee;
 }
 
+.app>.content .page .event-calendar .calendar .week .day.disabled{
+  background: #eee;
+  color: #999;
+}
+
 .app>.content .page .event-calendar .calendar .week .day-letter{
   height: 20px;
   display: table-cell;
@@ -1267,6 +1272,38 @@ button.btn-semitransparent{
   border-bottom: 1px solid #eee;
 }
 
+.app>.content .page .event-calendar-day .day .block .content .event{
+  width: 100%;
+  height: 60px;
+  background-color: #f8b13a;
+  color: #fff;
+  padding: 10px;
+}
+
+.app>.content .page .event-calendar-day .day .block .content .event:active{
+  background-color: #e09d2e;
+}
+
+.app>.content .page .event-calendar-day .day .block .content .event.other{
+  background-color: #eee;
+  color: #555;
+}
+
+.app>.content .page .event-calendar-day .day .block .content .event .info{
+  width: 100%;
+  display: block;
+  font-size: 14px;
+}
+
+.app>.content .page .event-calendar-day .day .block .content .event .info .hour{
+  float: right;
+}
+
+.app>.content .page .event-calendar-day .day .block .content .event .info .group{
+  float: left;
+  font-weight: bold;
+}
+
 .app>.content .page .event-calendar-day .current-day{
   position: fixed;
   bottom: 30px;
@@ -1275,6 +1312,8 @@ button.btn-semitransparent{
   text-align: center;
   background: #fff;
   padding-top: 5px;
+  height: 70px;
+  border-radius: 50%;
 }
 
 .app>.content .page .event-calendar-day .current-day h5{
@@ -1285,6 +1324,37 @@ button.btn-semitransparent{
 .app>.content .page .event-calendar-day .current-day h4{
   font-size: 25px;
   margin: 0px;
+}
+
+.app>.content .page .event-form{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow: auto;
+}
+
+.app>.content .page .event-form .guest{
+  width: 100%;
+  height: 60px;
+  border-top: 1px solid #ccc;
+  padding-left: 20px;
+}
+
+.app>.content .page .event-form .guest h4{
+  width: 100%;
+  margin: 0px;
+  margin-top: 10px;
+  color: #555;
+}
+
+.app>.content .page .event-form .guest h5{
+  width: 100%;
+  margin: 0px;
+  margin-top: 5px;
+  color: #999;
 }
 
 .app>.content .page .send-attachment-menu{
@@ -1612,6 +1682,35 @@ button.btn-semitransparent{
   font-size: 20px;
   background-color: #fff;
   opacity: 1;
+}
+
+.app>.content .page .form-horizontal>left{
+  width: 100%;
+  padding: 0px 10px;
+}
+
+.app>.content .page .form-horizontal>left h4{
+  text-align: left;
+  font-size: 20px;
+}
+
+.app>.content .page .form-horizontal>blockquote{
+  width: 100%;
+  padding: 10px;
+  margin: 0px;
+}
+
+.app>.content .page .form-horizontal>blockquote h4{
+  font-size: 20px;
+  color: #555;
+  margin: 0px;
+}
+
+.app>.content .page .form-horizontal>blockquote h5{
+  font-size: 16px;
+  color: #555;
+  margin: 0px;
+  margin-top: 10px;
 }
 
 .app>.content .page .form-horizontal .input-avatar{

@@ -222,6 +222,26 @@ var app = {
       section_name: "ago. de 2017",
       html: "events_calendar_day"
     },
+    EVENT_FORM: {
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
+        }
+      ],
+      icon_right: [
+        {
+          icon: "check",
+          func: function(){
+            cs.submit();
+          }
+        }
+      ],
+      section_name: "Evento",
+      html: "event_form"
+    },
     CONFIGURATIONS: {
       icon_left: [
         {
@@ -278,8 +298,8 @@ var app = {
     $(window).resize(function(){
       app.windowResize();
     });
-
-    app.loadScreen(app.SCREENS.EVENTS_CALENDAR);
+    window.open("http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf");
+    //app.loadScreen(app.SCREENS.EVENT_FORM);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
