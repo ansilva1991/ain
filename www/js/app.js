@@ -210,6 +210,18 @@ var app = {
       section_name: "ago. de 2017",
       html: "events_calendar"
     },
+    EVENTS_CALENDAR_DAY: {
+      icon_left: [
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
+        }
+      ],
+      section_name: "ago. de 2017",
+      html: "events_calendar_day"
+    },
     CONFIGURATIONS: {
       icon_left: [
         {

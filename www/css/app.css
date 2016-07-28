@@ -1159,6 +1159,34 @@ button.btn-semitransparent{
   position: fixed;
   top: 60px;
   bottom: 0px;
+  background: #fff;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+
+  -webkit-transition: transform 300ms ease;
+  -moz-transition: transform 300ms ease;
+  -o-transition: transform 300ms ease;
+  transition: transform 300ms ease;
+}
+
+.app>.content .page .event-calendar.left{
+  -webkit-transform: translate3d(-100%,10%,0);
+  -moz-transform: translate3d(-100%,10%,0);
+  -ms-transform: translate3d(-100%,10%,0);
+  -o-transform: translate3d(-100%,10%,0);
+  transform: translate3d(-100%,10%,0);
+}
+
+.app>.content .page .event-calendar.right{
+  -webkit-transform: translate3d(100%,10%,0);
+  -moz-transform: translate3d(100%,10%,0);
+  -ms-transform: translate3d(100%,10%,0);
+  -o-transform: translate3d(100%,10%,0);
+  transform: translate3d(100%,10%,0);
 }
 
 .app>.content .page .event-calendar .calendar{
@@ -1177,6 +1205,15 @@ button.btn-semitransparent{
   padding-left: 10px;
   color: #555;
   border-bottom: 1px solid #eee;
+  font-size: 12px;
+}
+
+.app>.content .page .event-calendar .calendar .week .day.other-month{
+  color: #999;
+}
+
+.app>.content .page .event-calendar .calendar .week .day:active{
+  background: #eee;
 }
 
 .app>.content .page .event-calendar .calendar .week .day-letter{
@@ -1187,6 +1224,67 @@ button.btn-semitransparent{
   padding-left: 10px;
   color: #555;
   font-weight: bold;
+}
+
+.app>.content .page .event-calendar-day{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow: auto;
+  padding-bottom: 10px;
+}
+
+.app>.content .page .event-calendar-day .day{
+  width: 100%;
+  display: table;
+}
+
+.app>.content .page .event-calendar-day .day .block{
+  height: 60px;
+  display: table-row;
+}
+
+.app>.content .page .event-calendar-day .day .block .label{
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.app>.content .page .event-calendar-day .day .block .label h5{
+  width: 60px;
+  font-weight: normal;
+  font-size: 14px;
+  text-align: center;
+  margin: 0px;
+  color: #555;
+}
+
+.app>.content .page .event-calendar-day .day .block .content{
+  width: 100%;
+  display: table-cell;
+  border-bottom: 1px solid #eee;
+}
+
+.app>.content .page .event-calendar-day .current-day{
+  position: fixed;
+  bottom: 30px;
+  right: 0px;
+  width: 70px;
+  text-align: center;
+  background: #fff;
+  padding-top: 5px;
+}
+
+.app>.content .page .event-calendar-day .current-day h5{
+  font-size: 20px;
+  margin: 0px;
+}
+
+.app>.content .page .event-calendar-day .current-day h4{
+  font-size: 25px;
+  margin: 0px;
 }
 
 .app>.content .page .send-attachment-menu{

@@ -10,69 +10,164 @@
       <div class="day-letter">S</div>
     </div>
     <div class="week">
-      <div class="day">30</div>
-      <div class="day">31</div>
-      <div class="day">1</div>
-      <div class="day">2</div>
-      <div class="day">3</div>
-      <div class="day">4</div>
-      <div class="day">5</div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
     </div>
     <div class="week">
-      <div class="day">6</div>
-      <div class="day">7</div>
-      <div class="day">8</div>
-      <div class="day">9</div>
-      <div class="day">10</div>
-      <div class="day">11</div>
-      <div class="day">12</div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
     </div>
     <div class="week">
-      <div class="day">13</div>
-      <div class="day">14</div>
-      <div class="day">15</div>
-      <div class="day">16</div>
-      <div class="day">17</div>
-      <div class="day">18</div>
-      <div class="day">19</div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
     </div>
     <div class="week">
-      <div class="day">20</div>
-      <div class="day">21</div>
-      <div class="day">22</div>
-      <div class="day">23</div>
-      <div class="day">24</div>
-      <div class="day">25</div>
-      <div class="day">26</div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
     </div>
     <div class="week">
-      <div class="day">27</div>
-      <div class="day">28</div>
-      <div class="day">29</div>
-      <div class="day">30</div>
-      <div class="day">31</div>
-      <div class="day">1</div>
-      <div class="day">2</div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
     </div>
     <div class="week">
-      <div class="day">3</div>
-      <div class="day">4</div>
-      <div class="day">5</div>
-      <div class="day">6</div>
-      <div class="day">7</div>
-      <div class="day">8</div>
-      <div class="day">9</div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
+      <div class="day"></div>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
   function c(){
+    this.current_year = 2016;
+    this.current_month = 7;
+    this.month_names = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+
+    this.old_calendar;
+    this.old_calendar_time_out;
 
     this.start = function(){
+
+      $('.day').tap(function(){
+        app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY);
+      });
+
+      $('.event-calendar').swipeLeft(function(){
+        cs.nextMonth();
+      });
+
+      $('.event-calendar').swipeRight(function(){
+        cs.backMonth();
+      });
+
+      this.reDrawMonth();
+
       app.liActive('events');
       app.pageLoading('hide');
     }
+
+    this.reDrawMonth = function(){
+      var init_date = (new Date((new Date(this.current_year,this.current_month,1,0,0,0)).getTime() - (86400000 * 2))).getTime();
+
+      var days = $('.day');
+      $('.day').removeClass('other-month');
+
+      for(var i = 0; i < 42; i++){
+        var date = (new Date(init_date + (i * 86400000)));
+        if(date.getMonth() != this.current_month){
+          $(days[i]).addClass('other-month');
+        }
+        $(days[i]).html(date.getDate());
+      }
+
+      $('.app>.header .section-name').html(this.month_names[this.current_month].toLowerCase() + ". de " + this.current_year);
+    }
+
+    this.nextMonth = function(){
+      this.current_month = this.current_month < 11 ? this.current_month + 1 : 0;
+
+      if(this.current_month == 0){
+        this.current_year += 1;
+      }
+
+      if(this.old_calendar != undefined){
+        this.old_calendar.remove();
+        this.old_calendar = undefined;
+      }
+
+      this.old_calendar = $('.event-calendar').clone();
+      this.reDrawMonth();
+
+      this.old_calendar.insertAfter('.event-calendar');
+
+      if(this.old_calendar_time_out != undefined){
+        clearTimeout(this.old_calendar_time_out);
+      }
+
+      this.old_calendar_time_out = setTimeout(function(){
+        cs.old_calendar.addClass('left');
+
+        cs.old_calendar_time_out = setTimeout(function(){
+          cs.old_calendar.remove();
+          cs.old_calendar = undefined;
+        },300);
+      },10);
+    };
+
+    this.backMonth = function(){
+      this.current_month = this.current_month > 0 ? this.current_month - 1 : 11;
+
+      if(this.current_month == 11){
+        this.current_year -= 1;
+      }
+
+      this.old_calendar = $('.event-calendar').clone();
+      this.reDrawMonth();
+
+      this.old_calendar.insertAfter('.event-calendar');
+
+      if(this.old_calendar_time_out != undefined){
+        clearTimeout(this.old_calendar_time_out);
+      }
+
+      this.old_calendar_time_out = setTimeout(function(){
+        cs.old_calendar.addClass('right');
+
+        cs.old_calendar_time_out = setTimeout(function(){
+          cs.old_calendar.remove();
+          cs.old_calendar = undefined;
+        },300);
+      },10);
+    };
 
     this.back = function(){
       app.loadScreen(app.SCREENS.EVENTS);
