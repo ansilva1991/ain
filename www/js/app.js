@@ -298,8 +298,8 @@ var app = {
     $(window).resize(function(){
       app.windowResize();
     });
-    window.plugins.fileOpener.open("file:///sdcard/IMG-20160501-WA0000.jpg");
-    //app.loadScreen(app.SCREENS.EVENT_FORM);
+
+    app.loadScreen(app.SCREENS.LOGIN);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
