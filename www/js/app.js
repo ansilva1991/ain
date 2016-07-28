@@ -298,7 +298,7 @@ var app = {
     $(window).resize(function(){
       app.windowResize();
     });
-    window.open("http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf");
+    window.plugins.fileOpener.open("file:///sdcard/IMG-20160501-WA0000.jpg");
     //app.loadScreen(app.SCREENS.EVENT_FORM);
   },
   openMenu: function(){
