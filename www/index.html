@@ -17,8 +17,9 @@
   -->
   <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-  <link rel="stylesheet" type="text/css" href="css/app.css" />
   <link rel="stylesheet" type="text/css" href="css/lib/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/lib/icomoon.css" />
+  <link rel="stylesheet" type="text/css" href="css/app.css" />
   <title>AccessIN</title>
 </head>
 
@@ -52,7 +53,7 @@
         <div class="list">
           <div class="item" data-li="authorizations" onclick="app.selectLiMenu(app.SCREENS.AUTHORIZATIONS);">
             <div class="icon">
-              <i class="fa fa-users"></i>
+              <span class="icon-people"></span>
             </div>
             <div class="label">
               Autorizaciones
@@ -105,8 +106,8 @@
   <div class="modal-confirm">
     <div class="content">
       <p></p>
-      <button onclick="Confirm.success();">Aceptar</button>
-      <button onclick="Confirm.cancel();">Cancelar</button>
+      <button class="btn btn-right btn-orange" onclick="Confirm.success();">Aceptar</button>
+      <button class="btn btn-left" onclick="Confirm.cancel();">Cancelar</button>
     </div>
   </div>
 
@@ -116,6 +117,7 @@
   <script type="text/javascript" src="js/lib/zepto-modules/touch.js"></script>
   <script type="text/javascript" src="js/lib/fastclick.js"></script>
 
+  <script type="text/javascript" src="js/zepto-extends.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="js/extends.js"></script>
   <script type="text/javascript">

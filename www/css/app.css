@@ -26,6 +26,14 @@ button.btn{
   font-size: 18px;
 }
 
+button.btn-left{
+  float: left;
+}
+
+button.btn-right{
+  float: right;
+}
+
 button.btn-block{
   width: 100%;
   display: block;
@@ -36,7 +44,7 @@ button.btn-semitransparent{
 }
 
 button.btn.btn-orange{
-  background-color: #ffa409;
+  background-color: #ffa400;
   color: #fff;
 }
 
@@ -123,6 +131,7 @@ button.btn.btn-orange{
 
 .modal-confirm .content{
   width: 100%;
+  padding: 10px;
   position: fixed;
   left: 0px;
   right: 0px;
@@ -143,15 +152,12 @@ button.btn.btn-orange{
 
 .modal-confirm .content p{
   min-height: 100px;
-  padding: 0px 10px;
+  color: #777;
 }
 
 .modal-confirm .content button{
-  width: 100%;
-  height: 50px;
-  background-color: #bbb;
-  border: none;
-  font-size: 18px;
+  text-transform: uppercase;
+  min-width: 128px;
 }
 
 .modal-confirm .content button:last-child{
@@ -191,7 +197,7 @@ button.btn.btn-orange{
 .spinner > div {
   width: 18px;
   height: 18px;
-  background-color: #ccc;
+  background-color: #ffa400;
 
   border-radius: 100%;
   display: inline-block;
@@ -283,7 +289,7 @@ button.btn.btn-orange{
 }
 
 .login form h5.orange{
-  color: #ffa409;
+  color: #ffa400;
 }
 
 .forgot-password{
@@ -485,7 +491,7 @@ button.btn.btn-orange{
 }
 
 .register form{
-  width: 80%;
+  width: 90%;
   margin: auto;
   max-width: 400px;
   padding-top: 20px;
@@ -495,10 +501,12 @@ button.btn.btn-orange{
 .register form img{
   width: 100%;
   max-width: 310px;
+  margin-bottom: 20px;
 }
 
 .register form>.form-group{
   width: 100%;
+  margin-top: 15px;
 }
 
 .register form>.form-group>label{
@@ -506,6 +514,43 @@ button.btn.btn-orange{
   text-transform: uppercase;
   display: block;
   text-align: left;
+  color: #939393;
+  font-size: 14px;
+}
+
+.register form>.form-group>.form-control{
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  display: block;
+  text-align: left;
+  outline: none;
+  color: #555;
+  font-size: 16px;
+  background: none;
+  background-color: #fff;
+}
+
+.register form>.form-group>.form-control:focus{
+  border-bottom: 1px solid #ffa400;
+}
+
+.register form>.form-group-checkbox{
+  width: 100%;
+  margin-top: 15px;
+}
+
+.register form>.form-group-checkbox>label{
+  text-transform: uppercase;
+  float: left;
+  text-align: left;
+  color: #939393;
+  font-size: 14px;
+}
+
+.register form>.form-group-checkbox>input{
+  float: right;
 }
 
 .register form button{
@@ -603,7 +648,7 @@ button.btn.btn-orange{
 .app>.header{
   width: 100%;
   height: 60px;
-  background-color: #f8b13a;
+  background-color: #ffa400;
   position: fixed;
   top: 0px;
   padding-left: 20px;
@@ -630,9 +675,10 @@ button.btn.btn-orange{
 
 .app>.header .section-name{
   line-height: 58px;
-  font-size: 20px;
+  font-size: 18px;
   color: #fff;
   float: left;
+  text-transform: uppercase;
 }
 
 .app>.content{
@@ -782,17 +828,23 @@ button.btn.btn-orange{
   position: fixed;
   top: 60px;
   left: 0px;
-  background-color: #EFA730;
+  background-color: #ffa400;
 }
 
 .app>.content .page .sub-header .item{
   width: 100%;
   height: 50px;
   color: #F5DAAE;
-  font-size: 30px;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
   text-align: center;
   line-height: 50px;
   float: left;
+}
+
+.app>.content .page .sub-header .item{
+
 }
 
 .app>.content .page .sub-header .item.active{
@@ -862,7 +914,8 @@ button.btn.btn-orange{
 .app>.content .page .list.authorizations .item{
   width: 100%;
   height: 80px;
-  border-top: 1px solid #cfcfcf;
+  border-top: 1px solid #e8e8e8;
+  color: #777;
 }
 
 
@@ -890,7 +943,6 @@ button.btn.btn-orange{
   padding: 0px;
   margin: 0px;
   line-height: 20px;
-  color: #000;
   margin-top: 15px;
 }
 
@@ -899,12 +951,12 @@ button.btn.btn-orange{
   padding: 0px;
   margin: 0px;
   line-height: 20px;
-  color: #555;
   margin-top: 5px;
 }
 
 .app>.content .page .list.authorizations .item.selected{
-  background-color: #ff0000;
+  background-color: #f39c00;
+  color: #fff;
 }
 
 .app>.content .page .list.communications{
@@ -1468,7 +1520,7 @@ button.btn.btn-orange{
 .app>.content .page .new-authorization-buttons button.new{
   width: 60px;
   height: 60px;
-  background-color: #bbb;
+  background-color: #ffa400;
   border-radius: 60px;
   border: none;
   font-size: 30px;
@@ -1485,7 +1537,7 @@ button.btn.btn-orange{
 }
 
 .app>.content .page .new-authorization-buttons .add-button{
-  width: 250px;
+  width: 340px;
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -1502,18 +1554,21 @@ button.btn.btn-orange{
 }
 
 .app>.content .page .new-authorization-buttons .add-button h5{
-  font-size: 20px;
-  line-height: 0px;
+  font-size: 18px;
+  height: 73px;
+  line-height: 60px;
+  margin: 0px;
   margin-right: 10px;
   float: right;
-  color: #000;
+  color: #555;
   display: none;
+  text-transform: uppercase;
 }
 
 .app>.content .page .new-authorization-buttons .add-button button{
   width: 60px;
   height: 60px;
-  background-color: #bbb;
+  background-color: #ffa400;
   border-radius: 60px;
   border: none;
   font-size: 30px;
@@ -1568,8 +1623,154 @@ button.btn.btn-orange{
   padding-bottom: 20px;
 }
 
+.app>.content .page .authorization-form-family .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .authorization-form-visit{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .authorization-form-visit .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .authorization-form-employee{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .authorization-form-employee .form-horizontal{
+  width: 90% !important;
+}
+
 .app>.content .page .form-horizontal{
   width: 100%;
+  margin: auto;
+}
+
+.app>.content .page .form-horizontal .form-dropdown{
+  max-height: 0;
+  overflow: hidden;
+}
+
+.app>.content .page .form-horizontal .form-dropdown.open{
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.app>.content .page .form-horizontal .form-group{
+  width: 100%;
+  margin-top: 15px;
+}
+
+.app>.content .page .form-horizontal .form-group>label{
+  width: 100%;
+  text-transform: uppercase;
+  display: block;
+  text-align: left;
+  color: #939393;
+  font-size: 14px;
+}
+
+.app>.content .page .form-horizontal .form-group>.form-control{
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  display: block;
+  text-align: left;
+  outline: none;
+  color: #555;
+  font-size: 16px;
+  background: none;
+  background-color: #fff;
+}
+
+.app>.content .page .form-horizontal .form-group>.form-control:focus{
+  border-bottom: 1px solid #ffa400;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox{
+  width: 100%;
+  margin-top: 15px;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  padding-top: 5px;
+  padding-bottom: 25px;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox>label{
+  height: 30px;
+  text-transform: uppercase;
+  float: left;
+  text-align: left;
+  color: #939393;
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox>input{
+  display: none;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox .checkbox{
+  width: 50px;
+  float: right;
+  vertical-align: middle;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox .checkbox>.box{
+  width: 50px;
+  height: 30px;
+  margin: auto;
+  background-color: #e2e2e2;
+  border-radius: 30px;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox .checkbox>.box>.pointer{
+  width: 30px;
+  height: 30px;
+  background-color: #ababab;
+  border-radius: 30px;
+
+  -webkit-transition: transform 400ms ease;
+  -moz-transition: transform 400ms ease;
+  -o-transition: transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox .checkbox.checked>.box>.pointer{
+  background-color: #ffa400;
+
+  -webkit-transform: translate3d(20px,0,0);
+  -moz-transform: translate3d(20px,0,0);
+  -ms-transform: translate3d(20px,0,0);
+  -o-transform: translate3d(20px,0,0);
+  transform: translate3d(20px,0,0);
 }
 
 .app>.content .page .form-horizontal .input-number{
@@ -1710,7 +1911,7 @@ button.btn.btn-orange{
 }
 
 .app>.content .page .form-horizontal .input-avatar .buttons{
-  width: 128px;
+  width: 130px;
   margin: auto;
 }
 
@@ -1720,17 +1921,15 @@ button.btn.btn-orange{
   float: left;
   font-size: 30px;
   border: none;
-  background-color: #bbb;
+  background-color: #ffa400;
   color: #fff;
-}
-
-.app>.content .page .form-horizontal .input-avatar .buttons button:last-child{
-  background-color: #ccc;
+  margin-left: 1px;
 }
 
 .app>.content .page center{
   width: 100%;
   padding: 0px 10px;
+  color: #777;
 }
 
 .app>.content .page center h4{

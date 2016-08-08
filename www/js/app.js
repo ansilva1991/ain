@@ -1,10 +1,12 @@
 var app = {
   SCREENS: {
     LOGIN: {
-      html: "login"
+      html: "login",
+      header: false
     },
     REGISTER: {
-      html: "register"
+      html: "register",
+      header: false
     },
     AUTHORIZATIONS: {
       icon_left: [
@@ -300,7 +302,7 @@ var app = {
       app.windowResize();
     });
 
-    app.loadScreen(app.SCREENS.REGISTER);
+    app.loadScreen(app.SCREENS.LOGIN);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
@@ -334,6 +336,12 @@ var app = {
     app.windowResize = function(){};
     $('.header .icon_end').remove();
     app.header_icon_clicks = {};
+
+    if(x_screen.header == false){
+      $('.header').hide();
+    }else{
+      $('.header').show();
+    }
 
     if(x_screen.icon_left && x_screen.icon_left.length > 0){
 

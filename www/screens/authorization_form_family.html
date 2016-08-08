@@ -11,47 +11,58 @@
         </button>
       </div>
     </div>
-    <div class="input">
-      <input type="text" placeholder="Nombre...">
+    <div class="form-group">
+      <label for="name">NOMBRE</label>
+      <input type="text" name="name" class="form-control">
     </div>
-    <div class="input">
-      <input type="text" placeholder="Apellido...">
+    <div class="form-group">
+      <label for="name">APELLIDO</label>
+      <input type="text" name="name" class="form-control">
     </div>
-    <div class="input-number">
-      <label>DNI...</label>
-      <input type="number">
+    <div class="form-group">
+      <label for="name">DNI</label>
+      <input type="number" name="name" class="form-control">
     </div>
-    <div class="input">
-      <select>
-        <option value="">Selecciona sexo por favor...</option>
+    <div class="form-group">
+      <label for="name">SEXO</label>
+      <select class="form-control">
+        <option value=""></option>
         <option value="m">Masculino</option>
         <option value="f">Femenino</option>
         <option value="o">Otros</option>
       </select>
     </div>
-    <div class="input-date">
-      <label>Fecha de nacimiento...</label>
-      <input type="date">
+    <div class="form-group">
+      <label for="name">FECHA DE NACIMIENTO</label>
+      <input type="date" name="name" class="form-control">
     </div>
-    <div class="input">
-      <input type="tel" placeholder="Teléfono de contacto...">
+    <div class="form-group">
+      <label for="name">Teléfono de contacto</label>
+      <input type="tel" name="name" class="form-control">
     </div>
-    <div class="input system-access-granted">
-      <input type="email" placeholder="Email...">
+    <div class="form-group-checkbox">
+      <label for="name">¿Dar acceso al sistema?</label>
+      <input type="checkbox">
+      <div class="checkbox">
+        <div class="box">
+          <div class="pointer"></div>
+        </div>
+      </div>
     </div>
-    <center class="system-access-granted">
-      <h5>
-        Se le enviará una notificación al email ingresado con las instrucciones de uso.
-      </h5>
-    </center>
-    <button type="button" class="btn btn-block system-access-granted" onclick="cs.removeAccess();">Quitar acceso al sistema</button>
-    <center class="system-access-denied">
-      <h4>¿Darle acceso al sistema?</h4>
-      <h5>
-        Al permitirle acceso al sistema, podra gestionar visitas y empleados, crear eventos, enviar y responder comunicaciones, entre otras funciones.
-      </h5>
-      <button type="button" class="btn btn-block" onclick="cs.giveAccess();">Permitir acceso al sistema</button>
-    </center>
+    <div class="form-dropdown">
+      <div class="form-group">
+        <label for="name">EMAIL</label>
+        <input type="text" name="email" class="form-control">
+      </div>
+      <center>
+        <h5>
+          Se le enviará una notificación al email ingresado con las instrucciones de uso.
+        </h5>
+        <h5>
+          Al permitirle acceso al sistema, podra gestionar visitas y empleados, crear eventos, enviar y responder comunicaciones, entre otras funciones.
+        </h5>
+      </center>
+    </div>
   </form>
 </div>
 
@@ -65,8 +76,13 @@
         Extends.scrollToInputFocus('.authorization-form-family');
       });
 
-      Extends.inputNumber('.input-number');
-      Extends.inputDate('.input-date');
+      $('.checkbox .box').tap(function(){
+        $(this).parent().toggleClass('checked');
+        $('.form-dropdown').toggleClass('open');
+        setTimeout(function(){
+          $('.authorization-form-family').scrollToBottom(250);
+        },200);
+      });
 
       app.liActive('authorizations');
       app.pageLoading('hide');

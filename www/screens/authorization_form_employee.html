@@ -1,37 +1,43 @@
 <div class="authorization-form-employee">
   <form class="form-horizontal">
-    <div class="input">
-      <input type="text" placeholder="Nombre...">
+    <div class="form-group">
+      <label for="name">NOMBRE</label>
+      <input type="text" name="name" class="form-control">
     </div>
-    <div class="input">
-      <input type="text" placeholder="Apellido...">
+    <div class="form-group">
+      <label for="name">APELLIDO</label>
+      <input type="text" name="name" class="form-control">
     </div>
-    <div class="input-number">
-      <label>DNI...</label>
-      <input type="number">
+    <div class="form-group">
+      <label for="name">DNI</label>
+      <input type="number" name="name" class="form-control">
     </div>
-    <div class="input-date">
-      <label>Fecha de vencimiento...</label>
-      <input type="date">
+    <div class="form-group">
+      <label for="name">FECHA DE Vencimiento</label>
+      <input type="date" name="name" class="form-control">
     </div>
-    <div class="input">
-      <select>
-        <option value="">¿Empleado de obra?</option>
-        <option value="0">No</option>
-        <option value="1">Si</option>
-      </select>
+    <div class="form-group-checkbox">
+      <label for="name">¿Empleado de obra?</label>
+      <input type="checkbox">
+      <div class="checkbox">
+        <div class="box">
+          <div class="pointer"></div>
+        </div>
+      </div>
     </div>
-    <div class="input-date">
-      <label>Vencimiento ART...</label>
-      <input type="date">
-    </div>
-    <div class="input-date">
-      <label>Vencimiento seguro del vehículo...</label>
-      <input type="date">
-    </div>
-    <div class="input-date">
-      <label>Vencimiento cert. buena conducta...</label>
-      <input type="date">
+    <div class="form-dropdown">
+      <div class="form-group">
+        <label for="name">Vencimiento de ART</label>
+        <input type="date" name="name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="name">Vencimiento seguro del vehículo</label>
+        <input type="date" name="name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="name">Vencimiento cert. buena conducta</label>
+        <input type="date" name="name" class="form-control">
+      </div>
     </div>
   </form>
 </div>
@@ -45,8 +51,13 @@
         Extends.scrollToInputFocus('.authorization-form-employee');
       });
 
-      Extends.inputNumber('.input-number');
-      Extends.inputDate('.input-date');
+      $('.checkbox .box').tap(function(){
+        $(this).parent().toggleClass('checked');
+        $('.form-dropdown').toggleClass('open');
+        setTimeout(function(){
+          $('.authorization-form-employee').scrollToBottom(250);
+        },200);
+      });
 
       app.liActive('authorizations');
       app.pageLoading('hide');
