@@ -3,19 +3,19 @@
     <img src="img/big_logo_without_legend.png">
     <h4>Se le enviará un email con los pasos para el recupero de su contraseña. Cualquier duda o consulta comuniquese a soporte@accessin.net</h4>
     <input type="email" placeholder="Email...">
-    <button class="btn btn-block" type="button" onclick="app.loadScreen(app.SCREENS.AUTHORIZATIONS)">ENVIAR</button>
+    <button class="btn btn-block btn-orange" type="button" onclick="app.loadScreen(app.SCREENS.AUTHORIZATIONS)">ENVIAR</button>
     <h5 onclick="cs.forgotPasswordBack();">Volver</h5>
   </form>
 </div>
 
 <div class="login layer">
   <form>
-    <img src="img/big_logo.png">
+    <img src="img/big_logo_without_legend.png">
     <input type="email" placeholder="Email...">
     <input type="password" placeholder="Contraseña...">
-    <button class="btn btn-block" type="button" onclick="app.loadScreen(app.SCREENS.AUTHORIZATIONS)">INGRESAR</button>
+    <button class="btn btn-block btn-orange" type="button" onclick="app.loadScreen(app.SCREENS.AUTHORIZATIONS)">INGRESAR</button>
+    <h5 class="orange" onclick="cs.registerCode();">¿Primera vez en AccessIN?</h5>
     <h5 onclick="cs.forgotPassword();">No recuerdo mi contraseña</h5>
-    <h5 onclick="cs.registerCode();">¿Primera vez en AccessIN?</h5>
   </form>
 </div>
 
@@ -24,7 +24,7 @@
     <img src="img/big_logo_without_legend.png">
     <h4>Ingrese el código proporcionado por su administrador</h4>
     <input type="text" placeholder="Código...">
-    <button class="btn btn-block" type="button" onclick="app.loadScreen(app.SCREENS.REGISTER)">PROCESAR</button>
+    <button class="btn btn-block btn-orange" type="button" onclick="app.loadScreen(app.SCREENS.REGISTER)">PROCESAR</button>
     <h5 onclick="cs.registerCodeBack();">Volver</h5>
   </form>
 </div>

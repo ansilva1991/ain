@@ -290,6 +290,7 @@ var app = {
   onDeviceReady: function() {
     console.log('deviceready');
     console.log(cordova.platformId);
+    console.log(device.uuid);
 
     if (cordova.platformId == 'android') {
       StatusBar.backgroundColorByHexString("#DC9929");
@@ -299,7 +300,7 @@ var app = {
       app.windowResize();
     });
 
-    app.loadScreen(app.SCREENS.LOGIN);
+    app.loadScreen(app.SCREENS.REGISTER);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
