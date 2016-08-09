@@ -307,15 +307,6 @@ var app = {
     });
 
     app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
-
-    OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
-
-    console.log(window.plugins.OneSignal.init("dab5c367-a58b-4ec8-ab06-2c8afa3ae808",{
-      googleProjectNumber: "969872359831"
-    },notificationOpenedCallback));
-
-    // Show an alert box if a notification comes in when the user is in your app.
-    window.plugins.OneSignal.enableInAppAlertNotification(true);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
