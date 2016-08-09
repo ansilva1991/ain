@@ -310,9 +310,9 @@ var app = {
 
     OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
 
-    window.plugins.OneSignal.init("dab5c367-a58b-4ec8-ab06-2c8afa3ae808",{
+    console.log(window.plugins.OneSignal.init("dab5c367-a58b-4ec8-ab06-2c8afa3ae808",{
       googleProjectNumber: "969872359831"
-    },notificationOpenedCallback);
+    },notificationOpenedCallback));
 
     // Show an alert box if a notification comes in when the user is in your app.
     window.plugins.OneSignal.enableInAppAlertNotification(true);
@@ -414,6 +414,7 @@ var app = {
 };
 
 var notificationOpenedCallback = function(jsonData) {
+  console.log(232323);
 console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
 };
 
