@@ -24,34 +24,58 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-app-operator:before {
+.icon-authorizations:before {
+  content: "\e90b";
+}
+.icon-communications:before {
+  content: "\e90c";
+}
+.icon-config:before {
+  content: "\e90d";
+}
+.icon-current_accounts:before {
+  content: "\e90e";
+}
+.icon-events:before {
+  content: "\e90f";
+}
+.icon-info:before {
+  content: "\e910";
+}
+.icon-sign-out:before {
+  content: "\e911";
+}
+.icon-people-bubble:before {
   content: "\e900";
 }
-.icon-client-employee:before {
+.icon-app-operator:before {
   content: "\e901";
 }
-.icon-family:before {
+.icon-client-employee:before {
   content: "\e902";
 }
-.icon-family-with-access:before {
+.icon-family:before {
   content: "\e903";
 }
-.icon-family-with-access2:before {
+.icon-family-with-access:before {
   content: "\e904";
 }
-.icon-people:before {
+.icon-family-with-access2:before {
   content: "\e905";
 }
-.icon-person:before {
+.icon-people:before {
   content: "\e906";
 }
-.icon-person-admin:before {
+.icon-person:before {
   content: "\e907";
 }
-.icon-person-employee:before {
+.icon-person-admin:before {
   content: "\e908";
 }
-.icon-person-owner-group:before {
+.icon-person-employee:before {
   content: "\e909";
+}
+.icon-person-owner-group:before {
+  content: "\e90a";
 }
 
