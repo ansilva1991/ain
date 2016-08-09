@@ -17,6 +17,7 @@
     <preference name="android-minSdkVersion" value="14" />
     <preference name="StatusBarOverlaysWebView" value="false"/>
     <preference name="StatusBarBackgroundColor" value="#DC9929" />
+    <plugin name="onesignal-cordova-plugin" source="npm" spec="~2.2.0" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.2.0" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-console" source="npm" spec="~1.0.2" />
