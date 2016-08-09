@@ -297,7 +297,6 @@ var app = {
     if(window.plugins.OneSignal && window.plugins.OneSignal.init){
       window.plugins.OneSignal.init("c121ee3a-dcad-4171-a489-12a59f102a04",{googleProjectNumber: "44425877825"},app.onNotificationOpenedCallback);
 
-      window.plugins.OneSignal.enableNotificationsWhenActive(true);
       window.plugins.OneSignal.enableInAppAlertNotification(false);
     }
 
