@@ -294,6 +294,17 @@ var app = {
     console.log(cordova.platformId);
     console.log(device.uuid);
 
+    var notificationOpenedCallback = function(jsonData) {
+    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+  };
+
+  window.plugins.OneSignal.init("0778ee53-9caf-420f-8f2f-bd1ad2076e4e",
+                                 {googleProjectNumber: "44425877825"},
+                                 notificationOpenedCallback);
+  
+  // Show an alert box if a notification comes in when the user is in your app.
+  window.plugins.OneSignal.enableInAppAlertNotification(true);
+
     if (cordova.platformId == 'android') {
       StatusBar.backgroundColorByHexString("#DC9929");
     }
@@ -306,7 +317,7 @@ var app = {
       app.closeMenu();
     });
 
-    app.setupPush();
+    //app.setupPush();
 
     app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
   },
