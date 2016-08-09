@@ -298,7 +298,7 @@ var app = {
     console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
   };
 
-  window.plugins.OneSignal.init("0778ee53-9caf-420f-8f2f-bd1ad2076e4e",
+  window.plugins.OneSignal.init("c121ee3a-dcad-4171-a489-12a59f102a04",
                                  {googleProjectNumber: "44425877825"},
                                  notificationOpenedCallback);
   
