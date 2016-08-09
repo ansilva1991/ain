@@ -294,16 +294,9 @@ var app = {
     console.log(cordova.platformId);
     console.log(device.uuid);
 
-    var notificationOpenedCallback = function(jsonData) {
-    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-  };
-
-  window.plugins.OneSignal.init("c121ee3a-dcad-4171-a489-12a59f102a04",
-                                 {googleProjectNumber: "44425877825"},
-                                 notificationOpenedCallback);
-  
-  // Show an alert box if a notification comes in when the user is in your app.
-  window.plugins.OneSignal.enableInAppAlertNotification(true);
+    if(window.plugins.OneSignal && window.plugins.OneSignal.init){
+      window.plugins.OneSignal.init("c121ee3a-dcad-4171-a489-12a59f102a04",{googleProjectNumber: "44425877825"},cs.onNotificationOpenedCallback);
+    }
 
     if (cordova.platformId == 'android') {
       StatusBar.backgroundColorByHexString("#DC9929");
@@ -320,6 +313,9 @@ var app = {
     //app.setupPush();
 
     app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
+  },
+  onNotificationOpenedCallback: function(jsonData){
+    alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
@@ -414,48 +410,6 @@ var app = {
       window.cs = app.current_screen;
     });
 
-  },
-  setupPush: function() {
-    console.log('calling push init');
-    var push = PushNotification.init({
-      "android": {
-        "senderID": "44425877825"
-      },
-      "browser": {},
-      "ios": {
-        "sound": true,
-        "vibration": true,
-        "badge": true
-      },
-      "windows": {}
-    });
-    console.log('after init');
-
-    push.on('registration', function(data) {
-      alert('registration event: ' + data.registrationId);
-
-      var oldRegId = localStorage.getItem('registrationId');
-      if (oldRegId !== data.registrationId) {
-        // Save new registration ID
-        localStorage.setItem('registrationId', data.registrationId);
-        // Post registrationId to your app server as the value has changed
-      }
-
-    });
-
-    push.on('error', function(e) {
-      console.log("push error = " + e.message);
-    });
-
-    push.on('notification', function(data) {
-      console.log('notification event');
-      navigator.notification.alert(
-        data.message,         // message
-        null,                 // callback
-        data.title,           // title
-        'Ok'                  // buttonName
-        );
-    });
   }
 };
 
