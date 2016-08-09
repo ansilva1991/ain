@@ -10,260 +10,260 @@ var app = {
     },
     AUTHORIZATIONS: {
       icon_left: [
-        {
-          icon: "bars",
-          func: function(){
-            app.openMenu();
-          }
+      {
+        icon: "bars",
+        func: function(){
+          app.openMenu();
         }
+      }
       ],
       icon_right: [
-        {
-          icon: "question-circle",
-          func: function(){
-            cs.help();
-          }
+      {
+        icon: "question-circle",
+        func: function(){
+          cs.help();
         }
+      }
       ],
       section_name: "Autorizaciones",
       html: "authorizations"
     },
     AUTHORIZATION_FORM_FAMILY: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       icon_right: [
-        {
-          icon: "check",
-          func: function(){
-            cs.submit();
-          }
+      {
+        icon: "check",
+        func: function(){
+          cs.submit();
         }
+      }
       ],
       section_name: "Familiar",
       html: "authorization_form_family"
     },
     AUTHORIZATION_FORM_VISIT: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       icon_right: [
-        {
-          icon: "check",
-          func: function(){
-            cs.submit();
-          }
+      {
+        icon: "check",
+        func: function(){
+          cs.submit();
         }
+      }
       ],
       section_name: "Visita",
       html: "authorization_form_visit"
     },
     AUTHORIZATION_FORM_EMPLOYEE: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       icon_right: [
-        {
-          icon: "check",
-          func: function(){
-            cs.submit();
-          }
+      {
+        icon: "check",
+        func: function(){
+          cs.submit();
         }
+      }
       ],
       section_name: "Empleado",
       html: "authorization_form_employee"
     },
     COMMUNICATIONS: {
       icon_left: [
-        {
-          icon: "bars",
-          func: function(){
-            app.openMenu();
-          }
+      {
+        icon: "bars",
+        func: function(){
+          app.openMenu();
         }
+      }
       ],
       icon_right: [
-        {
-          icon: "question-circle",
-          func: function(){
-            cs.help();
-          }
+      {
+        icon: "question-circle",
+        func: function(){
+          cs.help();
         }
+      }
       ],
       section_name: "Comunicaciones",
       html: "communications"
     },
     VIEW_COMMUNICATION: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       icon_right: [
-        {
-          icon: "info-circle",
-          func: function(){
-            cs.communicationInfo();
-          }
+      {
+        icon: "info-circle",
+        func: function(){
+          cs.communicationInfo();
         }
+      }
       ],
       section_name: "Comunicación",
       html: "view_communication"
     },
     INFO_COMMUNICATION: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       section_name: "Comunicación",
       html: "info_communication"
     },
     EVENTS: {
       icon_left: [
-        {
-          icon: "bars",
-          func: function(){
-            app.openMenu();
-          }
+      {
+        icon: "bars",
+        func: function(){
+          app.openMenu();
         }
+      }
       ],
       icon_right: [
-        {
-          icon: "info-circle",
-          func: function(){
-            cs.eventInfo();
-          }
+      {
+        icon: "info-circle",
+        func: function(){
+          cs.eventInfo();
         }
+      }
       ],
       section_name: "Eventos",
       html: "events"
     },
     EVENT_GUEST_LIST_FORM: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       icon_right: [
-        {
-          icon: "check",
-          func: function(){
-            cs.submit();
-          }
+      {
+        icon: "check",
+        func: function(){
+          cs.submit();
         }
+      }
       ],
       section_name: "Lista",
       html: "event_guest_list_form"
     },
     EVENT_GUEST_FORM: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       icon_right: [
-        {
-          icon: "check",
-          func: function(){
-            cs.submit();
-          }
+      {
+        icon: "check",
+        func: function(){
+          cs.submit();
         }
+      }
       ],
       section_name: "Invitado",
       html: "event_guest_form"
     },
     EVENTS_CALENDAR: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       section_name: "ago. de 2017",
       html: "events_calendar"
     },
     EVENTS_CALENDAR_DAY: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       section_name: "ago. de 2017",
       html: "events_calendar_day"
     },
     EVENT_FORM: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       icon_right: [
-        {
-          icon: "check",
-          func: function(){
-            cs.submit();
-          }
+      {
+        icon: "check",
+        func: function(){
+          cs.submit();
         }
+      }
       ],
       section_name: "Evento",
       html: "event_form"
     },
     CONFIGURATIONS: {
       icon_left: [
-        {
-          icon: "bars",
-          func: function(){
-            app.openMenu();
-          }
+      {
+        icon: "bars",
+        func: function(){
+          app.openMenu();
         }
+      }
       ],
       section_name: "Configuración",
       html: "configurations"
     },
     CONFIGURATION_NOTIFICATIONS: {
       icon_left: [
-        {
-          icon: "chevron-left",
-          func: function(){
-            cs.back();
-          }
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
         }
+      }
       ],
       section_name: "Notificaciones",
       html: "configuration_notifications"
@@ -305,6 +305,8 @@ var app = {
     $('.app>.menu').swipeLeft(function(){
       app.closeMenu();
     });
+
+    app.setupPush();
 
     app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
   },
@@ -401,12 +403,49 @@ var app = {
       window.cs = app.current_screen;
     });
 
-  }
-};
+  },
+  setupPush: function() {
+    console.log('calling push init');
+    var push = PushNotification.init({
+      "android": {
+        "senderID": "44425877825"
+      },
+      "browser": {},
+      "ios": {
+        "sound": true,
+        "vibration": true,
+        "badge": true
+      },
+      "windows": {}
+    });
+    console.log('after init');
 
-var notificationOpenedCallback = function(jsonData) {
-  console.log(232323);
-console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+    push.on('registration', function(data) {
+      alert('registration event: ' + data.registrationId);
+
+      var oldRegId = localStorage.getItem('registrationId');
+      if (oldRegId !== data.registrationId) {
+        // Save new registration ID
+        localStorage.setItem('registrationId', data.registrationId);
+        // Post registrationId to your app server as the value has changed
+      }
+
+    });
+
+    push.on('error', function(e) {
+      console.log("push error = " + e.message);
+    });
+
+    push.on('notification', function(data) {
+      console.log('notification event');
+      navigator.notification.alert(
+        data.message,         // message
+        null,                 // callback
+        data.title,           // title
+        'Ok'                  // buttonName
+        );
+    });
+  }
 };
 
 var Alert = {
