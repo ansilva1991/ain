@@ -180,6 +180,22 @@
         }
       });
 
+      $('.list.authorizations.families').swipeLeft(function(){
+        cs.selectTab($('.sub-header .item')[1]);
+      });
+
+      $('.list.authorizations.visits').swipeLeft(function(){
+        cs.selectTab($('.sub-header .item')[2]);
+      });
+
+      $('.list.authorizations.visits').swipeRight(function(){
+        cs.selectTab($('.sub-header .item')[0]);
+      });
+
+      $('.list.authorizations.employees').swipeRight(function(){
+        cs.selectTab($('.sub-header .item')[1]);
+      });
+
       app.liActive('authorizations');
       app.pageLoading('hide');
     }

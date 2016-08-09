@@ -302,7 +302,20 @@ var app = {
       app.windowResize();
     });
 
-    app.loadScreen(app.SCREENS.LOGIN);
+    $('.app>.menu').swipeLeft(function(){
+      app.closeMenu();
+    });
+
+    app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
+
+    OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
+
+    window.plugins.OneSignal.init("dab5c367-a58b-4ec8-ab06-2c8afa3ae808",{
+      googleProjectNumber: "969872359831"
+    },notificationOpenedCallback);
+
+    // Show an alert box if a notification comes in when the user is in your app.
+    window.plugins.OneSignal.enableInAppAlertNotification(true);
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
@@ -343,6 +356,8 @@ var app = {
       $('.header').show();
     }
 
+    $('.header .section-name').removeAttr('onclick');
+
     if(x_screen.icon_left && x_screen.icon_left.length > 0){
 
       for(var i in x_screen.icon_left){
@@ -353,6 +368,10 @@ var app = {
         var function_id = Math.round(Math.random() * 99999999999);
 
         tmp.attr('onclick','app.headerIconClick(' + function_id + ')');
+
+        if(i == 0){
+          $('.header .section-name').attr('onclick','app.headerIconClick(' + function_id + ')');
+        }
 
         tmp.show();
 
@@ -392,6 +411,10 @@ var app = {
     });
 
   }
+};
+
+var notificationOpenedCallback = function(jsonData) {
+console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
 };
 
 var Alert = {

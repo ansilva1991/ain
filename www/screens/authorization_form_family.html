@@ -42,8 +42,8 @@
     </div>
     <div class="form-group-checkbox">
       <label for="name">¿Dar acceso al sistema?</label>
-      <input type="checkbox">
-      <div class="checkbox">
+      <div class="checkbox for_tap">
+        <input type="checkbox" id="have_access">
         <div class="box">
           <div class="pointer"></div>
         </div>
@@ -76,12 +76,16 @@
         Extends.scrollToInputFocus('.authorization-form-family');
       });
 
-      $('.checkbox .box').tap(function(){
-        $(this).parent().toggleClass('checked');
+      Extends.inputCheckBox();
+
+      $('#have_access').change(function(){
         $('.form-dropdown').toggleClass('open');
-        setTimeout(function(){
-          $('.authorization-form-family').scrollToBottom(250);
-        },200);
+
+        if($(this).is(':checked')){
+          setTimeout(function(){
+            $('.authorization-form-family').scrollToBottom(250);
+          },200);
+        }
       });
 
       app.liActive('authorizations');

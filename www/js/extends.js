@@ -34,6 +34,14 @@ var Extends = {
       });
     });
   },
+  inputCheckBox : function(){
+    $('.checkbox.for_tap').tap(function(){
+      $(this).toggleClass('checked');
+
+      $(this).find('input[type="checkbox"]').prop('checked',$(this).hasClass('checked'));
+      $(this).find('input[type="checkbox"]').change();
+    });
+  },
   scrollToInputFocus : function(selector_css){
     $(selector_css).scrollTop(($(selector_css).scrollTop() + $(':focus').offset().top) - window.innerHeight + 60);
   }
