@@ -34,6 +34,12 @@ var Extends = {
       });
     });
   },
+  inputRadios : function(selector_css){
+    $(selector_css).find('.radio').tap(function(){
+      $(this).parent().find('.radio').removeClass('checked');
+      $(this).addClass('checked');
+    });
+  },
   inputCheckBox : function(){
     $('.checkbox.for_tap').tap(function(){
       $(this).toggleClass('checked');

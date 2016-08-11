@@ -8,6 +8,10 @@ var app = {
       html: "register",
       header: false
     },
+    REGISTER_TERMS_AND_CONDITIONS: {
+      html: "register_terms_and_conditions",
+      header: false
+    },
     AUTHORIZATIONS: {
       icon_left: [
       {
@@ -39,7 +43,7 @@ var app = {
       ],
       icon_right: [
       {
-        icon: "check",
+        text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
         }
@@ -59,7 +63,7 @@ var app = {
       ],
       icon_right: [
       {
-        icon: "check",
+        text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
         }
@@ -79,7 +83,7 @@ var app = {
       ],
       icon_right: [
       {
-        icon: "check",
+        text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
         }
@@ -314,7 +318,7 @@ var app = {
 
     //app.setupPush();
 
-    app.loadScreen(app.SCREENS.LOGIN);
+    app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY);
   },
   onNotificationOpenedCallback: function(jsonData){
     alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
@@ -366,7 +370,14 @@ var app = {
         var tmp = $('.header .icon.example').clone().insertBefore('.header .section-name');
         tmp.addClass('icon_end');
         tmp.removeClass('example');
-        tmp.children().attr('class','fa fa-' + x_screen.icon_left[i].icon);
+
+        if(x_screen.icon_left[i].icon){
+          tmp.children().attr('class','fa fa-' + x_screen.icon_left[i].icon);
+        }else{
+          tmp.html(x_screen.icon_left[i].text);
+          tmp.addClass('text');
+        }
+
         var function_id = Math.round(Math.random() * 99999999999);
 
         tmp.attr('onclick','app.headerIconClick(' + function_id + ')');
@@ -388,7 +399,14 @@ var app = {
         tmp.addClass('icon_end');
         tmp.addClass('right');
         tmp.removeClass('example');
-        tmp.children().attr('class','fa fa-' + x_screen.icon_right[i].icon);
+
+        if(x_screen.icon_right[i].icon){
+          tmp.children().attr('class','fa fa-' + x_screen.icon_right[i].icon);
+        }else{
+          tmp.html(x_screen.icon_right[i].text);
+          tmp.addClass('text');
+        }
+
         var function_id = Math.round(Math.random() * 99999999999);
 
         tmp.attr('onclick','app.headerIconClick(' + function_id + ')');
