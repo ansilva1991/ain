@@ -1,14 +1,16 @@
 <div class="event-guest-form">
   <form class="form-horizontal">
-    <div class="input">
-      <input type="text" placeholder="Nombre...">
+    <div class="form-group">
+      <label for="name">NOMBRE</label>
+      <input type="text" name="name" class="form-control" value="Javier">
     </div>
-    <div class="input">
-      <input type="text" placeholder="Apellido...">
+    <div class="form-group">
+      <label for="name">APELLIDO</label>
+      <input type="text" name="name" class="form-control" value="Menniti">
     </div>
-    <div class="input-number">
-      <label>DNI...</label>
-      <input type="number">
+    <div class="form-group">
+      <label for="name">DNI</label>
+      <input type="number" name="name" class="form-control">
     </div>
   </form>
 </div>
@@ -19,10 +21,8 @@
     this.start = function(){
 
       $(window).resize(function(){
-        Extends.scrollToInputFocus('.authorization-form-visit');
+        Extends.scrollToInputFocus('.event-guest-form');
       });
-
-      Extends.inputNumber('.input-number');
 
       app.liActive('events');
       app.pageLoading('hide');

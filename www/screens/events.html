@@ -1,41 +1,34 @@
 <div class="sub-header col-2">
   <div class="item active" data-item="0" onclick="cs.selectTab(this);">
-    <i class="fa fa-calendar"></i>
+    LUGARES
   </div>
   <div class="item" data-item="1" onclick="cs.selectTab(this);">
-    <i class="fa fa-users"></i>
+    INVITADOS
   </div>
   <div class="line">
     <div class="pointer"></div>
   </div>
 </div>
 <div class="list events event_places">
-  <div class="item">
+  <div class="item back-house">
     <h4>Mi Lote</h4>
-    <i class="fa fa-home"></i>
   </div>
-  <div class="item">
-    <h4>Cancha Norte</h4>
-    <i class="fa fa-futbol-o"></i>
+  <div class="item back-sum">
+    <h4>SUM</h4>
   </div>
-  <div class="item">
-    <h4>Cancha Norte</h4>
-    <i class="fa fa-futbol-o"></i>
+  <div class="item back-tennis-court">
+    <h4>Cancha de Tennis N° 1</h4>
   </div>
-  <div class="item">
-    <h4>Cancha Norte</h4>
-    <i class="fa fa-futbol-o"></i>
-  </div>
-  <div class="item">
-    <h4>Cancha Norte</h4>
-    <i class="fa fa-futbol-o"></i>
+  <div class="item back-tennis-court">
+    <h4>Cancha de Tennis N° 2</h4>
   </div>
 </div>
 <div class="list events guest_lists">
   <div class="item" data-id="4">
     <div class="row">
       <div class="icon">
-        <i class="fa fa-users"></i>
+        <span class="icon-people"></span>
+        <i class="fa fa-check"></i>
       </div>
       <div class="info">
         <h4>Facultad</h4>
@@ -46,7 +39,8 @@
   <div class="item" data-id="5">
     <div class="row">
       <div class="icon">
-        <i class="fa fa-users"></i>
+        <span class="icon-people"></span>
+        <i class="fa fa-check"></i>
       </div>
       <div class="info">
         <h4>Trabajo</h4>
@@ -76,6 +70,14 @@
     this.selectedItems = [];
 
     this.start = function(){
+      $('.list.events.event_places').swipeLeft(function(){
+        cs.selectTab($('.sub-header .item')[1]);
+      });
+
+      $('.list.events.guest_lists').swipeRight(function(){
+        cs.selectTab($('.sub-header .item')[0]);
+      });
+
       $('.events.guest_lists .item').longTap(function(){
         cs.selectItem($(this).data('id'));
       });
@@ -89,7 +91,7 @@
       });
 
       $('.events.event_places .item').tap(function(){
-          app.loadScreen(app.SCREENS.EVENTS_CALENDAR);
+          app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY);
       });
 
       app.liActive('events');
@@ -148,6 +150,9 @@
         '-o-transform': 'translate3d(' + (100 * item) + '%,0,0)',
         'transform': 'translate3d(' + (100 * item) + '%,0,0)'
       });
+
+      $('.list.events').removeClass('active');
+      $($('.list.events')[item]).addClass('active');
 
       $('.list.events').css({
         '-webkit-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',

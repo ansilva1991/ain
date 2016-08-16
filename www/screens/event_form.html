@@ -1,76 +1,98 @@
 <div class="event-form">
   <form class="form-horizontal">
-    <blockquote>
-      <h4>Lugar del evento</h4>
-      <h5>SUM</h5>
-    </blockquote>
-    <blockquote>
-      <h4>Fecha</h4>
-      <h5>Jueves 20 de Julio del 2016</h5>
-    </blockquote>
-    <blockquote>
-      <h4>Hora de inicio</h4>
-      <h5>15:00</h5>
-    </blockquote>
-    <div class="input">
-      <input type="text" placeholder="Nombre del evento...">
+    <div class="form-group">
+      <label for="name">Lugar</label>
+      <input type="text" class="form-control" value="Cancha de Tennis N° 1" readonly>
     </div>
-    <left>
-      <h4>Invitados</h4>
-    </left>
-    <button class="btn btn-block" type="button">
-      Importar Lista
-    </button>
-    <div class="guest">
+    <div class="form-group">
+      <label for="name">Fecha</label>
+      <input type="text" class="form-control" value="23 de Julio del 2016" readonly>
+    </div>
+    <div class="form-group">
+      <label for="name">Horario</label>
+      <input type="text" class="form-control" value="16:00 - 17:00 hrs" readonly>
+    </div>
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input type="text" class="form-control" value="">
+    </div>
+    <div class="form-group">
+      <label for="name">Permitir ingresar a los invitados</label>
+      <select class="form-control">
+        <option value="15">15 Minutos antes de la fecha de inicio del evento</option>
+        <option value="30">30 Minutos antes de la fecha de inicio del evento</option>
+        <option selected="selected" value="60">1 Hora antes de la fecha de inicio del evento</option>
+        <option value="120">2 Horas antes de la fecha de inicio del evento</option>
+        <option value="180">3 Horas antes de la fecha de inicio del evento</option>
+        <option value="240">4 Horas antes de la fecha de inicio del evento</option>
+        <option value="300">5 Horas antes de la fecha de inicio del evento</option>
+        <option value="360">6 Horas antes de la fecha de inicio del evento</option>
+      </select>
+    </div>
+    <legend>INVITADOS</legend>
+    <div class="guest" data-id="3">
       <h4>Silva Agustin</h4>
       <h5>36582407</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="4">
       <h4>Silva Agustin</h4>
       <h5>DNI no ingresado</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="45">
       <h4>Silva Agustin</h4>
       <h5>36582407</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="46">
       <h4>Silva Agustin</h4>
       <h5>DNI no ingresado</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="47">
       <h4>Silva Agustin</h4>
       <h5>36582407</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="48">
       <h4>Silva Agustin</h4>
       <h5>DNI no ingresado</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="49">
       <h4>Silva Agustin</h4>
       <h5>36582407</h5>
-    </div>
-    <div class="guest">
-      <h4>Silva Agustin</h4>
-      <h5>DNI no ingresado</h5>
-    </div>
-    <div class="guest">
-      <h4>Silva Agustin</h4>
-      <h5>36582407</h5>
-    </div>
-    <div class="guest">
-      <h4>Silva Agustin</h4>
-      <h5>DNI no ingresado</h5>
     </div>
   </form>
-
+  <div class="new-guests-buttons">
+    <div class="backdrop" onclick="cs.closeMenuNew();"></div>
+    <button class="new" onclick="cs.openMenuNew();">
+      <span class="icon-person-add"></span>
+    </button>
+    <div class="add-button new-family">
+      <button type="button" onclick="cs.newGuest();">
+        <span class="icon-person-add"></span>
+      </button>
+      <h5>Agregar Invitado</h5>
+    </div>
+    <div class="add-button new-visit">
+      <button type="button" onclick="cs.importFromList();">
+        <i class="fa fa-list"></i>
+      </button>
+      <h5>Importar Lista</h5>
+    </div>
+  </div>
 </div>
 
-<button class="new-event-guest-lists" onclick="cs.newEventGuest();">
-  <i class="fa fa-user-plus"></i>
-</button>
+<div class="header-actions">
+  <div class="icon" onclick="cs.desSelectAll();">
+    <i class="fa fa-chevron-left"></i>
+  </div>
+  <div class="section-name" id="number_selected"></div>
+   <div class="icon right" onclick="cs.confirmErased();">
+    <i class="fa fa-trash"></i>
+  </div>
+</div>
 
 <script type="text/javascript">
   function c(){
+    this.mode = 'list';
+    this.selectedItems = [];
 
     this.start = function(){
 
@@ -78,7 +100,17 @@
         Extends.scrollToInputFocus('.event-form');
       });
 
-      Extends.inputDate('.input-date');
+      $('.guest').longTap(function(){
+        cs.selectItem($(this).data('id'));
+      });
+
+      $('.guest').tap(function(){
+        if(cs.mode == 'select'){
+          cs.selectItem($(this).data('id'));
+        }else if(cs.mode == 'list'){
+          app.loadScreen(app.SCREENS.EVENT_GUEST_FORM);
+        }
+      });
 
       app.liActive('events');
       app.pageLoading('hide');
@@ -90,6 +122,67 @@
 
     this.back = function(){
       app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY);
+    };
+
+    this.newEventGuest = function(){
+      app.loadScreen(app.SCREENS.EVENT_GUEST_FORM);
+    }
+
+    this.selectItem = function(id){
+      var i = this.selectedItems.indexOf(id);
+
+      if(i > -1){
+        this.selectedItems.splice(i,1);
+        $('.guest[data-id="' + id + '"]').removeClass('selected');
+      }else{
+        $('.guest[data-id="' + id + '"]').addClass('selected');
+        this.selectedItems.push(id);
+      }
+
+      this.checkMode();
+    };
+
+    this.desSelectAll = function(){
+      $('.guest').removeClass('selected');
+      this.selectedItems = [];
+
+      this.checkMode();
+    };
+
+    this.checkMode = function(){
+      if(this.selectedItems.length > 0){
+        this.mode = 'select';
+
+        $('.header-actions #number_selected').html(this.selectedItems.length);
+        $('.header-actions').show();
+        $('.new-event-guest-lists').hide();
+      }else{
+        this.mode = 'list';
+        $('.header-actions').hide();
+        $('.new-event-guest-lists').show();
+      }
+    };
+
+    this.confirmErased = function(){
+      Confirm.open("¿Estas seguro que deseas eliminar los elementos seleccionados?",function(){
+        cs.desSelectAll();
+      });
+    }
+
+    this.openMenuNew = function(){
+      $('.new-guests-buttons').addClass('open');
+    };
+
+    this.closeMenuNew = function(){
+      $('.new-guests-buttons').removeClass('open');
+    };
+
+    this.newGuest = function(){
+      app.loadScreen(app.SCREENS.EVENT_GUEST_FORM);
+    };
+
+    this.importFromList = function(){
+      app.loadScreen(app.SCREENS.IMPORT_GUESTS_LIST);
     };
 
   }

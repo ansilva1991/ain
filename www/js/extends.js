@@ -50,5 +50,20 @@ var Extends = {
   },
   scrollToInputFocus : function(selector_css){
     $(selector_css).scrollTop(($(selector_css).scrollTop() + $(':focus').offset().top) - window.innerHeight + 60);
+  },
+  formatDate : function(date,format){
+    var months_name_abbr = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    var units = {
+      yyyy : date.getFullYear(),
+      mm : (date.getMonth() / 10).toFixed(1).replace('.',''),
+      dd : (date.getDate() / 10).toFixed(1).replace('.',''),
+      mabbr : months_name_abbr[date.getMonth()]
+    };
+
+    for(var i in units){
+      format = format.replace('%' + i,units[i]);
+    }
+
+    return format;
   }
 }

@@ -1,65 +1,75 @@
 <div class="event-guest-list-form">
   <form class="form-horizontal">
-    <div class="input">
-      <input type="text" placeholder="Nombre de la lista...">
+    <div class="form-group">
+      <label for="name">NOMBRE DE LA LISTA</label>
+      <input type="text" name="name" class="form-control" value="Facultad">
     </div>
-    <center>
-      <h4>Invitados</h4>
-    </center>
-    <div class="guest">
+    <legend>INVITADOS</legend>
+    <div class="guest" data-id="3">
       <h4>Silva Agustin</h4>
       <h5>36582407</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="4">
       <h4>Silva Agustin</h4>
       <h5>DNI no ingresado</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="45">
       <h4>Silva Agustin</h4>
       <h5>36582407</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="46">
       <h4>Silva Agustin</h4>
       <h5>DNI no ingresado</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="47">
       <h4>Silva Agustin</h4>
       <h5>36582407</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="48">
       <h4>Silva Agustin</h4>
       <h5>DNI no ingresado</h5>
     </div>
-    <div class="guest">
+    <div class="guest" data-id="49">
       <h4>Silva Agustin</h4>
       <h5>36582407</h5>
-    </div>
-    <div class="guest">
-      <h4>Silva Agustin</h4>
-      <h5>DNI no ingresado</h5>
-    </div>
-    <div class="guest">
-      <h4>Silva Agustin</h4>
-      <h5>36582407</h5>
-    </div>
-    <div class="guest">
-      <h4>Silva Agustin</h4>
-      <h5>DNI no ingresado</h5>
     </div>
   </form>
+  <button class="new-event-guest-lists" onclick="cs.newEventGuest();">
+    <span class="icon-person-add"></span>
+  </button>
 </div>
 
-<button class="new-event-guest-lists" onclick="cs.newEventGuest();">
-  <i class="fa fa-user-plus"></i>
-</button>
+<div class="header-actions">
+  <div class="icon" onclick="cs.desSelectAll();">
+    <i class="fa fa-chevron-left"></i>
+  </div>
+  <div class="section-name" id="number_selected"></div>
+   <div class="icon right" onclick="cs.confirmErased();">
+    <i class="fa fa-trash"></i>
+  </div>
+</div>
 
 <script type="text/javascript">
   function c(){
+    this.mode = 'list';
+    this.selectedItems = [];
 
     this.start = function(){
 
       $(window).resize(function(){
         Extends.scrollToInputFocus('.authorization-form-visit');
+      });
+
+      $('.guest').longTap(function(){
+        cs.selectItem($(this).data('id'));
+      });
+
+      $('.guest').tap(function(){
+        if(cs.mode == 'select'){
+          cs.selectItem($(this).data('id'));
+        }else if(cs.mode == 'list'){
+          app.loadScreen(app.SCREENS.EVENT_GUEST_FORM);
+        }
       });
 
       app.liActive('events');
@@ -76,6 +86,47 @@
 
     this.newEventGuest = function(){
       app.loadScreen(app.SCREENS.EVENT_GUEST_FORM);
+    }
+
+    this.selectItem = function(id){
+      var i = this.selectedItems.indexOf(id);
+
+      if(i > -1){
+        this.selectedItems.splice(i,1);
+        $('.guest[data-id="' + id + '"]').removeClass('selected');
+      }else{
+        $('.guest[data-id="' + id + '"]').addClass('selected');
+        this.selectedItems.push(id);
+      }
+
+      this.checkMode();
+    };
+
+    this.desSelectAll = function(){
+      $('.guest').removeClass('selected');
+      this.selectedItems = [];
+
+      this.checkMode();
+    };
+
+    this.checkMode = function(){
+      if(this.selectedItems.length > 0){
+        this.mode = 'select';
+
+        $('.header-actions #number_selected').html(this.selectedItems.length);
+        $('.header-actions').show();
+        $('.new-event-guest-lists').hide();
+      }else{
+        this.mode = 'list';
+        $('.header-actions').hide();
+        $('.new-event-guest-lists').show();
+      }
+    };
+
+    this.confirmErased = function(){
+      Confirm.open("¿Estas seguro que deseas eliminar los elementos seleccionados?",function(){
+        cs.desSelectAll();
+      });
     }
 
   }

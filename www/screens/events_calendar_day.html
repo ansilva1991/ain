@@ -1,102 +1,135 @@
 <div class="event-calendar-day">
-  <div class="day">
-    <div class="block">
-      <div class="label"><h5>0:00</h5></div>
-      <div class="content"></div>
+  <div class="calendar">
+    <div class="years">
+      <div class="year" data-year="2015">2015</div>
+      <div class="year" data-year="2016">2016</div>
+      <div class="year" data-year="2017">2017</div>
     </div>
-    <div class="block">
-      <div class="label"><h5>1:00</h5></div>
-      <div class="content">
-        <div class="event other">
-          Perez Jorge
-          <div class="info">
-            <span class="hour">0:00 - 1:00</span>
-            <span class="group">A 25</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>2:00</h5></div>
-      <div class="content">
-        <div class="event other">
-          Perez Jorge
-          <div class="info">
-            <span class="hour">1:00 - 2:00</span>
-            <span class="group">A 25</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>3:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>4:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>5:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>6:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>7:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>8:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>9:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>10:00</h5></div>
-      <div class="content">
-        <div class="event">
-          Silva Agustín
-          <div class="info">
-            <span class="hour">10:00 - 11:00</span>
-            <span class="group">A 23</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>11:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>12:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>13:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>14:00</h5></div>
-      <div class="content"></div>
-    </div>
-    <div class="block">
-      <div class="label"><h5>15:00</h5></div>
-      <div class="content"></div>
+    <div class="months">
+      <div class="month" data-month="0">Enero</div>
+      <div class="month" data-month="1">Febrero</div>
+      <div class="month" data-month="2">Marzo</div>
+      <div class="month" data-month="3">Abril</div>
+      <div class="month" data-month="4">Mayo</div>
+      <div class="month" data-month="5">Junio</div>
+      <div class="month" data-month="6">Julio</div>
+      <div class="month" data-month="7">Agosto</div>
+      <div class="month" data-month="8">Septiembre</div>
+      <div class="month" data-month="9">Octubre</div>
+      <div class="month" data-month="10">Noviembre</div>
+      <div class="month" data-month="11">Diciembre</div>
     </div>
   </div>
-  <div class="current-day">
-    <h4>29</h4>
-    <h5>jue.</h5>
+  <div class="days-number" id="days_number_example">
+    <div class="content">
+    </div>
+  </div>
+  <div class="day" id="days_number_day_example">
+    <label></label>
+    <div class="number"></div>
+  </div>
+  <div class="day-scroll">
+    <div class="day">
+      <div class="block">
+        <div class="label"><h5>0:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>1:00</h5></div>
+        <div class="content">
+          <div class="event other">
+            Perez Jorge
+            <div class="info">
+              <span class="hour">0:00 - 1:00</span>
+              <span class="group">A 25</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>2:00</h5></div>
+        <div class="content">
+          <div class="event other">
+            Perez Jorge
+            <div class="info">
+              <span class="hour">1:00 - 2:00</span>
+              <span class="group">A 25</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>3:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>4:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>5:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>6:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>7:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>8:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>9:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>10:00</h5></div>
+        <div class="content">
+          <div class="event">
+            Silva Agustín
+            <div class="info">
+              <span class="hour">10:00 - 11:00</span>
+              <span class="group">A 23</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>11:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>12:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>13:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>14:00</h5></div>
+        <div class="content"></div>
+      </div>
+      <div class="block">
+        <div class="label"><h5>15:00</h5></div>
+        <div class="content"></div>
+      </div>
+    </div>
   </div>
 </div>
 
 <script type="text/javascript">
   function c(){
+
+    this.DAYS_LABEL = ["DOM","LUN","MAR","MIE","JUE","VIE","SAB"];
+
+    this.scrolling_days_number = true;
+    this.scroll_init_day_integer = (new Date()).getTime() - ((new Date()).getDay() * 86400000);
+    this.selected_day = new Date(new Date().getTime() + 86400000);
 
     this.start = function(){
 
@@ -104,13 +137,147 @@
         app.loadScreen(app.SCREENS.EVENT_FORM);
       });
 
+      $('.event-calendar-day .years .year').tap(function(){
+        var year = parseInt($(this).data('year'));
+      });
+
+      $('.event-calendar-day').append(this.createDOMWeek(new Date(this.scroll_init_day_integer - 604800000),{
+        addClass: 'right'
+      }));
+      $('.event-calendar-day').append(this.createDOMWeek(new Date(this.scroll_init_day_integer),{
+        addClass: 'center'
+      }));
+      $('.event-calendar-day').append(this.createDOMWeek(new Date(this.scroll_init_day_integer + 604800000),{
+        addClass: 'left'
+      }));
+
+      $('.end_days_number.center').scrollLeft(window.innerWidth * 0.01);
+      $('.end_days_number.center').addClass('available-scroll');
+
+      $('.header .section-name').html(Extends.formatDate(new Date(this.scroll_init_day_integer),'%mabbr. de %yyyy'));
+
+      setTimeout(function(){
+        cs.scrolling_days_number = false;
+      },100);
+
       app.liActive('events');
       app.pageLoading('hide');
     }
 
     this.back = function(){
-      app.loadScreen(app.SCREENS.EVENTS_CALENDAR);
+      app.loadScreen(app.SCREENS.EVENTS);
     };
+
+    this.updateCalendarSelected = function(){
+      $('.calendar .years .year, .calendar .months .month').removeClass('selected');
+
+      var day = new Date(parseInt($('.end_days_number.center').data('init_day')));
+
+      $('.calendar .years .year[data-year="' + day.getFullYear() + '"]').addClass('selected');
+      $('.calendar .months .month[data-month="' + day.getMonth() + '"]').addClass('selected');
+    }
+
+    this.createDOMWeek = function(init_day, opts){
+      opts = opts || {};
+
+      var days_number = $('#days_number_example').clone();
+      days_number.data('init_day',init_day.getTime());
+      days_number.removeAttr('id');
+      var content = days_number.find('.content');
+      var days = this.getWeek(init_day);
+
+      if(opts.addClass){
+        days_number.addClass(opts.addClass);
+      }
+
+
+      for(var i in days){
+        var tmp = $('#days_number_day_example').clone().appendTo(content);
+        tmp.css({ 'display' : 'block' });
+        tmp.removeAttr('id');
+        tmp.find('label').html(this.DAYS_LABEL[days[i].wday]);
+        tmp.find('.number').html(days[i].date);
+
+        if(Extends.formatDate(new Date(),'%yyyy-%mm-%dd') == days[i].time){
+          tmp.addClass('today');
+        }
+
+        if(Extends.formatDate(this.selected_day,'%yyyy-%mm-%dd') == days[i].time){
+          tmp.addClass('selected');
+        }
+      }
+
+      days_number.css({ 'display' : 'block' });
+      days_number.addClass('end_days_number');
+      days_number.scroll(function(){
+        var scroll = $(this).scrollLeft();
+        if(!cs.scrolling_days_number){
+          cs.scrolling_days_number = true;
+
+          if(scroll > (window.innerWidth * 0.01)){
+            var this_day = parseInt($('.end_days_number.left').data('init_day'));
+            var other_day = this_day + 604800000;
+
+            $('.end_days_number.right').remove();
+            $('.end_days_number.center').addClass('right').removeClass('center');
+            $('.end_days_number.left').removeClass('left').addClass('center');
+
+            $('.header .section-name').html(Extends.formatDate(new Date(this_day),'%mabbr. de %yyyy'));
+
+            $('.event-calendar-day').append(cs.createDOMWeek(new Date(other_day),{
+              addClass: 'left'
+            }));
+
+            cs.updateCalendarSelected();
+          }
+
+          if(scroll < (window.innerWidth * 0.01)){
+            var this_day = parseInt($('.end_days_number.right').data('init_day'));
+            var other_day = this_day - 604800000;
+            $('.end_days_number.left').remove();
+            $('.end_days_number.center').addClass('left').removeClass('center');
+            $('.end_days_number.right').removeClass('right').addClass('center');
+
+            $('.header .section-name').html(Extends.formatDate(new Date(this_day),'%mabbr. de %yyyy'));
+
+            $('.event-calendar-day').append(cs.createDOMWeek(new Date(other_day),{
+              addClass: 'right'
+            }));
+
+            cs.updateCalendarSelected();
+          }
+
+          $('.end_days_number.center').scrollLeft(window.innerWidth * 0.01);
+
+          setTimeout(function(){
+            cs.scrolling_days_number = false;
+            $('.end_days_number.center').addClass('available-scroll');
+          },300);
+        }
+      });
+
+      return days_number;
+    };
+
+    this.getWeek = function(init_day){
+      var days = [];
+
+      for(var i = 0; i < 7;i++){
+        var d = new Date(init_day.getTime() + (86400000 * i));
+        days.push({
+          wday : d.getDay(),
+          date : d.getDate(),
+          time : Extends.formatDate(d,'%yyyy-%mm-%dd')
+        });
+      }
+
+      return days;
+    }
+
+    this.toggleCalendar = function(){
+      this.updateCalendarSelected();
+      $('.event-calendar-day').toggleClass('open-calendar');
+    }
 
   }
 </script>

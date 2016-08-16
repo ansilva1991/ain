@@ -3,6 +3,10 @@
   box-sizing: border-box;
 }
 
+h1,h2,h3,h4,h5,h6{
+  font-weight: normal;
+}
+
 body {
   -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
   -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
@@ -919,7 +923,7 @@ button.btn.btn-orange{
 
 .app>.header .section-name{
   line-height: 58px;
-  font-size: 18px;
+  font-size: 16px;
   color: #fff;
   float: left;
   text-transform: uppercase;
@@ -1033,7 +1037,7 @@ button.btn.btn-orange{
 
 .app>.menu .content .list{
   width: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   position: fixed;
   top: 150px;
   bottom: 0px;
@@ -1196,7 +1200,7 @@ button.btn.btn-orange{
   padding: 0px;
   margin: 0px;
   line-height: 20px;
-  margin-top: 15px;
+  margin-top: 17px;
 }
 
 .app>.content .page .list.authorizations .item .info h4{
@@ -1204,12 +1208,35 @@ button.btn.btn-orange{
   padding: 0px;
   margin: 0px;
   line-height: 20px;
-  margin-top: 5px;
+  margin-top: 2px;
+}
+
+.app>.content .page .list.authorizations .item i.fa.fa-check{
+  display: none;
 }
 
 .app>.content .page .list.authorizations .item.selected{
-  background-color: #f39c00;
+  background-color: #f3f3f3;
+}
+
+.app>.content .page .list.authorizations .item.selected img{
+  display: none;
+}
+
+.app>.content .page .list.authorizations .item.selected i.fa.fa-check{
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+  border: 1px solid #ffa400;
+  text-align: center;
+  line-height: 60px;
   color: #fff;
+  background: #ffa400;
+  font-size: 30px;
 }
 
 .app>.content .page .list.communications{
@@ -1308,30 +1335,34 @@ button.btn.btn-orange{
 
 .app>.content .page .list.events.event_places .item{
   width: 100%;
-  height: 100px;
-  background-image: url(../img/back_event_place_soccer.png);
+  height: 200px;
   background-position: center;
   background-size: cover;
-  border-bottom: 2px solid #fff;
+  overflow: hidden;
 }
 
-.app>.content .page .list.events.event_places .item i{
-  width: 80px;
-  text-align: center;
-  color: #fff;
-  font-size: 70px;
-  line-height: 100px;
-  float: right;
-  padding-right: 10px;
+.app>.content .page .list.events.event_places .item.back-house{
+  background-image: url(../img/back_event_place_house.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-sum{
+  background-image: url(../img/back_event_place_sum.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-tennis-court{
+  background-image: url(../img/back_event_place_tennis_court.png);
 }
 
 .app>.content .page .list.events.event_places .item h4{
+  width: 100%;
+  height: 50px;
   margin: 0px;
-  line-height: 100px;
-  float: left;
-  font-size: 20px;
+  line-height: 50px;
   color: #fff;
-  padding-left: 10px;
+  background: rgba(0,0,0,0.5);
+  padding-left: 20px;
+  margin-top: 150px;
+  font-size: 18px;
 }
 
 
@@ -1340,6 +1371,7 @@ button.btn.btn-orange{
   height: 80px;
   display: table;
   border-top: 1px solid #ccc;
+  color: #777;
 }
 
 .app>.content .page .list.events.guest_lists .item:active{
@@ -1347,7 +1379,28 @@ button.btn.btn-orange{
 }
 
 .app>.content .page .list.events.guest_lists .item.selected{
-  background-color: #ff0000;
+  background-color: #f3f3f3;
+}
+
+.app>.content .page .list.events.guest_lists .item i.fa.fa-check{
+  display: none;
+}
+.app>.content .page .list.events.guest_lists .item.selected .icon span.icon-people{
+  display: none;
+}
+
+.app>.content .page .list.events.guest_lists .item.selected i.fa.fa-check{
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  float: left;
+  border: 1px solid #ffa400;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  background: #ffa400;
+  font-size: 30px;
 }
 
 .app>.content .page .list.events.guest_lists .item .row{
@@ -1361,15 +1414,17 @@ button.btn.btn-orange{
   padding-left: 10px;
 }
 
-.app>.content .page .list.events.guest_lists .item .row .icon i{
+.app>.content .page .list.events.guest_lists .item .row .icon span{
   width: 60px;
   height: 60px;
   border-radius: 60px;
-  background-color: #ccc;
-  color: #fff;
+  border: 1px #eee solid;
+  background-color: #fff;
+  color: #dbdddf;
   text-align: center;
-  line-height: 60px;
-  font-size: 25px;
+  line-height: 57px;
+  font-size: 35px;
+  display: block;
 }
 
 .app>.content .page .list.events.guest_lists .item .row .info{
@@ -1381,19 +1436,19 @@ button.btn.btn-orange{
 
 .app>.content .page .list.events.guest_lists .item .row .info h4{
   margin: 0px;
-  color: #555;
+  font-weight: normal;
 }
 
 .app>.content .page .list.events.guest_lists .item .row .info h5{
   margin: 0px;
   margin-top: 5px;
-  color: #999;
+  font-weight: normal;
 }
 
 .app>.content .page .new-event-guest-lists{
   width: 60px;
   height: 60px;
-  background-color: #bbb;
+  background-color: #ffa400;
   border-radius: 60px;
   border: none;
   font-size: 30px;
@@ -1403,6 +1458,31 @@ button.btn.btn-orange{
   position: fixed;
   bottom: 20px;
   right: 20px;
+
+  -webkit-transform: translate3d(200%,0,0);
+  -moz-transform: translate3d(200%,0,0);
+  -ms-transform: translate3d(200%,0,0);
+  -o-transform: translate3d(200%,0,0);
+  transform: translate3d(200%,0,0);
+
+  -webkit-transition: transform 200ms ease;
+  -moz-transition: transform 200ms ease;
+  -ms-transform: transform 200ms ease;
+  -o-transition: transform 200ms ease;
+  transition: transform 200ms ease;
+}
+
+.app>.content .page .guest_lists.active .new-event-guest-lists{
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .event-guest-list-form .new-event-guest-lists{
+
   -webkit-transform: translate3d(0,0,0);
   -moz-transform: translate3d(0,0,0);
   -ms-transform: translate3d(0,0,0);
@@ -1420,33 +1500,58 @@ button.btn.btn-orange{
   overflow: auto;
 }
 
+.app>.content .page .event-guest-list-form .form-horizontal{
+  width: 90% !important;
+}
+
 .app>.content .page .event-guest-list-form .guest{
   width: 100%;
   height: 60px;
-  border-top: 1px solid #ccc;
-  padding-left: 20px;
+  border-bottom: 1px solid #eee;
+  padding-left: 10px;
+  color: #777;
+  overflow: hidden;
+}
+
+.app>.content .page .event-guest-list-form .guest.selected{
+  background: #f3f3f3;
 }
 
 .app>.content .page .event-guest-list-form .guest h4{
   width: 100%;
   margin: 0px;
   margin-top: 10px;
-  color: #555;
+  font-weight: normal;
 }
 
 .app>.content .page .event-guest-list-form .guest h5{
   width: 100%;
   margin: 0px;
   margin-top: 5px;
-  color: #999;
+  text-transform: uppercase;
+  font-weight: normal;
 }
 
-.app>.content .page .event-calendar{
+.app>.content .page .event-guest-form .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .event-calendar-day{
   width: 100%;
+}
+
+.app>.content .page .event-calendar-day.open-calendar>.days-number{
+  top: 300px;
+}
+
+.app>.content .page .event-calendar-day>.days-number{
+  width: 100%;
+  height: 85px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background: #f9f9f9;
   position: fixed;
   top: 60px;
-  bottom: 0px;
-  background: #fff;
 
   -webkit-transform: translate3d(0,0,0);
   -moz-transform: translate3d(0,0,0);
@@ -1454,97 +1559,120 @@ button.btn.btn-orange{
   -o-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
 
-  -webkit-transition: transform 300ms ease;
-  -moz-transition: transform 300ms ease;
-  -o-transition: transform 300ms ease;
-  transition: transform 300ms ease;
+  -webkit-transition: transform 300ms ease, top 300ms ease;
+  -moz-transition: transform 300ms ease, top 300ms ease;
+  -ms-transition: transform 300ms ease, top 300ms ease;
+  -o-transition: transform 300ms ease, top 300ms ease;
+  transition: transform 300ms ease, top 300ms ease;
+
+  display: none;
 }
 
-.app>.content .page .event-calendar.left{
-  -webkit-transform: translate3d(-100%,10%,0);
-  -moz-transform: translate3d(-100%,10%,0);
-  -ms-transform: translate3d(-100%,10%,0);
-  -o-transform: translate3d(-100%,10%,0);
-  transform: translate3d(-100%,10%,0);
+.app>.content .page .event-calendar-day>.days-number.available-scroll{
+  overflow-x: auto;
 }
 
-.app>.content .page .event-calendar.right{
-  -webkit-transform: translate3d(100%,10%,0);
-  -moz-transform: translate3d(100%,10%,0);
-  -ms-transform: translate3d(100%,10%,0);
-  -o-transform: translate3d(100%,10%,0);
-  transform: translate3d(100%,10%,0);
+.app>.content .page .event-calendar-day>.days-number.left{
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
 }
 
-.app>.content .page .event-calendar .calendar{
+.app>.content .page .event-calendar-day>.days-number.right{
+  -webkit-transform: translate3d(-100%,0,0);
+  -moz-transform: translate3d(-100%,0,0);
+  -ms-transform: translate3d(-100%,0,0);
+  -o-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+}
+
+.app>.content .page .event-calendar-day>.days-number .content{
+  width: 102%;
+  padding-left: 1%;
+  padding-right: 1%;
+  height: 85px;
+  overflow: hidden;
+}
+
+.app>.content .page .event-calendar-day>.days-number .day{
+  width: 14.285714285714286%;
+  height: 85px;
+  float: left;
+  display: none;
+}
+
+.app>.content .page .event-calendar-day>.days-number .day label{
   width: 100%;
-  height: 100%;
-  display: table;
-}
-
-.app>.content .page .event-calendar .calendar .week{
-  display: table-row;
-}
-
-.app>.content .page .event-calendar .calendar .week .day{
-  display: table-cell;
-  padding-top: 10px;
-  padding-left: 10px;
-  color: #555;
-  border-bottom: 1px solid #eee;
+  height: 30px;
+  color: #d2d2d2;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
   font-size: 12px;
+  line-height: 30px;
 }
 
-.app>.content .page .event-calendar .calendar .week .day.other-month{
-  color: #999;
+.app>.content .page .event-calendar-day>.days-number .day.today label{
+  color: #ffa400;
 }
 
-.app>.content .page .event-calendar .calendar .week .day:active{
-  background: #eee;
+.app>.content .page .event-calendar-day>.days-number .day .number{
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 50%;
+  color: #777;
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  margin: auto;
 }
 
-.app>.content .page .event-calendar .calendar .week .day.disabled{
-  background: #eee;
-  color: #999;
+.app>.content .page .event-calendar-day>.days-number .day.selected .number{
+  background: #ffa400;
+  color: #fff;
 }
 
-.app>.content .page .event-calendar .calendar .week .day-letter{
-  height: 20px;
-  display: table-cell;
-  padding-top: 10px;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  color: #555;
-  font-weight: bold;
+.app>.content .page .event-calendar-day>.days-number h1{
+  width: 800px;
 }
 
-.app>.content .page .event-calendar-day{
+.app>.content .page .event-calendar-day>.day-scroll{
   width: 100%;
   position: fixed;
-  top: 60px;
+  top: 145px;
   bottom: 0px;
   left: 0px;
-  right: 0px;
-  overflow: auto;
-  padding-bottom: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #fff;
+
+  -webkit-transition: top 300ms ease;
+  -moz-transition: top 300ms ease;
+  -ms-transition: top 300ms ease;
+  -o-transition: top 300ms ease;
+  transition: top 300ms ease;
 }
 
-.app>.content .page .event-calendar-day .day{
+.app>.content .page .event-calendar-day>.day-scroll .day{
   width: 100%;
   display: table;
 }
 
-.app>.content .page .event-calendar-day .day .block{
+.app>.content .page .event-calendar-day>.day-scroll .day .block{
   height: 60px;
   display: table-row;
 }
 
-.app>.content .page .event-calendar-day .day .block .label{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .label{
   display: table-cell;
   vertical-align: bottom;
 }
 
-.app>.content .page .event-calendar-day .day .block .label h5{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .label h5{
   width: 60px;
   font-weight: normal;
   font-size: 14px;
@@ -1553,13 +1681,13 @@ button.btn.btn-orange{
   color: #555;
 }
 
-.app>.content .page .event-calendar-day .day .block .content{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content{
   width: 100%;
   display: table-cell;
   border-bottom: 1px solid #eee;
 }
 
-.app>.content .page .event-calendar-day .day .block .content .event{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event{
   width: 100%;
   height: 60px;
   background-color: #f8b13a;
@@ -1567,26 +1695,26 @@ button.btn.btn-orange{
   padding: 10px;
 }
 
-.app>.content .page .event-calendar-day .day .block .content .event:active{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event:active{
   background-color: #e09d2e;
 }
 
-.app>.content .page .event-calendar-day .day .block .content .event.other{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event.other{
   background-color: #eee;
   color: #555;
 }
 
-.app>.content .page .event-calendar-day .day .block .content .event .info{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .info{
   width: 100%;
   display: block;
   font-size: 14px;
 }
 
-.app>.content .page .event-calendar-day .day .block .content .event .info .hour{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .info .hour{
   float: right;
 }
 
-.app>.content .page .event-calendar-day .day .block .content .event .info .group{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .info .group{
   float: left;
   font-weight: bold;
 }
@@ -1613,35 +1741,210 @@ button.btn.btn-orange{
   margin: 0px;
 }
 
+
+.app>.content .page .event-calendar-day.open-calendar>.days-number{
+  top: 360px;
+}
+
+.app>.content .page .event-calendar-day.open-calendar>.day-scroll{
+  top: 445px;
+}
+
+.app>.content .page .event-calendar-day>.calendar{
+  width: 100%;
+  height: 300px;
+  position: fixed;
+  top: 60px;
+  background: #ffa400;
+}
+
+.app>.content .page .event-calendar-day>.calendar .years{
+  width: 100%;
+  height: 60px;
+}
+
+.app>.content .page .event-calendar-day>.calendar .years .year{
+  width: 33.3333333%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  float: left;
+  color: rgba(255,255,255,0.5);
+}
+
+.app>.content .page .event-calendar-day>.calendar .years .year.selected{
+  color: #fff;
+}
+
+.app>.content .page .event-calendar-day>.calendar .months{
+  width: 100%;
+  height: 240px;
+}
+
+.app>.content .page .event-calendar-day>.calendar .months .month{
+  width: 33.3333333%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  float: left;
+  color: rgba(255,255,255,0.5);
+}
+.app>.content .page .event-calendar-day>.calendar .months .month.selected{
+  color: #fff;
+}
+
 .app>.content .page .event-form{
   width: 100%;
   position: fixed;
   top: 60px;
   bottom: 0px;
-  left: 0px;
   right: 0px;
+  left: 0px;
   overflow: auto;
+}
+
+.app>.content .page .event-form .form-horizontal{
+  width: 90% !important;
 }
 
 .app>.content .page .event-form .guest{
   width: 100%;
   height: 60px;
-  border-top: 1px solid #ccc;
-  padding-left: 20px;
+  border-bottom: 1px solid #eee;
+  padding-left: 10px;
+  color: #777;
+  overflow: hidden;
+}
+
+.app>.content .page .event-form .guest.selected{
+  background: #f3f3f3;
 }
 
 .app>.content .page .event-form .guest h4{
   width: 100%;
   margin: 0px;
   margin-top: 10px;
-  color: #555;
+  font-weight: normal;
 }
 
 .app>.content .page .event-form .guest h5{
   width: 100%;
   margin: 0px;
   margin-top: 5px;
-  color: #999;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.app>.content .page .event-form .new-guests-buttons{
+}
+
+.app>.content .page .event-form .new-guests-buttons .backdrop{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(255,255,255,0.75);
+  opacity: 0;
+}
+
+.app>.content .page .event-form .new-guests-buttons.open .backdrop{
+  bottom: 0px;
+  opacity: 1;
+}
+
+.app>.content .page .event-form .new-guests-buttons button.new{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  text-align: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.app>.content .page .event-form .new-guests-buttons.open button.new{
+  display: none;
+}
+
+.app>.content .page .event-form .new-guests-buttons .add-button{
+  width: 340px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  -webkit-transition: transform 400ms ease;
+  -moz-transition: transform 400ms ease;
+  -o-transition: transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .event-form .new-guests-buttons .add-button h5{
+  font-size: 18px;
+  height: 73px;
+  line-height: 60px;
+  margin: 0px;
+  margin-right: 10px;
+  float: right;
+  color: #555;
+  display: none;
+  text-transform: uppercase;
+}
+
+.app>.content .page .event-form .new-guests-buttons .add-button button{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  text-align: 60px;
+  float: right;
+  display: none;
+}
+
+.app>.content .page .event-form .new-guests-buttons.open .add-button h5, .app>.content .page .event-form .new-guests-buttons.open .add-button button{
+  display: block;
+}
+
+.app>.content .page .event-form .new-guests-buttons.open .add-button.new-visit{
+  -webkit-transform: translate3d(0,-100%,0);
+  -moz-transform: translate3d(0,-100%,0);
+  -ms-transform: translate3d(0,-100%,0);
+  -o-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+
+.app>.content .page .event-form .new-guests-buttons.open .add-button.new-employee{
+  -webkit-transform: translate3d(0,-200%,0);
+  -moz-transform: translate3d(0,-200%,0);
+  -ms-transform: translate3d(0,-200%,0);
+  -o-transform: translate3d(0,-200%,0);
+  transform: translate3d(0,-200%,0);
+}
+
+@media screen and (min-width: 480px){
+  .app>.content .page .event-form .new-guests-buttons button.new{
+    bottom: 30px;
+    right: 30px;
+  }
+
+  .app>.content .page .event-form .new-guests-buttons .add-button{
+    bottom: 30px;
+    right: 30px;
+  }
 }
 
 .app>.content .page .send-attachment-menu{
@@ -1725,7 +2028,7 @@ button.btn.btn-orange{
 .app .header-actions{
   width: 100%;
   height: 60px;
-  background-color: #555;
+  background-color: #777;
   position: fixed;
   top: 0px;
   display: none;
@@ -2065,6 +2368,13 @@ button.btn.btn-orange{
   line-height: 20px;
   color: #939393;
   float: left;
+}
+
+.app>.content .page .form-horizontal legend{
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #777;
 }
 
 .app>.content .page .form-horizontal .input-number{
@@ -2510,26 +2820,6 @@ button.btn.btn-orange{
   background-color: #eee;
 }
 
-.app>.content .page .list-configurations .item .icon{
-  width: 40px;
-  height: 70px;
-  float: left;
-  margin-left: 20px;
-  line-height: 70px;
-  text-align: center;
-  font-size: 20px;
-  color: #555;
-}
-
-.app>.content .page .list-configurations .item .label{
-  height: 70px;
-  line-height: 70px;
-  float: left;
-  margin-left: 10px;
-  color: #555;
-  font-size: 20px;
-}
-
 .app>.content .page .list-configurations .input{
   width: 100%;
   border-bottom: 1px solid #ccc;
@@ -2545,40 +2835,44 @@ button.btn.btn-orange{
 .app>.content .page .list-configurations .input .content .label{
   width: 100%;
   display: table-cell;
+  vertical-align: top;
 }
 
 .app>.content .page .list-configurations .input .content .label h4{
   margin: 0px;
   font-size: 18px;
   font-weight: bold;
+  color: #777;
 }
 
 .app>.content .page .list-configurations .input .content .label h5{
   margin: 0px;
   font-size: 12px;
   font-weight: normal;
-  color: #555;
+  color: #777;
   margin-top: 10px;
+  padding-right: 10px;
 }
 
 .app>.content .page .list-configurations .input .content .checkbox{
   width: 50px;
-  display: table-cell;
-  vertical-align: middle;
+  float: right;
+  height: 60px;
+  padding-top: 10px;
 }
 
 .app>.content .page .list-configurations .input .content .checkbox>.box{
   width: 50px;
   height: 30px;
   margin: auto;
-  background-color: #ccc;
+  background-color: #e2e2e2;
   border-radius: 30px;
 }
 
 .app>.content .page .list-configurations .input .content .checkbox>.box>.pointer{
   width: 30px;
   height: 30px;
-  background-color: #e69090;
+  background-color: #ababab;
   border-radius: 30px;
 
   -webkit-transition: transform 400ms ease;
@@ -2594,11 +2888,102 @@ button.btn.btn-orange{
 }
 
 .app>.content .page .list-configurations .input .content .checkbox.checked>.box>.pointer{
-  background-color: #90e697;
+  background-color: #ffa400;
 
   -webkit-transform: translate3d(20px,0,0);
   -moz-transform: translate3d(20px,0,0);
   -ms-transform: translate3d(20px,0,0);
   -o-transform: translate3d(20px,0,0);
   transform: translate3d(20px,0,0);
+}
+
+
+.app>.content .page .import-guests-list .guests-lists{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item{
+  width: 100%;
+  height: 80px;
+  display: table;
+  border-top: 1px solid #ccc;
+  color: #777;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item.selected{
+  background-color: #f3f3f3;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item i.fa.fa-check{
+  display: none;
+}
+.app>.content .page .import-guests-list .guests-lists .item.selected .icon span.icon-person{
+  display: none;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item.selected i.fa.fa-check{
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  float: left;
+  border: 1px solid #ffa400;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  background: #ffa400;
+  font-size: 30px;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row{
+  display: table-row;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row .icon{
+  width: 60px;
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 10px;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row .icon span{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  border: 1px #eee solid;
+  background-color: #fff;
+  color: #dbdddf;
+  text-align: center;
+  line-height: 57px;
+  font-size: 35px;
+  display: block;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row .info{
+  width: 100%;
+  display: table-cell;
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row .info h4{
+  margin: 0px;
+  font-weight: normal;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row .info h5{
+  margin: 0px;
+  margin-top: 5px;
+  font-weight: normal;
 }

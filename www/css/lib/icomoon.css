@@ -24,26 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-authorizations:before {
-  content: "\e90b";
-}
-.icon-communications:before {
-  content: "\e90c";
-}
-.icon-config:before {
-  content: "\e90d";
-}
-.icon-current_accounts:before {
-  content: "\e90e";
-}
-.icon-events:before {
-  content: "\e90f";
-}
-.icon-info:before {
-  content: "\e910";
-}
-.icon-sign-out:before {
-  content: "\e911";
+
+.icon-person-add:before {
+  content: "\e912";
 }
 .icon-people-bubble:before {
   content: "\e900";
@@ -77,5 +60,26 @@
 }
 .icon-person-owner-group:before {
   content: "\e90a";
+}
+.icon-authorizations:before {
+  content: "\e90b";
+}
+.icon-communications:before {
+  content: "\e90c";
+}
+.icon-config:before {
+  content: "\e90d";
+}
+.icon-current_accounts:before {
+  content: "\e90e";
+}
+.icon-events:before {
+  content: "\e90f";
+}
+.icon-info:before {
+  content: "\e910";
+}
+.icon-sign-out:before {
+  content: "\e911";
 }
 

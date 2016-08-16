@@ -1,0 +1,52 @@
+<div class="import-guests-list">
+  <div class="guests-lists">
+    <div class="item" data-id="4">
+      <div class="row">
+        <div class="icon">
+          <span class="icon-person"></span>
+          <i class="fa fa-check"></i>
+        </div>
+        <div class="info">
+          <h4>Silva Agustín</h4>
+          <h5>36582407</h5>
+        </div>
+      </div>
+    </div>
+    <div class="item" data-id="4">
+      <div class="row">
+        <div class="icon">
+          <span class="icon-person"></span>
+          <i class="fa fa-check"></i>
+        </div>
+        <div class="info">
+          <h4>Giovanella Giuliana</h4>
+          <h5>DNI NO INGRESADO</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      $('.guests-lists .item').tap(function(){
+        $(this).toggleClass('selected');
+      });
+
+      app.liActive('events');
+      app.pageLoading('hide');
+    }
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.IMPORT_GUESTS_LIST);
+    }
+
+    this.submit = function(){
+      app.loadScreen(app.SCREENS.EVENT_FORM);
+    }
+
+  };
+</script>

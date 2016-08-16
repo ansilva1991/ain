@@ -155,7 +155,7 @@ var app = {
       ],
       icon_right: [
       {
-        icon: "info-circle",
+        icon: "question-circle",
         func: function(){
           cs.eventInfo();
         }
@@ -175,13 +175,13 @@ var app = {
       ],
       icon_right: [
       {
-        icon: "check",
+        text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
         }
       }
       ],
-      section_name: "Lista",
+      section_name: "Lista de invitados",
       html: "event_guest_list_form"
     },
     EVENT_GUEST_FORM: {
@@ -195,7 +195,7 @@ var app = {
       ],
       icon_right: [
       {
-        icon: "check",
+        text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
         }
@@ -204,28 +204,24 @@ var app = {
       section_name: "Invitado",
       html: "event_guest_form"
     },
-    EVENTS_CALENDAR: {
-      icon_left: [
-      {
-        icon: "chevron-left",
-        func: function(){
-          cs.back();
-        }
-      }
-      ],
-      section_name: "ago. de 2017",
-      html: "events_calendar"
-    },
     EVENTS_CALENDAR_DAY: {
       icon_left: [
-      {
-        icon: "chevron-left",
-        func: function(){
-          cs.back();
+        {
+          icon: "chevron-left",
+          func: function(){
+            cs.back();
+          }
         }
-      }
       ],
-      section_name: "ago. de 2017",
+      icon_right:[
+        {
+          icon: "calendar",
+          func: function(){
+            cs.toggleCalendar();
+          }
+        }
+      ],
+      section_name: "",
       html: "events_calendar_day"
     },
     EVENT_FORM: {
@@ -239,7 +235,7 @@ var app = {
       ],
       icon_right: [
       {
-        icon: "check",
+        text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
         }
@@ -247,6 +243,38 @@ var app = {
       ],
       section_name: "Evento",
       html: "event_form"
+    },
+    IMPORT_GUESTS_LIST: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      section_name: "Importar lista",
+      html: "import_guests_list"
+    },
+    IMPORT_GUESTS_LIST_GUESTS: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      icon_right: [
+      {
+        text: "Listo <i class='fa fa-check'></i>",
+        func: function(){
+          cs.submit();
+        }
+      }
+      ],
+      section_name: "Amigos",
+      html: "import_guests_list_guests"
     },
     CONFIGURATIONS: {
       icon_left: [
@@ -259,18 +287,6 @@ var app = {
       ],
       section_name: "Configuración",
       html: "configurations"
-    },
-    CONFIGURATION_NOTIFICATIONS: {
-      icon_left: [
-      {
-        icon: "chevron-left",
-        func: function(){
-          cs.back();
-        }
-      }
-      ],
-      section_name: "Notificaciones",
-      html: "configuration_notifications"
     },
     TEST: {
       icon_left: {
@@ -318,7 +334,7 @@ var app = {
 
     //app.setupPush();
 
-    app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY);
+    app.loadScreen(app.SCREENS.CONFIGURATIONS);
   },
   onNotificationOpenedCallback: function(jsonData){
     alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
