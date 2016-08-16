@@ -334,7 +334,7 @@ var app = {
 
     //app.setupPush();
 
-    app.loadScreen(app.SCREENS.CONFIGURATIONS);
+    app.loadScreen(app.SCREENS.LOGIN);
   },
   onNotificationOpenedCallback: function(jsonData){
     alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
