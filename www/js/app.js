@@ -276,6 +276,26 @@ var app = {
       section_name: "Amigos",
       html: "import_guests_list_guests"
     },
+    EXPENSES: {
+      icon_left: [
+        {
+          icon: "bars",
+          func: function(){
+            app.openMenu();
+          }
+        }
+      ],
+      icon_right:[
+        {
+          icon: "calendar",
+          func: function(){
+            cs.toggleCalendar();
+          }
+        }
+      ],
+      section_name: "Ago. del 2016",
+      html: "expenses"
+    },
     CONFIGURATIONS: {
       icon_left: [
       {
@@ -334,7 +354,7 @@ var app = {
 
     //app.setupPush();
 
-    app.loadScreen(app.SCREENS.LOGIN);
+    app.loadScreen(app.SCREENS.EXPENSES);
   },
   onNotificationOpenedCallback: function(jsonData){
     alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));

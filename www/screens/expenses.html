@@ -1,0 +1,169 @@
+<div class="expenses">
+  <div class="calendar">
+    <div class="years">
+      <div class="year" data-year="2015">2015</div>
+      <div class="year" data-year="2016">2016</div>
+      <div class="year" data-year="2017">2017</div>
+    </div>
+    <div class="months">
+      <div class="month" data-month="0">Enero</div>
+      <div class="month" data-month="1">Febrero</div>
+      <div class="month" data-month="2">Marzo</div>
+      <div class="month" data-month="3">Abril</div>
+      <div class="month" data-month="4">Mayo</div>
+      <div class="month" data-month="5">Junio</div>
+      <div class="month" data-month="6">Julio</div>
+      <div class="month" data-month="7">Agosto</div>
+      <div class="month" data-month="8">Septiembre</div>
+      <div class="month" data-month="9">Octubre</div>
+      <div class="month" data-month="10">Noviembre</div>
+      <div class="month" data-month="11">Diciembre</div>
+    </div>
+  </div>
+  <div class="day-scroll">
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Expensas</h4>
+          <h5>Julio 2016</h5>
+        </div>
+        <div class="value">
+          <h6>2016/05/12</h6>
+          <h5>$ - 99999.99</h5>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Multa</h4>
+          <h5>Exceso de velocidad en...</h5>
+        </div>
+        <div class="value">
+          <h6>2016/05/13</h6>
+          <h5>$ - 235.54</h5>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Pago</h4>
+          <h5></h5>
+        </div>
+        <div class="value">
+          <h6>2016/05/25</h6>
+          <h5>$ 5428.51</h5>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Otros</h4>
+          <h5>Arreglos de ventanas</h5>
+        </div>
+        <div class="value">
+          <h6>2016/05/13</h6>
+          <h5>$ - 2350.54</h5>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Otros</h4>
+          <h5>Arreglos de ventanas</h5>
+        </div>
+        <div class="value">
+          <h6>2016/05/13</h6>
+          <h5>$ - 2350.54</h5>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Otros</h4>
+          <h5>Arreglos de ventanas</h5>
+        </div>
+        <div class="value">
+          <h6>2016/05/13</h6>
+          <h5>$ - 2350.54</h5>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Otros</h4>
+          <h5>Arreglos de ventanas</h5>
+        </div>
+        <div class="value">
+          <h6>2016/05/13</h6>
+          <h5>$ - 2350.54</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="totals">
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Total del mes</h4>
+        </div>
+        <div class="value">
+          <h5>$ 5428.51</h5>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Saldo al 2016/08/01</h4>
+        </div>
+        <div class="value">
+          <h5>$ 54280.51</h5>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Saldo actual</h4>
+        </div>
+        <div class="value">
+          <h5>$ - 54280.51</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      $('.event').tap(function(){
+        app.loadScreen(app.SCREENS.EVENT_FORM);
+      });
+
+      $('.expenses .years .year').tap(function(){
+        var year = parseInt($(this).data('year'));
+      });
+
+      app.liActive('expenses');
+      app.pageLoading('hide');
+    }
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.EVENTS);
+    };
+
+    this.toggleCalendar = function(){
+      $('.expenses').toggleClass('open-calendar');
+    }
+
+  }
+</script>

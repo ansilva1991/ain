@@ -891,30 +891,33 @@ button.btn.btn-orange{
   background-color: #ffa400;
   position: fixed;
   top: 0px;
-  padding-left: 20px;
-  padding-right: 20px;
   display: none;
 }
 
 .app>.header .icon{
-  width: 40px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   font-size: 30px;
   color: #fff;
   padding-top: 13px;
   float: left;
+  text-align: center;
+}
+
+.app>.header .icon:active{
+  background: rgba(255,255,255,0.1);
 }
 
 .app>.header .icon.text{
   width: initial;
   text-transform: uppercase;
   font-size: 16px;
-  line-height: 33px;
+  line-height: 60px;
+  padding: 0px 10px;
 }
 
 .app>.header .icon.right{
   float: right;
-  text-align: right;
 }
 
 .app>.header .icon.example{
@@ -2986,4 +2989,173 @@ button.btn.btn-orange{
   margin: 0px;
   margin-top: 5px;
   font-weight: normal;
+}
+
+.app>.content .page .expenses{
+  width: 100%;
+}
+
+.app>.content .page .expenses>.day-scroll{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 150px;
+  left: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #fff;
+
+  -webkit-transition: top 300ms ease;
+  -moz-transition: top 300ms ease;
+  -ms-transition: top 300ms ease;
+  -o-transition: top 300ms ease;
+  transition: top 300ms ease;
+}
+
+.app>.content .page .expenses>.day-scroll .item{
+  width: 100%;
+  display: table;
+  padding: 10px 15px;
+  color: #777;
+  border-bottom: 1px solid #ccc;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .info{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .info h4{
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .info h5{
+  margin: 0px;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .value{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .value h5{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .value h6{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+}
+
+.app>.content .page .expenses.open-calendar>.day-scroll{
+  top: 360px;
+  bottom: 0px;
+}
+
+.app>.content .page .expenses>.calendar{
+  width: 100%;
+  height: 300px;
+  position: fixed;
+  top: 60px;
+  background: #ffa400;
+}
+
+.app>.content .page .expenses>.calendar .years{
+  width: 100%;
+  height: 60px;
+}
+
+.app>.content .page .expenses>.calendar .years .year{
+  width: 33.3333333%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  float: left;
+  color: rgba(255,255,255,0.5);
+}
+
+.app>.content .page .expenses>.calendar .years .year.selected{
+  color: #fff;
+}
+
+.app>.content .page .expenses>.calendar .months{
+  width: 100%;
+  height: 240px;
+}
+
+.app>.content .page .expenses>.calendar .months .month{
+  width: 33.3333333%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  float: left;
+  color: rgba(255,255,255,0.5);
+}
+.app>.content .page .expenses>.calendar .months .month.selected{
+  color: #fff;
+}
+
+.app>.content .page .expenses>.totals{
+  width: 100%;
+  position: fixed;
+  height: 150px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.app>.content .page .expenses>.totals .item{
+  width: 100%;
+  display: table;
+  color: #fff;
+  padding: 12px 10px;
+  background-color: #ffb124;
+}
+
+.app>.content .page .expenses>.totals .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses>.totals .item .row .info{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.app>.content .page .expenses>.totals .item .row .info h4{
+  margin: 0px;
+}
+
+.app>.content .page .expenses>.totals .item .row .value{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.app>.content .page .expenses>.totals .item .row .value h5{
+  width: 100px;
+  margin: 0px;
+}
+
+.app>.content .page .expenses>.totals .item:last-child{
+  padding: 24px 10px;
+  background-color: #ffa400;
+}
+
+.app>.content .page .expenses.open-calendar>.totals{
+  display: none;
 }
