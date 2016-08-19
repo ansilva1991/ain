@@ -72,9 +72,10 @@ button.btn.btn-orange{
   bottom: 0px;
   background-color: #fff;
 
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 
   -webkit-transform: translate3d(0,100%,0);
@@ -142,9 +143,10 @@ button.btn.btn-orange{
   bottom: 0px;
   background-color: #fff;
 
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 
   -webkit-transform: translate3d(0,100%,0);
@@ -248,9 +250,10 @@ button.btn.btn-orange{
   background-image: url(../img/back_gradient_login.png);
   background-size: 100% 100%;
 
-  -webkit-transition: transform 200ms ease;
-  -moz-transition: transform 200ms ease;
-  -o-transition: transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
   transition: transform 200ms ease;
 
   -webkit-transform: translate3d(0,0,0);
@@ -374,9 +377,10 @@ button.btn.btn-orange{
   background-image: url(../img/back_gradient_login.png);
   background-size: 100% 100%;
 
-  -webkit-transition: transform 200ms ease;
-  -moz-transition: transform 200ms ease;
-  -o-transition: transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
   transition: transform 200ms ease;
 
   -webkit-transform: translate3d(-100%,0,0);
@@ -475,9 +479,10 @@ button.btn.btn-orange{
   background-image: url(../img/back_gradient_login.png);
   background-size: 100% 100%;
 
-  -webkit-transition: transform 200ms ease;
-  -moz-transition: transform 200ms ease;
-  -o-transition: transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
   transition: transform 200ms ease;
 
   -webkit-transform: translate3d(100%,0,0);
@@ -962,16 +967,17 @@ button.btn.btn-orange{
 
 .app>.menu .content{
   width: 300px;
+  height: 100%;
   position: fixed;
   top: 0px;
   bottom: 0px;
   left: 0px;
   background-color: #fff;
-  overflow: hidden;
 
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 
   -webkit-transform: translate3d(-100%,0,0);
@@ -1006,6 +1012,7 @@ button.btn.btn-orange{
   overflow: hidden;
   padding-top: 10px;
   color: #fff;
+  z-index: 99;
 }
 
 .app>.menu .content .header img{
@@ -1040,10 +1047,11 @@ button.btn.btn-orange{
 
 .app>.menu .content .list{
   width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  padding-top: 150px;
   overflow-y: auto;
-  position: fixed;
-  top: 150px;
-  bottom: 0px;
 }
 
 .app>.menu .content .item{
@@ -1124,17 +1132,19 @@ button.btn.btn-orange{
 
 .app>.content .page .sub-header.col-2 .item, .app>.content .page .sub-header.col-2 .line .pointer{
   width: 50%;
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 }
 
 .app>.content .page .sub-header.col-3 .item, .app>.content .page .sub-header.col-3 .line .pointer{
   width: 33.3333333333333333333%;
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 }
 
@@ -1152,9 +1162,10 @@ button.btn.btn-orange{
 
 .app>.content .page .list.authorizations{
   top: 114px;
-  -webkit-transition: transform 200ms ease;
-  -moz-transition: transform 200ms ease;
-  -o-transition: transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
   transition: transform 200ms ease;
 }
 
@@ -1322,9 +1333,10 @@ button.btn.btn-orange{
 
 .app>.content .page .list.events{
   top: 114px;
-  -webkit-transition: transform 200ms ease;
-  -moz-transition: transform 200ms ease;
-  -o-transition: transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
   transition: transform 200ms ease;
 }
 
@@ -1468,10 +1480,10 @@ button.btn.btn-orange{
   -o-transform: translate3d(200%,0,0);
   transform: translate3d(200%,0,0);
 
-  -webkit-transition: transform 200ms ease;
-  -moz-transition: transform 200ms ease;
-  -ms-transform: transform 200ms ease;
-  -o-transition: transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
   transition: transform 200ms ease;
 }
 
@@ -1562,10 +1574,10 @@ button.btn.btn-orange{
   -o-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
 
-  -webkit-transition: transform 300ms ease, top 300ms ease;
-  -moz-transition: transform 300ms ease, top 300ms ease;
-  -ms-transition: transform 300ms ease, top 300ms ease;
-  -o-transition: transform 300ms ease, top 300ms ease;
+  -webkit-transition: -webkit-transform 300ms ease, top 300ms ease;
+  -moz-transition: -moz-transform 300ms ease, top 300ms ease;
+  -ms-transition: -ms-transform 300ms ease, top 300ms ease;
+  -o-transition: -o-transform 300ms ease, top 300ms ease;
   transition: transform 300ms ease, top 300ms ease;
 
   display: none;
@@ -1880,9 +1892,10 @@ button.btn.btn-orange{
   position: fixed;
   bottom: 20px;
   right: 20px;
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 
   -webkit-transform: translate3d(0,0,0);
@@ -1952,9 +1965,10 @@ button.btn.btn-orange{
 
 .app>.content .page .list.guard{
   top: 114px;
-  -webkit-transition: transform 200ms ease;
-  -moz-transition: transform 200ms ease;
-  -o-transition: transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
   transition: transform 200ms ease;
 }
 
@@ -2173,9 +2187,10 @@ button.btn.btn-orange{
   bottom: 60px;
   border-top: 1px solid #ccc;
 
-  -webkit-transition: transform 200ms ease;
-  -moz-transition: transform 200ms ease;
-  -o-transition: transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
   transition: transform 200ms ease;
 
   -webkit-transform: translate3d(100%,0,0);
@@ -2302,9 +2317,10 @@ button.btn.btn-orange{
   position: fixed;
   bottom: 20px;
   right: 20px;
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 
   -webkit-transform: translate3d(0,0,0);
@@ -2522,9 +2538,10 @@ button.btn.btn-orange{
   background-color: #ababab;
   border-radius: 30px;
 
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 
   -webkit-transform: translate3d(0,0,0);
@@ -3088,9 +3105,10 @@ button.btn.btn-orange{
   background-color: #ababab;
   border-radius: 30px;
 
-  -webkit-transition: transform 400ms ease;
-  -moz-transition: transform 400ms ease;
-  -o-transition: transform 400ms ease;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 
   -webkit-transform: translate3d(0,0,0);
