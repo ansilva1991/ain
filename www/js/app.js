@@ -296,6 +296,46 @@ var app = {
       section_name: "Ago. del 2016",
       html: "expenses"
     },
+    GUARD: {
+      icon_left: [
+      {
+        icon: "bars",
+        func: function(){
+          app.openMenu();
+        }
+      }
+      ],
+      icon_right: [
+      {
+        icon: "question-circle",
+        func: function(){
+          cs.eventInfo();
+        }
+      }
+      ],
+      section_name: "Portería",
+      html: "guard"
+    },
+    GUARD_MESSAGE_FORM: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      icon_right: [
+      {
+        text: "Listo <i class='fa fa-check'></i>",
+        func: function(){
+          cs.submit();
+        }
+      }
+      ],
+      section_name: "Nuevo Mensaje",
+      html: "guard_message_form"
+    },
     CONFIGURATIONS: {
       icon_left: [
       {
@@ -354,7 +394,7 @@ var app = {
 
     //app.setupPush();
 
-    app.loadScreen(app.SCREENS.EXPENSES);
+    app.loadScreen(app.SCREENS.GUARD);
   },
   onNotificationOpenedCallback: function(jsonData){
     alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));

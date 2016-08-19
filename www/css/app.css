@@ -1950,6 +1950,208 @@ button.btn.btn-orange{
   }
 }
 
+.app>.content .page .list.guard{
+  top: 114px;
+  -webkit-transition: transform 200ms ease;
+  -moz-transition: transform 200ms ease;
+  -o-transition: transform 200ms ease;
+  transition: transform 200ms ease;
+}
+
+.app>.content .page .list.guard.messages{
+  left: 0px;
+}
+
+.app>.content .page .list.guard.records{
+  left: 100%;
+}
+
+.app>.content .page .list.guard.messages .item{
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid #ccc;
+  display: table;
+}
+
+.app>.content .page .list.guard.messages .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list.guard.messages .item .row{
+  display: table-row;
+}
+
+.app>.content .page .list.guard.messages .item .row>div{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .list.guard.messages .item .row>div.icon{
+  width: 60px;
+  padding: 0px 10px;
+}
+
+.app>.content .page .list.guard.messages .item .icon i{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  border: 1px #eee solid;
+  background-color: #fff;
+  color: #dbdddf;
+  text-align: center;
+  line-height: 57px;
+  font-size: 35px;
+  display: block;
+}
+
+.app>.content .page .list.guard.messages .item .info {
+  padding-left: 15px;
+}
+
+.app>.content .page .list.guard.messages .item .info h4{
+  margin: 0px;
+  color: #777;
+}
+
+.app>.content .page .list.guard.messages .item .info h5{
+  margin: 0px;
+  color: #777;
+}
+
+.app>.content .page .list.guard.messages .item .info .checks{
+  width: 100%;
+  text-align: right;
+  padding-right: 10px;
+  margin-top: 8px;
+}
+
+.app>.content .page .list.guard.messages .item .info .checks span{
+  color: #777;
+  font-size: 12px;
+}
+
+.app>.content .page .list.guard.messages .item .info .checks i{
+  color: #ccc;
+}
+
+.app>.content .page .list.guard.messages .item.view .info .checks i{
+  color: #ffa400;
+}
+
+.app>.content .page .list.guard.records .item{
+  width: 100%;
+  height: 70px;
+  border-top: 1px solid #ccc;
+  display: table;
+  padding-right: 10px;
+}
+
+.app>.content .page .list.guard.records .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list.guard.records .item .row{
+  display: table-row;
+}
+
+.app>.content .page .list.guard.records .item .row>div{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .list.guard.records .item .row>div.icon{
+  width: 60px;
+  padding: 0px 10px;
+}
+
+.app>.content .page .list.guard.records .item .icon i{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px #ffa400 solid;
+  background-color: #ffa400;
+  color: #fff;
+  text-align: center;
+  line-height: 37px;
+  font-size: 28px;
+  display: block;
+}
+
+.app>.content .page .list.guard.records .item .info h4{
+  margin: 0px;
+  color: #777;
+}
+
+.app>.content .page .list.guard.records .item .info h4 span:last-child{
+  float: right;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .list.guard.records .item .info h5{
+  margin: 0px;
+  color: #777;
+}
+
+.app>.content .page .list.guard.records .item .info h5 span:last-child{
+  float: right;
+  font-size: 12px;
+}
+
+.app>.content .page .list.guard.records .item .info .checks{
+  width: 100%;
+  text-align: right;
+  padding-right: 10px;
+  margin-top: 2px;
+}
+
+.app>.content .page .list.guard.records .item .info .checks span{
+  color: #777;
+  font-size: 12px;
+}
+
+.app>.content .page .list.guard.records .item .info .checks i{
+  color: #ccc;
+}
+
+.app>.content .page .list.guard.records .item.view .info .checks i{
+  color: #ffa400;
+}
+
+.app>.content .page .guard.button{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.app>.content .page .guard-message-form{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .guard-message-form .form-horizontal{
+  width: 90% !important;
+}
+
 .app>.content .page .send-attachment-menu{
 }
 
@@ -2247,6 +2449,7 @@ button.btn.btn-orange{
   text-align: left;
   color: #939393;
   font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .app>.content .page .form-horizontal .form-group>.form-control{
@@ -2261,10 +2464,17 @@ button.btn.btn-orange{
   color: #555;
   font-size: 16px;
   background: none;
-  background-color: #fff;
+  background-color: #fafafa;
+  padding: 5px;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
+}
+
+.app>.content .page .form-horizontal .form-group>textarea.form-control{
+  height: 200px;
+  resize: none;
+  line-height: 21px;
 }
 
 .app>.content .page .form-horizontal .form-group>.form-control:focus{

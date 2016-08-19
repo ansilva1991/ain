@@ -1,0 +1,37 @@
+<div class="guard-message-form">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="name">MENSAJE</label>
+      <textarea class="form-control" rows="10">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </textarea>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.guard-message-form');
+      });
+
+      Extends.inputNumber('.input-number');
+      Extends.inputDate('.input-date');
+
+      app.liActive('guard');
+      app.pageLoading('hide');
+    }
+
+    this.submit = function(){
+      app.loadScreen(app.SCREENS.GUARD);
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.GUARD);
+    };
+
+  }
+</script>

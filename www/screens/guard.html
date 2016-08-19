@@ -1,0 +1,249 @@
+<div class="sub-header col-2">
+  <div class="item active" data-item="0" onclick="cs.selectTab(this);">
+    MENSAJES
+  </div>
+  <div class="item" data-item="1" onclick="cs.selectTab(this);">
+    REGISTROS
+  </div>
+  <div class="line">
+    <div class="pointer"></div>
+  </div>
+</div>
+<div class="list guard messages">
+  <div class="item">
+    <div class="row">
+      <div class="info">
+        <h4>Silva Agustín</h4>
+        <h5>Lorem ipsum dolor sit amet ipsum dolor sit amet...</h5>
+        <div class="checks">
+          <span>2016/03/23 15:23 hrs</span>
+          <i class="fa fa-check"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="row">
+      <div class="info">
+        <h4>Silva Agustín</h4>
+        <h5>Lorem ipsum dolor sit amet ipsum dolor sit amet...</h5>
+        <div class="checks">
+          <span>2016/03/23 15:23 hrs</span>
+          <i class="fa fa-check"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item view">
+    <div class="row">
+      <div class="info">
+        <h4>Silva Agustín</h4>
+        <h5>Lorem ipsum dolor sit amet ipsum dolor sit amet...</h5>
+        <div class="checks">
+          <span>2016/03/23 15:23 hrs</span>
+          <i class="fa fa-check"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="list guard records">
+  <div class="item">
+    <div class="row">
+      <div class="icon">
+        <i class="fa fa-arrow-left"></i>
+      </div>
+      <div class="info">
+        <h4>
+          <span>Silva Agustín</span>
+          <span>Ingreso</span>
+        </h4>
+        <h5>
+          <span>36582407</span>
+          <span>2016/03/23 15:23 hrs</span>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="row">
+      <div class="icon">
+        <i class="fa fa-arrow-right"></i>
+      </div>
+      <div class="info">
+        <h4>
+          <span>Silva Agustín</span>
+          <span>Egreso</span>
+        </h4>
+        <h5>
+          <span>36582407</span>
+          <span>2016/03/23 15:23 hrs</span>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="row">
+      <div class="icon">
+        <i class="fa fa-arrow-right"></i>
+      </div>
+      <div class="info">
+        <h4>
+          <span>Giovanella Giuliana</span>
+          <span>Egreso</span>
+        </h4>
+        <h5>
+          <span>36582407</span>
+          <span>2016/03/23 15:23 hrs</span>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="row">
+      <div class="icon">
+        <i class="fa fa-arrow-left"></i>
+      </div>
+      <div class="info">
+        <h4>
+          <span>Silva Agustín</span>
+          <span>Ingreso</span>
+        </h4>
+        <h5>
+          <span>36582407</span>
+          <span>2016/03/23 15:23 hrs</span>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="row">
+      <div class="icon">
+        <i class="fa fa-arrow-right"></i>
+      </div>
+      <div class="info">
+        <h4>
+          <span>Silva Agustín</span>
+          <span>Egreso</span>
+        </h4>
+        <h5>
+          <span>36582407</span>
+          <span>2016/03/23 15:23 hrs</span>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="row">
+      <div class="icon">
+        <i class="fa fa-arrow-left"></i>
+      </div>
+      <div class="info">
+        <h4>
+          <span>Silva Agustín</span>
+          <span>Ingreso</span>
+        </h4>
+        <h5>
+          <span>36582407</span>
+          <span>2016/03/23 15:23 hrs</span>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="row">
+      <div class="icon">
+        <i class="fa fa-arrow-right"></i>
+      </div>
+      <div class="info">
+        <h4>
+          <span>Silva Agustín</span>
+          <span>Egreso</span>
+        </h4>
+        <h5>
+          <span>36582407</span>
+          <span>2016/03/23 15:23 hrs</span>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="row">
+      <div class="icon">
+        <i class="fa fa-arrow-right"></i>
+      </div>
+      <div class="info">
+        <h4>
+          <span>Silva Agustín</span>
+          <span>Egreso</span>
+        </h4>
+        <h5>
+          <span>36582407</span>
+          <span>2016/03/23 15:23 hrs</span>
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="guard button" onclick="cs.newMessage();">
+  <i class="fa fa-plus"></i>
+</div>
+
+
+<script type="text/javascript">
+  function c(){
+    this.mode = 'list';
+    this.selectedItems = [];
+
+    this.start = function(){
+      $('.list.guard.messages').swipeLeft(function(){
+        cs.selectTab($('.sub-header .item')[1]);
+      });
+
+      $('.list.guard.records').swipeRight(function(){
+        cs.selectTab($('.sub-header .item')[0]);
+      });
+
+      $('.guard.messages').tap(function(){
+        app.loadScreen(app.SCREENS.GUARD_MESSAGE_FORM);
+      });
+
+      app.liActive('guard');
+      app.pageLoading('hide');
+    }
+
+    this.selectTab = function(x){
+
+      var item = $(x).data('item');
+
+      (item == 0) ? $('.guard.button').show() : $('.guard.button').hide();
+
+      $('.sub-header .item').removeClass('active');
+      $('.sub-header .item[data-item="' + item + '"]').addClass('active');
+      $('.sub-header .line .pointer').css({
+        '-webkit-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-moz-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-ms-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-o-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        'transform': 'translate3d(' + (100 * item) + '%,0,0)'
+      });
+
+      $('.list.guard').removeClass('active');
+      $($('.list.guard')[item]).addClass('active');
+
+      $('.list.guard').css({
+        '-webkit-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-moz-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-ms-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-o-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        'transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)'
+      });
+    }
+
+    this.newMessage = function(){
+      app.loadScreen(app.SCREENS.GUARD_MESSAGE_FORM);
+    };
+
+  }
+</script>
