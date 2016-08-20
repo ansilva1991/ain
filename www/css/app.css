@@ -250,11 +250,11 @@ button.btn.btn-orange{
   background-image: url(../img/back_gradient_login.png);
   background-size: 100% 100%;
 
-  -webkit-transition: -webkit-transform 200ms ease;
-  -moz-transition: -moz-transform 200ms ease;
-  -ms-transition: -ms-transform 200ms ease;
-  -o-transition: -o-transform 200ms ease;
-  transition: transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease, bottom 200ms ease;
+  -moz-transition: -moz-transform 200ms ease, bottom 200ms ease;
+  -ms-transition: -ms-transform 200ms ease, bottom 200ms ease;
+  -o-transition: -o-transform 200ms ease, bottom 200ms ease;
+  transition: transform 200ms ease, bottom 200ms ease;
 
   -webkit-transform: translate3d(0,0,0);
   -moz-transform: translate3d(0,0,0);
@@ -267,29 +267,76 @@ button.btn.btn-orange{
   width: 80%;
   height: 100%;
   margin: auto;
-  max-width: 400px;
-  display: table;
+  min-height: 500px;
+  left: 10%;
+  position: absolute;
 }
 
-.login form>.row{
-  display: table-row;
+.login form>.row.logo{
+  width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0px;
 }
 
-.login form>.row>.cell{
-  display: table-cell;
+.login form>.row.logo>.cell{
+  width: 100%;
   height: 100%;
-  vertical-align: middle;
+  padding-bottom: 284px;
+
+  -webkit-transition: padding-bottom 1000ms ease;
+  -moz-transition: padding-bottom 1000ms ease;
+  -ms-transition: padding-bottom 1000ms ease;
+  -o-transition: padding-bottom 1000ms ease;
+  transition: padding-bottom 1000ms ease;
+}
+
+.login.init form>.row.logo>.cell span.icon-people-bubble{
+  font-size: 200px;
+  margin-top: -100px;
 }
 
 .login form span.icon-people-bubble{
   width: 100%;
+  position: relative;
+  top: 50%;
+  margin-top: -75px;
   text-align: center;
   color: #fff;
   font-size: 150px;
-  margin-top: 20px;
-  margin-bottom: 20px;
   display: block;
+
+  -webkit-transition: margin-top 1000ms ease, font-size 1000ms ease;
+  -moz-transition: margin-top 1000ms ease, font-size 1000ms ease;
+  -ms-transition: margin-top 1000ms ease, font-size 1000ms ease;
+  -o-transition: margin-top 1000ms ease, font-size 1000ms ease;
+  transition: margin-top 1000ms ease, font-size 1000ms ease;
+}
+
+.login.init form>.row.logo .cell{
+  padding: 0px;
+}
+
+.login.init form>.row.form{
+  bottom: -284px;
+}
+
+.login form>.row.form .cell{
+  width: 100%;
+  margin: auto;
+  max-width: 500px;
+}
+
+.login form>.row.form{
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+
+  -webkit-transition: bottom 1000ms ease;
+  -moz-transition: bottom 1000ms ease;
+  -ms-transition: bottom 1000ms ease;
+  -o-transition: bottom 1000ms ease;
+  transition: bottom 1000ms ease;
 }
 
 .login form .input{
@@ -300,12 +347,13 @@ button.btn.btn-orange{
 
 .login form input{
   width: 100%;
-  height: 50px;
-  background-color: #fff;
+  height: 35px;
+  background-color: transparent;
   border: none;
-  padding-left: 20px;
+  border-bottom: 1px solid #fff;
+  line-height: 30px;
   font-size: 12px;
-  color: #555;
+  color: #fff;
   outline: none;
 }
 
@@ -314,11 +362,7 @@ button.btn.btn-orange{
   text-align: left;
   color: #fff;
   font-size: 12px;
-  padding-left: 20px;
   display: block;
-  position: relative;
-  top: -30px;
-  pointer-events: none;
 }
 
 .login form .password{
@@ -344,11 +388,12 @@ button.btn.btn-orange{
 
 .login form .password button{
   width: 100px;
-  height: 50px;
-  background-color: #fff;
+  height: 49px;
+  background-color: transparent;
   border: none;
   font-size: 12px;
-  color: #bbb;
+  color: #fff;
+  border-bottom: 1px solid #fff;
 }
 
 
@@ -360,7 +405,8 @@ button.btn.btn-orange{
 .login form h5{
   font-size: 12px;
   color: #fff;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
+  margin-bottom: 0px;
 }
 
 .forgot-password{
@@ -427,12 +473,15 @@ button.btn.btn-orange{
 
 .forgot-password form input{
   width: 100%;
-  height: 50px;
-  background-color: #fff;
+  height: 35px;
+  background-color: transparent;
   border: none;
-  padding-left: 20px;
+  border-bottom: 1px solid #fff;
+  line-height: 30px;
   font-size: 12px;
-  color: #555;
+  color: #fff;
+  outline: none;
+  text-transform: uppercase;
 }
 
 .forgot-password form label{
@@ -440,11 +489,7 @@ button.btn.btn-orange{
   text-align: left;
   color: #fff;
   font-size: 12px;
-  padding-left: 20px;
   display: block;
-  position: relative;
-  top: -30px;
-  pointer-events: none;
 }
 
 .forgot-password form button.btn{
@@ -455,14 +500,15 @@ button.btn.btn-orange{
 .forgot-password form h4{
   font-size: 14px;
   color: #fff;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   display: block;
 }
 
 .forgot-password form h5{
   font-size: 12px;
   color: #fff;
-  margin-bottom: 60px;
+  padding-bottom: 60px;
+  margin-bottom: 0px;
 }
 
 .register-code{
@@ -529,12 +575,14 @@ button.btn.btn-orange{
 
 .register-code form input{
   width: 100%;
-  height: 50px;
-  background-color: #ff;
+  height: 35px;
+  background-color: transparent;
   border: none;
-  padding-left: 20px;
+  border-bottom: 1px solid #fff;
+  line-height: 30px;
   font-size: 12px;
-  color: #bbb;
+  color: #fff;
+  outline: none;
   text-transform: uppercase;
 }
 
@@ -543,11 +591,7 @@ button.btn.btn-orange{
   text-align: left;
   color: #fff;
   font-size: 12px;
-  padding-left: 20px;
   display: block;
-  position: relative;
-  top: -30px;
-  pointer-events: none;
 }
 
 .register-code form button.btn{
@@ -558,14 +602,15 @@ button.btn.btn-orange{
 .register-code form h4{
   font-size: 14px;
   color: #fff;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   display: block;
 }
 
 .register-code form h5{
   font-size: 12px;
   color: #fff;
-  margin-bottom: 60px;
+  padding-bottom: 60px;
+  margin-bottom: 0px;
 }
 
 .login.active-forgot-password{
@@ -627,8 +672,6 @@ button.btn.btn-orange{
   text-align: center;
   overflow-x: hidden;
   overflow-y: auto;
-  background-image: url(../img/back_gradient_login.png);
-  background-size: 100% 100%;
 }
 
 .register form{
@@ -643,7 +686,7 @@ button.btn.btn-orange{
   width: 100%;
   display: block;
   text-align: center;
-  color: #fff;
+  color: #ffa400;
   font-size: 100px;
 }
 
@@ -657,7 +700,7 @@ button.btn.btn-orange{
   text-transform: uppercase;
   display: block;
   text-align: left;
-  color: #fff;
+  color: #777;
   font-size: 14px;
 }
 
@@ -667,11 +710,11 @@ button.btn.btn-orange{
   line-height: 40px;
   padding-left: 0px;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #ccc;
   display: block;
   text-align: left;
   outline: none;
-  color: #fff;
+  color: #777;
   font-size: 16px;
   background: none;
   background-color: transparent;
@@ -683,7 +726,7 @@ button.btn.btn-orange{
 .register form>.form-group .form-radios{
   width: 100%;
   height: 60px;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #ccc;
   display: table;
   padding-top: 20px;
 }
@@ -701,7 +744,7 @@ button.btn.btn-orange{
 .register form>.form-group .form-radios .radio .circle{
   width: 20px;
   height: 20px;
-  border: 2px solid #fff;
+  border: 2px solid #ffa400;
   background: #fff;
   border-radius: 50%;
   margin-right: 5px;
@@ -715,7 +758,7 @@ button.btn.btn-orange{
 .register form>.form-group .form-radios .radio span{
   height: 20px;
   line-height: 20px;
-  color: #fff;
+  color: #777;
   float: left;
 }
 
@@ -747,7 +790,7 @@ button.btn.btn-orange{
 
 .register form h5{
   font-size: 14px;
-  color: #fff;
+  color: #777;
 }
 
 .register>form .input-number{
@@ -839,8 +882,6 @@ button.btn.btn-orange{
   text-align: center;
   overflow-x: hidden;
   overflow-y: auto;
-  background-image: url(../img/back_gradient_login.png);
-  background-size: 100% 100%;
 }
 
 .register-terms-and-conditions span.icon-people-bubble{
@@ -851,7 +892,7 @@ button.btn.btn-orange{
   left: 0px;
   font-size: 50px;
   line-height: 100px;
-  color: #fff;
+  color: #ffa400;
 }
 
 .register-terms-and-conditions .content{
@@ -863,10 +904,10 @@ button.btn.btn-orange{
   overflow-x: hidden;
   overflow-y: auto;
   padding: 20px;
-  color: #fff;
+  color: #777;
   text-align: left;
-  border-top: 2px solid #fff;
-  border-bottom: 2px solid #fff;
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
 }
 
 .register-terms-and-conditions .bottom{
@@ -881,7 +922,7 @@ button.btn.btn-orange{
 
 .register-terms-and-conditions h5{
   font-size: 14px;
-  color: #fff;
+  color: #777;
   margin: 0px;
   margin-top: 15px;
 }
