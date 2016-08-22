@@ -1847,11 +1847,12 @@ button.btn.btn-orange{
   text-align: center;
   line-height: 60px;
   float: left;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.75);
 }
 
 .app>.content .page .event-calendar-day>.calendar .years .year.selected{
   color: #fff;
+  background: rgba(255,255,255,0.1);
 }
 
 .app>.content .page .event-calendar-day>.calendar .months{
@@ -1865,10 +1866,11 @@ button.btn.btn-orange{
   text-align: center;
   line-height: 60px;
   float: left;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.75);
 }
 .app>.content .page .event-calendar-day>.calendar .months .month.selected{
   color: #fff;
+  background: rgba(255,255,255,0.1);
 }
 
 .app>.content .page .event-form{
@@ -3375,11 +3377,12 @@ button.btn.btn-orange{
   text-align: center;
   line-height: 60px;
   float: left;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.75);
 }
 
 .app>.content .page .expenses>.calendar .years .year.selected{
   color: #fff;
+  background: rgba(255,255,255,0.1);
 }
 
 .app>.content .page .expenses>.calendar .months{
