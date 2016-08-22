@@ -25,61 +25,65 @@
 }
 
 
-.icon-person-add:before {
-  content: "\e912";
-}
-.icon-people-bubble:before {
+
+.icon-accessin:before {
   content: "\e900";
 }
-.icon-app-operator:before {
+.icon-people-bubble:before {
   content: "\e901";
 }
-.icon-client-employee:before {
+.icon-app-operator:before {
   content: "\e902";
 }
-.icon-family:before {
+.icon-client-employee:before {
   content: "\e903";
 }
-.icon-family-with-access:before {
+.icon-family:before {
   content: "\e904";
 }
-.icon-family-with-access2:before {
+.icon-family-with-access:before {
   content: "\e905";
 }
-.icon-people:before {
+.icon-family-with-access2:before {
   content: "\e906";
 }
-.icon-person:before {
+.icon-people:before {
   content: "\e907";
 }
-.icon-person-admin:before {
+.icon-person:before {
   content: "\e908";
 }
-.icon-person-employee:before {
+.icon-person-admin:before {
   content: "\e909";
 }
-.icon-person-owner-group:before {
+.icon-person-employee:before {
   content: "\e90a";
 }
-.icon-authorizations:before {
+.icon-person-owner-group:before {
   content: "\e90b";
 }
-.icon-communications:before {
+.icon-authorizations:before {
   content: "\e90c";
 }
-.icon-config:before {
+.icon-communications:before {
   content: "\e90d";
 }
-.icon-current_accounts:before {
+.icon-config:before {
   content: "\e90e";
 }
-.icon-events:before {
+.icon-current_accounts:before {
   content: "\e90f";
 }
-.icon-info:before {
+.icon-events:before {
   content: "\e910";
 }
-.icon-sign-out:before {
+.icon-info:before {
   content: "\e911";
+}
+.icon-sign-out:before {
+  content: "\e912";
+}
+.icon-person-add:before {
+  content: "\e913";
 }
 
