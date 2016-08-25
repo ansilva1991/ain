@@ -12,6 +12,10 @@ var app = {
       html: "register_terms_and_conditions",
       header: false
     },
+    WELCOME: {
+      html: "welcome",
+      header: false
+    },
     AUTHORIZATIONS: {
       icon_left: [
       {
@@ -394,7 +398,7 @@ var app = {
 
     //app.setupPush();
 
-    app.loadScreen(app.SCREENS.LOGIN);
+    app.loadScreen(app.SCREENS.WELCOME);
   },
   onNotificationOpenedCallback: function(jsonData){
     alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
