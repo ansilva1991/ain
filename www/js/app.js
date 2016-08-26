@@ -300,6 +300,18 @@ var app = {
       section_name: "Ago. del 2016",
       html: "expenses"
     },
+    EXPENSES_SHOW_FULL: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      section_name: "EXPENSAS AGO. DEL 2016",
+      html: "expenses_show_full"
+    },
     GUARD: {
       icon_left: [
       {
@@ -319,6 +331,18 @@ var app = {
       ],
       section_name: "Portería",
       html: "guard"
+    },
+    GUARD_RECORD_FORM: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      section_name: "Portería",
+      html: "guard_record_form"
     },
     GUARD_MESSAGE_FORM: {
       icon_left: [
@@ -396,9 +420,7 @@ var app = {
       app.closeMenu();
     });
 
-    //app.setupPush();
-
-    app.loadScreen(app.SCREENS.WELCOME);
+    app.loadScreen(app.SCREENS.LOGIN);
   },
   onNotificationOpenedCallback: function(jsonData){
     alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
@@ -417,8 +439,16 @@ var app = {
     $('.app .menu .list .item[data-li="' + x + '"]').addClass('active');
   },
   selectLiMenu: function(x){
-    app.closeMenu();
-    app.loadScreen(x);
+    if(x == 'sign_out'){
+      app.closeMenu();
+
+      Confirm.open("¿Estas seguro que deseas cerrar sesión?",function(){
+        app.loadScreen(app.SCREENS.LOGIN);
+      });
+    }else{
+      app.closeMenu();
+      app.loadScreen(x);
+    }
   },
   takeFromCamera: function(success,error,options){
 

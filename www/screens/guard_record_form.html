@@ -1,0 +1,51 @@
+<div class="authorization-form-visit">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="name">PUERTA</label>
+      <input type="text" class="form-control" readonly value="Norte">
+    </div>
+    <div class="form-group">
+      <label for="name">GUARDÍA</label>
+      <input type="text" class="form-control" readonly value="Perez Alberto">
+    </div>
+    <div class="form-group">
+      <label for="name">FECHA</label>
+      <input type="text" class="form-control" readonly value="25 de Julio del 2016 a las 15:23 hrs">
+    </div>
+    <div class="form-group">
+      <label for="name">TIPO</label>
+      <input type="text" class="form-control" readonly value="Ingreso">
+    </div>
+    <div class="form-group">
+      <label for="name">AUTORIZADO POR</label>
+      <input type="text" class="form-control" readonly value="Administración">
+    </div>
+    <div class="form-group">
+      <label for="name">ACOMPAÑANTES</label>
+      <input type="text" class="form-control" readonly value="2">
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.authorization-form-visit');
+      });
+
+      Extends.inputNumber('.input-number');
+      Extends.inputDate('.input-date');
+
+      app.liActive('authorizations');
+      app.pageLoading('hide');
+    }
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.GUARD);
+    };
+
+  }
+</script>

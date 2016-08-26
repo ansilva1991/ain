@@ -209,6 +209,10 @@
         app.loadScreen(app.SCREENS.GUARD_MESSAGE_FORM);
       });
 
+      $('.guard.records .item').tap(function(){
+        app.loadScreen(app.SCREENS.GUARD_RECORD_FORM);
+      });
+
       app.liActive('guard');
       app.pageLoading('hide');
     }

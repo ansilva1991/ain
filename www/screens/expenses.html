@@ -120,7 +120,7 @@
     <div class="item">
       <div class="row">
         <div class="info">
-          <h4>Saldo al 2016/08/01</h4>
+          <h4>Saldo al 1° DE AGO.</h4>
         </div>
         <div class="value">
           <h5>$ 54280.51</h5>
@@ -145,8 +145,8 @@
 
     this.start = function(){
 
-      $('.event').tap(function(){
-        app.loadScreen(app.SCREENS.EVENT_FORM);
+      $('.day-scroll .item').tap(function(){
+        app.loadScreen(app.SCREENS.EXPENSES_SHOW_FULL);
       });
 
       $('.expenses .years .year').tap(function(){
