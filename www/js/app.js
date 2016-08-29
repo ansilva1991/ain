@@ -1,4 +1,5 @@
 var app = {
+  VERSION: "1.0",
   SCREENS: {
     LOGIN: {
       html: "login",
@@ -401,6 +402,8 @@ var app = {
     console.log('deviceready');
     console.log(cordova.platformId);
     console.log(device.uuid);
+
+    localStorage.uuid = localStorage.uuid || Extends.generateUUID();
 
     if(window.plugins.OneSignal && window.plugins.OneSignal.init){
       window.plugins.OneSignal.init("c121ee3a-dcad-4171-a489-12a59f102a04",{googleProjectNumber: "44425877825"},app.onNotificationOpenedCallback);

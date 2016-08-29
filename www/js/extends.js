@@ -65,5 +65,15 @@ var Extends = {
     }
 
     return format;
+  },
+  generateUUID : function(){
+    var chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0987654321";
+    var code = "";
+
+    for(var i = 0; i < 30; i++){
+      code += chars[Math.round(Math.random() * (chars.length - 1))];
+    }
+
+    return code + (new Date()).getTime();
   }
 }
