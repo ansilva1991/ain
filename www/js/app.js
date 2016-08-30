@@ -5,6 +5,18 @@ var app = {
       html: "login",
       header: false
     },
+    SELECT_AUTH: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      section_name: "Selección de autorización",
+      html: "select_auth"
+    },
     REGISTER: {
       html: "register",
       header: false
@@ -464,7 +476,8 @@ var app = {
     app.header_icon_clicks[function_id]();
   },
   windowResize: function(){},
-  loadScreen: function(x_screen){
+  loadScreen: function(x_screen,opts){
+    app.load_screen_opts = opts;
     app.windowResize = function(){};
     $('.header .icon_end').remove();
     app.header_icon_clicks = {};
@@ -538,7 +551,7 @@ var app = {
 
     $('.content .page').load('screens/' + x_screen.html + '.html',function(data,status,xhr){
       app.current_screen = new c();
-      app.current_screen.start();
+      app.current_screen.start(app.load_screen_opts);
 
       window.cs = app.current_screen;
     });

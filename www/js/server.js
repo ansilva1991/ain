@@ -4,8 +4,10 @@ var Server = {
   getMyServer: function(){
     return localStorage.my_server;
   },
-  send: function(route, data, callback){
-    route = route.join('/');
+  send: function(opts){
+    route = opts.route.join('/');
+
+    var data = opts.data;
     data.k = '0987654321';
     data.uuid = localStorage.uuid;
     console.log('send:' + JSON.stringify(data));
@@ -17,7 +19,7 @@ var Server = {
       data:{ a: data },
       async: true,
       beforeSend : function(xhr){
-        xhr.callback_tmp = callback
+        xhr.callback_tmp = opts.callback
       },
       complete: function(xhr,status){
         if(xhr.status == 200){

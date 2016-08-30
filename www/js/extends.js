@@ -75,5 +75,15 @@ var Extends = {
     }
 
     return code + (new Date()).getTime();
+  },
+  serializeForm : function(css_selector){
+    var t = $(css_selector).serializeArray();
+    var r = {};
+
+    for(var i in t){
+      r[t[i].name] = t[i].value;
+    }
+
+    return r;
   }
 }

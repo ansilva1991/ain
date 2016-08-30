@@ -31,14 +31,14 @@
       <div class="cell">
         <div class="input">
           <label>EMAIL</label>
-          <input type="email" id="email">
+          <input type="email" id="email" name="email">
         </div>
         <div class="password">
           <div class="row">
             <div class="cell">
               <div class="input">
                 <label>CONTRASEÑA</label>
-                <input type="password" id="password">
+                <input type="password" id="password" name="password">
               </div>
             </div>
             <div class="cell">
@@ -46,7 +46,7 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-block btn-orange" type="button" onclick="app.loadScreen(app.SCREENS.WELCOME)">INGRESAR</button>
+        <button class="btn btn-block btn-orange" type="button" onclick="cs.processLogin();">INGRESAR</button>
         <h5 onclick="cs.registerCode();">¿Primera vez en AccessIN?</h5>
       </div>
     </div>
@@ -88,6 +88,24 @@
       },2000);
 
       app.pageLoading('hide');
+    }
+
+    this.processLogin = function(){
+      var form = Extends.serializeForm('.login form');
+
+      Server.send({
+        route : [Server.ACCESSIN_URL,'app','login'],
+        data : form,
+        callback : function(data, success){
+          if(success){
+            if(data.auths.length == 0){
+
+            }else{
+              app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
+            }
+          }
+        }
+      })
     }
 
     this.forgotPassword = function(){
