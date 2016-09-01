@@ -5,17 +5,46 @@
 <script type="text/javascript">
   function c(){
 
-    this.start = function(opts){
+    this.auths = [];
 
-      console.log(opts);
-      if(opts.length == 1 && opts[0].auths.length == 1){
+    this.start = function(opts){
+      this.auths = opts || [];
+
+      if(this.auths.length == 1 && this.comprobateAutoRedirect()){
         console.log('auto redirect');
-        PrivateData.set_current_auth_code(opts[0].auths[0].code);
-        PrivateData.set_current_server_portal(opts[0].auths[0].url_server_for_app);
-        //app.loadScreen(app.SCREENS.WELCOME);
+
+        app.loadScreen(app.SCREENS.WELCOME);
       }
 
-      app.pageLoading('hide');
+      //app.pageLoading('hide');
+    }
+
+    this.comprobateAutoRedirect = function(){
+      if(this.auths.length == 1 && this.auths[0].auths.length == 1){
+        return this.loginWith(this.auths[0].auths[0].code,this.auths[0].auths[0].url_server_for_app);
+      }else{
+        return false;
+      }
+    }
+
+    this.loginWith = function(code, url){
+      PrivateData.set('current_auth_code',code);
+      PrivateData.set('current_server_portal',url);
+
+      return true;
+    }
+
+    this.getAuths = function(){
+      Server.send({
+        route : [PrivateData.get('country_server_url'),'app','get_auths'],
+        data : {},
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+          }else{
+          }
+        }
+      });
     }
 
     this.back = function(){

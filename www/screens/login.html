@@ -78,6 +78,7 @@
   function c(){
 
     this.is_processing = false;
+    this.email_login = undefined;
 
     this.start = function(opts){
       opts = opts || {};
@@ -110,6 +111,10 @@
       $('.login #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
       $('.login #submit').prop('disabled', true);
       this.is_processing = true;
+      this.email_login = form.email;
+
+      PrivateData.clear();
+      localStorage.is_login = false;
 
       Server.send({
         route : [Server.ACCESSIN_URL,'app','login'],
@@ -129,8 +134,9 @@
               Alert.open('Datos incorrectos','El email y la contraseña no son correctos.','Aceptar');
             }else{
               console.log(data);
-              PrivateData.set_country_server_id(data.auths[0].id);
-              PrivateData.set_country_server_url(data.auths[0].host);
+              PrivateData.set('country_server_id',data.auths[0].id);
+              PrivateData.set('country_server_url',data.auths[0].host);
+              PrivateData.set('email_logined',cs.email_login);
               localStorage.is_login = true;
 
               app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);

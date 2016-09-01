@@ -428,7 +428,11 @@ var app = {
     });
 
     //app.loadScreen(app.SCREENS.LOGIN);
-    app.loadScreen(app.SCREENS.LOGIN);
+    if(localStorage.is_login){
+      app.loadScreen(PrivateData.get('current_auth_code') ? app.SCREENS.WELCOME : app.SCREENS.SELECT_AUTH);
+    }else{
+      app.loadScreen(app.SCREENS.LOGIN);
+    }
   },
   onNotificationOpenedCallback: function(jsonData){
     alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
@@ -470,6 +474,7 @@ var app = {
   },
   windowResize: function(){},
   loadScreen: function(x_screen,opts){
+    console.log('loadScreen: ' + x_screen.html);
     app.load_screen_opts = opts;
     app.windowResize = function(){};
     $('.header .icon_end').remove();
@@ -585,37 +590,35 @@ var Confirm = {
 }
 
 var PrivateData = {
-  get_country_server_id : function(){
-    return Security.decrypt(localStorage["msjnd"]);
+  hide_fields : {
+    country_server_id: "msjnd",
+    country_server_url: "mvjnd",
+    current_auth_code: "mkemd",
+    current_server_portal: "spkmk",
+    email_logined: "eljjh"
   },
-  set_country_server_id : function(x){
-    return localStorage["msjnd"] = Security.encrypt(x);
+  get : function(key){
+    return localStorage[PrivateData.hide_fields[key]] ? Security.decrypt(localStorage[PrivateData.hide_fields[key]]) : undefined;
   },
-  get_country_server_url : function(){
-    return Security.decrypt(localStorage["mvjnd"]);
+  set : function(key,value){
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value);
   },
-  set_country_server_url : function(x){
-    return localStorage["mvjnd"] = Security.encrypt(x);
+  delete : function(key){
+    delete localStorage[PrivateData.hide_fields[key]];
   },
-  get_current_auth_code : function(){
-    return Security.decrypt(localStorage["mkemd"]);
+  getAll : function(){
+    var g = {};
+
+    for(var i in PrivateData.hide_fields){
+      g[i] = PrivateData.get(i);
+    }
+
+    return g;
   },
-  set_current_auth_code : function(x){
-    return localStorage["mkemd"] = Security.encrypt(x);
-  },
-  get_current_server_portal : function(){
-    return Security.decrypt(localStorage["spkmk"]);
-  },
-  set_current_server_portal : function(x){
-    return localStorage["spkmk"] = Security.encrypt(x);
-  },
-  get : function(){
-    return {
-      country_server_id: PrivateData.get_country_server_id(),
-      country_server_url: PrivateData.get_country_server_url(),
-      current_auth_code: PrivateData.get_current_auth_code(),
-      current_server_portal: PrivateData.get_current_server_portal()
-    };
+  clear : function(){
+    for(var i in PrivateData.hide_fields){
+      PrivateData.delete(i);
+    }
   }
 }
 
