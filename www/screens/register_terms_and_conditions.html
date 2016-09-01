@@ -189,7 +189,7 @@
       </p>
     </div>
     <div class="bottom">
-      <button class="btn btn-block btn-orange" type="button" onclick="app.loadScreen(app.SCREENS.LOGIN)">Acepto los términos y condiciones</button>
+      <button class="btn btn-block btn-orange" type="button" onclick="cs.submit();">Acepto los términos y condiciones</button>
       <h5 onclick="cs.back();">No estoy de acuerdo</h5>
     </div>
   </form>
@@ -197,8 +197,10 @@
 
 <script type="text/javascript">
   function c(){
+    this.opts = {};
+    this.start = function(opts){
 
-    this.start = function(){
+      this.opts = opts;
 
       app.windowResize = function(){
       };
@@ -206,8 +208,12 @@
       app.pageLoading('hide');
     }
 
+    this.submit = function(){
+      app.loadScreen(app.SCREENS.REGISTER, this.opts);
+    }
+
     this.back = function(){
-      app.loadScreen(app.SCREENS.REGISTER);
+      app.loadScreen(app.SCREENS.LOGIN);
     };
 
   }

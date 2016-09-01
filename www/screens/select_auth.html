@@ -10,7 +10,9 @@
       console.log(opts);
       if(opts.length == 1 && opts[0].auths.length == 1){
         console.log('auto redirect');
-        app.loadScreen(app.SCREENS.WELCOME);
+        PrivateData.set_current_auth_code(opts[0].auths[0].code);
+        PrivateData.set_current_server_portal(opts[0].auths[0].url_server_for_app);
+        //app.loadScreen(app.SCREENS.WELCOME);
       }
 
       app.pageLoading('hide');

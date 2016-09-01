@@ -6,16 +6,8 @@ var app = {
       header: false
     },
     SELECT_AUTH: {
-      icon_left: [
-      {
-        icon: "chevron-left",
-        func: function(){
-          cs.back();
-        }
-      }
-      ],
-      section_name: "Selección de autorización",
-      html: "select_auth"
+      html: "select_auth",
+      header: false
     },
     REGISTER: {
       html: "register",
@@ -435,6 +427,7 @@ var app = {
       app.closeMenu();
     });
 
+    //app.loadScreen(app.SCREENS.LOGIN);
     app.loadScreen(app.SCREENS.LOGIN);
   },
   onNotificationOpenedCallback: function(jsonData){
@@ -560,8 +553,10 @@ var app = {
 };
 
 var Alert = {
-  open : function(msg){
+  open : function(title,msg,button){
+    $('.modal-alert h4 span').html(title);
     $('.modal-alert p').html(msg);
+    $('.modal-alert button').html(button);
     $('.modal-alert').addClass('open');
   },
   close : function(){
@@ -586,6 +581,41 @@ var Confirm = {
   cancel : function(){
     Confirm.callback_cancel();
     $('.modal-confirm').removeClass('open');
+  }
+}
+
+var PrivateData = {
+  get_country_server_id : function(){
+    return Security.decrypt(localStorage["msjnd"]);
+  },
+  set_country_server_id : function(x){
+    return localStorage["msjnd"] = Security.encrypt(x);
+  },
+  get_country_server_url : function(){
+    return Security.decrypt(localStorage["mvjnd"]);
+  },
+  set_country_server_url : function(x){
+    return localStorage["mvjnd"] = Security.encrypt(x);
+  },
+  get_current_auth_code : function(){
+    return Security.decrypt(localStorage["mkemd"]);
+  },
+  set_current_auth_code : function(x){
+    return localStorage["mkemd"] = Security.encrypt(x);
+  },
+  get_current_server_portal : function(){
+    return Security.decrypt(localStorage["spkmk"]);
+  },
+  set_current_server_portal : function(x){
+    return localStorage["spkmk"] = Security.encrypt(x);
+  },
+  get : function(){
+    return {
+      country_server_id: PrivateData.get_country_server_id(),
+      country_server_url: PrivateData.get_country_server_url(),
+      current_auth_code: PrivateData.get_current_auth_code(),
+      current_server_portal: PrivateData.get_current_server_portal()
+    };
   }
 }
 

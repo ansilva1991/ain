@@ -85,5 +85,17 @@ var Extends = {
     }
 
     return r;
+  },
+  name : function(css_selector){
+    $(css_selector).blur(function(){
+      var txt = $(this).val().split(' ');
+      var txt_new = [];
+      for(var i in txt){
+        var t = txt[i].substr(0,1).toUpperCase();
+        t += txt[i].substr(1,txt[i].length - 1).toLowerCase();
+        txt_new.push(t);
+      }
+      $(this).val(txt_new.join(" "));
+    });
   }
 }

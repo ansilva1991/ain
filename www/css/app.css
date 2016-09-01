@@ -52,6 +52,10 @@ button.btn.btn-orange{
   color: #fff;
 }
 
+button.btn.btn-orange:disabled{
+  background-color: #ffb52f;
+}
+
 .modal-alert{
   width: 100%;
   position: fixed;
@@ -65,12 +69,13 @@ button.btn.btn-orange{
 }
 
 .modal-alert .content{
-  width: 100%;
+  width: 320px;
   position: fixed;
-  left: 0px;
+  left: 50%;
   right: 0px;
-  bottom: 0px;
+  top: 0px;
   background-color: #fff;
+  margin-left: -160px;
 
   -webkit-transition: -webkit-transform 400ms ease;
   -moz-transition: -moz-transform 400ms ease;
@@ -78,33 +83,44 @@ button.btn.btn-orange{
   -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 
-  -webkit-transform: translate3d(0,100%,0);
-  -moz-transform: translate3d(0,100%,0);
-  -ms-transform: translate3d(0,100%,0);
-  -o-transform: translate3d(0,100%,0);
-  transform: translate3d(0,100%,0);
+  -webkit-transform: translate3d(0,-100%,0);
+  -moz-transform: translate3d(0,-100%,0);
+  -ms-transform: translate3d(0,-100%,0);
+  -o-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+
+.modal-alert .content h4{
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #ffa400;
+  margin: 0px;
+  font-weight: bold;
+}
+
+.modal-alert .content h4 .line{
+  width: 40px;
+  height: 2px;
+  background-color: #ffa400;
 }
 
 .modal-alert .content p{
-  min-height: 100px;
-  padding: 0px 10px;
+  padding: 10px 10px;
+  color: #777;
+  margin: 0px;
 }
 
 .modal-alert .content button{
-  width: 100%;
-  height: 50px;
-  background-color: #bbb;
+  height: 40px;
   border: none;
   font-size: 18px;
-}
-
-@media screen and (min-width: 480px){
-  .modal-alert .content button{
-    width: 200px;
-    float: right;
-    margin-bottom: 10px;
-    margin-right: 10px;
-  }
+  color: #ffa400;
+  background-color: #fff;
+  float: right;
+  margin-right: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .modal-alert.open{
@@ -115,11 +131,11 @@ button.btn.btn-orange{
 }
 
 .modal-alert.open .content{
-  -webkit-transform: translate3d(0,0,0);
-  -moz-transform: translate3d(0,0,0);
-  -ms-transform: translate3d(0,0,0);
-  -o-transform: translate3d(0,0,0);
-  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,100px,0);
+  -moz-transform: translate3d(0,100px,0);
+  -ms-transform: translate3d(0,100px,0);
+  -o-transform: translate3d(0,100px,0);
+  transform: translate3d(0,100px,0);
 }
 
 .modal-confirm{
@@ -503,7 +519,6 @@ button.btn.btn-orange{
   font-size: 12px;
   color: #fff;
   outline: none;
-  text-transform: uppercase;
 }
 
 .forgot-password form label{
@@ -787,6 +802,11 @@ button.btn.btn-orange{
 
 .register form>.form-group>.form-control:focus{
   border-bottom: 1px solid #ffa400;
+}
+
+.register form>.form-group>.form-control[readonly]{
+  color: #aaa;
+  border-bottom: 1px solid #ccc;
 }
 
 .register form>.form-group-checkbox{

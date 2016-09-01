@@ -1,5 +1,5 @@
 var Server = {
-  ACCESSIN_URL: 'http://0.0.0.0:4000',
+  ACCESSIN_URL: 'http://192.168.1.35:4000',
   last_ajax: undefined,
   getMyServer: function(){
     return localStorage.my_server;
@@ -22,7 +22,8 @@ var Server = {
         xhr.callback_tmp = opts.callback
       },
       complete: function(xhr,status){
-        if(xhr.status == 200){
+        console.log(xhr);
+        if(xhr.status == 200 && xhr.responseText != ""){
           var data = Security.decrypt(xhr.responseText);
           xhr.callback_tmp(data, true)
         }else{
