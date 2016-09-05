@@ -12,131 +12,27 @@
     <div class="pointer"></div>
   </div>
 </div>
+
+<div id="example_item" style="display: none;">
+  <img src="img/avatar.png">
+  <i class="fa fa-check"></i>
+  <div class="info">
+    <h5 id="name"></h5>
+    <h4 id="type"></h4>
+  </div>
+</div>
+
 <div class="list authorizations families">
-  <div class="item" data-id="564" data-type="family">
-    <img src="img/avatar.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Propietario</h4>
-    </div>
-  </div>
-  <div class="item" data-id="0" data-type="family">
-    <img src="img/avatar.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Ariela Giovanella</h5>
-      <h4>Familiar con Acceso</h4>
-    </div>
-  </div>
-  <div class="item" data-id="1" data-type="family">
-    <img src="img/avatar.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Silva Agustin</h5>
-      <h4>Familiar</h4>
-    </div>
-  </div>
-  <div class="item" data-id="2" data-type="family">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Silva Santiago</h5>
-      <h4>Familiar</h4>
-    </div>
-  </div>
 </div>
 <div class="list authorizations visits">
-  <div class="item" data-id="4" data-type="visit">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Visita</h4>
-    </div>
-  </div>
+  <h5 id="none">
+    No se encontraron visitas autorizados a su propiedad.
+  </h5>
 </div>
 <div class="list authorizations employees">
-  <div class="item" data-id="10" data-type="employee">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Empleado</h4>
-    </div>
-  </div>
-  <div class="item" data-id="11" data-type="employee">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Empleado</h4>
-    </div>
-  </div>
-  <div class="item" data-id="12" data-type="employee">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Empleado</h4>
-    </div>
-  </div>
-  <div class="item" data-id="13" data-type="employee">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Empleado</h4>
-    </div>
-  </div>
-  <div class="item" data-id="14" data-type="employee">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Empleado</h4>
-    </div>
-  </div>
-  <div class="item" data-id="15" data-type="employee">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Empleado</h4>
-    </div>
-  </div>
-  <div class="item" data-id="16" data-type="employee">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Empleado</h4>
-    </div>
-  </div>
-  <div class="item" data-id="17" data-type="employee">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Empleado</h4>
-    </div>
-  </div>
-  <div class="item" data-id="18" data-type="employee">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Empleado</h4>
-    </div>
-  </div>
-  <div class="item" data-id="19" data-type="employee">
-    <img src="img/avatar_example.png">
-    <i class="fa fa-check"></i>
-    <div class="info">
-      <h5>Giuliana Giovanella</h5>
-      <h4>Empleado</h4>
-    </div>
-  </div>
+  <h5 id="none">
+    No se encontraron empleados autorizados a su propiedad.
+  </h5>
 </div>
 
 <div class="header-actions">
@@ -178,30 +74,9 @@
   function c(){
     this.mode = 'list';
     this.selectedItems = [];
+    this.callback_update_auths;
 
     this.start = function(){
-      $('.authorizations .item').longTap(function(){
-        cs.selectItem($(this).data('id'));
-      });
-
-      $('.authorizations .item').tap(function(){
-        if(cs.mode == 'select'){
-          cs.selectItem($(this).data('id'));
-        }else if(cs.mode == 'list'){
-          if($(this).data('type') == 'family'){
-            app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY);
-          }
-
-          if($(this).data('type') == 'visit'){
-            app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_VISIT);
-          }
-
-          if($(this).data('type') == 'employee'){
-            app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
-          }
-        }
-      });
-
       $('.list.authorizations.families').swipeLeft(function(){
         cs.selectTab($('.sub-header .item')[1]);
       });
@@ -219,7 +94,103 @@
       });
 
       app.liActive('authorizations');
-      app.pageLoading('hide');
+
+      this.updateAuthorizations(function(){
+        app.pageLoading('hide');
+      });
+
+    }
+
+    this.updateAuthorizations = function(callback){
+      this.callback_update_auths = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','people','index'],
+        data : {},
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            $('.authorizations .item').remove();
+
+            $('.authorizations #none').show();
+
+            for(var i in data.people){
+              var person = data.people[i];
+              var tmp = $('#example_item').clone();
+
+              if(["AuthorizationOwnerGroup","AuthorizationFamilyWithAccess","AuthorizationFamily"].indexOf(person.type) > -1){
+                tmp.appendTo('.list.authorizations.families');
+                tmp.data('type', 'family');
+
+                if(person.type == "AuthorizationOwnerGroup"){
+                  tmp.find('#type').html('Propietario');
+                }else if(person.type == "AuthorizationFamilyWithAccess"){
+                  tmp.find('#type').html('Familiar con Accesso');
+                }else{
+                  tmp.find('#type').html('Familiar');
+                }
+              }else if(["AuthorizationVisit"].indexOf(person.type) > -1){
+                tmp.appendTo('.list.authorizations.visits');
+                tmp.data('type', 'visit');
+                tmp.find('#type').html('Visita');
+
+                $('.authorizations.visits #none').hide();
+              }else if(["AuthorizationEmployee"].indexOf(person.type) > -1){
+                tmp.appendTo('.list.authorizations.employees');
+                tmp.data('type', 'employee');
+                tmp.find('#type').html('Empleado');
+
+                $('.authorizations.employees #none').hide();
+              }
+
+              if(person.avatar){
+                tmp.find('img').attr('src',person.avatar);
+              }
+
+              tmp.data('id',person.id);
+              tmp.find('#name').html(person.full_name);
+
+              tmp.removeAttr('id');
+              tmp.addClass('item');
+
+              tmp.tap(function(){
+                cs.tabItem(this);
+              });
+
+              tmp.longTap(function(){
+                cs.selectItem($(this).data('id'));
+              });
+
+              tmp.show();
+            }
+
+            cs.callback_update_auths();
+
+          }else{
+
+          }
+        }
+      });
+    };
+
+    this.tabItem = function(x){
+      if(cs.mode == 'select'){
+        cs.selectItem($(x).data('id'));
+      }else if(cs.mode == 'list'){
+        if($(x).data('type') == 'family'){
+          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY,{
+            person_id: $(x).data('id')
+          });
+        }
+
+        if($(x).data('type') == 'visit'){
+          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_VISIT);
+        }
+
+        if($(x).data('type') == 'employee'){
+          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
+        }
+      }
     }
 
     this.selectItem = function(id){

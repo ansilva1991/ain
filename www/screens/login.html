@@ -114,13 +114,13 @@
       this.email_login = form.email;
 
       PrivateData.clear();
-      localStorage.is_login = false;
+      PrivateData.set('is_login') = false;
 
       Server.send({
         route : [Server.ACCESSIN_URL,'app','login'],
         data : {
           login: form,
-          devise: {
+          device: {
             model: device.model,
             platform: device.platform,
             version: device.version,
@@ -137,7 +137,7 @@
               PrivateData.set('country_server_id',data.auths[0].id);
               PrivateData.set('country_server_url',data.auths[0].host);
               PrivateData.set('email_logined',cs.email_login);
-              localStorage.is_login = true;
+              PrivateData.set('is_login',true);
 
               app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
             }

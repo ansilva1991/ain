@@ -428,8 +428,16 @@ var app = {
     });
 
     //app.loadScreen(app.SCREENS.LOGIN);
-    if(localStorage.is_login){
-      app.loadScreen(PrivateData.get('current_auth_code') ? app.SCREENS.WELCOME : app.SCREENS.SELECT_AUTH);
+    if(PrivateData.get('is_login')){
+      if(PrivateData.get('current_auth_code')){
+        if(localStorage['welcome_' + PrivateData.get('email_logined')]){
+          app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+        }else{
+          app.loadScreen(app.SCREENS.WELCOME);
+        }
+      }else{
+        app.loadScreen(app.SCREENS.SELECT_AUTH);
+      }
     }else{
       app.loadScreen(app.SCREENS.LOGIN);
     }
@@ -595,10 +603,16 @@ var PrivateData = {
     country_server_url: "mvjnd",
     current_auth_code: "mkemd",
     current_server_portal: "spkmk",
-    email_logined: "eljjh"
+    email_logined: "eljjh",
+    is_login: "evjjh"
   },
+  booleans : ["is_login"],
   get : function(key){
-    return localStorage[PrivateData.hide_fields[key]] ? Security.decrypt(localStorage[PrivateData.hide_fields[key]]) : undefined;
+    if(PrivateData.booleans.indexOf(key) > -1){
+      return localStorage[PrivateData.hide_fields[key]] ? Security.decrypt(localStorage[PrivateData.hide_fields[key]]) : false;
+    }else{
+      return localStorage[PrivateData.hide_fields[key]] ? Security.decrypt(localStorage[PrivateData.hide_fields[key]]) : undefined;
+    }
   },
   set : function(key,value){
     return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value);

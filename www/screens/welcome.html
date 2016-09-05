@@ -185,6 +185,9 @@
     }
 
     this.startNow = function(){
+
+      localStorage['welcome_' + PrivateData.get('email_logined')] = true;
+
       app.loadScreen(app.SCREENS.AUTHORIZATIONS);
     }
 

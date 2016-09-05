@@ -1,5 +1,5 @@
 var Server = {
-  ACCESSIN_URL: 'http://192.168.1.35:4000',
+  ACCESSIN_URL: 'http://192.168.0.110:4000',
   last_ajax: undefined,
   getMyServer: function(){
     return localStorage.my_server;
@@ -10,6 +10,7 @@ var Server = {
     var data = opts.data;
     data.k = '0987654321';
     data.uuid = localStorage.uuid;
+    data.auth_code = PrivateData.get('current_auth_code');
     console.log('send:' + JSON.stringify(data));
     data = Security.encrypt(data);
 
@@ -21,6 +22,7 @@ var Server = {
       beforeSend : function(xhr){
         xhr.callback_tmp = opts.callback
       },
+      timeout: 30000,
       complete: function(xhr,status){
         console.log(xhr);
         if(xhr.status == 200 && xhr.responseText != ""){

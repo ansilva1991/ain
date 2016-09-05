@@ -13,20 +13,20 @@
     </div>
     <div class="form-group">
       <label for="name">NOMBRE</label>
-      <input type="text" name="name" class="form-control">
+      <input type="text" name="name" id="name" class="form-control">
     </div>
     <div class="form-group">
-      <label for="name">APELLIDO</label>
-      <input type="text" name="name" class="form-control">
+      <label for="last_name">APELLIDO</label>
+      <input type="text" name="last_name" id="last_name" class="form-control">
     </div>
     <div class="form-group">
-      <label for="name">DNI</label>
-      <input type="number" name="name" class="form-control">
+      <label for="real_id">DNI</label>
+      <input type="number" name="real_id" id="real_id" class="form-control">
     </div>
     <div class="form-group">
-      <label for="name">SEXO</label>
+      <label for="sex">SEXO</label>
       <div class="form-radios">
-        <div class="row">
+        <div class="row" id="sex">
           <div class="radio">
             <div class="circle"></div>
             <span>Masculino</span>
@@ -43,12 +43,12 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="name">FECHA DE NACIMIENTO</label>
-      <input type="date" name="name" class="form-control">
+      <label for="birthdate">FECHA DE NACIMIENTO</label>
+      <input type="date" name="birthdate" id="birthdate" class="form-control">
     </div>
     <div class="form-group">
-      <label for="name">Teléfono de contacto</label>
-      <input type="tel" name="name" class="form-control">
+      <label for="phone">Teléfono de contacto</label>
+      <input type="tel" name="phone" id="phone" class="form-control">
     </div>
     <div class="form-group-checkbox">
       <label for="name">¿Dar acceso al sistema?</label>
@@ -61,8 +61,8 @@
     </div>
     <div class="form-dropdown">
       <div class="form-group">
-        <label for="name">EMAIL</label>
-        <input type="text" name="email" class="form-control">
+        <label for="email">EMAIL</label>
+        <input type="text" name="email" id="email" class="form-control">
       </div>
       <center>
         <h5>
@@ -79,8 +79,14 @@
 <script type="text/javascript">
   function c(){
     this.last_screen_height = 0;
+    this.person_id;
+    this.callback_get_person_info;
+    this.started = false;
 
-    this.start = function(){
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.person_id = opts.person_id;
 
       $(window).resize(function(){
         Extends.scrollToInputFocus('.authorization-form-family');
@@ -90,19 +96,60 @@
       Extends.inputRadios('.form-radios');
 
       $('#have_access').change(function(){
-        $('.form-dropdown').toggleClass('open');
 
         if($(this).is(':checked')){
-          setTimeout(function(){
-            $('.authorization-form-family').scrollToBottom(250);
-          },200);
+          $('.form-dropdown').addClass('open');
+
+          if(cs.started){
+            setTimeout(function(){
+              $('.authorization-form-family').scrollToBottom(250);
+            },200);
+          }
+        }else{
+          $('.form-dropdown').removeClass('open');
         }
       });
 
       app.liActive('authorizations');
-      app.pageLoading('hide');
+      this.getPersonInfo(function(){
+        app.pageLoading('hide');
+        cs.started = true;
+      });
+    }
 
-      this.removeAccess();
+    this.getPersonInfo = function(callback){
+      this.callback_get_person_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','people','edit_family'],
+        data : {
+          person_id: this.person_id
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            $('#name').val(data.person.name);
+            $('#last_name').val(data.person.last_name);
+            $('#real_id').val(data.person.real_id);
+            $($('#sex .radio')[data.person.sex]).addClass('checked');
+            $('#birthdate').val(data.person.birthdate);
+            $('#phone').val(data.person.phone);
+            $('#email').val(data.person.email);
+
+            if(data.person.avatar){
+              $('#avatar').attr('src',data.person.avatar);
+            }
+
+            if(data.person.type == 'AuthorizationOwnerGroup' || data.person.type == 'AuthorizationFamilyWithAccess'){
+
+              $('#have_access').prop('checked', true);
+              $('#have_access').change();
+            }
+
+            cs.callback_get_person_info();
+          }
+        }
+      });
     }
 
     this.submit = function(){

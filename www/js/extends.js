@@ -47,6 +47,14 @@ var Extends = {
       $(this).find('input[type="checkbox"]').prop('checked',$(this).hasClass('checked'));
       $(this).find('input[type="checkbox"]').change();
     });
+
+    $('.checkbox.for_tap input[type="checkbox"]').change(function(){
+      if($(this).is(':checked')){
+        $(this).parents('.checkbox.for_tap').addClass('checked');
+      }else{
+        $(this).parents('.checkbox.for_tap').removeClass('checked');
+      }
+    });
   },
   scrollToInputFocus : function(selector_css){
     $(selector_css).scrollTop(($(selector_css).scrollTop() + $(':focus').offset().top) - window.innerHeight + 60);

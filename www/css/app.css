@@ -1030,7 +1030,11 @@ button.btn.btn-orange:disabled{
 .app>.content .loading{
   width: 100%;
   display: none;
-  margin-top: 40px;
+  top: 60px;
+  padding-top: 40px;
+  position: fixed;
+  bottom: 0px;
+  background-color: #fff;
 }
 
 .app>.menu{
@@ -1271,6 +1275,12 @@ button.btn.btn-orange:disabled{
   color: #777;
 }
 
+.app>.content .page .list.authorizations>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
 
 .app>.content .page .list.authorizations .item:active{
   background-color: #eee;
