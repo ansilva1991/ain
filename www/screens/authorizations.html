@@ -76,7 +76,9 @@
     this.selectedItems = [];
     this.callback_update_auths;
 
-    this.start = function(){
+    this.start = function(opts){
+      opts = opts || {};
+
       $('.list.authorizations.families').swipeLeft(function(){
         cs.selectTab($('.sub-header .item')[1]);
       });
@@ -92,6 +94,10 @@
       $('.list.authorizations.employees').swipeRight(function(){
         cs.selectTab($('.sub-header .item')[1]);
       });
+
+      if(opts.open_in){
+        cs.selectTab($('.sub-header .item')[opts.open_in]);
+      }
 
       app.liActive('authorizations');
 
@@ -124,6 +130,7 @@
 
                 if(person.type == "AuthorizationOwnerGroup"){
                   tmp.find('#type').html('Propietario');
+                  tmp.addClass('owner_group');
                 }else if(person.type == "AuthorizationFamilyWithAccess"){
                   tmp.find('#type').html('Familiar con Accesso');
                 }else{
@@ -184,11 +191,15 @@
         }
 
         if($(x).data('type') == 'visit'){
-          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_VISIT);
+          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_VISIT,{
+            person_id: $(x).data('id')
+          });
         }
 
         if($(x).data('type') == 'employee'){
-          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
+          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE,{
+            person_id: $(x).data('id')
+          });
         }
       }
     }
@@ -227,8 +238,43 @@
     };
 
     this.confirmErased = function(){
-      Confirm.open("¿Estas seguro que deseas eliminar los elementos seleccionados?",function(){
-        cs.desSelectAll();
+      console.log(this.selectedItems);
+      Confirm.open({
+        title: "Eliminar",
+        msg: "¿Estas seguro que deseas eliminar los elementos seleccionados?",
+        success_button: "Continuar",
+        cancel_button: "Cancelar",
+        callback_success: function(){
+          if(cs.selectedItems.indexOf(PrivateData.get('current_person_id')) > -1){
+            Alert.open('Lo sentimos','No puedes eliminarte a ti mismo.','Aceptar');
+            return false;
+          }
+
+          for(var i in cs.selectedItems){
+            if($('.item.owner_group[data-id="' + cs.selectedItems[i] + '"]').length > 0){
+              Alert.open('Lo sentimos','No puedes eliminar al propietario.','Aceptar');
+              return false;
+            }
+          }
+          app.pageLoading('show');
+
+          Server.send({
+            route : [PrivateData.get('current_server_portal'),'app','people','destroy'],
+            data : {
+              ids: cs.selectedItems
+            },
+            callback : function(data, success){
+              if(success){
+                app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+              }else{
+                app.pageLoading('hide');
+                Alert.open('Lo sentimos','Ocurrío un error al eliminar, intenta nuevamente por favor.','Aceptar');
+              }
+            }
+          });
+
+          cs.desSelectAll();
+        }
       });
     }
 

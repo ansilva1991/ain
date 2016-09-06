@@ -114,7 +114,7 @@
       this.email_login = form.email;
 
       PrivateData.clear();
-      PrivateData.set('is_login') = false;
+      PrivateData.set('is_login',false);
 
       Server.send({
         route : [Server.ACCESSIN_URL,'app','login'],
@@ -129,7 +129,7 @@
         },
         callback : function(data, success){
           if(success){
-
+            console.log(data);
             if(data.auths.length == 0){
               Alert.open('Datos incorrectos','El email y la contraseña no son correctos.','Aceptar');
             }else{
@@ -137,6 +137,7 @@
               PrivateData.set('country_server_id',data.auths[0].id);
               PrivateData.set('country_server_url',data.auths[0].host);
               PrivateData.set('email_logined',cs.email_login);
+              PrivateData.set('current_person_id',data.auths[0].auths[0].person_id);
               PrivateData.set('is_login',true);
 
               app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);

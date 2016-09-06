@@ -127,7 +127,6 @@ button.btn.btn-orange:disabled{
   display: block;
   opacity: 1;
   bottom: 0px;
-
 }
 
 .modal-alert.open .content{
@@ -151,13 +150,13 @@ button.btn.btn-orange:disabled{
 }
 
 .modal-confirm .content{
-  width: 100%;
-  padding: 10px;
+  width: 320px;
   position: fixed;
-  left: 0px;
+  left: 50%;
   right: 0px;
-  bottom: 0px;
+  top: 0px;
   background-color: #fff;
+  margin-left: -160px;
 
   -webkit-transition: -webkit-transform 400ms ease;
   -moz-transition: -moz-transform 400ms ease;
@@ -165,49 +164,66 @@ button.btn.btn-orange:disabled{
   -o-transition: -o-transform 400ms ease;
   transition: transform 400ms ease;
 
-  -webkit-transform: translate3d(0,100%,0);
-  -moz-transform: translate3d(0,100%,0);
-  -ms-transform: translate3d(0,100%,0);
-  -o-transform: translate3d(0,100%,0);
-  transform: translate3d(0,100%,0);
+  -webkit-transform: translate3d(0,-100%,0);
+  -moz-transform: translate3d(0,-100%,0);
+  -ms-transform: translate3d(0,-100%,0);
+  -o-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+
+.modal-confirm .content h4{
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #ffa400;
+  margin: 0px;
+  font-weight: bold;
+}
+
+.modal-confirm .content h4 .line{
+  width: 40px;
+  height: 2px;
+  background-color: #ffa400;
 }
 
 .modal-confirm .content p{
-  min-height: 100px;
+  padding: 10px 10px;
   color: #777;
+  margin: 0px;
 }
 
 .modal-confirm .content button{
+  height: 40px;
+  border: none;
+  font-size: 18px;
+  color: #ffa400;
+  background-color: #fff;
   text-transform: uppercase;
-  min-width: 128px;
+  font-weight: bold;
 }
 
-.modal-confirm .content button:last-child{
-  background-color: #ccc;
+.modal-confirm .content button#success{
+  float: right;
+  margin-right: 10px;
 }
 
-@media screen and (min-width: 480px){
-  .modal-confirm .content button{
-    width: 200px;
-    float: right;
-    margin-bottom: 10px;
-    margin-right: 10px;
-  }
+.modal-confirm .content button#cancel{
+  float: left;
+  margin-left: 10px;
 }
 
 .modal-confirm.open{
   display: block;
   opacity: 1;
   bottom: 0px;
-
 }
 
 .modal-confirm.open .content{
-  -webkit-transform: translate3d(0,0,0);
-  -moz-transform: translate3d(0,0,0);
-  -ms-transform: translate3d(0,0,0);
-  -o-transform: translate3d(0,0,0);
-  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,100px,0);
+  -moz-transform: translate3d(0,100px,0);
+  -ms-transform: translate3d(0,100px,0);
+  -o-transform: translate3d(0,100px,0);
+  transform: translate3d(0,100px,0);
 }
 
 .spinner {

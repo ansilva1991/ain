@@ -55,7 +55,8 @@ var app = {
         text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
-        }
+        },
+        id: 'submit-button'
       }
       ],
       section_name: "Familiar",
@@ -75,7 +76,8 @@ var app = {
         text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
-        }
+        },
+        id: 'submit-button'
       }
       ],
       section_name: "Visita",
@@ -95,7 +97,8 @@ var app = {
         text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
-        }
+        },
+        id: 'submit-button'
       }
       ],
       section_name: "Empleado",
@@ -462,8 +465,14 @@ var app = {
     if(x == 'sign_out'){
       app.closeMenu();
 
-      Confirm.open("¿Estas seguro que deseas cerrar sesión?",function(){
-        app.loadScreen(app.SCREENS.LOGIN);
+      Confirm.open({
+        title: "Cerrar sesión",
+        msg: "¿Estas seguro que deseas cerrar sesión?",
+        success_button: "Continuar",
+        cancel_button: "Cancelar",
+        callback_success: function(){
+          app.loadScreen(app.SCREENS.LOGIN);
+        }
       });
     }else{
       app.closeMenu();
@@ -531,6 +540,9 @@ var app = {
         tmp.addClass('icon_end');
         tmp.addClass('right');
         tmp.removeClass('example');
+        if(x_screen.icon_right[i].id){
+          tmp.attr('id',x_screen.icon_right[i].id);
+        }
 
         if(x_screen.icon_right[i].icon){
           tmp.children().attr('class','fa fa-' + x_screen.icon_right[i].icon);
@@ -557,9 +569,9 @@ var app = {
 
     $('.content .page').load('screens/' + x_screen.html + '.html',function(data,status,xhr){
       app.current_screen = new c();
-      app.current_screen.start(app.load_screen_opts);
-
       window.cs = app.current_screen;
+
+      app.current_screen.start(app.load_screen_opts);
     });
 
   }
@@ -580,11 +592,18 @@ var Alert = {
 var Confirm = {
   callback_success : function(){},
   callback_cancel : function(){},
-  open : function(msg, callback_success, callback_cancel){
-    Confirm.callback_success = callback_success || function(){};
-    Confirm.callback_cancel = callback_cancel || function(){};
+  open : function(opts){
+    title = opts.title;
+    msg = opts.msg;
+    success_button = opts.success_button;
+    cancel_button = opts.cancel_button;
+    Confirm.callback_success = opts.callback_success || function(){};
+    Confirm.callback_cancel = opts.callback_cancel || function(){};
 
+    $('.modal-confirm h4 span').html(title);
     $('.modal-confirm p').html(msg);
+    $('.modal-confirm button#success').html(success_button);
+    $('.modal-confirm button#cancel').html(cancel_button);
     $('.modal-confirm').addClass('open');
   },
   success : function(){
@@ -604,7 +623,8 @@ var PrivateData = {
     current_auth_code: "mkemd",
     current_server_portal: "spkmk",
     email_logined: "eljjh",
-    is_login: "evjjh"
+    is_login: "evjjh",
+    current_person_id: "evjjc"
   },
   booleans : ["is_login"],
   get : function(key){
