@@ -471,7 +471,19 @@ var app = {
         success_button: "Continuar",
         cancel_button: "Cancelar",
         callback_success: function(){
-          app.loadScreen(app.SCREENS.LOGIN);
+          ModalLoading.open('Cerrando Sesión', "Espere un momento por favor");
+
+          Server.send({
+            route : [PrivateData.get('current_server_portal'),'app','people','sign_out'],
+            data : {},
+            callback : function(data, success){
+              if(success){
+                ModalLoading.close();
+                PrivateData.clear();
+                app.loadScreen(app.SCREENS.LOGIN);
+              }
+            }
+          });
         }
       });
     }else{
@@ -586,6 +598,17 @@ var Alert = {
   },
   close : function(){
     $('.modal-alert').removeClass('open');
+  }
+}
+
+var ModalLoading = {
+  open : function(title,msg){
+    $('.modal-loading h4 span').html(title);
+    $('.modal-loading p').html(msg);
+    $('.modal-loading').addClass('open');
+  },
+  close : function(){
+    $('.modal-loading').removeClass('open');
   }
 }
 

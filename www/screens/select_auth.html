@@ -13,7 +13,11 @@
       if(this.auths.length == 1 && this.comprobateAutoRedirect()){
         console.log('auto redirect');
 
-        app.loadScreen(app.SCREENS.WELCOME);
+        if(localStorage['welcome_' + PrivateData.get('email_logined')]){
+          app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+        }else{
+          app.loadScreen(app.SCREENS.WELCOME);
+        }
       }
 
       //app.pageLoading('hide');

@@ -24,10 +24,14 @@ var Server = {
       },
       timeout: 30000,
       complete: function(xhr,status){
+        console.log(xhr.status);
         console.log(xhr);
         if(xhr.status == 200 && xhr.responseText != ""){
           var data = Security.decrypt(xhr.responseText);
           xhr.callback_tmp(data, true)
+        }else if(xhr.status == 999){
+          PrivateData.clear();
+          app.loadScreen(app.SCREENS.LOGIN);
         }else{
           xhr.callback_tmp({}, false)
         }
