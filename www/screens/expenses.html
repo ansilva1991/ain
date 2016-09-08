@@ -6,102 +6,50 @@
       <div class="year" data-year="2017">2017</div>
     </div>
     <div class="months">
-      <div class="month" data-month="0">Enero</div>
-      <div class="month" data-month="1">Febrero</div>
-      <div class="month" data-month="2">Marzo</div>
-      <div class="month" data-month="3">Abril</div>
-      <div class="month" data-month="4">Mayo</div>
-      <div class="month" data-month="5">Junio</div>
-      <div class="month" data-month="6">Julio</div>
-      <div class="month" data-month="7">Agosto</div>
-      <div class="month" data-month="8">Septiembre</div>
-      <div class="month" data-month="9">Octubre</div>
-      <div class="month" data-month="10">Noviembre</div>
-      <div class="month" data-month="11">Diciembre</div>
+      <div class="month" data-month="1">Enero</div>
+      <div class="month" data-month="2">Febrero</div>
+      <div class="month" data-month="3">Marzo</div>
+      <div class="month" data-month="4">Abril</div>
+      <div class="month" data-month="5">Mayo</div>
+      <div class="month" data-month="6">Junio</div>
+      <div class="month" data-month="7">Julio</div>
+      <div class="month" data-month="8">Agosto</div>
+      <div class="month" data-month="9">Septiembre</div>
+      <div class="month" data-month="10">Octubre</div>
+      <div class="month" data-month="11">Noviembre</div>
+      <div class="month" data-month="12">Diciembre</div>
+    </div>
+  </div>
+  <div id="example_item" style="display: none;">
+    <div class="row">
+      <div class="info">
+        <h4 id="type"></h4>
+        <h5 id="description"></h5>
+      </div>
+      <div class="value">
+        <h6 id="real_date"></h6>
+        <h5>$ <span id="value"></span></h5>
+      </div>
     </div>
   </div>
   <div class="day-scroll">
-    <div class="item">
+    <div class="item balance" id="init_balance">
       <div class="row">
         <div class="info">
-          <h4>Expensas</h4>
-          <h5>Julio 2016</h5>
+          <h4>Saldo al <span id="init_balance_date"></span></h4>
         </div>
         <div class="value">
-          <h6>2016/05/12</h6>
-          <h5>$ - 99999.99</h5>
+          <h5>$ <span id="value"></span></h5>
         </div>
       </div>
     </div>
-    <div class="item">
+    <div class="item balance" id="end_balance">
       <div class="row">
         <div class="info">
-          <h4>Multa</h4>
-          <h5>Exceso de velocidad en...</h5>
+          <h4>Saldo al <span id="end_balance_date"></span></h4>
         </div>
         <div class="value">
-          <h6>2016/05/13</h6>
-          <h5>$ - 235.54</h5>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Pago</h4>
-          <h5></h5>
-        </div>
-        <div class="value">
-          <h6>2016/05/25</h6>
-          <h5>$ 5428.51</h5>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Otros</h4>
-          <h5>Arreglos de ventanas</h5>
-        </div>
-        <div class="value">
-          <h6>2016/05/13</h6>
-          <h5>$ - 2350.54</h5>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Otros</h4>
-          <h5>Arreglos de ventanas</h5>
-        </div>
-        <div class="value">
-          <h6>2016/05/13</h6>
-          <h5>$ - 2350.54</h5>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Otros</h4>
-          <h5>Arreglos de ventanas</h5>
-        </div>
-        <div class="value">
-          <h6>2016/05/13</h6>
-          <h5>$ - 2350.54</h5>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Otros</h4>
-          <h5>Arreglos de ventanas</h5>
-        </div>
-        <div class="value">
-          <h6>2016/05/13</h6>
-          <h5>$ - 2350.54</h5>
+          <h5>$ <span id="value"></span></h5>
         </div>
       </div>
     </div>
@@ -113,17 +61,7 @@
           <h4>Total del mes</h4>
         </div>
         <div class="value">
-          <h5>$ 5428.51</h5>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Saldo al 1° DE AGO.</h4>
-        </div>
-        <div class="value">
-          <h5>$ 54280.51</h5>
+          <h5>$ <span id="total_month">-</span></h5>
         </div>
       </div>
     </div>
@@ -133,7 +71,7 @@
           <h4>Saldo actual</h4>
         </div>
         <div class="value">
-          <h5>$ - 54280.51</h5>
+          <h5>$ <span id="current_balance">-</span></h5>
         </div>
       </div>
     </div>
@@ -142,20 +80,97 @@
 
 <script type="text/javascript">
   function c(){
+    this.callback_get_month;
+    this.current_month;
 
-    this.start = function(){
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.current_month = opts.month || Extends.formatDate(new Date(),'%yyyy-%mm');
 
       $('.day-scroll .item').tap(function(){
         app.loadScreen(app.SCREENS.EXPENSES_SHOW_FULL);
       });
 
       $('.expenses .years .year').tap(function(){
-        var year = parseInt($(this).data('year'));
+        $('.expenses .years .year').removeClass('selected');
+        $('.expenses .months .month').removeClass('selected');
+        $(this).addClass('selected');
+      });
+
+      $('.expenses .months .month').tap(function(){
+        var year = parseInt($('.expenses .years .year.selected').data('year'));
+        var month = parseInt($(this).data('month'));
+
+        cs.current_month = year + "-" + ((month/10).toFixed(1).replace('.',''));
+
+        cs.toggleCalendar();
+        app.pageLoading('show');
+        cs.setMonth(function(){
+          app.pageLoading('hide');
+        });
       });
 
       app.liActive('expenses');
-      app.pageLoading('hide');
+
+      this.setMonth(function(){
+        app.pageLoading('hide');
+      });
+
     }
+
+    this.updateCalendar = function(){
+      $('.expenses .calendar .year').removeClass('selected');
+      $('.expenses .calendar .month').removeClass('selected');
+
+      $('.expenses .calendar .year[data-year="' + this.current_month.split('-')[0] + '"]').addClass('selected');
+      $('.expenses .calendar .month[data-month="' + parseInt(this.current_month.split('-')[1]) + '"]').addClass('selected');
+    }
+
+    this.setMonth = function(callback){
+      this.callback_get_month = callback;
+
+      $('.header .section-name').html(Extends.formatDate(new Date(this.current_month + "-01 00:00:00"),'%mabbr. del %yyyy'));
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','group_current_accounts','index'],
+        data : {
+          month: this.current_month
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+
+            $('.item.entry').remove();
+
+            for(var i in data.entries){
+              var entry = data.entries[i];
+              var tmp = $('#example_item').clone().insertBefore('.day-scroll #end_balance');
+              tmp.removeAttr('id');
+
+              tmp.find('#type').html(HelperExpenses.entry_type(entry));
+              tmp.find('#description').html(HelperExpenses.entry_description(entry));
+              tmp.find('#real_date').html(Extends.formatDate(new Date(entry.real_date + " 00:00:00"),'%yyyy/%mm/%dd'));
+              tmp.find('#value').html(entry.value.toFixed(2));
+
+              tmp.addClass('item');
+              tmp.addClass('entry');
+              tmp.show();
+            }
+
+            $('#init_balance #init_balance_date').html(Extends.formatDate(new Date(cs.current_month + "-01 00:00:00"),'%dd de %mname'));
+            $('#end_balance #end_balance_date').html(Extends.formatDate(Extends.lastDayMonth(new Date(cs.current_month + "-01 00:00:00")),'%dd de %mname'));
+            $('#init_balance #value').html(data.monthly_balance.init_balance.toFixed(2));
+            $('#end_balance #value').html(data.monthly_balance.end_balance.toFixed(2));
+
+            $('#total_month').html(data.monthly_balance.balance.toFixed(2));
+            $('#current_balance').html(data.current_balance.toFixed(2));
+
+            cs.callback_get_month();
+          }
+        }
+      });
+    };
 
     this.back = function(){
       app.loadScreen(app.SCREENS.EVENTS);
@@ -163,6 +178,10 @@
 
     this.toggleCalendar = function(){
       $('.expenses').toggleClass('open-calendar');
+
+      if($('.expenses').hasClass('open-calendar')){
+        this.updateCalendar();
+      }
     }
 
   }

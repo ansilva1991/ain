@@ -433,11 +433,16 @@ var app = {
     //app.loadScreen(app.SCREENS.LOGIN);
     if(PrivateData.get('is_login')){
       if(PrivateData.get('current_auth_code')){
-        if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-          app.loadScreen(app.SCREENS.AUTHORIZATIONS);
-        }else{
-          app.loadScreen(app.SCREENS.WELCOME);
-        }
+        app.updateConfig(function(){
+          app.updateMenuInfo();
+          if(localStorage['welcome_' + PrivateData.get('email_logined')]){
+            app.loadScreen(app.SCREENS.EXPENSES,{
+              month: "2016-02"
+            });
+          }else{
+            app.loadScreen(app.SCREENS.WELCOME);
+          }
+        })
       }else{
         app.loadScreen(app.SCREENS.SELECT_AUTH);
       }
@@ -447,6 +452,17 @@ var app = {
   },
   onNotificationOpenedCallback: function(jsonData){
     alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+  },
+  updateMenuInfo: function(){
+    if(PrivateData.get('current_person_avatar')){
+      $('.app>.menu .content .header img').attr('src','data:image/jpg;base64,' + PrivateData.get('current_person_avatar'));
+    }
+    $('.app>.menu .content .header #client_name').html(PrivateData.get('current_client_name'));
+    $('.app>.menu .content .header #group_identificator').html(PrivateData.get('current_group_identificator'));
+    $('.app>.menu .content .header #person_full_name').html(PrivateData.get('current_person_full_name'));
+    $('.app>.menu .content .header').css({
+      'background-image' : 'url(img/back_menu_lateral_' + PrivateData.get('current_client_picture_menu_n')+ '.jpg)'
+    });
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
@@ -460,6 +476,40 @@ var app = {
   liActive: function(x){
     $('.app .menu .list .item').removeClass('active');
     $('.app .menu .list .item[data-li="' + x + '"]').addClass('active');
+  },
+  update_config_callback: -1,
+  updateConfig: function(callback){
+    app.update_config_callback = callback;
+
+    if((new Date()).getTime() - (PrivateData.get('last_config_sync') || 0) > 5000){
+      app.pageLoading('show');
+      console.log('SYNC CONFIG');
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','config','sync'],
+        data : {
+          avatar_last_change: PrivateData.get('current_person_avatar_last_change') || 0
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            PrivateData.set('current_person_full_name',data.person_full_name);
+            if(data.person_avatar){
+              PrivateData.set('current_person_avatar',data.person_avatar);
+            }
+            PrivateData.set('current_group_identificator',data.group_identificator);
+            PrivateData.set('current_client_name',data.client_name);
+            PrivateData.set('current_client_picture_menu_n',data.client_picture_menu_app_n);
+            PrivateData.set('last_config_sync',(new Date()).getTime());
+            PrivateData.set('current_person_avatar_last_change',data.person_last_avatar_change);
+
+            app.update_config_callback();
+          }
+        }
+      });
+
+    }else{
+      app.update_config_callback();
+    }
   },
   selectLiMenu: function(x){
     if(x == 'sign_out'){
@@ -647,7 +697,14 @@ var PrivateData = {
     current_server_portal: "spkmk",
     email_logined: "eljjh",
     is_login: "evjjh",
-    current_person_id: "evjjc"
+    current_person_id: "evjjc",
+    current_person_full_name: "esjjc",
+    current_person_avatar: "avjjc",
+    current_person_avatar_last_change: "avlcc",
+    current_group_identificator: "esjjf",
+    current_client_name: "cvjjf",
+    current_client_picture_menu_n: "cbjjf",
+    last_config_sync: "lcsyd"
   },
   booleans : ["is_login"],
   get : function(key){

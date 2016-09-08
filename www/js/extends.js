@@ -60,12 +60,14 @@ var Extends = {
     $(selector_css).scrollTop(($(selector_css).scrollTop() + $(':focus').offset().top) - window.innerHeight + 60);
   },
   formatDate : function(date,format){
-    var months_name_abbr = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    var months_name_abbr = ['-','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    var months_name = ['-','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
     var units = {
       yyyy : date.getFullYear(),
-      mm : (date.getMonth() / 10).toFixed(1).replace('.',''),
+      mm : ((date.getMonth() + 1) / 10).toFixed(1).replace('.',''),
       dd : (date.getDate() / 10).toFixed(1).replace('.',''),
-      mabbr : months_name_abbr[date.getMonth()]
+      mabbr : months_name_abbr[(date.getMonth() + 1)],
+      mname : months_name[(date.getMonth() + 1)]
     };
 
     for(var i in units){
@@ -73,6 +75,9 @@ var Extends = {
     }
 
     return format;
+  },
+  lastDayMonth : function(date){
+    return new Date(date.getFullYear(), date.getMonth() + 1,0,0,0,0);
   },
   generateUUID : function(){
     var chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0987654321";
