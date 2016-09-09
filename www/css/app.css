@@ -3718,6 +3718,35 @@ button.btn.btn-orange:disabled{
   font-size: 16px !important;
 }
 
+.app>.content .page .expenses-show-pdf{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  bottom: 0px;
+}
+
+.app>.content .page .expenses-show-pdf h6{
+  width: 100%;
+  text-align: center;
+  color: #777;
+  font-size: 20px;
+  padding: 0px 20px;
+}
+
+.app>.content .page .expenses-show-pdf .bar{
+  width: 300px;
+  height: 16px;
+  background: #eee;
+  margin: auto;
+}
+
+.app>.content .page .expenses-show-pdf .bar .inner{
+  width: 30%;
+  height: 16px;
+  background: #ffa400;
+}
+
 .app>.content .page .welcome{
   width: 100%;
   position: fixed;

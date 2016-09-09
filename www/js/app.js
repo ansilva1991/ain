@@ -320,6 +320,18 @@ var app = {
       section_name: "EXPENSAS",
       html: "expenses_show_full"
     },
+    EXPENSES_SHOW_PDF: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      section_name: "EXPENSAS",
+      html: "expenses_show_pdf"
+    },
     GUARD: {
       icon_left: [
       {
@@ -405,6 +417,12 @@ var app = {
     FastClick.attach(document.body);
     document.addEventListener('deviceready', this.onDeviceReady, false);
   },
+  getMyPath: function(){
+    return cordova.file.externalDataDirectory;
+  },
+  openFile: function(file){
+    window.plugins.fileOpener.open(app.getMyPath() + file);
+  },
   onDeviceReady: function() {
     console.log('deviceready');
     console.log(cordova.platformId);
@@ -430,34 +448,6 @@ var app = {
       app.closeMenu();
     });
 
-    var fileTransfer = new FileTransfer();
-    fileTransfer.onprogress = function(n){
-      console.log(n.loaded + "/" + n.total);
-    };
-    console.log(fileTransfer);
-    var uri = encodeURI("http://168.181.184.90:3500/system/group_current_account_expenses_pack_pdfs/attachments/000/000/001/original/Propuesta-4.pdf");
-    console.log(window.plugins);
-    console.log(cordova.file);
-    console.log(cordova.file.externalDataDirectory);
-    fileTransfer.download(
-        uri,
-        cordova.file.externalDataDirectory + "test.pdf",
-        function(entry) {
-            console.log("download complete: " + entry.toURL());
-
-            window.plugins.fileOpener.open(cordova.file.externalDataDirectory + "test.pdf");
-        },
-        function(error) {
-          console.log(error);
-            console.log("download error source " + error.source);
-            console.log("download error target " + error.target);
-            console.log("download error code " + error.code);
-        },
-        true
-    );
-
-    return false;
-
     //app.loadScreen(app.SCREENS.LOGIN);
     if(PrivateData.get('is_login')){
       if(PrivateData.get('current_auth_code')){
@@ -465,7 +455,7 @@ var app = {
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
             app.loadScreen(app.SCREENS.EXPENSES,{
-              month: "2016-02"
+              month: "2016-03"
             });
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
@@ -743,7 +733,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.1.35") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];

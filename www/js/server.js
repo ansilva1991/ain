@@ -37,5 +37,13 @@ var Server = {
         }
       }
     });
+  },
+  download: function(opts){
+    console.log('init download:' + opts.from);
+    var fileTransfer = new FileTransfer();
+    fileTransfer.onprogress = opts.progress;
+    fileTransfer.download(opts.from, app.getMyPath() + opts.to,opts.success, opts.error,false);
+
+    return fileTransfer;
   }
 }

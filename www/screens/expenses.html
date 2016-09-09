@@ -160,6 +160,15 @@
                     })
                   });
                 }
+
+                if(entry.expenses_pack.type == 'GroupCurrentAccountExpensesPackPdf'){
+                  tmp.tap(function(){
+                    var id = $(this).data('id');
+                    app.loadScreen(app.SCREENS.EXPENSES_SHOW_PDF,{
+                      entry_id: id
+                    })
+                  });
+                }
               }
 
               tmp.addClass('item');
