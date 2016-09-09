@@ -431,9 +431,10 @@ var app = {
     });
 
     var fileTransfer = new FileTransfer();
-    fileTransfer.onprogress(function(n){
-      console.log(n);
-    });
+    fileTransfer.onprogress = function(n){
+      console.log(n.loaded + "/" + n.total);
+    };
+    console.log(fileTransfer);
     var uri = encodeURI("http://168.181.184.90:3500/system/group_current_account_expenses_pack_pdfs/attachments/000/000/001/original/Propuesta-4.pdf");
     console.log(window.plugins);
     console.log(cordova.file);
