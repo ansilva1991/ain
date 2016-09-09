@@ -431,17 +431,20 @@ var app = {
     });
 
     var fileTransfer = new FileTransfer();
-    var uri = encodeURI("http://accessin.net/assets/logo-66cca57308200f4f87c5da094148c9a1.png");
+    fileTransfer.onprogress(function(n){
+      console.log(n);
+    });
+    var uri = encodeURI("http://168.181.184.90:3500/system/group_current_account_expenses_pack_pdfs/attachments/000/000/001/original/Propuesta-4.pdf");
     console.log(window.plugins);
     console.log(cordova.file);
     console.log(cordova.file.externalDataDirectory);
     fileTransfer.download(
         uri,
-        cordova.file.externalDataDirectory + "logo.png",
+        cordova.file.externalDataDirectory + "test.pdf",
         function(entry) {
             console.log("download complete: " + entry.toURL());
 
-            window.plugins.fileOpener.open(cordova.file.externalDataDirectory + "logo.png");
+            window.plugins.fileOpener.open(cordova.file.externalDataDirectory + "test.pdf");
         },
         function(error) {
           console.log(error);
