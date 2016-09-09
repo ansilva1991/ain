@@ -317,7 +317,7 @@ var app = {
         }
       }
       ],
-      section_name: "EXPENSAS AGO. DEL 2016",
+      section_name: "EXPENSAS",
       html: "expenses_show_full"
     },
     GUARD: {
@@ -430,6 +430,28 @@ var app = {
       app.closeMenu();
     });
 
+    var fileTransfer = new FileTransfer();
+    var uri = encodeURI("http://accessin.net/assets/logo-66cca57308200f4f87c5da094148c9a1.png");
+    console.log(window.plugins);
+    fileTransfer.download(
+        uri,
+        cordova.file.dataDirectory + "logo.png",
+        function(entry) {
+            console.log("download complete: " + entry.toURL());
+
+            window.cordova.plugins.FileOpener.openFile(cordova.file.dataDirectory + "logo.png", function(){}, function(){});
+        },
+        function(error) {
+          console.log(error);
+            console.log("download error source " + error.source);
+            console.log("download error target " + error.target);
+            console.log("download error code " + error.code);
+        },
+        true
+    );
+
+    return false;
+
     //app.loadScreen(app.SCREENS.LOGIN);
     if(PrivateData.get('is_login')){
       if(PrivateData.get('current_auth_code')){
@@ -481,7 +503,7 @@ var app = {
   updateConfig: function(callback){
     app.update_config_callback = callback;
 
-    if((new Date()).getTime() - (PrivateData.get('last_config_sync') || 0) > 5000){
+    if((new Date()).getTime() - (PrivateData.get('last_config_sync') || 0) > 1800000){
       app.pageLoading('show');
       console.log('SYNC CONFIG');
       Server.send({

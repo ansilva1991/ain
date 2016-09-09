@@ -3645,6 +3645,7 @@ button.btn.btn-orange:disabled{
   display: block;
   text-align: right;
   margin: 0px;
+  opacity: 0;
 }
 
 .app>.content .page .expenses-show-full .item .row .amount h5{

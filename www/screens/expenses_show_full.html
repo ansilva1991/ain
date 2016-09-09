@@ -1,104 +1,15 @@
 <div class="expenses-show-full">
   <div class="scroll">
-    <div class="category">Sueldos y Jornales</div>
-    <div class="item">
+    <div id="example_category" style="display: none;"></div>
+    <div id="example_item" style="display: none;">
       <div class="row">
         <div class="info">
-          <h4>Estación Club SA</h4>
-          <h5>1° Quincena Julio 2016</h5>
+          <h4 id="provider"></h4>
+          <h5 id="concept"></h5>
         </div>
         <div class="amount">
-          <h6>2016/02/15</h6>
-          <h5>$ 99999.99</h5>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Estación Club SA</h4>
-          <h5>2da Quincena Julio y Mensual De Limpieza</h5>
-        </div>
-        <div class="amount">
-          <h6>2016/02/15</h6>
-          <h5>$ 99999.99</h5>
-        </div>
-      </div>
-    </div>
-    <div class="category">Cargas Sociales</div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>AFIP</h4>
-          <h5>-</h5>
-        </div>
-        <div class="amount">
-          <h6>2016/02/15</h6>
-          <h5>$ 99999.99</h5>
-        </div>
-      </div>
-    </div>
-    <div class="category">Gastos de Admnistración</div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Estación Club SA</h4>
-          <h5>Honorarios Profesionales Administrador Julio 2016</h5>
-        </div>
-        <div class="amount">
-          <h6>2016/02/15</h6>
-          <h5>$ 99999.99</h5>
-        </div>
-      </div>
-    </div>
-    <div class="category">Tasas y Servicios</div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Estación Club SA</h4>
-          <h5>Honorarios Profesionales Administrador Julio 2016</h5>
-        </div>
-        <div class="amount">
-          <h6>2016/02/15</h6>
-          <h5>$ 99999.99</h5>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Estación Club SA</h4>
-          <h5>Honorarios Profesionales Administrador Julio 2016</h5>
-        </div>
-        <div class="amount">
-          <h6>2016/02/15</h6>
-          <h5>$ 99999.99</h5>
-        </div>
-      </div>
-    </div>
-    <div class="category">Mantenimiento y Reparación</div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Estación Club SA</h4>
-          <h5>Honorarios Profesionales Administrador Julio 2016</h5>
-        </div>
-        <div class="amount">
-          <h6>2016/02/15</h6>
-          <h5>$ 99999.99</h5>
-        </div>
-      </div>
-    </div>
-    <div class="category">No Categorizados</div>
-    <div class="item">
-      <div class="row">
-        <div class="info">
-          <h4>Estación Club SA</h4>
-          <h5>Honorarios Profesionales Administrador Julio 2016</h5>
-        </div>
-        <div class="amount">
-          <h6>2016/02/15</h6>
-          <h5>$ 99999.99</h5>
+          <h6># 000</h6>
+          <h5>$ <span id="value"></span></h5>
         </div>
       </div>
     </div>
@@ -110,7 +21,7 @@
           <h4>SubTotal</h4>
         </div>
         <div class="value">
-          <h5>$ 54289.51</h5>
+          <h5>$ <span id="total">-</span></h5>
         </div>
       </div>
     </div>
@@ -120,17 +31,17 @@
           <h4>% de distribución</h4>
         </div>
         <div class="value">
-          <h5>5.324 %</h5>
+          <h5><span id="area_percentage">-</spam> %</h5>
         </div>
       </div>
     </div>
     <div class="item">
       <div class="row">
         <div class="info">
-          <h4>Expensas Ago. del 2016</h4>
+          <h4 id="total_expenses_label"></h4>
         </div>
         <div class="value">
-          <h5>$ 54280.51</h5>
+          <h5>$ <span id="total_expenses">-</span></h5>
         </div>
       </div>
     </div>
@@ -139,14 +50,74 @@
 <script type="text/javascript">
   function c(){
 
-    this.start = function(){
+    this.entry_id;
+    this.callback_get_entry;
+    this.impute_date;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.entry_id = opts.entry_id;
 
       app.liActive('expenses');
-      app.pageLoading('hide');
+
+
+      this.getEntry(function(){
+        app.pageLoading('hide');
+      });
     }
 
+    this.getEntry = function(callback){
+      this.callback_get_entry = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','group_current_accounts','show_expenses_full'],
+        data : {
+          id: this.entry_id
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+
+            for(var i in data.details){
+              var tmpc = $('#example_category').clone().insertBefore('#example_category');
+              tmpc.removeAttr('id');
+              tmpc.addClass('category');
+              tmpc.html(data.details[i].category);
+              tmpc.show();
+
+              for(var k in data.details[i].details){
+                var detail = data.details[i].details[k];
+
+                var tmp = $('#example_item').clone().insertBefore('#example_category');
+                tmp.removeAttr('id');
+                tmp.addClass('item');
+
+                tmp.find('#provider').html(detail.provider);
+                tmp.find('#concept').html(detail.concept);
+                tmp.find('#value').html(detail.value.toFixed(2));
+                tmp.show();
+              }
+            }
+
+            $('#total').html(data.total.toFixed(2));
+            $('#area_percentage').html(data.area_percentage.toFixed(2));
+            $('#total_expenses').html(data.total_expenses.toFixed(2));
+
+            $('#total_expenses_label').html('Expensas ' + Extends.formatDate(new Date(data.real_date + " 00:00:00"),'%mabbr. del %yyyy'));
+            $('.header .section-name').html('Expensas ' + Extends.formatDate(new Date(data.real_date + " 00:00:00"),'%mabbr. del %yyyy'));
+
+            cs.impute_date = new Date(data.impute_date + " 00:00:00");
+            cs.callback_get_entry();
+          }
+        }
+      });
+    };
+
     this.back = function(){
-      app.loadScreen(app.SCREENS.EXPENSES);
+      app.loadScreen(app.SCREENS.EXPENSES,{
+        month: Extends.formatDate(this.impute_date,'%yyyy-%mm')
+      });
     }
 
   }

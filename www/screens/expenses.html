@@ -88,10 +88,6 @@
 
       this.current_month = opts.month || Extends.formatDate(new Date(),'%yyyy-%mm');
 
-      $('.day-scroll .item').tap(function(){
-        app.loadScreen(app.SCREENS.EXPENSES_SHOW_FULL);
-      });
-
       $('.expenses .years .year').tap(function(){
         $('.expenses .years .year').removeClass('selected');
         $('.expenses .months .month').removeClass('selected');
@@ -152,6 +148,19 @@
               tmp.find('#description').html(HelperExpenses.entry_description(entry));
               tmp.find('#real_date').html(Extends.formatDate(new Date(entry.real_date + " 00:00:00"),'%yyyy/%mm/%dd'));
               tmp.find('#value').html(entry.value.toFixed(2));
+
+              tmp.attr('data-id',entry.id);
+
+              if(entry.type == 'GroupCurrentAccountEntryExpenses'){
+                if(entry.expenses_pack.type == 'GroupCurrentAccountExpensesPackFull'){
+                  tmp.tap(function(){
+                    var id = $(this).data('id');
+                    app.loadScreen(app.SCREENS.EXPENSES_SHOW_FULL,{
+                      entry_id: id
+                    })
+                  });
+                }
+              }
 
               tmp.addClass('item');
               tmp.addClass('entry');
