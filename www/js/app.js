@@ -433,13 +433,15 @@ var app = {
     var fileTransfer = new FileTransfer();
     var uri = encodeURI("http://accessin.net/assets/logo-66cca57308200f4f87c5da094148c9a1.png");
     console.log(window.plugins);
+    console.log(cordova.file);
+    console.log(cordova.file.externalDataDirectory);
     fileTransfer.download(
         uri,
-        cordova.file.dataDirectory + "logo.png",
+        cordova.file.externalDataDirectory + "logo.png",
         function(entry) {
             console.log("download complete: " + entry.toURL());
 
-            window.plugins.fileOpener.open(cordova.file.dataDirectory + "logo.png");
+            window.plugins.fileOpener.open(cordova.file.externalDataDirectory + "logo.png");
         },
         function(error) {
           console.log(error);
