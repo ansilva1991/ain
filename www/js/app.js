@@ -439,7 +439,7 @@ var app = {
         function(entry) {
             console.log("download complete: " + entry.toURL());
 
-            window.cordova.plugins.FileOpener.openFile(cordova.file.dataDirectory + "logo.png", function(){}, function(){});
+            window.plugins.fileOpener.open(cordova.file.dataDirectory + "logo.png");
         },
         function(error) {
           console.log(error);
