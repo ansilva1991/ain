@@ -332,6 +332,30 @@ var app = {
       section_name: "EXPENSAS",
       html: "expenses_show_pdf"
     },
+    EXPENSES_SHOW_NOTHING: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      section_name: "EXPENSAS",
+      html: "expenses_show_nothing"
+    },
+    EXPENSES_SHOW_PER_METER: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      section_name: "EXPENSAS",
+      html: "expenses_show_per_meter"
+    },
     GUARD: {
       icon_left: [
       {
@@ -378,7 +402,8 @@ var app = {
         text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
-        }
+        },
+        id: 'submit-button'
       }
       ],
       section_name: "Nuevo Mensaje",
@@ -454,8 +479,8 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.EXPENSES,{
-              month: "2016-03"
+            app.loadScreen(app.SCREENS.EVENTS,{
+              open_in: 0
             });
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
@@ -519,6 +544,8 @@ var app = {
             PrivateData.set('current_client_picture_menu_n',data.client_picture_menu_app_n);
             PrivateData.set('last_config_sync',(new Date()).getTime());
             PrivateData.set('current_person_avatar_last_change',data.person_last_avatar_change);
+            PrivateData.set('current_group_identificator_one',data.current_group_identificator_one);
+            PrivateData.set('current_group_identificator_others',data.current_group_identificator_others);
 
             app.update_config_callback();
           }
@@ -720,6 +747,8 @@ var PrivateData = {
     current_person_avatar: "avjjc",
     current_person_avatar_last_change: "avlcc",
     current_group_identificator: "esjjf",
+    current_group_identificator_one: "esjjo",
+    current_group_identificator_others: "esjot",
     current_client_name: "cvjjf",
     current_client_picture_menu_n: "cbjjf",
     last_config_sync: "lcsyd"

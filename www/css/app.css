@@ -1248,7 +1248,7 @@ button.btn.btn-orange:disabled{
   width: 40px;
   height: 60px;
   float: left;
-  line-height: 65px;
+  line-height: 60px;
   margin-left: 15px;
   font-size: 25px;
 }
@@ -1268,7 +1268,7 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.menu .content .item.active .icon i{
-  color: #555;
+  color: #fff;
 }
 
 /* SCREENS */
@@ -1550,11 +1550,11 @@ button.btn.btn-orange:disabled{
   background-image: url(../img/back_event_place_house.png);
 }
 
-.app>.content .page .list.events.event_places .item.back-sum{
+.app>.content .page .list.events.event_places .item.back-party_room{
   background-image: url(../img/back_event_place_sum.png);
 }
 
-.app>.content .page .list.events.event_places .item.back-tennis-court{
+.app>.content .page .list.events.event_places .item.back-court_tennis{
   background-image: url(../img/back_event_place_tennis_court.png);
 }
 
@@ -2144,6 +2144,13 @@ button.btn.btn-orange:disabled{
   transition: transform 200ms ease;
 }
 
+.app>.content .page .list.guard>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
+
 .app>.content .page .list.guard.messages{
   left: 100%;
 }
@@ -2337,6 +2344,14 @@ button.btn.btn-orange:disabled{
 
 .app>.content .page .guard-message-form .form-horizontal{
   width: 90% !important;
+}
+
+.app>.content .page .guard-message-form .form-horizontal h5{
+  color: #777;
+}
+
+.app>.content .page .guard-message-form .form-horizontal h5 i{
+  color: #ffa400;
 }
 
 .app>.content .page .send-attachment-menu{
@@ -2571,6 +2586,12 @@ button.btn.btn-orange:disabled{
   overflow-x: hidden;
   overflow-y: auto;
   padding-bottom: 20px;
+}
+
+.app>.content .page .authorization-form-family canvas{
+  position: fixed;
+  top: -200px;
+  left: -200px;
 }
 
 .app>.content .page .authorization-form-family .form-horizontal{
@@ -3464,6 +3485,13 @@ button.btn.btn-orange:disabled{
   margin-top: 10px;
 }
 
+.app>.content .page .expenses>.day-scroll .item .label-benefit{
+  background: #ffa400;
+  color: #fff;
+  padding: 2px 5px;
+  font-size: 13px;
+}
+
 .app>.content .page .expenses>.day-scroll .item.balance .row .value h5{
   margin: 0px;
 }
@@ -3745,6 +3773,142 @@ button.btn.btn-orange:disabled{
   width: 30%;
   height: 16px;
   background: #ffa400;
+}
+
+.app>.content .page .expenses-show-nothing{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  bottom: 0px;
+}
+
+.app>.content .page .expenses-show-nothing .scroll{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  bottom: 145px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app>.content .page .expenses-show-nothing .category{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: #eee;
+  color: #777;
+  padding-left: 20px;
+}
+
+.app>.content .page .expenses-show-nothing .item{
+  width: 100%;
+  display: table;
+  padding: 10px 15px;
+  color: #777;
+  border-top: 1px solid #eee;
+}
+
+.app>.content .page .expenses-show-nothing .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-show-nothing .item .row>div{
+  width: 100%;
+  display: table-cell;
+}
+
+.app>.content .page .expenses-show-nothing .item .row>div.amount{
+  width: 100px;
+}
+
+.app>.content .page .expenses-show-nothing .item .row .info h4{
+  margin: 0px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.app>.content .page .expenses-show-nothing .item .row .info h5{
+  margin: 0px;
+}
+
+.app>.content .page .expenses-show-nothing .item .row .amount h6{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+  opacity: 0;
+}
+
+.app>.content .page .expenses-show-nothing .item .row .amount h5{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.app>.content .page .expenses-show-nothing>.totals{
+  width: 100%;
+  position: fixed;
+  height: 105px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item{
+  width: 100%;
+  display: table;
+  color: #fff;
+  padding: 12px 10px;
+  background-color: #ffb124;
+  border: none;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item .row .info{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item .row .info h4{
+  margin: 0px;
+  font-size: 12px;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item .row .value{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item .row .value h5{
+  width: 100px;
+  margin: 0px;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item:first-child{
+  /*background: #ffbb40;*/
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item:first-child h4{
+  font-size: 12px;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item:last-child{
+  padding: 24px 10px;
+  background-color: #ffa400;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item:last-child h4{
+  font-size: 16px !important;
 }
 
 .app>.content .page .welcome{

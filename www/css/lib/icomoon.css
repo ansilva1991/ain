@@ -25,7 +25,6 @@
 }
 
 
-
 .icon-accessin:before {
   content: "\e900";
 }
@@ -62,28 +61,40 @@
 .icon-person-owner-group:before {
   content: "\e90b";
 }
-.icon-authorizations:before {
-  content: "\e90c";
-}
-.icon-communications:before {
-  content: "\e90d";
-}
-.icon-config:before {
-  content: "\e90e";
-}
-.icon-current_accounts:before {
-  content: "\e90f";
-}
-.icon-events:before {
-  content: "\e910";
-}
-.icon-info:before {
-  content: "\e911";
-}
 .icon-sign-out:before {
   content: "\e912";
 }
 .icon-person-add:before {
   content: "\e913";
+}
+.icon-authorizations:before {
+  content: "\e90c";
+}
+.icon-batch:before {
+  content: "\e90d";
+}
+.icon-communications:before {
+  content: "\e90e";
+}
+.icon-config:before {
+  content: "\e90f";
+}
+.icon-department:before {
+  content: "\e910";
+}
+.icon-events:before {
+  content: "\e911";
+}
+.icon-expenses:before {
+  content: "\e914";
+}
+.icon-guard:before {
+  content: "\e915";
+}
+.icon-help:before {
+  content: "\e916";
+}
+.icon-registration_codes:before {
+  content: "\e917";
 }
 

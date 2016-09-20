@@ -10,37 +10,16 @@
   </div>
 </div>
 <div class="list guard messages">
-  <div class="item">
+  <h5 id="none">
+    No se encontraron mensajes enviado a portería.
+  </h5>
+  <div id="example" style="display: none;">
     <div class="row">
       <div class="info">
-        <h4>Silva Agustín</h4>
-        <h5>Lorem ipsum dolor sit amet ipsum dolor sit amet...</h5>
+        <h4 id="person"></h4>
+        <h5 id="content"></h5>
         <div class="checks">
-          <span>2016/03/23 15:23 hrs</span>
-          <i class="fa fa-check"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="row">
-      <div class="info">
-        <h4>Silva Agustín</h4>
-        <h5>Lorem ipsum dolor sit amet ipsum dolor sit amet...</h5>
-        <div class="checks">
-          <span>2016/03/23 15:23 hrs</span>
-          <i class="fa fa-check"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="item view">
-    <div class="row">
-      <div class="info">
-        <h4>Silva Agustín</h4>
-        <h5>Lorem ipsum dolor sit amet ipsum dolor sit amet...</h5>
-        <div class="checks">
-          <span>2016/03/23 15:23 hrs</span>
+          <span id="date"></span>
           <i class="fa fa-check"></i>
         </div>
       </div>
@@ -48,138 +27,22 @@
   </div>
 </div>
 <div class="list guard records">
-  <div class="item">
+  <h5 id="none">
+    No se encontraron registros vinculados a su propiedad.
+  </h5>
+  <div id="example" style="display: none;">
     <div class="row">
       <div class="icon">
-        <span>I</span>
+        <span id="icon"></span>
       </div>
       <div class="info">
         <h4>
-          <span>Silva Agustín</span>
-          <span>Ingreso</span>
+          <span id="person"></span>
+          <span id="type"></span>
         </h4>
         <h5>
-          <span>36582407</span>
-          <span>2016/03/23 15:23 hrs</span>
-        </h5>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="row">
-      <div class="icon">
-        <span>E</span>
-      </div>
-      <div class="info">
-        <h4>
-          <span>Silva Agustín</span>
-          <span>Egreso</span>
-        </h4>
-        <h5>
-          <span>36582407</span>
-          <span>2016/03/23 15:23 hrs</span>
-        </h5>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="row">
-      <div class="icon">
-        <span>E</span>
-      </div>
-      <div class="info">
-        <h4>
-          <span>Giovanella Giuliana</span>
-          <span>Egreso</span>
-        </h4>
-        <h5>
-          <span>36582407</span>
-          <span>2016/03/23 15:23 hrs</span>
-        </h5>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="row">
-      <div class="icon">
-        <span>I</span>
-      </div>
-      <div class="info">
-        <h4>
-          <span>Silva Agustín</span>
-          <span>Ingreso</span>
-        </h4>
-        <h5>
-          <span>36582407</span>
-          <span>2016/03/23 15:23 hrs</span>
-        </h5>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="row">
-      <div class="icon">
-        <span>E</span>
-      </div>
-      <div class="info">
-        <h4>
-          <span>Silva Agustín</span>
-          <span>Egreso</span>
-        </h4>
-        <h5>
-          <span>36582407</span>
-          <span>2016/03/23 15:23 hrs</span>
-        </h5>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="row">
-      <div class="icon">
-        <span>I</span>
-      </div>
-      <div class="info">
-        <h4>
-          <span>Silva Agustín</span>
-          <span>Ingreso</span>
-        </h4>
-        <h5>
-          <span>36582407</span>
-          <span>2016/03/23 15:23 hrs</span>
-        </h5>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="row">
-      <div class="icon">
-        <span>E</span>
-      </div>
-      <div class="info">
-        <h4>
-          <span>Silva Agustín</span>
-          <span>Egreso</span>
-        </h4>
-        <h5>
-          <span>36582407</span>
-          <span>2016/03/23 15:23 hrs</span>
-        </h5>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="row">
-      <div class="icon">
-        <span>E</span>
-      </div>
-      <div class="info">
-        <h4>
-          <span>Silva Agustín</span>
-          <span>Egreso</span>
-        </h4>
-        <h5>
-          <span>36582407</span>
-          <span>2016/03/23 15:23 hrs</span>
+          <span id="real_id"></span>
+          <span id="date"></span>
         </h5>
       </div>
     </div>
@@ -195,8 +58,11 @@
   function c(){
     this.mode = 'list';
     this.selectedItems = [];
+    this.callback_get_data;
 
-    this.start = function(){
+    this.start = function(opts){
+      opts = opts || {};
+
       $('.list.guard.messages').swipeLeft(function(){
         cs.selectTab($('.sub-header .item')[1]);
       });
@@ -205,17 +71,100 @@
         cs.selectTab($('.sub-header .item')[0]);
       });
 
-      $('.guard.messages').tap(function(){
-        app.loadScreen(app.SCREENS.GUARD_MESSAGE_FORM);
-      });
-
-      $('.guard.records .item').tap(function(){
-        app.loadScreen(app.SCREENS.GUARD_RECORD_FORM);
-      });
+      if(opts.open_in){
+        cs.selectTab($('.sub-header .item')[opts.open_in]);
+      }
 
       app.liActive('guard');
-      app.pageLoading('hide');
+
+      this.setData(function(){
+        app.pageLoading('hide');
+      });
     }
+
+    this.setData = function(callback){
+      this.callback_get_data = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','guard','index'],
+        data : {},
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+
+            if(data.guard_records.length > 0){
+
+              $('.guard.records #none').hide();
+
+              for(var i in data.guard_records){
+                var record = data.guard_records[i];
+
+                var tmp = $('.guard.records #example').clone().insertBefore('.guard.records #example');
+                tmp.removeAttr('id');
+                tmp.addClass('item');
+
+                tmp.attr('data-id',record.id);
+                tmp.find('#person').html(record.person);
+                tmp.find('#real_id').html(record.real_id);
+                tmp.find('#date').html(Extends.formatDate(new Date(record.date),'%dd de %mabbr del %yyyy, %hh:%ii') + ' hrs');
+
+                if(record.type == 'GuardRecordIn'){
+                  tmp.find('#icon').html('I');
+                  tmp.find('#type').html('Ingreso');
+                }else{
+                  tmp.find('#icon').html('E');
+                  tmp.find('#type').html('Egreso');
+                }
+
+                tmp.tap(function(){
+                  var id = $(this).data('id');
+
+                  app.loadScreen(app.SCREENS.GUARD_RECORD_FORM,{
+                    record_id: id
+                  });
+                });
+
+                tmp.show();
+              }
+            }
+
+            if(data.messages.length > 0){
+
+              $('.guard.messages #none').hide();
+
+              for(var i in data.messages){
+                var message = data.messages[i];
+
+                var tmp = $('.guard.messages #example').clone().insertBefore('.guard.messages #example');
+                tmp.removeAttr('id');
+                tmp.addClass('item');
+
+                if(message.has_views){
+                  tmp.addClass('view');
+                }
+
+                tmp.attr('data-id',message.id);
+                tmp.find('#person').html(message.person);
+                tmp.find('#content').html(Extends.truncate(message.content, 50));
+                tmp.find('#date').html(Extends.formatDate(new Date(message.date),'%dd de %mabbr del %yyyy, %hh:%ii') + ' hrs');
+
+                tmp.tap(function(){
+                  var id = $(this).data('id');
+
+                  app.loadScreen(app.SCREENS.GUARD_MESSAGE_FORM,{
+                    message_id: id
+                  });
+                });
+
+                tmp.show();
+              }
+            }
+
+            cs.callback_get_data();
+          }
+        }
+      });
+    };
 
     this.selectTab = function(x){
 

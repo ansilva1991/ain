@@ -3,6 +3,7 @@
     <input type="hidden" id="auth_code">
     <div class="input-avatar">
       <img src="img/avatar.png" id="avatar">
+      <canvas width="128" height="128"></canvas>
       <div class="buttons">
         <button type="button" onclick="cs.avatarFrom('gallery');">
           <i class="fa fa-image"></i>
@@ -94,6 +95,8 @@
     this.started = false;
     this.has_access = false;
     this.is_processing = false;
+    this.canvas;
+    this.avatar_change = false;
 
     this.start = function(opts){
       opts = opts || {};
@@ -107,6 +110,8 @@
       Extends.inputCheckBox();
       Extends.inputRadios('.form-radios');
       Extends.name('#name, #last_name');
+
+      this.canvas = $('canvas')[0].getContext("2d");
 
       $('#have_access').change(function(){
 
@@ -234,6 +239,10 @@
         }
       }
 
+      if(this.avatar_change){
+        form.data_avatar = $('canvas')[0].toDataURL("image/jpeg", 0.8).split(',')[1];
+      }
+
       $('#submit-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
       $('#submit-button').removeClass('text');
 
@@ -294,7 +303,15 @@
 
     this.avatarFrom = function(type){
       app.takeFromCamera(function(imageData){
-        $('img#avatar').attr('src',"data:image/jpeg;base64," + imageData);
+        var img = new Image();
+        img.onload = function(){
+          $('img#avatar').attr('src',this.src);
+          cs.canvas.drawImage(this,0,0,this.width,this.height,0,0,128,128);
+          cs.avatar_change = true;
+        };
+        img.src = "data:image/jpeg;base64," + imageData;
+
+
       },function(errorMessage){
       },{
         quality: 50,

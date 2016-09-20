@@ -146,7 +146,14 @@
 
               tmp.find('#type').html(HelperExpenses.entry_type(entry));
               tmp.find('#description').html(HelperExpenses.entry_description(entry));
-              tmp.find('#real_date').html(Extends.formatDate(new Date(entry.real_date + " 00:00:00"),'%yyyy/%mm/%dd'));
+
+              if(entry.benefit){
+                tmp.find('#real_date').html("<span class='label-benefit'>BONIFICADO</span>");
+
+              }else{
+                tmp.find('#real_date').html(Extends.formatDate(new Date(entry.real_date + " 00:00:00"),'%yyyy/%mm/%dd'));
+              }
+
               tmp.find('#value').html(entry.value.toFixed(2));
 
               tmp.attr('data-id',entry.id);
@@ -165,6 +172,24 @@
                   tmp.tap(function(){
                     var id = $(this).data('id');
                     app.loadScreen(app.SCREENS.EXPENSES_SHOW_PDF,{
+                      entry_id: id
+                    })
+                  });
+                }
+
+                if(entry.expenses_pack.type == 'GroupCurrentAccountExpensesPackNothing'){
+                  tmp.tap(function(){
+                    var id = $(this).data('id');
+                    app.loadScreen(app.SCREENS.EXPENSES_SHOW_NOTHING,{
+                      entry_id: id
+                    })
+                  });
+                }
+
+                if(entry.expenses_pack.type == 'GroupCurrentAccountExpensesPackPerMeter'){
+                  tmp.tap(function(){
+                    var id = $(this).data('id');
+                    app.loadScreen(app.SCREENS.EXPENSES_SHOW_PER_METER,{
                       entry_id: id
                     })
                   });

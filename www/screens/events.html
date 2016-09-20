@@ -10,17 +10,8 @@
   </div>
 </div>
 <div class="list events event_places">
-  <div class="item back-house">
-    <h4>Mi Lote</h4>
-  </div>
-  <div class="item back-sum">
-    <h4>SUM</h4>
-  </div>
-  <div class="item back-tennis-court">
-    <h4>Cancha de Tennis N° 1</h4>
-  </div>
-  <div class="item back-tennis-court">
-    <h4>Cancha de Tennis N° 2</h4>
+  <div id="example" class="item" style="display: none;">
+    <h4 id="name"></h4>
   </div>
 </div>
 <div class="list events guest_lists">
@@ -68,8 +59,11 @@
   function c(){
     this.mode = 'list';
     this.selectedItems = [];
+    this.callback_get_info;
 
-    this.start = function(){
+    this.start = function(opts){
+      opts = opts || {};
+
       $('.list.events.event_places').swipeLeft(function(){
         cs.selectTab($('.sub-header .item')[1]);
       });
@@ -94,9 +88,49 @@
           app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY);
       });
 
+      if(opts.open_in){
+        cs.selectTab($('.sub-header .item')[opts.open_in]);
+      }
+
       app.liActive('events');
-      app.pageLoading('hide');
+
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      });
     }
+
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','events','index'],
+        data : {},
+        callback : function(data, success){
+          if(success){
+            console.log(data);
+
+            for(var i in data.event_places){
+              var event_place = data.event_places[i];
+              var tmp = $('.event_places #example').clone().insertBefore('.event_places #example');
+              tmp.removeAttr('id');
+
+              if(event_place.in_house){
+                tmp.addClass('back-house');
+                tmp.find('#name').html('Mi ' + PrivateData.get('current_group_identificator_one'));
+              }else{
+                tmp.addClass('back-' + event_place.type);
+                tmp.find('#name').html(event_place.name);
+              }
+
+              tmp.show();
+            }
+
+            cs.callback_get_info();
+          }
+        }
+      });
+
+    };
 
     this.selectItem = function(id){
       var i = this.selectedItems.indexOf(id);

@@ -67,7 +67,9 @@ var Extends = {
       mm : ((date.getMonth() + 1) / 10).toFixed(1).replace('.',''),
       dd : (date.getDate() / 10).toFixed(1).replace('.',''),
       mabbr : months_name_abbr[(date.getMonth() + 1)],
-      mname : months_name[(date.getMonth() + 1)]
+      mname : months_name[(date.getMonth() + 1)],
+      hh: ((date.getHours() + 1) / 10).toFixed(1).replace('.',''),
+      ii: ((date.getMinutes() + 1) / 10).toFixed(1).replace('.','')
     };
 
     for(var i in units){
@@ -110,5 +112,12 @@ var Extends = {
       }
       $(this).val(txt_new.join(" "));
     });
+  },
+  truncate : function(t,n){
+    if(t.length > n){
+      return t.substr(0,n) + '...';
+    }else{
+      return t;
+    }
   }
 }
