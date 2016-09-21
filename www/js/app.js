@@ -190,7 +190,8 @@ var app = {
         text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
-        }
+        },
+        id: 'submit-button'
       }
       ],
       section_name: "Lista de invitados",
@@ -479,9 +480,7 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.EVENTS,{
-              open_in: 0
-            });
+            app.loadScreen(app.SCREENS.EVENTS);
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
@@ -599,6 +598,7 @@ var app = {
   windowResize: function(){},
   loadScreen: function(x_screen,opts){
     console.log('loadScreen: ' + x_screen.html);
+    console.log('loadScreen(opts): ' + JSON.stringify(opts|| {}));
     app.load_screen_opts = opts;
     app.windowResize = function(){};
     $('.header .icon_end').remove();

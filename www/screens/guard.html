@@ -1,4 +1,4 @@
-<div class="sub-header col-2">
+<div class="sub-header col-2 insta-move">
   <div class="item active" data-item="0" onclick="cs.selectTab(this);">
     REGISTROS
   </div>
@@ -9,7 +9,7 @@
     <div class="pointer"></div>
   </div>
 </div>
-<div class="list guard messages">
+<div class="list guard messages insta-move">
   <h5 id="none">
     No se encontraron mensajes enviado a portería.
   </h5>
@@ -26,7 +26,7 @@
     </div>
   </div>
 </div>
-<div class="list guard records">
+<div class="list guard records insta-move">
   <h5 id="none">
     No se encontraron registros vinculados a su propiedad.
   </h5>
@@ -63,12 +63,12 @@
     this.start = function(opts){
       opts = opts || {};
 
-      $('.list.guard.messages').swipeLeft(function(){
-        cs.selectTab($('.sub-header .item')[1]);
+      $('.list.guard.messages').swipeRight(function(){
+        cs.selectTab($('.sub-header .item')[0]);
       });
 
-      $('.list.guard.records').swipeRight(function(){
-        cs.selectTab($('.sub-header .item')[0]);
+      $('.list.guard.records').swipeLeft(function(){
+        cs.selectTab($('.sub-header .item')[1]);
       });
 
       if(opts.open_in){
@@ -78,6 +78,7 @@
       app.liActive('guard');
 
       this.setData(function(){
+        $('.insta-move').removeClass('insta-move');
         app.pageLoading('hide');
       });
     }

@@ -1,4 +1,4 @@
-<div class="sub-header col-2">
+<div class="sub-header col-2 insta-move">
   <div class="item active" data-item="0" onclick="cs.selectTab(this);">
     LUGARES
   </div>
@@ -9,33 +9,24 @@
     <div class="pointer"></div>
   </div>
 </div>
-<div class="list events event_places">
+<div class="list events event_places insta-move">
   <div id="example" class="item" style="display: none;">
     <h4 id="name"></h4>
   </div>
 </div>
-<div class="list events guest_lists">
-  <div class="item" data-id="4">
+<div class="list events guest_lists insta-move">
+  <h5 id="none">
+    No se encontraron listas de invitados.
+  </h5>
+  <div  id="example" class="item" style="display: none;">
     <div class="row">
       <div class="icon">
         <span class="icon-people"></span>
         <i class="fa fa-check"></i>
       </div>
       <div class="info">
-        <h4>Facultad</h4>
-        <h5>24 invitados</h5>
-      </div>
-    </div>
-  </div>
-  <div class="item" data-id="5">
-    <div class="row">
-      <div class="icon">
-        <span class="icon-people"></span>
-        <i class="fa fa-check"></i>
-      </div>
-      <div class="info">
-        <h4>Trabajo</h4>
-        <h5>5 invitados</h5>
+        <h4 id="name"></h4>
+        <h5 id="guests"><span></span> invitados</h5>
       </div>
     </div>
   </div>
@@ -72,18 +63,6 @@
         cs.selectTab($('.sub-header .item')[0]);
       });
 
-      $('.events.guest_lists .item').longTap(function(){
-        cs.selectItem($(this).data('id'));
-      });
-
-      $('.events.guest_lists .item').tap(function(){
-        if(cs.mode == 'select'){
-          cs.selectItem($(this).data('id'));
-        }else if(cs.mode == 'list'){
-          app.loadScreen(app.SCREENS.EVENT_GUEST_LIST_FORM);
-        }
-      });
-
       $('.events.event_places .item').tap(function(){
           app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY);
       });
@@ -95,6 +74,7 @@
       app.liActive('events');
 
       this.getInfo(function(){
+        $('.insta-move').removeClass('insta-move');
         app.pageLoading('hide');
       });
     }
@@ -113,6 +93,7 @@
               var event_place = data.event_places[i];
               var tmp = $('.event_places #example').clone().insertBefore('.event_places #example');
               tmp.removeAttr('id');
+              tmp.attr('data-id', event_place.id);
 
               if(event_place.in_house){
                 tmp.addClass('back-house');
@@ -123,6 +104,39 @@
               }
 
               tmp.show();
+            }
+
+            if(data.guest_lists.length > 0){
+
+              $('.guest_lists #none').hide();
+
+              for(var i in data.guest_lists){
+                var guest_list = data.guest_lists[i];
+                var tmp = $('.guest_lists #example').clone().insertBefore('.guest_lists #example');
+                tmp.removeAttr('id');
+
+                tmp.attr('data-id', guest_list.id);
+                tmp.find('#name').html(guest_list.name);
+                tmp.find('#guests span').html(guest_list.guests);
+
+                tmp.tap(function(){
+                  if(cs.mode == 'select'){
+                    cs.selectItem($(this).data('id'));
+                  }else if(cs.mode == 'list'){
+                    var id = $(this).data('id');
+
+                    app.loadScreen(app.SCREENS.EVENT_GUEST_LIST_FORM,{
+                      list_id: id
+                    });
+                  }
+                });
+
+                tmp.longTap(function(){
+                  cs.selectItem($(this).data('id'));
+                });
+
+                tmp.show();
+              }
             }
 
             cs.callback_get_info();
@@ -166,8 +180,34 @@
     };
 
     this.confirmErased = function(){
-      Confirm.open("¿Estas seguro que deseas eliminar los elementos seleccionados?",function(){
-        cs.desSelectAll();
+
+      Confirm.open({
+        title: "Eliminar",
+        msg: "¿Estas seguro que deseas eliminar los elementos seleccionados?",
+        success_button: "Continuar",
+        cancel_button: "Cancelar",
+        callback_success: function(){
+          app.pageLoading('show');
+
+          Server.send({
+            route : [PrivateData.get('current_server_portal'),'app','events','destroy_guest_lists'],
+            data : {
+              ids: cs.selectedItems
+            },
+            callback : function(data, success){
+              if(success){
+                app.loadScreen(app.SCREENS.EVENTS,{
+                  open_in: 1
+                });
+              }else{
+                app.pageLoading('hide');
+                Alert.open('Lo sentimos','Ocurrío un error al eliminar, intenta nuevamente por favor.','Aceptar');
+              }
+            }
+          });
+
+          cs.desSelectAll();
+        }
       });
     }
 
@@ -175,6 +215,12 @@
       this.desSelectAll();
 
       var item = $(x).data('item');
+
+      $('.new-event-guest-lists').hide();
+      if(item == 1){
+        $('.new-event-guest-lists').show();
+      }
+
       $('.sub-header .item').removeClass('active');
       $('.sub-header .item[data-item="' + item + '"]').addClass('active');
       $('.sub-header .line .pointer').css({

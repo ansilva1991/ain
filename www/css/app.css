@@ -1316,6 +1316,13 @@ button.btn.btn-orange:disabled{
 
 .app>.content .page .sub-header.col-2 .item, .app>.content .page .sub-header.col-2 .line .pointer{
   width: 50%;
+}
+
+.app>.content .page .sub-header.col-3 .item, .app>.content .page .sub-header.col-3 .line .pointer{
+  width: 33.3333333333333333333%;
+}
+
+.app>.content .page .sub-header .item, .app>.content .page .sub-header .line .pointer{
   -webkit-transition: -webkit-transform 400ms ease;
   -moz-transition: -moz-transform 400ms ease;
   -ms-transition: -ms-transform 400ms ease;
@@ -1323,13 +1330,12 @@ button.btn.btn-orange:disabled{
   transition: transform 400ms ease;
 }
 
-.app>.content .page .sub-header.col-3 .item, .app>.content .page .sub-header.col-3 .line .pointer{
-  width: 33.3333333333333333333%;
-  -webkit-transition: -webkit-transform 400ms ease;
-  -moz-transition: -moz-transform 400ms ease;
-  -ms-transition: -ms-transform 400ms ease;
-  -o-transition: -o-transform 400ms ease;
-  transition: transform 400ms ease;
+.app>.content .page .sub-header.insta-move .item, .app>.content .page .sub-header .line .pointer{
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 
 .app>.content .page .list{
@@ -1530,6 +1536,21 @@ button.btn.btn-orange:disabled{
   transition: transform 200ms ease;
 }
 
+.app>.content .page .list.events.insta-move{
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.app>.content .page .list.events>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
+
 .app>.content .page .list.events.event_places{
   left: 0px;
 }
@@ -1683,6 +1704,12 @@ button.btn.btn-orange:disabled{
   right: 0px;
   left: 0px;
   overflow: auto;
+}
+
+.app>.content .page .event-guest-list-form form>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
 }
 
 .app>.content .page .event-guest-list-form .form-horizontal{
@@ -2142,6 +2169,14 @@ button.btn.btn-orange:disabled{
   -ms-transition: -ms-transform 200ms ease;
   -o-transition: -o-transform 200ms ease;
   transition: transform 200ms ease;
+}
+
+.app>.content .page .list.guard.insta-move{
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 
 .app>.content .page .list.guard>h5{
