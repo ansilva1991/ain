@@ -1872,6 +1872,7 @@ button.btn.btn-orange:disabled{
 .app>.content .page .event-calendar-day>.day-scroll .day{
   width: 100%;
   display: table;
+  margin-top: 10px;
 }
 
 .app>.content .page .event-calendar-day>.day-scroll .day .block{
@@ -1881,7 +1882,7 @@ button.btn.btn-orange:disabled{
 
 .app>.content .page .event-calendar-day>.day-scroll .day .block .label{
   display: table-cell;
-  vertical-align: bottom;
+  vertical-align: top;
 }
 
 .app>.content .page .event-calendar-day>.day-scroll .day .block .label h5{

@@ -480,7 +480,9 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.EVENTS);
+            app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
+              event_place_id: 2
+            });
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }

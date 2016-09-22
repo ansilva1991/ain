@@ -29,95 +29,18 @@
     <div class="number"></div>
   </div>
   <div class="day-scroll">
+    <div id="example" class="event" style="display: none;">
+      <span id="person_full_name"></span>
+      <div class="info">
+        <span class="hour" id="interval"></span>
+        <span class="group" id="group_identificator"></span>
+      </div>
+    </div>
+    <div id="block_example" class="block" style="display: none;">
+      <div class="label"><h5 id="hour"></h5></div>
+      <div class="content"></div>
+    </div>
     <div class="day">
-      <div class="block">
-        <div class="label"><h5>0:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>1:00</h5></div>
-        <div class="content">
-          <div class="event other">
-            Perez Jorge
-            <div class="info">
-              <span class="hour">0:00 - 1:00</span>
-              <span class="group">A 25</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>2:00</h5></div>
-        <div class="content">
-          <div class="event other">
-            Perez Jorge
-            <div class="info">
-              <span class="hour">1:00 - 2:00</span>
-              <span class="group">A 25</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>3:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>4:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>5:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>6:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>7:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>8:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>9:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>10:00</h5></div>
-        <div class="content">
-          <div class="event">
-            Silva Agustín
-            <div class="info">
-              <span class="hour">10:00 - 11:00</span>
-              <span class="group">A 23</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>11:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>12:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>13:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>14:00</h5></div>
-        <div class="content"></div>
-      </div>
-      <div class="block">
-        <div class="label"><h5>15:00</h5></div>
-        <div class="content"></div>
-      </div>
     </div>
   </div>
 </div>
@@ -130,8 +53,14 @@
     this.scrolling_days_number = true;
     this.scroll_init_day_integer = (new Date()).getTime() - ((new Date()).getDay() * 86400000);
     this.selected_day = new Date(new Date().getTime() + 86400000);
+    this.callback_get_info;
+    this.event_place_id;
+    this.is_processing = false;
 
-    this.start = function(){
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.event_place_id = opts.event_place_id;
 
       $('.event').tap(function(){
         app.loadScreen(app.SCREENS.EVENT_FORM);
@@ -139,6 +68,14 @@
 
       $('.event-calendar-day .years .year').tap(function(){
         var year = parseInt($(this).data('year'));
+        cs.goTo(year + "-01-07 00:00:00");
+      });
+
+      $('.event-calendar-day .months .month').tap(function(){
+        var year = parseInt($('.year.selected').data('year'));
+        var month = ((parseInt($(this).data('month')) + 1)/10).toFixed(1).replace('.','');
+        console.log(month);
+        cs.goTo(year + "-" + month + "-07 00:00:00");
       });
 
       $('.event-calendar-day').append(this.createDOMWeek(new Date(this.scroll_init_day_integer - 604800000),{
@@ -161,8 +98,61 @@
       },100);
 
       app.liActive('events');
-      app.pageLoading('hide');
+
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      });
     }
+
+    this.getInfo = function(callback){
+      this.is_processing = true;
+      this.callback_get_info = callback;
+
+      $('.day-scroll .day .block').remove();
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','events','get_day'],
+        data : {
+          event_place_id: this.event_place_id,
+          date: Extends.formatDate(this.selected_day,'%yyyy-%mm-%dd')
+        },
+        callback : function(data, success){
+          console.log(data);
+
+          for(var i in data.event_place.interval_hours){
+            var hour = data.event_place.interval_hours[i];
+
+            var tmp = $('#block_example').clone().appendTo('.day-scroll .day');
+            tmp.removeAttr('id');
+
+            tmp.attr('data-hour',hour);
+            tmp.find('#hour').html(hour);
+            tmp.show();
+          }
+
+          for(var hour in data.events){
+            for(var i in data.events[hour]){
+              var event = data.events[hour][i];
+              var tmp = $('#example').clone().appendTo('.day-scroll .day .block[data-hour="' + hour + '"] .content');
+              tmp.removeAttr('id');
+
+              if(!event.its_me){
+                tmp.addClass('other');
+              }
+
+              tmp.find('#person_full_name').html(event.person);
+              tmp.find('#group_identificator').html(event.group_identificator);
+              tmp.find('#interval').html(event.init_hour + " - " + event.end_hour);
+
+              tmp.show();
+            }
+          }
+
+          cs.is_processing = false;
+          cs.callback_get_info();
+        }
+      });
+    };
 
     this.back = function(){
       app.loadScreen(app.SCREENS.EVENTS);
@@ -183,6 +173,7 @@
       var days_number = $('#days_number_example').clone();
       days_number.data('init_day',init_day.getTime());
       days_number.removeAttr('id');
+      days_number.addClass('not_example');
       var content = days_number.find('.content');
       var days = this.getWeek(init_day);
 
@@ -205,11 +196,28 @@
         if(Extends.formatDate(this.selected_day,'%yyyy-%mm-%dd') == days[i].time){
           tmp.addClass('selected');
         }
+
+        tmp.attr('data-date',days[i].time);
+        tmp.tap(function(){
+          var date = $(this).data('date');
+          cs.selected_day = new Date(date + " 00:00:00");
+
+          $('.days-number .day').removeClass('selected');
+          $(this).addClass('selected');
+
+          cs.closeCalendar();
+
+          app.pageLoading('show');
+          cs.getInfo(function(){
+            app.pageLoading('hide');
+          });
+        });
       }
 
       days_number.css({ 'display' : 'block' });
       days_number.addClass('end_days_number');
       days_number.scroll(function(){
+        console.log('scroll');
         var scroll = $(this).scrollLeft();
         if(!cs.scrolling_days_number){
           cs.scrolling_days_number = true;
@@ -274,9 +282,38 @@
       return days;
     }
 
+    this.goTo = function(day){
+      if(!this.scrolling_days_number){
+        var scroll_init_day_integer = (new Date(day)).getTime() - ((new Date(day)).getDay() * 86400000) + 604800000;
+        console.log(scroll_init_day_integer);
+        $('.days-number.end_days_number').remove();
+
+        $('.event-calendar-day').append(this.createDOMWeek(new Date(scroll_init_day_integer - 604800000),{
+          addClass: 'right'
+        }));
+        $('.event-calendar-day').append(this.createDOMWeek(new Date(scroll_init_day_integer),{
+          addClass: 'center'
+        }));
+        $('.event-calendar-day').append(this.createDOMWeek(new Date(scroll_init_day_integer + 604800000),{
+          addClass: 'left'
+        }));
+
+        $('.end_days_number.center').scrollLeft(window.innerWidth * 0.01);
+
+        this.updateCalendarSelected();
+      }
+    }
+
     this.toggleCalendar = function(){
+      if(this.is_processing){ return false; }
+
       this.updateCalendarSelected();
       $('.event-calendar-day').toggleClass('open-calendar');
+    }
+
+    this.closeCalendar = function(){
+      this.updateCalendarSelected();
+      $('.event-calendar-day').removeClass('open-calendar');
     }
 
   }

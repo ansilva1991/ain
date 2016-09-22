@@ -103,6 +103,14 @@
                 tmp.find('#name').html(event_place.name);
               }
 
+              tmp.tap(function(){
+                var id = $(this).data('id');
+
+                app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
+                  event_place_id: id
+                });
+              });
+
               tmp.show();
             }
 
