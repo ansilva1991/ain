@@ -1,24 +1,24 @@
 <div class="event-form">
   <form class="form-horizontal">
     <div class="form-group">
-      <label for="name">Lugar</label>
-      <input type="text" class="form-control" value="Cancha de Tennis N° 1" readonly>
+      <label for="event_place">Lugar</label>
+      <input type="text" class="form-control" readonly id="event_place">
     </div>
     <div class="form-group">
-      <label for="name">Fecha</label>
-      <input type="text" class="form-control" value="23 de Julio del 2016" readonly>
+      <label for="date">Fecha</label>
+      <input type="text" class="form-control" id="date" readonly>
     </div>
     <div class="form-group">
-      <label for="name">Horario</label>
-      <input type="text" class="form-control" value="16:00 - 17:00 hrs" readonly>
+      <label for="hour">Horario</label>
+      <input type="text" class="form-control" id="hour" readonly>
     </div>
     <div class="form-group">
       <label for="name">Nombre</label>
-      <input type="text" class="form-control" value="">
+      <input type="text" class="form-control" name="name" id="name">
     </div>
     <div class="form-group">
-      <label for="name">Permitir ingresar a los invitados</label>
-      <select class="form-control">
+      <label for="allow_guests_previous_minutes">Permitir ingresar a los invitados</label>
+      <select class="form-control" name="allow_guests_previous_minutes" id="allow_guests_previous_minutes">
         <option value="15">15 Minutos antes de la fecha de inicio del evento</option>
         <option value="30">30 Minutos antes de la fecha de inicio del evento</option>
         <option selected="selected" value="60">1 Hora antes de la fecha de inicio del evento</option>
@@ -30,33 +30,15 @@
       </select>
     </div>
     <legend>INVITADOS</legend>
-    <div class="guest" data-id="3">
-      <h4>Silva Agustin</h4>
-      <h5>36582407</h5>
-    </div>
-    <div class="guest" data-id="4">
-      <h4>Silva Agustin</h4>
-      <h5>DNI no ingresado</h5>
-    </div>
-    <div class="guest" data-id="45">
-      <h4>Silva Agustin</h4>
-      <h5>36582407</h5>
-    </div>
-    <div class="guest" data-id="46">
-      <h4>Silva Agustin</h4>
-      <h5>DNI no ingresado</h5>
-    </div>
-    <div class="guest" data-id="47">
-      <h4>Silva Agustin</h4>
-      <h5>36582407</h5>
-    </div>
-    <div class="guest" data-id="48">
-      <h4>Silva Agustin</h4>
-      <h5>DNI no ingresado</h5>
-    </div>
-    <div class="guest" data-id="49">
-      <h4>Silva Agustin</h4>
-      <h5>36582407</h5>
+    <h5 id="none">Sin invitados agregados a la lista.</h5>
+    <div id="example" style="display: none;">
+      <input type="hidden" id="name">
+      <input type="hidden" id="last_name">
+      <input type="hidden" id="real_id">
+      <input type="hidden" id="id">
+      <input type="hidden" id="erased">
+      <h4 id="label_full_name"></h4>
+      <h5 id="label_real_id"></h5>
     </div>
   </form>
   <div class="new-guests-buttons">
@@ -90,11 +72,20 @@
 </div>
 
 <script type="text/javascript">
-  function c(){
+  function c(opts){
     this.mode = 'list';
     this.selectedItems = [];
+    this.event_place_id;
+    this.date;
+    this.init_hour;
 
-    this.start = function(){
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.event_place_id = opts.event_place_id;
+      this.date = opts.date;
+      this.init_hour = opts.init_hour;
+      this.event_id = opts.event_id;
 
       $(window).resize(function(){
         Extends.scrollToInputFocus('.event-form');
@@ -114,19 +105,178 @@
 
       app.liActive('events');
       app.pageLoading('hide');
+
+      if(opts.list){
+        this.processList(opts.list);
+        app.pageLoading('hide');
+      }else{
+        this.getInfo(function(){
+          app.pageLoading('hide');
+        })
+      }
+    }
+
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','events','edit_event'],
+        data : {
+          event_place_id: this.event_place_id,
+          date: this.date,
+          init_hour: this.init_hour,
+          event_id: this.event_id
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            cs.processList(data.list);
+            cs.callback_get_info();
+          }
+        }
+      });
+    };
+
+    this.processList = function(list){
+      this.event_id = list.event_id;
+      this.event_place_name = list.event_place_name;
+      this.event_place_id = list.event_place_id;
+      this.date = list.date;
+      this.init_hour = list.init_hour;
+      this.end_hour = list.end_hour;
+
+      $('#event_place').val(list.event_place_name);
+      $('#date').val(Extends.formatDate(new Date(list.date + " 00:00:00"),'%dd de %mname del %yyyy'));
+      $('#hour').val(list.init_hour + " - " + list.end_hour + " hrs");
+      $('#allow_guests_previous_minutes').val(list.allow_guests_previous_minutes || "15");
+
+      $('#name').val(list.name || "");
+
+      if(list.guests_attributes && Object.keys(list.guests_attributes).length > 0){
+
+        $('h5#none').hide();
+
+        for(var i in list.guests_attributes){
+          var guest = list.guests_attributes[i];
+          var tmp = $('#example').clone().insertBefore('#example');
+          tmp.removeAttr('id');
+          tmp.addClass('guest');
+          tmp.attr('data-id', i);
+
+          tmp.find('#name').val(guest.name || "");
+          tmp.find('#last_name').val(guest.last_name || "");
+          tmp.find('#real_id').val(guest.real_id || "");
+          tmp.find('#id').val(guest.id || "");
+          tmp.find('#erased').val(guest.erased || false);
+
+          tmp.find('#label_full_name').html(guest.last_name + " " + guest.name);
+          tmp.find('#label_real_id').html(guest.real_id || "No ingresado");
+
+          if(!guest.erased){
+            tmp.longTap(function(){
+              cs.selectItem($(this).data('id'));
+            });
+
+            tmp.tap(function(){
+              if(cs.mode == 'select'){
+                cs.selectItem($(this).data('id'));
+              }else if(cs.mode == 'list'){
+                app.loadScreen(app.SCREENS.EVENT_GUEST_FORM,{
+                  list: cs.getList(),
+                  i: $(this).data('id')
+                });
+              }
+            });
+
+            tmp.show();
+          }
+        }
+      }
+    };
+
+    this.getList = function(){
+      var list = {
+        event_id: this.event_id,
+        event_place_name: this.event_place_name,
+        event_place_id: this.event_place_id,
+        date: this.date,
+        init_hour: this.init_hour,
+        end_hour: this.end_hour,
+        name: $('#name').val(),
+        allow_guests_previous_minutes: $('#allow_guests_previous_minutes').val(),
+        guests_attributes: {}
+      }
+
+      $('.guest').each(function(){
+        var i = $(this).data('id');
+        var id = $(this).find('#id').val();
+        var name = $(this).find('#name').val();
+        var last_name = $(this).find('#last_name').val();
+        var real_id = $(this).find('#real_id').val();
+        var erased = $(this).find('#erased').val() == "true";
+
+        list.guests_attributes[i] = {
+          name : name,
+          last_name : last_name,
+          real_id : real_id,
+          id : id,
+          erased : erased
+        }
+      });
+
+      return list;
     }
 
     this.submit = function(){
-      app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY);
+       if(this.is_processing){ return false; }
+
+      var form = this.getList();
+      console.log(form);
+
+      if(form.name.length == 0){
+        Alert.open('Nombre','Debe ingresar un nombre válido para continuar. Por ejemplo: "Cumple Ani"','Aceptar');
+        return false;
+      }
+
+      $('#submit-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('#submit-button').removeClass('text');
+
+      this.is_processing = true;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','events',this.event_id ? 'update_event' : 'create_event'],
+        data : {
+          event: form,
+          event_id: this.event_id
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            if(data.event){
+              app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
+                event_place_id: cs.event_place_id,
+                selected_day: new Date(cs.date + ' 00:00:00')
+              });
+            }else{
+              Alert.open('Fecha del evento','La fecha ingresada se encuentra ocupada por otro evento.','Aceptar');
+            }
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+          }
+
+          cs.is_processing = false;
+          $('#submit-button').html("Listo <i class='fa fa-check'></i>");
+          $('#submit-button').addClass('text');
+        }
+      });
     };
 
     this.back = function(){
-      app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY);
+      app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
+        event_place_id: this.event_place_id,
+        selected_day: new Date(this.date + ' 00:00:00')
+      });
     };
-
-    this.newEventGuest = function(){
-      app.loadScreen(app.SCREENS.EVENT_GUEST_FORM);
-    }
 
     this.selectItem = function(id){
       var i = this.selectedItems.indexOf(id);
@@ -164,9 +314,16 @@
     };
 
     this.confirmErased = function(){
-      Confirm.open("¿Estas seguro que deseas eliminar los elementos seleccionados?",function(){
-        cs.desSelectAll();
-      });
+      for(var i in this.selectedItems){
+        if ($('.guest[data-id="' + this.selectedItems[i] + '"] #id').val() != ""){
+          $('.guest[data-id="' + this.selectedItems[i] + '"] #erased').val('true');
+          $('.guest[data-id="' + this.selectedItems[i] + '"]').hide();
+        }else{
+          $('.guest[data-id="' + this.selectedItems[i] + '"]').remove();
+        }
+      }
+
+      cs.desSelectAll();
     }
 
     this.openMenuNew = function(){
@@ -178,11 +335,17 @@
     };
 
     this.newGuest = function(){
-      app.loadScreen(app.SCREENS.EVENT_GUEST_FORM);
-    };
+      app.loadScreen(app.SCREENS.EVENT_GUEST_FORM,{
+        list: this.getList(),
+        back_to: app.SCREENS.EVENT_FORM
+      });
+    }
 
     this.importFromList = function(){
-      app.loadScreen(app.SCREENS.IMPORT_GUESTS_LIST);
+      app.loadScreen(app.SCREENS.IMPORT_GUESTS_LIST,{
+        list: this.getList(),
+        back_to: app.SCREENS.EVENT_FORM
+      });
     };
 
   }

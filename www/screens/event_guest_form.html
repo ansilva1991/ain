@@ -19,11 +19,13 @@
   function c(){
     this.list = {};
     this.i;
+    this.back_to;
 
     this.start = function(opts){
 
       this.list = opts.list;
       this.i = opts.i;
+      this.back_to = opts.back_to;
 
       if(this.i){
         var guest = this.list.guests_attributes[this.i];
@@ -81,13 +83,13 @@
         id : this.guest_id
       }
 
-      app.loadScreen(app.SCREENS.EVENT_GUEST_LIST_FORM,{
+      app.loadScreen(this.back_to,{
         list: this.list
       });
     };
 
     this.back = function(){
-      app.loadScreen(app.SCREENS.EVENT_GUEST_LIST_FORM,{
+      app.loadScreen(this.back_to,{
         list: this.list
       });
     };

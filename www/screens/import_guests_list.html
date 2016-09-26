@@ -1,47 +1,91 @@
 <div class="import-guests-list">
 	<div class="guests-lists">
-		<div class="item" data-id="4">
-	    <div class="row">
-	      <div class="icon">
-	        <span class="icon-people"></span>
-	        <i class="fa fa-check"></i>
-	      </div>
-	      <div class="info">
-	        <h4>Facultad</h4>
-	        <h5>24 invitados</h5>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="item" data-id="4">
-	    <div class="row">
-	      <div class="icon">
-	        <span class="icon-people"></span>
-	        <i class="fa fa-check"></i>
-	      </div>
-	      <div class="info">
-	        <h4>Amigos</h4>
-	        <h5>12 invitados</h5>
-	      </div>
-	    </div>
-	  </div>
-  </div>
+    <h5 id="none">
+      No se encontraron listas de invitados.
+    </h5>
+    <div id="example" style="display: none;">
+     <div class="row">
+       <div class="icon">
+         <span class="icon-people"></span>
+         <i class="fa fa-check"></i>
+       </div>
+       <div class="info">
+         <h4 id="name"></h4>
+         <h5 id="guests"><span></span> invitados</h5>
+       </div>
+     </div>
+   </div>
+ </div>
 </div>
 
 <script type="text/javascript">
   function c(){
+    this.callback_get_info;
+    this.list;
+    this.back_to;
 
-    this.start = function(){
+    this.start = function(opts){
+      opts = opts || {};
 
-    	$('.guests-lists .item').tap(function(){
-    		app.loadScreen(app.SCREENS.IMPORT_GUESTS_LIST_GUESTS);
-    	});
+      this.list = opts.list;
+      this.back_to = opts.back_to;
 
-    	app.liActive('events');
-      app.pageLoading('hide');
+      app.liActive('events');
+
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      });
     }
 
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','events','get_event_lists'],
+        data : {},
+        callback : function(data, success){
+          if(success){
+            console.log(data);
+
+            if(data.guest_lists.length > 0){
+
+              $('.guests-lists #none').hide();
+
+              for(var i in data.guest_lists){
+                var guest_list = data.guest_lists[i];
+                var tmp = $('.guests-lists #example').clone().insertBefore('.guests-lists #example');
+                tmp.removeAttr('id');
+                tmp.addClass('item');
+
+                tmp.attr('data-id', guest_list.id);
+                tmp.find('#name').html(guest_list.name);
+                tmp.find('#guests span').html(guest_list.guests);
+
+                tmp.tap(function(){
+                  var id = $(this).data('id');
+
+                  app.loadScreen(app.SCREENS.IMPORT_GUESTS_LIST_GUESTS,{
+                    list_id: id,
+                    list: cs.list,
+                    back_to: cs.back_to
+                  });
+                });
+
+                tmp.show();
+              }
+            }
+
+            cs.callback_get_info();
+          }
+        }
+      });
+
+    };
+
     this.back = function(){
-    	app.loadScreen(app.SCREENS.EVENT_FORM);
+    	app.loadScreen(this.back_to,{
+        list: this.list
+      });
     }
 
   };

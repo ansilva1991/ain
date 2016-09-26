@@ -53,7 +53,7 @@
       if(opts.list){
         this.processList(opts.list);
         app.pageLoading('hide');
-      }else{      
+      }else{
         this.getInfo(function(){
           app.pageLoading('hide');
         })
@@ -98,7 +98,7 @@
       $('#submit-button').removeClass('text');
 
       this.is_processing = true;
-      
+
       Server.send({
         route : [PrivateData.get('current_server_portal'),'app','events',this.list_id ? 'update_guest_list' : 'create_guest_list'],
         data : {
@@ -129,7 +129,8 @@
 
     this.newEventGuest = function(){
       app.loadScreen(app.SCREENS.EVENT_GUEST_FORM,{
-        list: this.getList()
+        list: this.getList(),
+        back_to: app.SCREENS.EVENT_GUEST_LIST_FORM
       });
     }
 

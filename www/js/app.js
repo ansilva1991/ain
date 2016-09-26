@@ -251,7 +251,8 @@ var app = {
         text: "Listo <i class='fa fa-check'></i>",
         func: function(){
           cs.submit();
-        }
+        },
+        id: 'submit-button'
       }
       ],
       section_name: "Evento",
@@ -764,7 +765,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.1.35") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.0.108") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];

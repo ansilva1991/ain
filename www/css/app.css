@@ -1553,6 +1553,7 @@ button.btn.btn-orange:disabled{
 
 .app>.content .page .list.events.event_places{
   left: 0px;
+  background: #222;
 }
 
 .app>.content .page .list.events.guest_lists{
@@ -1879,6 +1880,10 @@ button.btn.btn-orange:disabled{
   height: 60px;
   display: table-row;
 }
+.app>.content .page .event-calendar-day>.day-scroll .day .block.disabled .content{
+  background: #eee;
+  border-color: #ccc;
+}
 
 .app>.content .page .event-calendar-day>.day-scroll .day .block .label{
   display: table-cell;
@@ -2018,8 +2023,16 @@ button.btn.btn-orange:disabled{
   overflow: auto;
 }
 
+.app>.content .page .event-form form>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
+
 .app>.content .page .event-form .form-horizontal{
   width: 90% !important;
+  padding-bottom: 100px;
 }
 
 .app>.content .page .event-form .guest{
@@ -3368,6 +3381,13 @@ button.btn.btn-orange:disabled{
   right: 0px;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.app>.content .page .import-guests-list .guests-lists>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  padding: 20px;
 }
 
 .app>.content .page .import-guests-list .guests-lists .item{

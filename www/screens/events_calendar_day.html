@@ -52,7 +52,7 @@
 
     this.scrolling_days_number = true;
     this.scroll_init_day_integer = (new Date()).getTime() - ((new Date()).getDay() * 86400000);
-    this.selected_day = new Date(new Date().getTime() + 86400000);
+    this.selected_day = new Date();
     this.callback_get_info;
     this.event_place_id;
     this.is_processing = false;
@@ -61,6 +61,7 @@
       opts = opts || {};
 
       this.event_place_id = opts.event_place_id;
+      this.selected_day = opts.selected_day || this.selected_day;
 
       $('.event').tap(function(){
         app.loadScreen(app.SCREENS.EVENT_FORM);
@@ -118,12 +119,18 @@
         },
         callback : function(data, success){
           console.log(data);
+          var init_calendar = new Date(data.event_place.init_calendar);
 
           for(var i in data.event_place.interval_hours){
             var hour = data.event_place.interval_hours[i];
+            var date_block = new Date(Extends.formatDate(cs.selected_day,'%yyyy-%mm-%dd ') + hour + ":00" );
+
 
             var tmp = $('#block_example').clone().appendTo('.day-scroll .day');
             tmp.removeAttr('id');
+            if(date_block < init_calendar){
+              tmp.addClass('disabled');
+            }
 
             tmp.attr('data-hour',hour);
             tmp.find('#hour').html(hour);
@@ -138,8 +145,17 @@
 
               if(!event.its_me){
                 tmp.addClass('other');
+              }else{
+              tmp.tap(function(){
+                var id = $(this).data('id');
+
+                app.loadScreen(app.SCREENS.EVENT_FORM,{
+                  event_id: id
+                });
+              });
               }
 
+              tmp.attr('data-id',event.id);
               tmp.find('#person_full_name').html(event.person);
               tmp.find('#group_identificator').html(event.group_identificator);
               tmp.find('#interval').html(event.init_hour + " - " + event.end_hour);
@@ -147,6 +163,19 @@
               tmp.show();
             }
           }
+
+          $('.day-scroll .day>.block .content').tap(function(){
+
+            if($(this).html() == "" && !$(this).parent().hasClass('disabled')){
+              var init_hour = $(this).parent().data('hour');
+
+              app.loadScreen(app.SCREENS.EVENT_FORM,{
+                event_place_id: cs.event_place_id,
+                date: Extends.formatDate(cs.selected_day,'%yyyy-%mm-%dd'),
+                init_hour: init_hour
+              });
+            }
+          });
 
           cs.is_processing = false;
           cs.callback_get_info();
