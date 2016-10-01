@@ -1,5 +1,5 @@
 var Server = {
-  ACCESSIN_URL: 'http://192.168.0.108:4000',
+  ACCESSIN_URL: 'http://test.accessin.net:4000',
   last_ajax: undefined,
   getMyServer: function(){
     return localStorage.my_server;
