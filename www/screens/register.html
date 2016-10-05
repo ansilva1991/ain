@@ -146,7 +146,7 @@
       this.is_processing = true;
 
       Server.send({
-        route : [Server.ACCESSIN_URL,'app','register'],
+        route : [Server.serverUrl(),'app','register'],
         data : {
           code: this.init_opts.code,
           country_server_id: this.init_opts.country_server_id,

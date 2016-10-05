@@ -1,0 +1,169 @@
+<div class="form-communication">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="title">TÍTULO</label>
+      <input type="text" name="title" id="title" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="communication_reason_id">MOTIVO</label>
+      <select name="communication_reason_id" id="communication_reason_id" class="form-control">
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="comment">MENSAJE</label>
+      <textarea class="form-control" rows="10" name="comment" id="comment"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="communication_reason_id">ADJUNTO</label>
+      <div class="file" id="attachment_file">
+        <input type="hidden" id="attachment" name="attachment">
+        <div class="options">
+          <div class="option">
+            <button type="button" onclick="cs.attachmentFrom('gallery');">
+              <i class="fa fa-photo"></i>
+            </button>
+          </div>
+          <div class="option">
+            <button type="button" onclick="cs.attachmentFrom('camera');">
+              <i class="fa fa-camera"></i>
+            </button>
+          </div>
+        </div>
+        <div class="attachment">
+          <div class="box"></div>
+          <button type="button" onclick="cs.changeAttachment();" class="btn btn-orange">CAMBIAR ADJUNTO</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.is_processing = false;
+    this.callback_get_info;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.form-communication');
+      });
+
+      Extends.name('#title');
+
+      app.liActive('communications');
+
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      });
+    }
+
+    this.getInfo = function(callback){
+
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','communications','get_reasons'],
+        data : {},
+        callback : function(data, success){
+          console.log(data);
+
+          for(var i in data.reasons){
+            var tmp = $('<option></option>').appendTo('#communication_reason_id');
+            tmp.attr('value',data.reasons[i][1]);
+            tmp.html(data.reasons[i][0]);
+          }
+
+          cs.callback_get_info();
+        }
+      });
+    };
+
+    this.submit = function(){
+      if(this.is_processing){ return false; }
+      var form = Extends.serializeForm('.form-communication form');
+
+      console.log(form);
+
+      if(form.title.length == 0){
+        Alert.open('Título','Debe ingresar un título válido para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.comment.length == 0){
+        Alert.open('Mensaje','Debe ingresar un mensaje válido para continuar.','Aceptar');
+        return false;
+      }
+
+      $('#submit-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('#submit-button').removeClass('text');
+
+      this.is_processing = true;
+
+      Server.upload({
+        route : [PrivateData.get('current_server_portal'),'app','communications','create'],
+        data : {
+          communication: {
+            title: form.title,
+            communication_reason_id: form.communication_reason_id,
+            comments_attributes: {
+              0: {
+                description: form.comment
+              }
+            }
+          }
+        },
+        file_key : 'file_attachment',
+        file_name : 'image.jpg',
+        file_uri : form.attachment,
+        callback : function(data, success){
+          if(success){
+            if(data.communication){
+              app.loadScreen(app.SCREENS.VIEW_COMMUNICATION,{
+                communication_id: data.communication
+              });
+            }else{
+              Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+            }
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+          }
+
+          cs.is_processing = false;
+          $('#submit-button').html("Listo <i class='fa fa-check'></i>");
+          $('#submit-button').addClass('text');
+        }
+      });
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.COMMUNICATIONS);
+    };
+
+    this.attachmentFrom = function(source){
+      app.takeFromCamera(function(imageURI){
+        $('#image_d').attr('src',imageURI);
+        $('#attachment_file .options').hide();
+        $('#attachment_file .attachment').show();
+        $('#attachment_file .attachment .box').css({
+          'background-image' : 'url(' + imageURI + ')'
+        });
+        $('#attachment_file input').val(imageURI);
+      },function(){
+        Alert.open('Lo Sentimos','Ocurrío un error al intentar leer el archivo, por favor intenta nuevamente.','Aceptar');
+      },{
+        quality: 90,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: source == 'gallery' ? Camera.PictureSourceType.PHOTOLIBRARY : Camera.PictureSourceType.CAMERA
+      });
+    };
+
+    this.changeAttachment = function(){
+      $('#attachment_file .options').show();
+      $('#attachment_file .attachment').hide();
+      $('#attachment_file input').val('');
+    }
+
+  }
+</script>

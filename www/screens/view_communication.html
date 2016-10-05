@@ -1,69 +1,25 @@
 <div class="chat-list">
-  <button class="btn btn-block btn-semitransparent">
+  <!--<button class="btn btn-block btn-semitransparent">
     Cargar anteriores
-  </button>
-  <div class="chat-message">
-    <div class="arrow-right"></div>
-    <div class="content">
-      <h4><b>Silva Agustin</b> (A 05)</h4>
-      <h5>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </h5>
-      <h6>
-        <i class="fa fa-check"></i>
-        <span>2016-02-13 23:24 hrs</span>
-      </h6>
-    </div>
-  </div>
-  <div class="chat-message left">
+  </button>-->
+  <div id="example_message" style="display:none;">
     <div class="arrow-right"></div>
     <div class="arrow-left"></div>
     <div class="content">
-      <h4><b>Silva Agustin</b> (Administrador)</h4>
-      <h5>
-        Lorem ipsum dol
-      </h5>
-      <h6>
-        <i class="fa fa-check"></i>
-        <span>2016-02-13 23:24 hrs</span>
-      </h6>
-    </div>
-  </div>
-  <div class="chat-message">
-    <div class="arrow-right"></div>
-    <div class="content">
-      <h4><b>Silva Agustin</b> (A 05)</h4>
-      <h5>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      </h5>
+      <h4><b id="person_full_name"></b> (<span id="person_label"></span>)</h4>
+      <h5 id="message"></h5>
       <div class="attachment img">
-        <img src="img/communication_attachment_example_thumb.png">
+        <img src="">
+      </div>
+      <div class="attachment loading-bar">
+        <div class="box">
+          <div class="in"></div>
+        </div>
+        <div class="label"></div>
       </div>
       <h6>
+        <span id="hour"></span>
         <i class="fa fa-check"></i>
-        <span>2016-02-13 23:24 hrs</span>
-      </h6>
-    </div>
-  </div>
-  <div class="chat-message">
-    <div class="arrow-right"></div>
-    <div class="content">
-      <h4><b>Silva Agustin</b> (A 05)</h4>
-      <h5>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      </h5>
-      <div class="attachment file">
-        <i class="fa fa-file-text"></i>
-        <h5>Documento 234234 Reservas</h5>
-      </div>
-      <h6>
-        <i class="fa fa-check"></i>
-        <span>2016-02-13 23:24 hrs</span>
       </h6>
     </div>
   </div>
@@ -72,7 +28,9 @@
   <div class="content-parent">
     <div class="content">
       <div clas="input">
-        <input type="text" placeholder="Escribir mensaje">
+        <form id="form_send_comment">
+          <input type="text" id="comment" placeholder="Escribir mensaje">
+        </form>
       </div>
       <div class="button">
         <button type="button" onclick="cs.openAttachmentMenu();">
@@ -105,12 +63,113 @@
 <script type="text/javascript">
   function c(){
 
-    this.start = function(){
+    this.callback_get_communication_info;
+    this.is_processing = false;
+    this.communication_id;
 
-      $('.chat-list').scrollTop(99999999);
+    this.start = function(opts){
+
+      this.communication_id = opts.communication_id;
+
+      $('#form_send_comment').submit(function(){
+        cs.sendMessage();
+
+        return false;
+      });
 
       app.liActive('communications');
-      app.pageLoading('hide');
+
+      this.getCommunicationInfo(function(){
+        $('.chat-list').scrollTop(99999999);
+        app.pageLoading('hide');
+      });
+    }
+
+    this.getCommunicationInfo = function(callback){
+      this.callback_get_communication_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','communications','show'],
+        data : {
+          id: this.communication_id
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+
+            $('.header .section-name').html(Extends.truncate(data.communication.title,30));
+
+            for(var i in data.communication.comments){
+              var comment = data.communication.comments[i];
+
+              var tmp = $('#example_message').clone().insertBefore('#example_message');
+              tmp.removeAttr('id');
+              tmp.addClass('chat-message');
+
+              tmp.find('#person_full_name').html(comment.person);
+              tmp.find('#person_label').html(comment.group || "Administrador");
+              tmp.find('#message').html(comment.description);
+              tmp.find('#hour').html(Extends.formatDate(new Date(comment.date),'%yyyy/%mm/%dd %hh:%ii'));
+              tmp.attr('data-id',comment.id);
+
+              if(!comment.my){
+                tmp.addClass('left');
+              }
+
+              if(comment.attachment){
+                tmp.find('.attachment.img img').attr('src',PrivateData.get('current_server_portal') + comment.attachment.thumb);
+                tmp.find('.attachment.img img').attr('data-uri', comment.attachment.url);
+                tmp.find('.attachment.img img').tap(function(){
+                  cs.downloadAttachment(this);
+                });
+              }else{
+                tmp.find('.attachment').remove();
+              }
+
+              tmp.show();
+            }
+
+            cs.callback_get_communication_info();
+          }
+        }
+      });
+    };
+
+    this.sendMessage = function(){
+      var comment = $('#form_send_comment input#comment').val();
+
+      if(comment.length == 0){
+        Alert.open('Mensaje','Debe ingresar un mensaje válido para continuar.','Aceptar');
+        return false;
+      }
+
+      app.pageLoading('show');
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','communications','add_simple_comment'],
+        data : {
+          communication_id: this.communication_id,
+          comment: comment
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            if(data.comment){
+              app.loadScreen(app.SCREENS.VIEW_COMMUNICATION,{
+                communication_id: cs.communication_id
+              });
+
+              return false;
+            }else{
+              Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+            }
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+          }
+
+          app.pageLoading('hide');
+        }
+      });
     }
 
     this.back = function(){
@@ -145,6 +204,38 @@
         sourceType:  Camera.PictureSourceType.PHOTOLIBRARY,
         destinationType: Camera.DestinationType.DATA_URL,
       });
+    }
+
+    this.downloadAttachment = function(x){
+      var uri = $(x).data('uri');
+      var id = $(x).parents('.chat-message').data('id');
+
+      var file = 'communication_comment_attachment_' + id + uri.split('/').slice(-1)[0].split('?')[0].split('.')[1];
+
+      $(x).parents('.chat-message').find('.attachment.loading-bar').show();
+
+      Server.download({
+        from: PrivateData.get('current_server_portal') + uri,
+        to: file,
+        progress: function(n){
+          console.log(this);
+          this.extra_data.loading_bar.find('.in').css({
+            width: (n.loaded*100/n.total) + '%'
+          });
+
+          this.extra_data.loading_bar.find('.label').html((n.loaded*100/n.total).toFixed(1) + '%');
+        },
+        success: function(){
+          app.openFile(this.file_name);
+        },
+        error: function(er){
+          console.log(er);
+        },
+        extra_data: {
+          loading_bar: $(x).parents('.chat-message').find('.attachment.loading-bar'),
+          file_name: file
+        }
+      })
     }
 
     this.communicationInfo = function(){

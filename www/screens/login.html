@@ -117,7 +117,7 @@
       PrivateData.set('is_login',false);
 
       Server.send({
-        route : [Server.ACCESSIN_URL,'app','login'],
+        route : [Server.serverUrl(),'app','login'],
         data : {
           login: form,
           device: {
@@ -161,7 +161,7 @@
       this.is_processing = true;
 
       Server.send({
-        route : [Server.ACCESSIN_URL,'app','request_reset_password'],
+        route : [Server.serverUrl(),'app','request_reset_password'],
         data : form,
         callback : function(data, success){
           if(success){
@@ -189,7 +189,7 @@
       this.is_processing = true;
 
       Server.send({
-        route : [Server.ACCESSIN_URL,'app','register_code'],
+        route : [Server.serverUrl(),'app','register_code'],
         data : form,
         callback : function(data, success){
           if(success){

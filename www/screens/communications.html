@@ -1,98 +1,18 @@
 <div class="list communications normal">
-  <div class="item pending" data-id="0" data-type="normal">
-    <div class="row">
-      <div class="icon-column">
-        <div class="icon">
-          <i class="fa fa-clock-o"></i>
-        </div>
-      </div>
-      <div class="info">
-        <h5>Giuliana Giovanella (A 05)</h5>
-        <h4>Lorem ipsum dolor sit amet...</h4>
-      </div>
-    </div>
+</div>
+
+<div id="example" style="display: none;">
+  <img src="img/avatar.png">
+  <i class="fa fa-check"></i>
+  <div class="info">
+    <h5 id="name"></h5>
+    <h4 id="title"></h4>
   </div>
-  <div class="item pending" data-id="0" data-type="normal">
-    <div class="row">
-      <div class="icon-column">
-        <div class="icon">
-          <i class="fa fa-clock-o"></i>
-        </div>
-      </div>
-      <div class="info">
-        <h5>Giuliana Giovanella (A 05)</h5>
-        <h4>Lorem ipsum dolor sit amet...</h4>
-      </div>
-    </div>
+  <div class="status">
+    <i class="fa fa-eye-slash"></i>
+    <i class="fa fa-clock-o"></i>
+    <i class="fa fa-check"></i>
   </div>
-  <div class="item pending view" data-id="0" data-type="normal">
-    <div class="row">
-      <div class="icon-column">
-        <div class="icon">
-          <i class="fa fa-clock-o"></i>
-        </div>
-      </div>
-      <div class="info">
-        <h5>Giuliana Giovanella (A 05)</h5>
-        <h4>Lorem ipsum dolor sit amet...</h4>
-      </div>
-    </div>
-  </div>
-  <div class="item pending view" data-id="0" data-type="normal">
-    <div class="row">
-      <div class="icon-column">
-        <div class="icon">
-          <i class="fa fa-clock-o"></i>
-        </div>
-      </div>
-      <div class="info">
-        <h5>Giuliana Giovanella (A 05)</h5>
-        <h4>Lorem ipsum dolor sit amet...</h4>
-      </div>
-    </div>
-  </div>
-  <div class="item success view" data-id="0" data-type="normal">
-    <div class="row">
-      <div class="icon-column">
-        <div class="icon">
-          <i class="fa fa-clock-o"></i>
-        </div>
-      </div>
-      <div class="info">
-        <h5>Giuliana Giovanella (A 05)</h5>
-        <h4>Lorem ipsum dolor sit amet...</h4>
-      </div>
-    </div>
-  </div>
-  <div class="item success view" data-id="0" data-type="normal">
-    <div class="row">
-      <div class="icon-column">
-        <div class="icon">
-          <i class="fa fa-clock-o"></i>
-        </div>
-      </div>
-      <div class="info">
-        <h5>Giuliana Giovanella (A 05)</h5>
-        <h4>Lorem ipsum dolor sit amet...</h4>
-      </div>
-    </div>
-  </div>
-  <div class="item success view" data-id="0" data-type="normal">
-    <div class="row">
-      <div class="icon-column">
-        <div class="icon">
-          <i class="fa fa-clock-o"></i>
-        </div>
-      </div>
-      <div class="info">
-        <h5>Giuliana Giovanella (A 05)</h5>
-        <h4>Lorem ipsum dolor sit amet...</h4>
-      </div>
-    </div>
-  </div>
-  <button class="btn btn-block">
-    Cargar anteriores
-  </button>
 </div>
 
 <div class="header-actions">
@@ -105,28 +25,64 @@
   </div>
 </div>
 
+<div class="new-communication-button">
+  <button class="new" onclick="cs.newCommunication();">
+    <i class="fa fa-plus"></i>
+  </button>
+</div>
+
 <script type="text/javascript">
   function c(){
     this.mode = 'list';
     this.selectedItems = [];
+    this.callback_get_data;
 
     this.start = function(){
-      $('.communications .item').longTap(function(){
-        cs.selectItem($(this).data('id'));
-      });
-
-      $('.communications .item').tap(function(){
-        if(cs.mode == 'select'){
-          cs.selectItem($(this).data('id'));
-        }else if(cs.mode == 'list'){
-          if($(this).data('type') == 'normal'){
-            app.loadScreen(app.SCREENS.VIEW_COMMUNICATION);
-          }
-        }
-      });
 
       app.liActive('communications');
-      app.pageLoading('hide');
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      });
+    }
+
+    this.getInfo = function(callback){
+      this.callback_get_data = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','communications','index'],
+        data : {},
+        callback : function(data, success){
+          console.log(data);
+
+          for(var i in data.communications){
+            var communication = data.communications[i];
+            var tmp = $('#example').clone().appendTo('.list.communications');
+            tmp.removeAttr('id');
+            tmp.addClass('item');
+
+            tmp.find('.status').addClass(communication.status);
+            tmp.find('#name').html(communication.last_comment_person);
+            tmp.find('#title').html(Extends.truncate(communication.title,30));
+            tmp.attr('data-id', communication.id);
+
+            tmp.tap(function(){
+              var id = $(this).data('id');
+
+              app.loadScreen(app.SCREENS.VIEW_COMMUNICATION,{
+                communication_id: id
+              });
+            });
+
+            if(communication.last_comment_person_avatar){
+              tmp.find('img').attr('src',communication.last_comment_person_avatar);
+            }
+
+            tmp.show();
+          }
+
+          cs.callback_get_data();
+        }
+      });
     }
 
     this.selectItem = function(id){
@@ -199,16 +155,8 @@
       $('.new-authorization-buttons').removeClass('open');
     };
 
-    this.newFamily = function(){
-      app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY);
-    };
-
-    this.newVisit = function(){
-      app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_VISIT);
-    };
-
-    this.newEmployee = function(){
-      app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
+    this.newCommunication = function(){
+      app.loadScreen(app.SCREENS.FORM_COMMUNICATION);
     };
 
   }

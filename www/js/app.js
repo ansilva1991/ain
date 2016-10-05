@@ -1,5 +1,6 @@
 var app = {
   VERSION: "1.0",
+  ENV: "development",
   SCREENS: {
     LOGIN: {
       html: "login",
@@ -20,6 +21,10 @@ var app = {
     WELCOME: {
       html: "welcome",
       header: false
+    },
+    DASHBOARD: {
+      html: "dashboard",
+      section_name: "<span class='dashboard-icon icon-people-bubble'></span><span class='dashboard-text'>Inicio</span>"
     },
     AUTHORIZATIONS: {
       icon_left: [
@@ -155,6 +160,27 @@ var app = {
       ],
       section_name: "Comunicación",
       html: "info_communication"
+    },
+    FORM_COMMUNICATION: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      icon_right: [
+      {
+        text: "Listo <i class='fa fa-check'></i>",
+        func: function(){
+          cs.submit();
+        },
+        id: 'submit-button'
+      }
+      ],
+      section_name: "NUEVA COMUNICACIÓN",
+      html: "form_communication"
     },
     EVENTS: {
       icon_left: [
@@ -481,8 +507,8 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
-              event_place_id: 2
+            app.loadScreen(app.SCREENS.VIEW_COMMUNICATION,{
+              communication_id: 15
             });
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
@@ -496,7 +522,7 @@ var app = {
     }
   },
   onNotificationOpenedCallback: function(jsonData){
-    alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
   },
   updateMenuInfo: function(){
     if(PrivateData.get('current_person_avatar')){
@@ -684,6 +710,9 @@ var app = {
       app.current_screen.start(app.load_screen_opts);
     });
 
+  },
+  in_dev : function(){
+    return app.ENV == 'development';
   }
 };
 
@@ -765,7 +794,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.0.108") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.0.110") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];

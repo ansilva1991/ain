@@ -1115,6 +1115,21 @@ button.btn.btn-orange:disabled{
   text-transform: uppercase;
 }
 
+.app>.header .section-name .dashboard-icon{
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  float: left;
+  text-align: center;
+  line-height: 60px;
+}
+
+.app>.header .section-name .dashboard-text{
+  height: 60px;
+  float: left;
+  margin-left: 10px;
+}
+
 .app>.content{
   width: 100%;
   position: fixed;
@@ -1456,49 +1471,67 @@ button.btn.btn-orange:disabled{
 .app>.content .page .list.communications .item{
   width: 100%;
   height: 80px;
-  border-top: 1px solid #cfcfcf;
-  display: table;
+  border-top: 1px solid #e8e8e8;
+  color: #777;
+  position: relative;
 }
-
-.app>.content .page .list.communications .item .row{
-  display: table-row;
-}
-
 
 .app>.content .page .list.communications .item:active{
   background-color: #eee;
 }
 
-.app>.content .page .list.communications .item .icon-column{
-  display: table-cell;
-  width: 60px;
-  padding-left: 10px;
-  vertical-align: middle;
-}
-
-.app>.content .page .list.communications .item .icon{
+.app>.content .page .list.communications .item img{
   width: 60px;
   height: 60px;
   border-radius: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+  border: 1px solid #eee;
+}
+
+.app>.content .page .list.communications .item .status{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 46px;
+  left: 46px;
+  border-radius: 50%;
+  border: 2px #ccc solid;
+  background: #fff;
+  font-size: 16px;
   text-align: center;
-  font-size: 40px;
-  line-height: 60px;
+  line-height: 22px;
+}
+
+.app>.content .page .list.communications .item .status>i{
+  display: none;
+}
+
+.app>.content .page .list.communications .item .status.pending>i.fa-eye-slash{
+  display: inline;
+  color: #777;
+}
+
+.app>.content .page .list.communications .item .status.in_progress>i.fa-clock-o{
+  display: inline;
+  color: #777;
+}
+
+.app>.content .page .list.communications .item .status.resolved{
+  background: #ffa400;
+  border-color: #ffa400;
+}
+
+.app>.content .page .list.communications .item .status.resolved>i.fa-check{
+  display: inline;
   color: #fff;
-}
-
-.app>.content .page .list.communications .item.pending .icon{
-  background-color: #ccc;
-}
-
-.app>.content .page .list.communications .item.success .icon{
-  background-color: #eee;
 }
 
 .app>.content .page .list.communications .item .info{
   height: 80px;
-  padding-left: 10px;
-  display: table-cell;
-  vertical-align: middle;
+  float: left;
+  margin-left: 10px;
 }
 
 .app>.content .page .list.communications .item .info h5{
@@ -1506,25 +1539,60 @@ button.btn.btn-orange:disabled{
   padding: 0px;
   margin: 0px;
   line-height: 20px;
-  color: #000;
+  margin-top: 17px;
+  color: #777;
 }
 
 .app>.content .page .list.communications .item .info h4{
-  width: 90%;
   font-size: 14px;
   padding: 0px;
   margin: 0px;
   line-height: 20px;
-  color: #555;
-  margin-top: 5px;
+  margin-top: 2px;
+  color: #777;
 }
 
-.app>.content .page .list.communications .item.view .info h5,.app>.content .page .list.communications .item.view .info h4{
-  color: #bbb;
+.app>.content .page .list.communications .item>i.fa.fa-check{
+  display: none;
 }
 
 .app>.content .page .list.communications .item.selected{
-  background-color: #ff0000;
+  background-color: #f3f3f3;
+}
+
+.app>.content .page .list.communications .item.selected img{
+  display: none;
+}
+
+.app>.content .page .list.communications .item.selected i.fa.fa-check{
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+  border: 1px solid #ffa400;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  background: #ffa400;
+  font-size: 30px;
+}
+
+.app>.content .page .new-communication-button button.new{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  text-align: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
 
 .app>.content .page .list.events{
@@ -2466,7 +2534,7 @@ button.btn.btn-orange:disabled{
   width: 50px;
   height: 50px;
   border-radius: 50px;
-  background: #709BF1;
+  background: #ffa400;
   text-align: center;
   vertical-align: middle;
   font-size: 24px;
@@ -2843,6 +2911,49 @@ button.btn.btn-orange:disabled{
   float: left;
 }
 
+.app>.content .page .form-horizontal .form-group>.file{
+  width: 100%;
+}
+
+.app>.content .page .form-horizontal .form-group>.file .options{
+  width: 100%;
+  overflow: hidden;
+}
+
+.app>.content .page .form-horizontal .form-group>.file .option{
+  width: 50%;
+  text-align: center;
+  float: left;
+}
+
+.app>.content .page .form-horizontal .form-group>.file .option button{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  background: #ffa400;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 40px;
+}
+
+.app>.content .page .form-horizontal .form-group>.file .attachment{
+  width: 100%;
+  display: none;
+}
+
+.app>.content .page .form-horizontal .form-group>.file .attachment .box{
+  width: 200px;
+  height: 145px;
+  background: #eee;
+  background-image: url(../img/communications_back.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
 .app>.content .page .form-horizontal legend{
   margin-top: 40px;
   margin-bottom: 20px;
@@ -3027,7 +3138,7 @@ button.btn.btn-orange:disabled{
   left: 0px;
   right: 0px;
   background-color: #eee;
-  background-image: url(../img/communications_back.jpg);
+  /*background-image: url(../img/communications_back.jpg);*/
   background-size: cover;
   overflow-x: hidden;
   overflow-y: auto;
@@ -3037,7 +3148,7 @@ button.btn.btn-orange:disabled{
 .app>.content .page .chat-input{
   width: 100%;
   height: 60px;
-  background-color: #ccc;
+  background-color: #ffa400;
   position: fixed;
   bottom: 0px;
   padding: 7px;
@@ -3065,13 +3176,21 @@ button.btn.btn-orange:disabled{
   display: table-cell;
 }
 
-.app>.content .page .chat-input input{
+.app>.content .page .chat-input input#comment{
   width: 100%;
   background-color: #fff;
   border: none;
   height: 45px;
   padding-left: 10px;
   font-size: 18px;
+  outline: none;
+}
+
+.app>.content .page .chat-input input#submit{
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0px;
 }
 
 .app>.content .page .chat-input button{
@@ -3080,7 +3199,7 @@ button.btn.btn-orange:disabled{
   background-color: #fff;
   border: none;
   font-size: 20px;
-  color: #bbb;
+  color: #ffa400;
 }
 
 .app>.content .page .chat-list .chat-message{
@@ -3146,6 +3265,7 @@ button.btn.btn-orange:disabled{
   padding: 0px;
   margin: 0px;
   margin-bottom: 10px;
+  color: #777;
 }
 
 .app>.content .page .chat-list .chat-message>.content>h6{
@@ -3155,7 +3275,7 @@ button.btn.btn-orange:disabled{
   padding: 0px;
   margin: 0px;
   margin-top: 10px;
-  color: #555;
+  color: #777;
 }
 
 .app>.content .page .chat-list .chat-message>.content .attachment.img{
@@ -3165,12 +3285,12 @@ button.btn.btn-orange:disabled{
 
 .app>.content .page .chat-list .chat-message>.content .attachment.img img{
   overflow: hidden;
-  border: 1px solid #555;
+  border: 1px solid #ccc;
 }
 
 .app>.content .page .chat-list .chat-message>.content .attachment.file{
   width: 100%;
-  background: rgba(0,0,0,0.08);
+  background: rgba(0,0,0,0.03);
   padding: 10px;
   overflow: hidden;
   margin-top: 5px;
@@ -3181,7 +3301,7 @@ button.btn.btn-orange:disabled{
   display: block;
   float: left;
   font-size: 25px;
-  color: #3EA0F9;
+  color: #ffa400;
 }
 
 .app>.content .page .chat-list .chat-message>.content .attachment.file h5{
@@ -3194,8 +3314,47 @@ button.btn.btn-orange:disabled{
   line-height: 25px;
 }
 
+.app>.content .page .chat-list .chat-message>.content .attachment.loading-bar{
+  width: 100%;
+  display: none;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.loading-bar .box{
+  width: 100%;
+  height: 10px;
+  background: #eee;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.loading-bar .box .in{
+  width: 0%;
+  height: 10px;
+  background: #ffa400;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.loading-bar .label{
+  color: #777;
+  font-size: 12px;
+}
+
 .app>.content .page .chat-list .chat-message>.content .attachment:active{
   background: rgba(0,0,0,0.1);
+}
+
+.app>.content .page .form-communication{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+.app>.content .page .form-communication .form-horizontal{
+  width: 90% !important;
 }
 
 .app>.content .page .info_communication{
@@ -4158,4 +4317,23 @@ button.btn.btn-orange:disabled{
 
 .app>.content .page .welcome .controls .row .points .point.active{
   background: #ffa400;
+}
+
+.app>.content .page .dashboard .item{
+  width: 95%;
+  height: 60px;
+  background: #ffa400;
+  margin-left: 2.5%;
+  margin-top: 10px;
+}
+
+.app>.content .page .dashboard .item .icon{
+  width: 60px;
+  height: 60px;
+  color: #fff;
+  float: right;
+}
+
+.app>.content .page .dashboard .item .text{
+  float: left;
 }

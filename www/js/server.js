@@ -1,6 +1,9 @@
 var Server = {
   ACCESSIN_URL: 'http://test.accessin.net:4000',
+  DEV_URL: 'http://192.168.0.110:4000',
   last_ajax: undefined,
+  upload_success_callback: function(){},
+  upload_error_callback: function(){},
   getMyServer: function(){
     return localStorage.my_server;
   },
@@ -42,8 +45,40 @@ var Server = {
     console.log('init download:' + opts.from);
     var fileTransfer = new FileTransfer();
     fileTransfer.onprogress = opts.progress;
+    fileTransfer.extra_data = opts.extra_data;
     fileTransfer.download(opts.from, app.getMyPath() + opts.to,opts.success, opts.error,false);
 
     return fileTransfer;
+  },
+  upload: function(opts){
+    route = opts.route.join('/');
+    var options = new FileUploadOptions();
+      options.fileKey = opts.file_key || "file";
+      options.fileName = opts.file_name;
+      options.mimeType = opts.file_mime_type || "image/jpeg";
+
+      var data = opts.data || new Object();
+      data.k = '0987654321';
+      data.uuid = localStorage.uuid;
+      data.auth_code = PrivateData.get('current_auth_code');
+      console.log('send:' + JSON.stringify(data));
+      data = Security.encrypt(data);
+
+      options.params = { a: data };
+      options.chunkedMode = false;
+
+      Server.upload_callback = opts.callback;
+
+      var ft = new FileTransfer();
+      ft.a = 2;
+      ft.upload(opts.file_uri, route,function(r){
+        var data = Security.decrypt(r.response);
+        Server.upload_callback(data,true);
+      },function(){
+        Server.upload_callback({},false);
+      }, options);
+  },
+  serverUrl: function(){
+    return app.in_dev() ? Server.DEV_URL : Server.ACCESSIN_URL;
   }
 }
