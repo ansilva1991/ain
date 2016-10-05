@@ -9,7 +9,11 @@
       <h4><b id="person_full_name"></b> (<span id="person_label"></span>)</h4>
       <h5 id="message"></h5>
       <div class="attachment img">
-        <img src="">
+        <img src="" height="150">
+      </div>
+      <div class="attachment file">
+        <i class="fa fa-file-text"></i>
+        <h5></h5>
       </div>
       <div class="attachment loading-bar">
         <div class="box">
@@ -117,11 +121,26 @@
               }
 
               if(comment.attachment){
-                tmp.find('.attachment.img img').attr('src',PrivateData.get('current_server_portal') + comment.attachment.thumb);
-                tmp.find('.attachment.img img').attr('data-uri', comment.attachment.url);
-                tmp.find('.attachment.img img').tap(function(){
-                  cs.downloadAttachment(this);
-                });
+                var file = 'communication_comment_attachment_' + comment.id + '.' + comment.attachment.url.split('/').slice(-1)[0].split('?')[0].split('.')[1];
+
+                if(comment.attachment.type == 'image'){
+                  tmp.find('.attachment.file').remove();
+                  tmp.find('.attachment.img img').attr('src',PrivateData.get('current_server_portal') + comment.attachment.thumb);
+                  tmp.find('.attachment.img img').attr('data-uri', comment.attachment.url);
+                  tmp.find('.attachment.img img').attr('data-filename', file);
+                  tmp.find('.attachment.img img').tap(function(){
+                    cs.downloadAttachment(this);
+                  });
+                }else{
+                  tmp.find('.attachment.img').remove();
+                  tmp.find('.attachment.file h5').html(comment.attachment.name);
+                  tmp.find('.attachment.file').attr('data-uri', comment.attachment.url);
+                  tmp.find('.attachment.file').attr('data-filename', file);
+                  tmp.find('.attachment.file').tap(function(){
+                    cs.downloadAttachment(this);
+                  });
+                }
+
               }else{
                 tmp.find('.attachment').remove();
               }
@@ -208,9 +227,7 @@
 
     this.downloadAttachment = function(x){
       var uri = $(x).data('uri');
-      var id = $(x).parents('.chat-message').data('id');
-
-      var file = 'communication_comment_attachment_' + id + '.' + uri.split('/').slice(-1)[0].split('?')[0].split('.')[1];
+      var file = $(x).data('filename');
 
       $(x).parents('.chat-message').find('.attachment.loading-bar').show();
 
@@ -226,7 +243,8 @@
           this.extra_data.loading_bar.find('.label').html((n.loaded*100/n.total).toFixed(1) + '%');
         },
         success: function(e){
-          app.openFile(e.nativeURL);
+          $('[data-filename="' + e.name + '"]').parents('.chat-message').find('.attachment.loading-bar').hide();
+          app.openFile(e.nativeURL,true);
         },
         error: function(er){
           console.log(er);
