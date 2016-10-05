@@ -210,7 +210,7 @@
       var uri = $(x).data('uri');
       var id = $(x).parents('.chat-message').data('id');
 
-      var file = 'communication_comment_attachment_' + id + uri.split('/').slice(-1)[0].split('?')[0].split('.')[1];
+      var file = 'communication_comment_attachment_' + id + '.' + uri.split('/').slice(-1)[0].split('?')[0].split('.')[1];
 
       $(x).parents('.chat-message').find('.attachment.loading-bar').show();
 
