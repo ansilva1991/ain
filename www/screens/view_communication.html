@@ -218,15 +218,15 @@
         from: PrivateData.get('current_server_portal') + uri,
         to: file,
         progress: function(n){
-          console.log(this);
+          //console.log(this);
           this.extra_data.loading_bar.find('.in').css({
             width: (n.loaded*100/n.total) + '%'
           });
 
           this.extra_data.loading_bar.find('.label').html((n.loaded*100/n.total).toFixed(1) + '%');
         },
-        success: function(){
-          app.openFile(this.file_name);
+        success: function(e){
+          app.openFile(e.nativeURL);
         },
         error: function(er){
           console.log(er);

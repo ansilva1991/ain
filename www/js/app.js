@@ -474,6 +474,7 @@ var app = {
     return cordova.file.externalDataDirectory;
   },
   openFile: function(file){
+    console.log('Try open: ' + app.getMyPath() + file);
     window.plugins.fileOpener.open(app.getMyPath() + file);
   },
   onDeviceReady: function() {
