@@ -138,14 +138,14 @@ var app = {
         }
       }
       ],
-      icon_right: [
+      /*icon_right: [
       {
         icon: "info-circle",
         func: function(){
           cs.communicationInfo();
         }
       }
-      ],
+      ],*/
       section_name: "Comunicación",
       html: "view_communication"
     },
@@ -158,7 +158,7 @@ var app = {
         }
       }
       ],
-      section_name: "Comunicación",
+      section_name: "Información",
       html: "info_communication"
     },
     FORM_COMMUNICATION: {
@@ -509,8 +509,8 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.VIEW_COMMUNICATION,{
-              communication_id: 15
+            app.loadScreen(app.SCREENS.INFO_COMMUNICATION,{
+              communication_id: 17
             });
           }else{
             app.loadScreen(app.SCREENS.WELCOME);

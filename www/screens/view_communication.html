@@ -2,12 +2,25 @@
   <!--<button class="btn btn-block btn-semitransparent">
     Cargar anteriores
   </button>-->
+  <div class="penalty">
+    <h4>Multa #<span id="n"></span></h4>
+    <h5><b>Fecha de imputación: </b><span id="date"></span></h5>
+    <h5><b id="group_identificator"></b><span id="group"></span></h5>
+    <h5><b>Monto: </b>$ <span id="value"></span></h5>
+    <h5><b>Descripción: <br></b><span id="description"></span></h5>
+  </div>
   <div id="example_message" style="display:none;">
     <div class="arrow-right"></div>
     <div class="arrow-left"></div>
     <div class="content">
       <h4><b id="person_full_name"></b> (<span id="person_label"></span>)</h4>
       <h5 id="message"></h5>
+      <div class="quiz">
+        <div id="example_quiz_option" class="option" style="display: none;" onclick="cs.quizVote(this);">
+          <div class="circle"></div>
+          <div class="label"></div>
+        </div>
+      </div>
       <div class="attachment img">
         <img src="" height="150">
       </div>
@@ -25,6 +38,10 @@
         <span id="hour"></span>
         <i class="fa fa-check"></i>
       </h6>
+    </div>
+  </div>
+  <div id="example_message_block" style="display: none;">
+    <div class="content">
     </div>
   </div>
 </div>
@@ -70,6 +87,9 @@
     this.callback_get_communication_info;
     this.is_processing = false;
     this.communication_id;
+    this.communication_quiz_id;
+    this.quiz_vote_id;
+    this.quiz_voted = false;
 
     this.start = function(opts){
 
@@ -101,51 +121,115 @@
           console.log(data);
           if(success){
 
-            $('.header .section-name').html(Extends.truncate(data.communication.title,30));
+            $('.header .section-name').html(Extends.truncate(data.communication.title,20));
+
+            if(data.communication.status == 'resolved'){
+              $('.chat-input').addClass('disabled');
+              $('.chat-input input,.chat-input button').prop('disabled', true);
+            }
+            cs.communication_status = data.communication.status;
+
+            if(data.communication.penalty){
+              $('.penalty').show();
+
+              $('.penalty #n').html(data.communication.penalty.id);
+              $('.penalty #date').html(Extends.formatDate(new Date(data.communication.penalty.date + ' 00:00:00'),'%dd de %mname del %yyyy'));
+              $('.penalty #group_identificator').html(PrivateData.get('current_group_identificator_one') + ": ");
+              $('.penalty #group').html(data.communication.penalty.group);
+              $('.penalty #value').html(data.communication.penalty.value.toFixed(2));
+              $('.penalty #description').html(data.communication.penalty.description);
+            }
+
+            var cont = 0;
 
             for(var i in data.communication.comments){
               var comment = data.communication.comments[i];
 
-              var tmp = $('#example_message').clone().insertBefore('#example_message');
-              tmp.removeAttr('id');
-              tmp.addClass('chat-message');
+              if(comment.type == 'message'){
+                var tmp = $('#example_message').clone().insertBefore('#example_message');
+                tmp.removeAttr('id');
+                tmp.addClass('chat-message');
 
-              tmp.find('#person_full_name').html(comment.person);
-              tmp.find('#person_label').html(comment.group || "Administrador");
-              tmp.find('#message').html(comment.description);
-              tmp.find('#hour').html(Extends.formatDate(new Date(comment.date),'%yyyy/%mm/%dd %hh:%ii'));
-              tmp.attr('data-id',comment.id);
+                tmp.find('#person_full_name').html(comment.person);
+                tmp.find('#person_label').html(comment.group || "Administrador");
+                tmp.find('#message').html(comment.description);
+                tmp.find('#hour').html(Extends.formatDate(new Date(comment.date),'%yyyy/%mm/%dd %hh:%ii hrs'));
+                tmp.attr('data-id',comment.id);
 
-              if(!comment.my){
-                tmp.addClass('left');
-              }
-
-              if(comment.attachment){
-                var file = 'communication_comment_attachment_' + comment.id + '.' + comment.attachment.url.split('/').slice(-1)[0].split('?')[0].split('.')[1];
-
-                if(comment.attachment.type == 'image'){
-                  tmp.find('.attachment.file').remove();
-                  tmp.find('.attachment.img img').attr('src',PrivateData.get('current_server_portal') + comment.attachment.thumb);
-                  tmp.find('.attachment.img img').attr('data-uri', comment.attachment.url);
-                  tmp.find('.attachment.img img').attr('data-filename', file);
-                  tmp.find('.attachment.img img').tap(function(){
-                    cs.downloadAttachment(this);
-                  });
-                }else{
-                  tmp.find('.attachment.img').remove();
-                  tmp.find('.attachment.file h5').html(comment.attachment.name);
-                  tmp.find('.attachment.file').attr('data-uri', comment.attachment.url);
-                  tmp.find('.attachment.file').attr('data-filename', file);
-                  tmp.find('.attachment.file').tap(function(){
-                    cs.downloadAttachment(this);
-                  });
+                if(!comment.my){
+                  tmp.addClass('left');
                 }
 
-              }else{
-                tmp.find('.attachment').remove();
+                if(comment.attachment){
+                  var file = 'communication_comment_attachment_' + comment.id + '.' + comment.attachment.url.split('/').slice(-1)[0].split('?')[0].split('.')[1];
+
+                  if(comment.attachment.type == 'image'){
+                    tmp.find('.attachment.file').remove();
+                    tmp.find('.attachment.img img').attr('src',PrivateData.get('current_server_portal') + comment.attachment.thumb);
+                    tmp.find('.attachment.img img').attr('data-uri', comment.attachment.url);
+                    tmp.find('.attachment.img img').attr('data-filename', file);
+                    tmp.find('.attachment.img img').tap(function(){
+                      cs.downloadAttachment(this);
+                    });
+                  }else{
+                    tmp.find('.attachment.img').remove();
+                    tmp.find('.attachment.file h5').html(comment.attachment.name);
+                    tmp.find('.attachment.file').attr('data-uri', comment.attachment.url);
+                    tmp.find('.attachment.file').attr('data-filename', file);
+                    tmp.find('.attachment.file').tap(function(){
+                      cs.downloadAttachment(this);
+                    });
+                  }
+
+                }else{
+                  tmp.find('.attachment').remove();
+                }
+
+                if(cont == 0 && data.communication.quiz){
+                  tmp.find('.quiz').show();
+
+                  cs.communication_quiz_id = data.communication.quiz.id;
+
+                  for(var i in data.communication.quiz.options){
+                    var option = data.communication.quiz.options[i];
+                    var opt = $('#example_quiz_option').clone().insertBefore('#example_quiz_option');
+                    opt.removeAttr('id');
+                    opt.attr('data-id',option.id);
+                    opt.find('.label').html(option.description);
+                    opt.show();
+                  }
+
+                  if(data.communication.quiz.voted){
+                    tmp.find('.quiz .option[data-id="' + data.communication.quiz.voted + '"]').addClass('selected');
+                    cs.quiz_voted = true;
+                  }
+                }
+              }
+
+              if(comment.type == 'add_new_participant'){
+                var tmp = $('#example_message_block').clone().insertBefore('#example_message');
+                tmp.removeAttr('id');
+                tmp.addClass('chat-message-block');
+
+                tmp.find('.content').html("<b>" + comment.person + " (" + (comment.group || "Administrador") + ")</b> agrego a <b>" + comment.description + "</b> a la comunicación");
+              }
+
+              if(comment.type == 'change_status'){
+                var statuses = {
+                  pending: 'No visto',
+                  in_progress: 'En progreso',
+                  resolved: 'Finalizado'
+                }
+                var tmp = $('#example_message_block').clone().insertBefore('#example_message');
+                tmp.removeAttr('id');
+                tmp.addClass('chat-message-block');
+
+                tmp.find('.content').html("<b>" + comment.person + " (" + (comment.group || "Administrador") + ")</b> cambio el estado de la comunicación a <b>" + statuses[comment.description] + "</b>");
               }
 
               tmp.show();
+
+              cont++;
             }
 
             cs.callback_get_communication_info();
@@ -256,8 +340,57 @@
       })
     }
 
+    this.quizVote = function(x){
+      if(this.quiz_voted || this.communication_status == 'resolved'){
+        return false;
+      }
+
+      this.quiz_vote_id = $(x).data('id');
+      var option = $(x).find('.label').html();
+
+      Confirm.open({
+        title: "Enviar voto",
+        msg: "¿Esta seguro que desea votar por '" + option + "' ?",
+        success_button: "Votar",
+        cancel_button: "Cancelar",
+        callback_success: function(){
+          console.log(cs.communication_quiz_id);
+          console.log(cs.quiz_vote_id);
+
+          app.pageLoading('show');
+
+          Server.send({
+            route : [PrivateData.get('current_server_portal'),'app','communications','vote'],
+            data : {
+              quiz_id: cs.communication_quiz_id,
+              vote: cs.quiz_vote_id
+            },
+            callback : function(data, success){
+              if(success){
+                if(data.option){
+                  app.loadScreen(app.SCREENS.VIEW_COMMUNICATION,{
+                    communication_id: cs.communication_id
+                  });
+
+                  return false;
+                }else{
+                  Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+                }
+              }else{
+                Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+              }
+
+              app.pageLoading('hide');
+            }
+          });
+        }
+      });
+    };
+
     this.communicationInfo = function(){
-      app.loadScreen(app.SCREENS.INFO_COMMUNICATION);
+      app.loadScreen(app.SCREENS.INFO_COMMUNICATION,{
+        communication_id: this.communication_id
+      });
     };
   }
 </script>

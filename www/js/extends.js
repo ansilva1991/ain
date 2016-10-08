@@ -68,8 +68,8 @@ var Extends = {
       dd : (date.getDate() / 10).toFixed(1).replace('.',''),
       mabbr : months_name_abbr[(date.getMonth() + 1)],
       mname : months_name[(date.getMonth() + 1)],
-      hh: ((date.getHours() + 1) / 10).toFixed(1).replace('.',''),
-      ii: ((date.getMinutes() + 1) / 10).toFixed(1).replace('.','')
+      hh: (date.getHours() / 10).toFixed(1).replace('.',''),
+      ii: (date.getMinutes() / 10).toFixed(1).replace('.','')
     };
 
     for(var i in units){
