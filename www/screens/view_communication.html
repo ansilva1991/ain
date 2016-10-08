@@ -66,13 +66,13 @@
   <div class="backdrop" onclick="cs.closeAttachmentMenu();"></div>
   <div class="menu">
     <div class="content">
-      <div class="type" onclick="cs.addAttachmentFromGallery();">
+      <div class="type" onclick="cs.addAttachmentFrom('gallery');">
         <div class="icon">
           <i class="fa fa-photo"></i>
         </div>
         <h5>Galería</h5>
       </div>
-      <div class="type" onclick="cs.addAttachmentFromCamera();">
+      <div class="type" onclick="cs.addAttachmentFrom('camera');">
         <div class="icon">
           <i class="fa fa-camera"></i>
         </div>
@@ -287,25 +287,17 @@
       $('.send-attachment-menu').removeClass('open');
     };
 
-    this.addAttachmentFromCamera = function(){
-      app.takeFromCamera(function(imageData){
-
+    this.addAttachmentFrom = function(source){
+      app.takeFromCamera(function(imageURI){
+        app.loadScreen(app.SCREENS.ATTACHMENT_COMMUNICATION,{
+          communication_id: cs.communication_id,
+          attachment_url: imageURI
+        })
       },function(errorMessage){
       },{
-        quality: 50,
-        sourceType: Camera.PictureSourceType.CAMERA,
-        destinationType: Camera.DestinationType.DATA_URL,
-      });
-    }
-
-    this.addAttachmentFromGallery = function(){
-      app.takeFromCamera(function(imageData){
-
-      },function(errorMessage){
-      },{
-        quality: 50,
-        sourceType:  Camera.PictureSourceType.PHOTOLIBRARY,
-        destinationType: Camera.DestinationType.DATA_URL,
+        quality: 90,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: source == 'gallery' ? Camera.PictureSourceType.PHOTOLIBRARY : Camera.PictureSourceType.CAMERA
       });
     }
 

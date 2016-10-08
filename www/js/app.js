@@ -1,6 +1,6 @@
 var app = {
   VERSION: "1.0",
-  ENV: "development",
+  ENV: "production",
   SCREENS: {
     LOGIN: {
       html: "login",
@@ -181,6 +181,28 @@ var app = {
       ],
       section_name: "NUEVA COMUNICACIÓN",
       html: "form_communication"
+    },
+    ATTACHMENT_COMMUNICATION: {
+      icon_left: [
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
+      }
+      ],
+      icon_right: [
+      {
+        text: "Listo <i class='fa fa-check'></i>",
+        func: function(){
+          cs.submit();
+        },
+        id: 'submit-button'
+      }
+      ],
+      section_name: "",
+      header_class: ["black"],
+      html: "attachment_communication"
     },
     EVENTS: {
       icon_left: [
@@ -483,6 +505,7 @@ var app = {
     console.log(cordova.platformId);
     console.log(device.uuid);
 
+
     localStorage.uuid = localStorage.uuid || Extends.generateUUID();
 
     if(window.plugins.OneSignal && window.plugins.OneSignal.init){
@@ -509,9 +532,7 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.INFO_COMMUNICATION,{
-              communication_id: 17
-            });
+            app.loadScreen(app.SCREENS.DASHBOARD);
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
@@ -630,6 +651,7 @@ var app = {
   loadScreen: function(x_screen,opts){
     console.log('loadScreen: ' + x_screen.html);
     console.log('loadScreen(opts): ' + JSON.stringify(opts|| {}));
+
     app.load_screen_opts = opts;
     app.windowResize = function(){};
     $('.header .icon_end').remove();
@@ -639,6 +661,13 @@ var app = {
       $('.header').hide();
     }else{
       $('.header').show();
+    }
+
+    $('.header').attr('class','header');
+    if(x_screen.header_class){
+      for(var i in x_screen.header_class){
+        $('.header').addClass(x_screen.header_class[i]);
+      }
     }
 
     $('.header .section-name').removeAttr('onclick');
@@ -796,7 +825,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.0.110") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.1.35") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];
