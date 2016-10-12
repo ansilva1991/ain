@@ -79,6 +79,7 @@
 
     this.is_processing = false;
     this.email_login = undefined;
+    this.one_signal_ids;
 
     this.start = function(opts){
       opts = opts || {};
@@ -116,41 +117,47 @@
       PrivateData.clear();
       PrivateData.set('is_login',false);
 
-      Server.send({
-        route : [Server.serverUrl(),'app','login'],
-        data : {
-          login: form,
-          device: {
-            model: device.model,
-            platform: device.platform,
-            version: device.version,
-            uuid: localStorage.uuid
-          }
-        },
-        callback : function(data, success){
-          if(success){
-            console.log(data);
-            if(data.auths.length == 0){
-              Alert.open('Datos incorrectos','El email y la contraseña no son correctos.','Aceptar');
-            }else{
-              console.log(data);
-              PrivateData.set('country_server_id',data.auths[0].id);
-              PrivateData.set('country_server_url',data.auths[0].host);
-              PrivateData.set('email_logined',cs.email_login);
-              PrivateData.set('current_person_id',data.auths[0].auths[0].person_id);
-              PrivateData.set('is_login',true);
+      var ids = this.oneSignalReady();
 
-              app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
+      if(ids){
+        Server.send({
+          route : [Server.serverUrl(),'app','login'],
+          data : {
+            login: form,
+            device: {
+              model: device.model,
+              platform: device.platform,
+              version: device.version,
+              uuid: localStorage.uuid,
+              one_signal_push_token: ids.pushToken,
+              one_signal_user_id: ids.userId
             }
-          }else{
-            Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
-          }
+          },
+          callback : function(data, success){
+            if(success){
+              console.log(data);
+              if(data.auths.length == 0){
+                Alert.open('Datos incorrectos','El email y la contraseña no son correctos.','Aceptar');
+              }else{
+                console.log(data);
+                PrivateData.set('country_server_id',data.auths[0].id);
+                PrivateData.set('country_server_url',data.auths[0].host);
+                PrivateData.set('email_logined',cs.email_login);
+                PrivateData.set('current_person_id',data.auths[0].auths[0].person_id);
+                PrivateData.set('is_login',true);
 
-          $('.login #submit').html('INGRESAR');
-          $('.login #submit').prop('disabled', false);
-          cs.is_processing = false;
-        }
-      })
+                app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
+              }
+            }else{
+              Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
+            }
+
+            $('.login #submit').html('INGRESAR');
+            $('.login #submit').prop('disabled', false);
+            cs.is_processing = false;
+          }
+        });
+      }
     }
 
     this.processForgotPassword = function(){
@@ -212,6 +219,26 @@
           $('.register-code #submit').prop('disabled', false);
         }
       })
+    }
+
+    this.oneSignalReady = function(){
+      if(this.one_signal_ids){
+        return this.one_signal_ids;
+      }else{
+        if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
+          window.plugins.OneSignal.getIds(function(ids){
+            cs.one_signal_ids = ids;
+            cs.processRegister();
+          });
+          return false;
+        }else{
+          return {
+            pushToken: "",
+            userId: ""
+          };
+        }
+
+      }
     }
 
     this.forgotPassword = function(){
