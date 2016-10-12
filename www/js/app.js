@@ -1,6 +1,6 @@
 var app = {
   VERSION: "1.0",
-  ENV: "production",
+  ENV: "development",
   SCREENS: {
     LOGIN: {
       html: "login",
@@ -508,8 +508,9 @@ var app = {
 
     localStorage.uuid = localStorage.uuid || Extends.generateUUID();
 
-    if(window.plugins.OneSignal && window.plugins.OneSignal.init){
-      window.plugins.OneSignal.init("c121ee3a-dcad-4171-a489-12a59f102a04",{googleProjectNumber: "44425877825"},app.onNotificationOpenedCallback);
+    if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
+
+      window.plugins.OneSignal.startInit("c121ee3a-dcad-4171-a489-12a59f102a04", "44425877825").handleNotificationOpened(app.onNotificationOpenedCallback).endInit();
 
       window.plugins.OneSignal.enableInAppAlertNotification(false);
     }
