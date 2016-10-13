@@ -546,7 +546,7 @@ var app = {
   onNotificationOpenedCallback: function(jsonData){
     console.log('onNotificationOpenedCallback: ');
     console.log(jsonData);
-    var data = jsonData.payload.additionalData;
+    var data = jsonData.notification.payload.additionalData;
 
     app.loadScreen(app.SCREENS[data.screen],data.data);
 
