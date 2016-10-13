@@ -510,7 +510,7 @@ var app = {
 
     if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
 
-      window.plugins.OneSignal.startInit("c121ee3a-dcad-4171-a489-12a59f102a04", "44425877825").handleNotificationOpened(app.onNotificationOpenedCallback).endInit();
+      window.plugins.OneSignal.startInit("c121ee3a-dcad-4171-a489-12a59f102a04", "44425877825").handleNotificationOpened(app.onNotificationOpenedCallback).handleNotificationReceived(app.onNotificationReceivedCallback).inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.None).endInit();
     }
 
     if (cordova.platformId == 'android') {
@@ -544,7 +544,13 @@ var app = {
     }
   },
   onNotificationOpenedCallback: function(jsonData){
-    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+    console.log('onNotificationOpenedCallback: ');
+    console.log(jsonData);
+
+  },
+  onNotificationReceivedCallback: function(jsonData){
+    console.log('onNotificationReceivedCallback: ');
+    console.log(jsonData);
   },
   updateMenuInfo: function(){
     if(PrivateData.get('current_person_avatar')){
