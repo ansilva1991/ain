@@ -169,7 +169,7 @@
                     tmp.find('.attachment.img img').attr('data-uri', comment.attachment.url);
                     tmp.find('.attachment.img img').attr('data-filename', file);
                     tmp.find('.attachment.img img').tap(function(){
-                      cs.downloadAttachment(this);
+                      cs.openAttachment(this);
                     });
                   }else{
                     tmp.find('.attachment.img').remove();
@@ -177,7 +177,7 @@
                     tmp.find('.attachment.file').attr('data-uri', comment.attachment.url);
                     tmp.find('.attachment.file').attr('data-filename', file);
                     tmp.find('.attachment.file').tap(function(){
-                      cs.downloadAttachment(this);
+                      cs.openAttachment(this);
                     });
                   }
 
@@ -330,6 +330,18 @@
           file_name: file
         }
       })
+    }
+
+    this.openAttachment = function(x){
+      var uri = $(x).data('uri');
+      var file = $(x).data('filename');
+      var element = x;
+
+      app.openFile(file,false,function(e){
+        if(e.status == 9){
+          cs.downloadAttachment(element);
+        }
+      });
     }
 
     this.quizVote = function(x){

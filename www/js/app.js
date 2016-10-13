@@ -16,10 +16,19 @@ var app = {
   getMyPath: function(){
     return cordova.file.externalDataDirectory;
   },
-  openFile: function(file,from_root){
+  openFile: function(file,from_root,error){
+    var mime_types = {
+      jpg: "image/jpeg",
+      pdf: "application/pdf",
+      doc: "application/msword",
+      xls: "application/vnd.ms-excel"
+    }
+    var type = file.split('/')[file.split('/').length -1].split('.')[1].split('?')[0];
     var url = (!from_root ? app.getMyPath() : '' ) + file;
-    console.log('Try open: ' + url);
-    window.plugins.fileOpener.open(url);
+    console.log('Try open: ' + url + ' TYPE: ' + type);
+    cordova.plugins.fileOpener2.open(url,mime_types[type],{ 
+      error : error
+    });
   },
   onDeviceReady: function() {
     console.log('deviceready');
