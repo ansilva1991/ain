@@ -1,6 +1,6 @@
 var app = {
   VERSION: "1.0",
-  ENV: "development",
+  ENV: "production",
   SCREENS: {
     LOGIN: {
       html: "login",
@@ -32,14 +32,6 @@ var app = {
         icon: "bars",
         func: function(){
           app.openMenu();
-        }
-      }
-      ],
-      icon_right: [
-      {
-        icon: "question-circle",
-        func: function(){
-          cs.help();
         }
       }
       ],
@@ -118,14 +110,6 @@ var app = {
         }
       }
       ],
-      icon_right: [
-      {
-        icon: "question-circle",
-        func: function(){
-          cs.help();
-        }
-      }
-      ],
       section_name: "Comunicaciones",
       html: "communications"
     },
@@ -138,14 +122,6 @@ var app = {
         }
       }
       ],
-      /*icon_right: [
-      {
-        icon: "info-circle",
-        func: function(){
-          cs.communicationInfo();
-        }
-      }
-      ],*/
       section_name: "Comunicación",
       html: "view_communication"
     },
@@ -179,7 +155,7 @@ var app = {
         id: 'submit-button'
       }
       ],
-      section_name: "NUEVA COMUNICACIÓN",
+      section_name: "COMUNICACIÓN",
       html: "form_communication"
     },
     ATTACHMENT_COMMUNICATION: {
@@ -412,14 +388,6 @@ var app = {
         icon: "bars",
         func: function(){
           app.openMenu();
-        }
-      }
-      ],
-      icon_right: [
-      {
-        icon: "question-circle",
-        func: function(){
-          cs.eventInfo();
         }
       }
       ],
