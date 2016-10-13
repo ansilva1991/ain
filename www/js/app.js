@@ -491,6 +491,7 @@ var app = {
   bindEvents: function() {
     FastClick.attach(document.body);
     document.addEventListener('deviceready', this.onDeviceReady, false);
+    document.addEventListener('backbutton', this.onBackButton, false);
   },
   getMyPath: function(){
     return cordova.file.externalDataDirectory;
@@ -546,7 +547,7 @@ var app = {
   onNotificationOpenedCallback: function(jsonData){
     console.log('onNotificationOpenedCallback: ');
     console.log(jsonData);
-    var data = jsonData.notification.payload.additionalData;
+    var data = JSON.parse(jsonData.notification.payload.additionalData);
 
     app.loadScreen(app.SCREENS[data.screen],data.data);
 
@@ -555,6 +556,15 @@ var app = {
     console.log('onNotificationReceivedCallback: ');
     console.log(jsonData);
     var data = jsonData.payload.additionalData;
+  },
+  onBackButton: function(){
+    if($('.app .menu').hasClass('open')){
+      app.closeMenu();
+    }else if(cs && cs.back){
+      cs.back();
+    }else{
+      navigator.app.exitApp();
+    }
   },
   updateMenuInfo: function(){
     if(PrivateData.get('current_person_avatar')){
