@@ -145,6 +145,7 @@
                 PrivateData.set('email_logined',cs.email_login);
                 PrivateData.set('current_person_id',data.auths[0].auths[0].person_id);
                 PrivateData.set('is_login',true);
+                PrivateData.set('logined_version',app.VERSION);
 
                 app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
               }

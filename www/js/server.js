@@ -14,6 +14,7 @@ var Server = {
     data.k = '0987654321';
     data.uuid = localStorage.uuid;
     data.auth_code = PrivateData.get('current_auth_code');
+    data.version = app.VERSION;
     console.log('send:' + JSON.stringify(data));
     data = Security.encrypt(data);
 
@@ -35,6 +36,8 @@ var Server = {
         }else if(xhr.status == 999){
           PrivateData.clear();
           app.loadScreen(app.SCREENS.LOGIN);
+        }else if(xhr.status == 998){
+          app.loadScreen(app.SCREENS.DEPRECATED);
         }else{
           xhr.callback_tmp({}, false)
         }
