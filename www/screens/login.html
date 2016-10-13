@@ -228,7 +228,7 @@
         if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
           window.plugins.OneSignal.getIds(function(ids){
             cs.one_signal_ids = ids;
-            cs.processRegister();
+            cs.processLogin();
           });
           return false;
         }else{
