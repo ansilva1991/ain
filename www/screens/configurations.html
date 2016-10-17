@@ -1,59 +1,124 @@
 <div class="list-configurations">
-  <div class="input">
-    <div class="content">
-      <div class="label">
-        <h4>Liquidación de expensas</h4>
-        <h5>Enviarme una alerta cuando se liquiden expensas</h5>
-      </div>
-      <div class="checkbox checked">
-        <div class="box">
-          <div class="pointer"></div>
+  <form>
+    <div class="input">
+      <div class="content">
+        <div class="label">
+          <h4>Liquidación de expensas</h4>
+          <h5>Enviarme una alerta cuando se liquiden expensas</h5>
+        </div>
+        <div class="checkbox for_tap">
+          <input type="checkbox" name="notificate_new_expenses" id="notificate_new_expenses">
+          <div class="box">
+            <div class="pointer"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="input">
-    <div class="content">
-      <div class="label">
-        <h4>Nueva comunicación</h4>
-        <h5>Enviarme una alerta cuando reciba una nueva comunicación</h5>
-      </div>
-      <div class="checkbox checked">
-        <div class="box">
-          <div class="pointer"></div>
+    <div class="input">
+      <div class="content">
+        <div class="label">
+          <h4>Nueva comunicación</h4>
+          <h5>Enviarme una alerta cuando reciba una nueva comunicación</h5>
+        </div>
+        <div class="checkbox for_tap">
+          <input type="checkbox" name="notificate_new_communication" id="notificate_new_communication">
+          <div class="box">
+            <div class="pointer"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="input">
-    <div class="content">
-      <div class="label">
-        <h4>Actualizacón de comunicación</h4>
-        <h5>Enviarme una alerta cuando se envie un nuevo mensaje o algun cambio en las comunicaciones.</h5>
-      </div>
-      <div class="checkbox checked">
-        <div class="box">
-          <div class="pointer"></div>
+    <div class="input">
+      <div class="content">
+        <div class="label">
+          <h4>Actualizacón de comunicación</h4>
+          <h5>Enviarme una alerta cuando se envie un nuevo mensaje o algun cambio en las comunicaciones.</h5>
+        </div>
+        <div class="checkbox for_tap">
+          <input type="checkbox" name="notificate_new_communication_message" id="notificate_new_communication_message">
+          <div class="box">
+            <div class="pointer"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>
 <script type="text/javascript">
   function c(){
+    this.callback_get_info;
+    this.is_processing = false;
 
     this.start = function(){
 
-      $('.checkbox .box').tap(function(){
-        $(this).parent().toggleClass('checked');
-      });
+      Extends.inputCheckBox();
 
       app.liActive('configurations');
-      app.pageLoading('hide');
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      });
     }
 
-    this.back = function(){
-      app.loadScreen(app.SCREENS.CONFIGURATIONS);
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','config','get'],
+        data : {},
+        callback : function(data, success){
+          console.log(data);
+
+          if(data.config.notificate_new_expenses){
+            $('#notificate_new_expenses').prop('checked',true).change();
+          }
+
+          if(data.config.notificate_new_communication){
+            $('#notificate_new_communication').prop('checked',true).change();
+          }
+
+          if(data.config.notificate_new_communication_message){
+            $('#notificate_new_communication_message').prop('checked',true).change();
+          }
+
+          cs.callback_get_info();
+        }
+      });
+    }
+
+    this.submit = function(){
+      if(this.is_processing){ return false; }
+
+      $('#submit-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('#submit-button').removeClass('text');
+
+      this.is_processing = true;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','config','update'],
+        data : {
+          config: {
+            notificate_new_expenses: $('#notificate_new_expenses').is(':checked'),
+            notificate_new_communication: $('#notificate_new_communication').is(':checked'),
+            notificate_new_communication_message: $('#notificate_new_communication_message').is(':checked')
+          }
+        },
+        callback : function(data, success){
+
+          if(success){
+            if(data.device){
+              
+            }else{
+              Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+            }
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+          }
+
+          cs.is_processing = false;
+          $('#submit-button').html("Listo <i class='fa fa-check'></i>");
+          $('#submit-button').addClass('text');
+        }
+      });
     }
 
   }

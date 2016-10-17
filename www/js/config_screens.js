@@ -429,6 +429,15 @@ app.SCREENS = {
       }
     }
     ],
+    icon_right: [
+    {
+      text: "Listo <i class='fa fa-check'></i>",
+      func: function(){
+        cs.submit();
+      },
+      id: 'submit-button'
+    }
+    ],
     section_name: "Configuración",
     html: "configurations"
   },

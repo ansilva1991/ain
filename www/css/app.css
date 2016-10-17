@@ -56,6 +56,14 @@ button.btn.btn-orange:disabled{
   background-color: #ffb52f;
 }
 
+.toast{
+  width: 300px;
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  margin-left: -150px;
+}
+
 .modal-alert{
   width: 100%;
   position: fixed;
@@ -3649,6 +3657,15 @@ button.btn.btn-orange:disabled{
   float: right;
   height: 60px;
   padding-top: 10px;
+}
+
+.app>.content .page .list-configurations .input .content .checkbox>input{
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: fixed;
+  top: -10px;
+  left: -10px;
 }
 
 .app>.content .page .list-configurations .input .content .checkbox>.box{
