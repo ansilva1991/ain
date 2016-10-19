@@ -64,6 +64,7 @@ var Server = {
       data.k = '0987654321';
       data.uuid = localStorage.uuid;
       data.auth_code = PrivateData.get('current_auth_code');
+      data.version = app.VERSION;
       console.log('send:' + JSON.stringify(data));
       data = Security.encrypt(data);
 

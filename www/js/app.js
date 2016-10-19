@@ -1,7 +1,7 @@
 var app = {
   VERSION: 203,
   MINIUM_VERSION_LOGUINED: 202,
-  ENV: "development",
+  ENV: "production",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
