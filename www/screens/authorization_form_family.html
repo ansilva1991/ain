@@ -161,6 +161,7 @@
             $('#last_name').val(data.person.last_name);
             $('#real_id').val(data.person.real_id);
             $($('#sex .radio')[data.person.sex]).addClass('checked');
+            console.log(data.person.birthdate);
             $('#birthdate').val(data.person.birthdate);
             $('#phone').val(data.person.phone);
             $('#email').val(data.person.email);

@@ -208,6 +208,7 @@ button.btn.btn-orange:disabled{
   background-color: #fff;
   text-transform: uppercase;
   font-weight: bold;
+  padding: 0px;
 }
 
 .modal-confirm .content button#success{
@@ -530,6 +531,7 @@ button.btn.btn-orange:disabled{
   font-size: 12px;
   color: #fff;
   outline: none;
+  border-radius: 0px;
 }
 
 .login form label{
@@ -656,6 +658,7 @@ button.btn.btn-orange:disabled{
   font-size: 12px;
   color: #fff;
   outline: none;
+  border-radius: 0px;
 }
 
 .forgot-password form label{
@@ -758,6 +761,7 @@ button.btn.btn-orange:disabled{
   color: #fff;
   outline: none;
   text-transform: uppercase;
+  border-radius: 0px;
 }
 
 .register-code form label{
@@ -895,6 +899,7 @@ button.btn.btn-orange:disabled{
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
+  border-radius: 0px;
 }
 
 .register form>.form-group .form-radios{
@@ -1639,6 +1644,7 @@ button.btn.btn-orange:disabled{
   position: fixed;
   bottom: 20px;
   right: 20px;
+  padding: 0px;
 }
 
 .app>.content .page .list.events{
@@ -1795,11 +1801,11 @@ button.btn.btn-orange:disabled{
   font-size: 30px;
   color: #fff;
   text-align: center;
-  text-align: 60px;
   position: fixed;
   bottom: 20px;
   right: 20px;
   display: none;
+  padding: 0px;
 }
 
 .app>.content .page .guest_lists.active .new-event-guest-lists{
@@ -2208,6 +2214,7 @@ button.btn.btn-orange:disabled{
   position: fixed;
   bottom: 20px;
   right: 20px;
+  padding: 0px;
 }
 
 .app>.content .page .event-form .new-guests-buttons.open button.new{
@@ -2256,6 +2263,7 @@ button.btn.btn-orange:disabled{
   text-align: 60px;
   float: right;
   display: none;
+  padding: 0px;
 }
 
 .app>.content .page .event-form .new-guests-buttons.open .add-button h5, .app>.content .page .event-form .new-guests-buttons.open .add-button button{
@@ -2263,19 +2271,11 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.content .page .event-form .new-guests-buttons.open .add-button.new-visit{
-  -webkit-transform: translate3d(0,-100%,0);
-  -moz-transform: translate3d(0,-100%,0);
-  -ms-transform: translate3d(0,-100%,0);
-  -o-transform: translate3d(0,-100%,0);
-  transform: translate3d(0,-100%,0);
-}
-
-.app>.content .page .event-form .new-guests-buttons.open .add-button.new-employee{
-  -webkit-transform: translate3d(0,-200%,0);
-  -moz-transform: translate3d(0,-200%,0);
-  -ms-transform: translate3d(0,-200%,0);
-  -o-transform: translate3d(0,-200%,0);
-  transform: translate3d(0,-200%,0);
+  -webkit-transform: translate3d(0,-75px,0);
+  -moz-transform: translate3d(0,-75px,0);
+  -ms-transform: translate3d(0,-75px,0);
+  -o-transform: translate3d(0,-75px,0);
+  transform: translate3d(0,-75px,0);
 }
 
 @media screen and (min-width: 480px){
@@ -2714,19 +2714,19 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.content .page .new-authorization-buttons.open .add-button.new-visit{
-  -webkit-transform: translate3d(0,-100px,0);
-  -moz-transform: translate3d(0,-100px,0);
-  -ms-transform: translate3d(0,-100px,0);
-  -o-transform: translate3d(0,-100px,0);
-  transform: translate3d(0,-100px,0);
+  -webkit-transform: translate3d(0,-75px,0);
+  -moz-transform: translate3d(0,-75px,0);
+  -ms-transform: translate3d(0,-75px,0);
+  -o-transform: translate3d(0,-75px,0);
+  transform: translate3d(0,-75px,0);
 }
 
 .app>.content .page .new-authorization-buttons.open .add-button.new-employee{
-  -webkit-transform: translate3d(0,-200px,0);
-  -moz-transform: translate3d(0,-200px,0);
-  -ms-transform: translate3d(0,-200px,0);
-  -o-transform: translate3d(0,-200px,0);
-  transform: translate3d(0,-200px,0);
+  -webkit-transform: translate3d(0,-150px,0);
+  -moz-transform: translate3d(0,-150px,0);
+  -ms-transform: translate3d(0,-150px,0);
+  -o-transform: translate3d(0,-150px,0);
+  transform: translate3d(0,-150px,0);
 }
 
 @media screen and (min-width: 480px){
@@ -2841,6 +2841,7 @@ button.btn.btn-orange:disabled{
   background: none;
   background-color: #fafafa;
   padding: 5px;
+  border-radius: 0px;
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -2983,6 +2984,7 @@ button.btn.btn-orange:disabled{
   border: none;
   border-radius: 50%;
   font-size: 40px;
+  padding: 0px;
 }
 
 .app>.content .page .form-horizontal .form-group>.file .attachment{
@@ -3160,6 +3162,7 @@ button.btn.btn-orange:disabled{
   background-color: #ffa400;
   color: #fff;
   margin-left: 1px;
+  padding: 0px;
 }
 
 .app>.content .page center{
@@ -3224,7 +3227,7 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.content .page .chat-input .content .button{
-  width: 50;
+  width: 50px;
   display: table-cell;
 }
 
@@ -3516,6 +3519,7 @@ button.btn.btn-orange:disabled{
   background: #000;
   border: none;
   border-bottom: 1px solid #fff;
+  border-radius: 0px;
   padding-left: 5px;
   outline: none;
   color: #fff;

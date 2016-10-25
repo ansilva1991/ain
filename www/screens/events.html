@@ -55,11 +55,13 @@
     this.start = function(opts){
       opts = opts || {};
 
-      $('.list.events.event_places').swipeLeft(function(){
+      var hammertime = new Hammer($('.list.events.event_places')[0]);
+      hammertime.on('swipeleft', function(ev) {
         cs.selectTab($('.sub-header .item')[1]);
       });
 
-      $('.list.events.guest_lists').swipeRight(function(){
+      var hammertime = new Hammer($('.list.events.guest_lists')[0]);
+      hammertime.on('swiperight', function(ev) {
         cs.selectTab($('.sub-header .item')[0]);
       });
 

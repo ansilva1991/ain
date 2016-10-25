@@ -72,11 +72,11 @@
             $('#area_percentage').html(data.area_percentage.toFixed(2));
             $('#total_expenses').html(data.total_expenses.toFixed(2));
 
-            $('#concept').html(Extends.formatDate(new Date(data.real_date + " 00:00:00"),'%mname del %yyyy'));
-            $('#total_expenses_label').html('Expensas ' + Extends.formatDate(new Date(data.real_date + " 00:00:00"),'%mabbr. del %yyyy'));
-            $('.header .section-name').html('Expensas ' + Extends.formatDate(new Date(data.real_date + " 00:00:00"),'%mabbr. del %yyyy'));
+            $('#concept').html(Extends.formatDate(new Date(data.real_date + "T00:00:00"),'%mname del %yyyy'));
+            $('#total_expenses_label').html('Expensas ' + Extends.formatDate(new Date(data.real_date + "T00:00:00"),'%mabbr. del %yyyy'));
+            $('.header .section-name').html('Expensas ' + Extends.formatDate(new Date(data.real_date + "T00:00:00"),'%mabbr. del %yyyy'));
 
-            cs.impute_date = new Date(data.impute_date + " 00:00:00");
+            cs.impute_date = new Date(data.impute_date + "T12:00:00");
             cs.callback_get_entry();
           }
         }

@@ -30,13 +30,13 @@ var HelperExpenses = {
   entry_description : function(entry){
     switch(entry.type){
       case 'GroupCurrentAccountEntryExpensesSurcharge':
-        return Extends.formatDate(new Date(entry.vinculated_to.description + " 00:00:00"),'%mname del %yyyy');
+        return Extends.formatDate(new Date(entry.vinculated_to.description + "T00:00:00"),'%mname del %yyyy');
         break;
       case 'GroupCurrentAccountEntryPenalty':
         return entry.description.length > 45 ? entry.description.substr(0,45) + "..." : entry.description;
         break;
       case 'GroupCurrentAccountEntryExpenses':
-        return Extends.formatDate(new Date(entry.description + " 00:00:00"),'%mname del %yyyy');
+        return Extends.formatDate(new Date(entry.description + "T00:00:00"),'%mname del %yyyy');
         break;
       case 'GroupCurrentAccountEntryEvent':
         return "Evento #" + entry.vinculated_to.id;

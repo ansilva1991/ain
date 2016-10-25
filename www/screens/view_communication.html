@@ -133,7 +133,7 @@
               $('.penalty').show();
 
               $('.penalty #n').html(data.communication.penalty.id);
-              $('.penalty #date').html(Extends.formatDate(new Date(data.communication.penalty.date + ' 00:00:00'),'%dd de %mname del %yyyy'));
+              $('.penalty #date').html(Extends.formatDate(new Date(data.communication.penalty.date + 'T00:00:00'),'%dd de %mname del %yyyy'));
               $('.penalty #group_identificator').html(PrivateData.get('current_group_identificator_one') + ": ");
               $('.penalty #group').html(data.communication.penalty.group);
               $('.penalty #value').html(data.communication.penalty.value.toFixed(2));
@@ -296,6 +296,8 @@
       },function(errorMessage){
       },{
         quality: 90,
+        targetWidth: 800,
+        targetHeight: 600,
         destinationType: Camera.DestinationType.FILE_URI,
         sourceType: source == 'gallery' ? Camera.PictureSourceType.PHOTOLIBRARY : Camera.PictureSourceType.CAMERA
       });

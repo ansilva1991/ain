@@ -154,6 +154,8 @@
         Alert.open('Lo Sentimos','Ocurrío un error al intentar leer el archivo, por favor intenta nuevamente.','Aceptar');
       },{
         quality: 90,
+        targetWidth: 800,
+        targetHeight: 600,
         destinationType: Camera.DestinationType.FILE_URI,
         sourceType: source == 'gallery' ? Camera.PictureSourceType.PHOTOLIBRARY : Camera.PictureSourceType.CAMERA
       });

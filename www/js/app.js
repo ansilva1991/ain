@@ -1,5 +1,5 @@
 var app = {
-  VERSION: 203,
+  VERSION: 204,
   MINIUM_VERSION_LOGUINED: 202,
   ENV: "development",
   load_screen_ajax: false,
@@ -54,7 +54,8 @@ var app = {
       app.windowResize();
     });
 
-    $('.app>.menu').swipeLeft(function(){
+    var hammertime = new Hammer($('.app>.menu')[0]);
+    hammertime.on('swipeleft', function(ev) {
       app.closeMenu();
     });
 
@@ -69,7 +70,7 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+            app.loadScreen(app.SCREENS.DASHBOARD);
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
@@ -382,7 +383,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.1.35") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.1.55") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];
