@@ -2657,6 +2657,7 @@ button.btn.btn-orange:disabled{
   position: fixed;
   bottom: 20px;
   right: 20px;
+  padding: 0px;
 }
 
 .app>.content .page .new-authorization-buttons.open button.new{
@@ -2705,6 +2706,7 @@ button.btn.btn-orange:disabled{
   text-align: 60px;
   float: right;
   display: none;
+  padding: 0px;
 }
 
 .app>.content .page .new-authorization-buttons.open .add-button h5, .app>.content .page .new-authorization-buttons.open .add-button button{
@@ -2712,19 +2714,19 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.content .page .new-authorization-buttons.open .add-button.new-visit{
-  -webkit-transform: translate3d(0,-100%,0);
-  -moz-transform: translate3d(0,-100%,0);
-  -ms-transform: translate3d(0,-100%,0);
-  -o-transform: translate3d(0,-100%,0);
-  transform: translate3d(0,-100%,0);
+  -webkit-transform: translate3d(0,-100px,0);
+  -moz-transform: translate3d(0,-100px,0);
+  -ms-transform: translate3d(0,-100px,0);
+  -o-transform: translate3d(0,-100px,0);
+  transform: translate3d(0,-100px,0);
 }
 
 .app>.content .page .new-authorization-buttons.open .add-button.new-employee{
-  -webkit-transform: translate3d(0,-200%,0);
-  -moz-transform: translate3d(0,-200%,0);
-  -ms-transform: translate3d(0,-200%,0);
-  -o-transform: translate3d(0,-200%,0);
-  transform: translate3d(0,-200%,0);
+  -webkit-transform: translate3d(0,-200px,0);
+  -moz-transform: translate3d(0,-200px,0);
+  -ms-transform: translate3d(0,-200px,0);
+  -o-transform: translate3d(0,-200px,0);
+  transform: translate3d(0,-200px,0);
 }
 
 @media screen and (min-width: 480px){

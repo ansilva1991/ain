@@ -1,7 +1,7 @@
 var app = {
   VERSION: 203,
   MINIUM_VERSION_LOGUINED: 202,
-  ENV: "production",
+  ENV: "development",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -69,7 +69,7 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.CONFIGURATIONS);
+            app.loadScreen(app.SCREENS.AUTHORIZATIONS);
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
