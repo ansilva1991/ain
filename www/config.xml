@@ -51,14 +51,14 @@
         <icon platform="android" qualifier="xxhdpi" src="res/icons/android/icon-144-xxhdpi.png"/>
         <icon platform="android" qualifier="xxxhdpi" src="res/icons/android/icon-192-xxxhdpi.png"/>
 
-        <splash platform="android" qualifier="portrait-ldpi" src="res/screens/android/screen-ldpi-portrait.png" />
-        <splash platform="android" qualifier="portrait-mdpi" src="res/screens/android/screen-mdpi-portrait.png" />
-        <splash platform="android" qualifier="portrait-hdpi" src="res/screens/android/screen-hdpi-portrait.png" />
-        <splash platform="android" qualifier="portrait-xhdpi" src="res/screens/android/screen-xhdpi-portrait.png" />
-        <splash platform="android" qualifier="landscape-ldpi" src="res/screens/android/screen-ldpi-landscape.png" />
-        <splash platform="android" qualifier="landscape-mdpi" src="res/screens/android/screen-mdpi-landscape.png" />
-        <splash platform="android" qualifier="landscape-hdpi" src="res/screens/android/screen-hdpi-landscape.png" />
-        <splash platform="android" qualifier="landscape-xhdpi" src="res/screens/android/screen-xhdpi-landscape.png" />
+        <splash platform="android" density="port-ldpi" src="res/screens/android/screen-ldpi-portrait.png" />
+        <splash platform="android" density="port-mdpi" src="res/screens/android/screen-mdpi-portrait.png" />
+        <splash platform="android" density="port-hdpi" src="res/screens/android/screen-hdpi-portrait.png" />
+        <splash platform="android" density="port-xhdpi" src="res/screens/android/screen-xhdpi-portrait.png" />
+        <splash platform="android" density="land-ldpi" src="res/screens/android/screen-ldpi-landscape.png" />
+        <splash platform="android" density="land-mdpi" src="res/screens/android/screen-mdpi-landscape.png" />
+        <splash platform="android" density="land-hdpi" src="res/screens/android/screen-hdpi-landscape.png" />
+        <splash platform="android" density="land-xhdpi" src="res/screens/android/screen-xhdpi-landscape.png" />
     </platform>
     <platform name="ios">
         <icon platform="ios" src="res/icons/ios/icon-small.png" width="29" height="29" />
