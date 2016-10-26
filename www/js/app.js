@@ -14,7 +14,7 @@ var app = {
     document.addEventListener('backbutton', this.onBackButton, false);
   },
   getMyPath: function(){
-    return cordova.file.externalDataDirectory;
+    return cordova.platformId == 'ios' ? cordova.file.documentsDirectory : cordova.file.externalDataDirectory;
   },
   openFile: function(file,from_root,error){
     var mime_types = {
