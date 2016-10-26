@@ -1700,6 +1700,10 @@ button.btn.btn-orange:disabled{
   background-image: url(../img/back_event_place_tennis_court.png);
 }
 
+.app>.content .page .list.events.event_places .item.back-court_football{
+  background-image: url(../img/back_event_place_football_court.png);
+}
+
 .app>.content .page .list.events.event_places .item h4{
   width: 100%;
   height: 50px;
