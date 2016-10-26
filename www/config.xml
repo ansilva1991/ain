@@ -50,10 +50,15 @@
         <icon platform="android" qualifier="xhdpi" src="res/icons/android/icon-96-xhdpi.png"/>
         <icon platform="android" qualifier="xxhdpi" src="res/icons/android/icon-144-xxhdpi.png"/>
         <icon platform="android" qualifier="xxxhdpi" src="res/icons/android/icon-192-xxxhdpi.png"/>
-        <splash platform="android" qualifier="ldpi" src="res/screens/android/screen-ldpi-portrait.png" />
-        <splash platform="android" qualifier="mdpi" src="res/screens/android/screen-mdpi-portrait.png" />
-        <splash platform="android" qualifier="hdpi" src="res/screens/android/screen-hdpi-portrait.png" />
-        <splash platform="android" qualifier="xhdpi" src="res/screens/android/screen-xhdpi-portrait.png" />
+
+        <splash platform="android" qualifier="portrait-ldpi" src="res/screens/android/screen-ldpi-portrait.png" />
+        <splash platform="android" qualifier="portrait-mdpi" src="res/screens/android/screen-mdpi-portrait.png" />
+        <splash platform="android" qualifier="portrait-hdpi" src="res/screens/android/screen-hdpi-portrait.png" />
+        <splash platform="android" qualifier="portrait-xhdpi" src="res/screens/android/screen-xhdpi-portrait.png" />
+        <splash platform="android" qualifier="landscape-ldpi" src="res/screens/android/screen-ldpi-landscape.png" />
+        <splash platform="android" qualifier="landscape-mdpi" src="res/screens/android/screen-mdpi-landscape.png" />
+        <splash platform="android" qualifier="landscape-hdpi" src="res/screens/android/screen-hdpi-landscape.png" />
+        <splash platform="android" qualifier="landscape-xhdpi" src="res/screens/android/screen-xhdpi-landscape.png" />
     </platform>
     <platform name="ios">
         <icon platform="ios" src="res/icons/ios/icon-small.png" width="29" height="29" />
@@ -71,6 +76,7 @@
         <icon platform="ios" src="res/icons/ios/icon-72-2x.png" width="144" height="144" />
         <icon platform="ios" src="res/icons/ios/icon-76.png" width="76" height="76" />
         <icon platform="ios" src="res/icons/ios/icon-76-2x.png" width="152" height="152" />
+
         <splash platform="ios" src="res/screens/ios/screen-iphone-portrait.png" width="320" height="480" />
         <splash platform="ios" src="res/screens/ios/screen-iphone-portrait-2x.png" width="640" height="960" />
         <splash platform="ios" src="res/screens/ios/screen-iphone-portrait-568h-2x.png" width="640" height="1136" />
@@ -78,6 +84,14 @@
         <splash platform="ios" src="res/screens/ios/screen-iphone-portrait-736h.png" width="1242" height="2208" />
         <splash platform="ios" src="res/screens/ios/screen-ipad-portrait.png" width="768" height="1024" />
         <splash platform="ios" src="res/screens/ios/screen-ipad-portrait-2x.png" width="1536" height="2048" />
+
+        <splash platform="ios" src="res/screens/ios/screen-iphone-landscape.png" width="480" height="320" />
+        <splash platform="ios" src="res/screens/ios/screen-iphone-landscape-2x.png" width="960" height="640" />
+        <splash platform="ios" src="res/screens/ios/screen-iphone-landscape-568h-2x.png" width="1136" height="640" />
+        <splash platform="ios" src="res/screens/ios/screen-iphone-landscape-667h.png" width="1334" height="750" />
+        <splash platform="ios" src="res/screens/ios/screen-iphone-landscape-736h.png" width="2208" height="1242" />
+        <splash platform="ios" src="res/screens/ios/screen-ipad-landscape.png" width="1024" height="768" />
+        <splash platform="ios" src="res/screens/ios/screen-ipad-landscape-2x.png" width="2048" height="1536" />
     </platform>
     <access origin="*" />
     <allow-navigation href="*" />
