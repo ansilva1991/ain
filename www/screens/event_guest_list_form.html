@@ -89,7 +89,7 @@
       var form = this.getList();
       console.log(form);
 
-      if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/)){
+      if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
         Alert.open('Nombre','Debe ingresar un nombre válido para continuar.','Aceptar');
         return false;
       }

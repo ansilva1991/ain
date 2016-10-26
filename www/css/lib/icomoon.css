@@ -25,65 +25,65 @@
 }
 
 
-.icon-accessin:before {
+.icon-signout:before {
   content: "\e900";
 }
-.icon-people-bubble:before {
+.icon-accessin:before {
   content: "\e901";
 }
-.icon-app-operator:before {
+.icon-people-bubble:before {
   content: "\e902";
 }
-.icon-client-employee:before {
+.icon-app-operator:before {
   content: "\e903";
 }
-.icon-family:before {
+.icon-client-employee:before {
   content: "\e904";
 }
-.icon-family-with-access:before {
+.icon-family:before {
   content: "\e905";
 }
-.icon-family-with-access2:before {
+.icon-family-with-access:before {
   content: "\e906";
 }
-.icon-people:before {
+.icon-family-with-access2:before {
   content: "\e907";
 }
-.icon-person:before {
+.icon-people:before {
   content: "\e908";
 }
-.icon-person-admin:before {
+.icon-person:before {
   content: "\e909";
 }
-.icon-person-employee:before {
+.icon-person-admin:before {
   content: "\e90a";
 }
-.icon-person-owner-group:before {
+.icon-person-employee:before {
   content: "\e90b";
 }
-.icon-sign-out:before {
+.icon-person-owner-group:before {
+  content: "\e90c";
+}
+.icon-authorizations:before {
+  content: "\e90d";
+}
+.icon-batch:before {
+  content: "\e90e";
+}
+.icon-communications:before {
+  content: "\e90f";
+}
+.icon-config:before {
+  content: "\e910";
+}
+.icon-department:before {
+  content: "\e911";
+}
+.icon-events:before {
   content: "\e912";
 }
 .icon-person-add:before {
   content: "\e913";
-}
-.icon-authorizations:before {
-  content: "\e90c";
-}
-.icon-batch:before {
-  content: "\e90d";
-}
-.icon-communications:before {
-  content: "\e90e";
-}
-.icon-config:before {
-  content: "\e90f";
-}
-.icon-department:before {
-  content: "\e910";
-}
-.icon-events:before {
-  content: "\e911";
 }
 .icon-expenses:before {
   content: "\e914";

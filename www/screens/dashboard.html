@@ -1,6 +1,7 @@
 <div class="dashboard">
-  <h4>BIENVENIDO</h4>
-  <div class="item" onclick="app.selectLiMenu(app.SCREENS.EVENTS);">
+  <h4>BIENVENIDO A LA<br>COMUNIDAD ACCESSIN</h4>
+  <div class="separator"></div>
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.EVENTS);" data-module="events">
     <div class="icon">
       <span class="icon-events"></span>
     </div>
@@ -16,7 +17,7 @@
       Comunicaciones
     </div>
   </div>
-  <div class="item" onclick="app.selectLiMenu(app.SCREENS.EXPENSES);">
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.EXPENSES);" data-module="expenses">
     <div class="icon">
       <span class="icon-expenses"></span>
     </div>
@@ -24,7 +25,7 @@
       Expensas
     </div>
   </div>
-  <div class="item" onclick="app.selectLiMenu(app.SCREENS.GUARD);">
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.GUARD);" data-module="guard">
     <div class="icon">
       <span class="icon-guard"></span>
     </div>
@@ -45,6 +46,19 @@
   function c(){
 
     this.start = function(){
+
+      if(!PrivateData.get('module_expense_active')){
+        $('.dashboard [data-module="expenses"]').remove();
+      }
+
+      if(!PrivateData.get('module_guard_active')){
+        $('.dashboard [data-module="guard"]').remove();
+      }
+
+      if(!PrivateData.get('module_events_active')){
+        $('.dashboard [data-module="events"]').remove();
+      }
+
       app.pageLoading('hide');
     }
 

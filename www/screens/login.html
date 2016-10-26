@@ -130,7 +130,8 @@
               version: device.version,
               uuid: localStorage.uuid,
               one_signal_push_token: ids.pushToken,
-              one_signal_user_id: ids.userId
+              one_signal_user_id: ids.userId,
+              original_uuid: device.uuid
             }
           },
           callback : function(data, success){

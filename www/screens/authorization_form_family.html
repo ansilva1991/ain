@@ -198,12 +198,12 @@
 
       console.log(form);
 
-      if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/)){
+      if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
         Alert.open('Nombre','Debe ingresar un nombre válido para continuar.','Aceptar');
         return false;
       }
 
-      if(form.last_name.length == 0 || !form.last_name.match(/^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/)){
+      if(form.last_name.length == 0 || !form.last_name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
         Alert.open('Apellido','Debe ingresar un apellido válido para continuar.','Aceptar');
         return false;
       }

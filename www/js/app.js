@@ -1,6 +1,6 @@
 var app = {
   VERSION: 204,
-  MINIUM_VERSION_LOGUINED: 202,
+  MINIUM_VERSION_LOGUINED: 204,
   ENV: "production",
   load_screen_ajax: false,
   current_screen: false,
@@ -114,6 +114,18 @@ var app = {
     $('.app>.menu .content .header').css({
       'background-image' : 'url(img/back_menu_lateral_' + PrivateData.get('current_client_picture_menu_n')+ '.jpg)'
     });
+
+    if(!PrivateData.get('module_expense_active')){
+      $('.app>.menu .content [data-module="expenses"]').remove();
+    }
+
+    if(!PrivateData.get('module_guard_active')){
+      $('.app>.menu .content [data-module="guard"]').remove();
+    }
+
+    if(!PrivateData.get('module_events_active')){
+      $('.app>.menu .content [data-module="events"]').remove();
+    }
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
@@ -154,6 +166,9 @@ var app = {
             PrivateData.set('current_person_avatar_last_change',data.person_last_avatar_change);
             PrivateData.set('current_group_identificator_one',data.current_group_identificator_one);
             PrivateData.set('current_group_identificator_others',data.current_group_identificator_others);
+            PrivateData.set('module_expense_active',data.module_expense_active);
+            PrivateData.set('module_guard_active',data.module_guard_active);
+            PrivateData.set('module_events_active',data.module_events_active);
 
             app.update_config_callback();
           }
@@ -372,7 +387,10 @@ var PrivateData = {
     current_group_identificator_others: "esjot",
     current_client_name: "cvjjf",
     current_client_picture_menu_n: "cbjjf",
-    last_config_sync: "lcsyd"
+    last_config_sync: "lcsyd",
+    module_expense_active: "meadd",
+    module_guard_active: "mgadd",
+    module_events_active: "mevad"
   },
   booleans : ["is_login"],
   get : function(key){
