@@ -182,7 +182,8 @@
               }else if(cs.mode == 'list'){
                 app.loadScreen(app.SCREENS.EVENT_GUEST_FORM,{
                   list: cs.getList(),
-                  i: $(this).data('id')
+                  i: $(this).data('id'),
+                  back_to: app.SCREENS.EVENT_FORM
                 });
               }
             });

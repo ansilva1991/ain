@@ -60,7 +60,6 @@ var Extends = {
     $(selector_css).scrollTop(($(selector_css).scrollTop() + $(':focus').offset().top) - window.innerHeight + 60);
   },
   formatDate : function(date,format){
-    console.log(date);
     var months_name_abbr = ['-','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
     var months_name = ['-','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
     var units = {
