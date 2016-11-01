@@ -155,6 +155,10 @@
 
               if(person.avatar){
                 tmp.find('img').attr('src',person.avatar);
+
+                if(person.id == PrivateData.get('current_person_id')){
+                  PrivateData.set('current_person_avatar',person.avatar);
+                }
               }
 
               tmp.data('id',person.id);

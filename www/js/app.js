@@ -1,6 +1,6 @@
 var app = {
-  VERSION: 204,
-  MINIUM_VERSION_LOGUINED: 204,
+  VERSION: 206,
+  MINIUM_VERSION_LOGUINED: 206,
   ENV: "production",
   load_screen_ajax: false,
   current_screen: false,
@@ -106,7 +106,7 @@ var app = {
   },
   updateMenuInfo: function(){
     if(PrivateData.get('current_person_avatar')){
-      $('.app>.menu .content .header img').attr('src','data:image/jpg;base64,' + PrivateData.get('current_person_avatar'));
+      $('.app>.menu .content .header img').attr('src',PrivateData.get('current_person_avatar'));
     }
     $('.app>.menu .content .header #client_name').html(PrivateData.get('current_client_name'));
     $('.app>.menu .content .header #group_identificator').html(PrivateData.get('current_group_identificator'));
@@ -144,7 +144,7 @@ var app = {
   updateConfig: function(callback){
     app.update_config_callback = callback;
 
-    if((new Date()).getTime() - (PrivateData.get('last_config_sync') || 0) > 1800000){
+    if((new Date()).getTime() - (PrivateData.get('last_config_sync') || 0) > 10800000){
       app.pageLoading('show');
       console.log('SYNC CONFIG');
       Server.send({
@@ -156,9 +156,6 @@ var app = {
           console.log(data);
           if(success){
             PrivateData.set('current_person_full_name',data.person_full_name);
-            if(data.person_avatar){
-              PrivateData.set('current_person_avatar',data.person_avatar);
-            }
             PrivateData.set('current_group_identificator',data.group_identificator);
             PrivateData.set('current_client_name',data.client_name);
             PrivateData.set('current_client_picture_menu_n',data.client_picture_menu_app_n);
@@ -169,6 +166,10 @@ var app = {
             PrivateData.set('module_expense_active',data.module_expense_active);
             PrivateData.set('module_guard_active',data.module_guard_active);
             PrivateData.set('module_events_active',data.module_events_active);
+
+            if(data.person_avatar){
+              PrivateData.set('current_person_avatar',data.person_avatar);
+            }
 
             app.update_config_callback();
           }

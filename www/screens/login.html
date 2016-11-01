@@ -109,6 +109,13 @@
     this.processLogin = function(){
       var form = Extends.serializeForm('.login form');
 
+      var type_server = 'real';
+
+      if(form.email.search("test:") == 0){
+        type_server = 'test';
+        form.email = form.email.replace('test:','');
+      }
+
       $('.login #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
       $('.login #submit').prop('disabled', true);
       this.is_processing = true;
@@ -121,7 +128,7 @@
 
       if(ids){
         Server.send({
-          route : [Server.serverUrl(),'app','login'],
+          route : [Server.serverUrl(type_server),'app','login'],
           data : {
             login: form,
             device: {
@@ -147,8 +154,9 @@
                 PrivateData.set('current_server_portal','http://demo.accessin.net');
 
                 app.ifDemo();
-
-                app.loadScreen(app.SCREENS.WELCOME);
+                app.updateConfig(function(){
+                  app.loadScreen(app.SCREENS.WELCOME);
+                });
 
               }else if(data.auths.length == 0){
                 Alert.open('Datos incorrectos','El email y la contraseña no son correctos.','Aceptar');

@@ -1,5 +1,6 @@
 var Server = {
   ACCESSIN_URL: 'http://accessin.net',
+  TEST_ACCESSIN_URL: 'http://test.accessin.net:4000',
   DEV_URL: 'http://192.168.1.55:4000',
   last_ajax: undefined,
   upload_success_callback: function(){},
@@ -15,6 +16,7 @@ var Server = {
     data.uuid = localStorage.uuid;
     data.auth_code = PrivateData.get('current_auth_code');
     data.version = app.VERSION;
+    console.log('send to:' + route);
     console.log('send:' + JSON.stringify(data));
     data = Security.encrypt(data);
 
@@ -82,7 +84,7 @@ var Server = {
         Server.upload_callback({},false);
       }, options);
   },
-  serverUrl: function(){
-    return app.in_dev() ? Server.DEV_URL : Server.ACCESSIN_URL;
+  serverUrl: function(type){
+    return type != 'test' ? (app.in_dev() ? Server.DEV_URL : Server.ACCESSIN_URL) : Server.TEST_ACCESSIN_URL;
   }
 }

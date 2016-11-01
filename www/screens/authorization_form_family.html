@@ -142,7 +142,7 @@
     }
 
     this.getPersonInfo = function(callback){
-      if(!this.person_id){
+      if(this.person_id != 0 && !this.person_id){
         callback();
         return true;
       }
@@ -250,7 +250,7 @@
       this.is_processing = true;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','people',this.person_id ? 'update_family' : 'create_family'],
+        route : [PrivateData.get('current_server_portal'),'app','people',(this.person_id == 0 || this.person_id) ? 'update_family' : 'create_family'],
         data : {
           person: form,
           person_auth_code : this.auth_code,
