@@ -219,6 +219,11 @@ var app = {
   headerIconClick: function(function_id){
     app.header_icon_clicks[function_id]();
   },
+  ifDemo: function(){
+    if(PrivateData.get('is_demo')){
+      app.ENV = 'demo';
+    }
+  },
   windowResize: function(){},
   loadScreen: function(x_screen,opts){
     console.log('loadScreen: ' + x_screen.html);
@@ -316,6 +321,9 @@ var app = {
   },
   in_dev : function(){
     return app.ENV == 'development';
+  },
+  in_demo : function(){
+    return app.ENV == 'demo';
   }
 };
 
@@ -377,6 +385,7 @@ var PrivateData = {
     current_server_portal: "spkmk",
     email_logined: "eljjh",
     is_login: "evjjh",
+    is_demo: "diskk",
     logined_version: "lvsyd",
     current_person_id: "evjjc",
     current_person_full_name: "esjjc",
@@ -392,7 +401,7 @@ var PrivateData = {
     module_guard_active: "mgadd",
     module_events_active: "mevad"
   },
-  booleans : ["is_login"],
+  booleans : ["is_login","is_demo"],
   get : function(key){
     if(PrivateData.booleans.indexOf(key) > -1){
       return localStorage[PrivateData.hide_fields[key]] ? Security.decrypt(localStorage[PrivateData.hide_fields[key]]) : false;

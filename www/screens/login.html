@@ -137,7 +137,20 @@
           callback : function(data, success){
             if(success){
               console.log(data);
-              if(data.auths.length == 0){
+              if(data.demo){
+                PrivateData.set('is_demo', true);
+                PrivateData.set('is_login',true);
+                PrivateData.set('logined_version',app.VERSION);
+                PrivateData.set('current_person_id',0);
+                PrivateData.set('email_logined','demo@accessin.net');
+                PrivateData.set('current_auth_code','demo_owner');
+                PrivateData.set('current_server_portal','http://demo.accessin.net');
+
+                app.ifDemo();
+
+                app.loadScreen(app.SCREENS.WELCOME);
+
+              }else if(data.auths.length == 0){
                 Alert.open('Datos incorrectos','El email y la contraseña no son correctos.','Aceptar');
               }else{
                 console.log(data);

@@ -1,5 +1,5 @@
 var Server = {
-  ACCESSIN_URL: 'http://test.accessin.net:4000',
+  ACCESSIN_URL: 'http://accessin.net',
   DEV_URL: 'http://192.168.1.55:4000',
   last_ajax: undefined,
   upload_success_callback: function(){},
