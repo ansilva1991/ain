@@ -67,7 +67,7 @@ var Server = {
       data.uuid = localStorage.uuid;
       data.auth_code = PrivateData.get('current_auth_code');
       data.version = app.VERSION;
-      console.log('send:' + JSON.stringify(data));
+      console.log('upload:' + JSON.stringify(data));
       data = Security.encrypt(data);
 
       options.params = { a: data };

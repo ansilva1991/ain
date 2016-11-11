@@ -101,41 +101,56 @@
 
       this.is_processing = true;
 
-      Server.upload({
-        route : [PrivateData.get('current_server_portal'),'app','communications','create'],
-        data : {
-          communication: {
-            title: form.title,
-            communication_reason_id: form.communication_reason_id,
-            comments_attributes: {
-              0: {
-                description: form.comment
-              }
+      var route = [PrivateData.get('current_server_portal'),'app','communications','create'];
+      var data = {
+        communication: {
+          title: form.title,
+          communication_reason_id: form.communication_reason_id,
+          comments_attributes: {
+            0: {
+              description: form.comment
             }
           }
-        },
-        file_key : 'file_attachment',
-        file_name : 'image.jpg',
-        file_uri : form.attachment,
-        callback : function(data, success){
-          if(success){
-            if(data.communication){
-              app.loadScreen(app.SCREENS.VIEW_COMMUNICATION,{
-                communication_id: data.communication
-              });
-            }else{
-              Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
-            }
-          }else{
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
-          }
-
-          cs.is_processing = false;
-          $('#submit-button').html("Listo <i class='fa fa-check'></i>");
-          $('#submit-button').addClass('text');
         }
-      });
+      }
+      if(form.attachment != ""){
+        Server.upload({
+          route : route,
+          data : data,
+          file_key : 'file_attachment',
+          file_name : 'image.jpg',
+          file_uri : form.attachment,
+          callback : function(data, success){
+            cs.submitSuccess(data,success);
+        }});
+      }else{
+        Server.send({
+          route : route,
+          data : data,
+          callback : function(data, success){
+            cs.submitSuccess(data,success);
+        }});
+      }
     };
+
+    this.submitSuccess = function(data, success){
+      console.log(data,success);
+      if(success){
+        if(data.communication){
+          app.loadScreen(app.SCREENS.VIEW_COMMUNICATION,{
+            communication_id: data.communication
+          });
+        }else{
+          Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+        }
+      }else{
+        Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+      }
+
+      this.is_processing = false;
+      $('#submit-button').html("Listo <i class='fa fa-check'></i>");
+      $('#submit-button').addClass('text');
+    }
 
     this.back = function(){
       app.loadScreen(app.SCREENS.COMMUNICATIONS);

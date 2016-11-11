@@ -1,5 +1,5 @@
 var app = {
-  VERSION: 206,
+  VERSION: 207,
   MINIUM_VERSION_LOGUINED: 206,
   ENV: "production",
   load_screen_ajax: false,
@@ -64,6 +64,7 @@ var app = {
       if(!PrivateData.get('logined_version') || PrivateData.get('logined_version') < app.MINIUM_VERSION_LOGUINED){
         PrivateData.clear();
         app.loadScreen(app.SCREENS.LOGIN);
+        return false;
       }
 
       if(PrivateData.get('current_auth_code')){

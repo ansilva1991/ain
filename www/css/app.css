@@ -1745,6 +1745,30 @@ button.btn.btn-orange:disabled{
   background-image: url(../img/back_event_place_football_court.png);
 }
 
+.app>.content .page .list.events.event_places .item.back-court_voley{
+  background-image: url(../img/back_event_place_voley_court.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-court_beach_voley{
+  background-image: url(../img/back_event_place_beach_voley_court.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-course_golf{
+  background-image: url(../img/back_event_place_golf_course.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-cricket_golf{
+  background-image: url(../img/back_event_place_cricket_course.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-kindergarten{
+  background-image: url(../img/back_event_place_kindergarten.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-laundry{
+  background-image: url(../img/back_event_place_laundry.png);
+}
+
 .app>.content .page .list.events.event_places .item h4{
   width: 100%;
   height: 50px;
