@@ -1,7 +1,7 @@
 var app = {
   VERSION: 207,
   MINIUM_VERSION_LOGUINED: 206,
-  ENV: "production",
+  ENV: "development",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -412,7 +412,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.1.55") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.0.108") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];

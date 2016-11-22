@@ -156,8 +156,12 @@
               }
 
               tmp.attr('data-id',event.id);
-              tmp.find('#person_full_name').html(event.person);
-              tmp.find('#group_identificator').html(event.group_identificator);
+              if(data.event_place.visible_who_resersed){
+                tmp.find('#person_full_name').html(event.person);
+                tmp.find('#group_identificator').html(event.group_identificator);
+              }else{
+                tmp.find('#person_full_name').html("Reservado");
+              }
               tmp.find('#interval').html(event.init_hour + " - " + event.end_hour);
 
               tmp.show();

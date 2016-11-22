@@ -494,7 +494,7 @@ button.btn.btn-orange:disabled{
 }
 
 .login.init form>.row.form{
-  bottom: -284px;
+  bottom: -291px;
 }
 
 .login form>.row.form .cell{
@@ -530,7 +530,7 @@ button.btn.btn-orange:disabled{
 
 .login form .input{
   width: 100%;
-  height: 50px;
+  height: 53px;
   overflow: hidden;
 }
 
@@ -541,7 +541,7 @@ button.btn.btn-orange:disabled{
   border: none;
   border-bottom: 1px solid #fff;
   line-height: 30px;
-  font-size: 12px;
+  font-size: 16px;
   color: #fff;
   outline: none;
   border-radius: 0px;
@@ -551,7 +551,7 @@ button.btn.btn-orange:disabled{
   width: 100%;
   text-align: left;
   color: #fff;
-  font-size: 12px;
+  font-size: 16px;
   display: block;
 }
 
@@ -585,7 +585,7 @@ button.btn.btn-orange:disabled{
   height: 49px;
   background-color: transparent;
   border: none;
-  font-size: 12px;
+  font-size: 16px;
   color: #fff;
   padding: 0px;
 }
@@ -597,9 +597,9 @@ button.btn.btn-orange:disabled{
 }
 
 .login form h5{
-  font-size: 12px;
+  font-size: 16px;
   color: #fff;
-  padding-bottom: 40px;
+  padding-bottom: 30px;
   margin-bottom: 0px;
 }
 
@@ -661,7 +661,7 @@ button.btn.btn-orange:disabled{
 
 .forgot-password form .input{
   width: 100%;
-  height: 50px;
+  height: 53px;
   overflow: hidden;
 }
 
@@ -682,7 +682,7 @@ button.btn.btn-orange:disabled{
   width: 100%;
   text-align: left;
   color: #fff;
-  font-size: 12px;
+  font-size: 16px;
   display: block;
 }
 
@@ -692,14 +692,14 @@ button.btn.btn-orange:disabled{
 }
 
 .forgot-password form h4{
-  font-size: 14px;
+  font-size: 16px;
   color: #fff;
   margin-bottom: 30px;
   display: block;
 }
 
 .forgot-password form h5{
-  font-size: 12px;
+  font-size: 16px;
   color: #fff;
   padding-bottom: 60px;
   margin-bottom: 0px;
@@ -775,7 +775,7 @@ button.btn.btn-orange:disabled{
 
 .register-code form .input{
   width: 100%;
-  height: 50px;
+  height: 53px;
   overflow: hidden;
 }
 
@@ -797,7 +797,7 @@ button.btn.btn-orange:disabled{
   width: 100%;
   text-align: left;
   color: #fff;
-  font-size: 12px;
+  font-size: 16px;
   display: block;
 }
 
@@ -807,14 +807,14 @@ button.btn.btn-orange:disabled{
 }
 
 .register-code form h4{
-  font-size: 14px;
+  font-size: 16px;
   color: #fff;
   margin-bottom: 30px;
   display: block;
 }
 
 .register-code form h5{
-  font-size: 12px;
+  font-size: 16px;
   color: #fff;
   padding-bottom: 60px;
   margin-bottom: 0px;
