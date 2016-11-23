@@ -264,7 +264,6 @@
        if(this.is_processing){ return false; }
 
       var form = this.getList();
-      console.log(form);
 
       if(this.countGuests() > this.event_place_max_people){
         Alert.open('Invitados','No se permite reservar un evento con más de ' + this.event_place_max_people + ' invitados en ' + this.event_place_name + '.','Aceptar');

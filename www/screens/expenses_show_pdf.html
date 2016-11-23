@@ -38,7 +38,7 @@
         callback : function(data, success){
           console.log(data);
           if(success){
-            cs.impute_date = new Date(data.impute_date + "T12:00:00");
+            cs.impute_date = new Date(data.impute_date + "T00:00:00" + PrivateData.get('time_zone_offset'));
 
             cs.file_name = cs.entry_id + "_" + data.pdf_update + ".pdf";
 
