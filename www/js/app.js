@@ -412,7 +412,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.0.108") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.0.113") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];

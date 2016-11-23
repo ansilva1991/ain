@@ -56,6 +56,10 @@ button.btn.btn-orange:disabled{
   background-color: #ffb52f;
 }
 
+.text-uppercase{
+  text-transform: uppercase;
+}
+
 .toast{
   width: 300px;
   position: fixed;
@@ -2072,7 +2076,13 @@ button.btn.btn-orange:disabled{
 .app>.content .page .event-calendar-day>.day-scroll .day .block.disabled .content{
   background: #eee;
   border-color: #ccc;
+  text-align: center;
+  color: #777;
+  font-size: 12px;
+  line-height: 60px;
+  text-transform: uppercase;
 }
+
 
 .app>.content .page .event-calendar-day>.day-scroll .day .block .label{
   display: table-cell;
@@ -2102,6 +2112,21 @@ button.btn.btn-orange:disabled{
   padding: 10px;
 }
 
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event.pending{
+  background-color: #eee;
+  color: #777;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event.rejected{
+  background-color: #cc3f44;
+  color: #fff;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event.canceled{
+  background-color: #0e62c7;
+  color: #fff;
+}
+
 .app>.content .page .event-calendar-day>.day-scroll .day .block .content .event:active{
   background-color: #e09d2e;
 }
@@ -2111,17 +2136,27 @@ button.btn.btn-orange:disabled{
   color: #555;
 }
 
-.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .info{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .line{
   width: 100%;
   display: block;
   font-size: 14px;
+  height: 24px;
 }
 
-.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .info .hour{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .line .name{
+  float: left;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .line .status{
+  float: right;
+  text-transform: uppercase;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .line .hour{
   float: right;
 }
 
-.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .info .group{
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .line .group{
   float: left;
   font-weight: bold;
 }

@@ -105,14 +105,13 @@
         var last_name = $(this).find('#last_name').val();
         var real_id = $(this).find('#real_id').val();
 
-        var id = (new Date()).getTime() + "" + Math.round(Math.random() + 9999);
+        var id = (new Date()).getTime() + "" + Math.round(Math.random() * 9999);
         cs.list.guests_attributes[id] = {
           name : name,
           last_name : last_name,
           real_id : real_id
         }
       });
-
 
       app.loadScreen(this.back_to,{
         list: this.list

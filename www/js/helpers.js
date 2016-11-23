@@ -46,3 +46,14 @@ var HelperExpenses = {
     }
   }
 }
+
+var HelperEvents = {
+  status : function(status){
+    return {
+      'pending' : 'Pendiente',
+      'approved' : 'Aprobado',
+      'rejected' : 'Rechazado',
+      'canceled' : 'Cancelado'
+    }[status];
+  }
+}

@@ -17,6 +17,13 @@
       <input type="text" class="form-control" name="name" id="name">
     </div>
     <div class="form-group">
+      <label for="name">Estado</label>
+      <input type="text" class="form-control" id="status">
+    </div>
+    <div class="form-group cancel-event-button">
+      <button type="button" onclick="cs.cancelEvent();" class="btn btn-orange btn-block text-uppercase">Cancelar Evento</button>
+    </div>
+    <div class="form-group">
       <label for="allow_guests_previous_minutes">Permitir ingresar a los invitados</label>
       <select class="form-control" name="allow_guests_previous_minutes" id="allow_guests_previous_minutes">
         <option value="15">15 Minutos antes de la fecha de inicio del evento</option>
@@ -29,7 +36,11 @@
         <option value="360">6 Horas antes de la fecha de inicio del evento</option>
       </select>
     </div>
-    <legend>INVITADOS</legend>
+    <div class="form-group">
+      <label for="price">Precio Estimado</label>
+      <input type="text" class="form-control" id="estimated_price">
+    </div>
+    <legend>INVITADOS (<span id="total_guests">0</span>/<span id="max_people">0</span>)</legend>
     <h5 id="none">Sin invitados agregados a la lista.</h5>
     <div id="example" style="display: none;">
       <input type="hidden" id="name">
@@ -140,16 +151,22 @@
       this.event_id = list.event_id;
       this.event_place_name = list.event_place_name;
       this.event_place_id = list.event_place_id;
+      this.event_place_max_people = list.event_place_max_people;
+      this.event_place_estimated_price = list.event_place_estimated_price;
+      this.event_status = list.status;
       this.date = list.date;
       this.init_hour = list.init_hour;
       this.end_hour = list.end_hour;
 
       $('#event_place').val(list.event_place_name == 'in_house' ? ('Mi ' + PrivateData.get('current_group_identificator_one')) : list.event_place_name);
+      $('#max_people').html(list.event_place_max_people);
       $('#date').val(Extends.formatDate(new Date(list.date + "T12:00:00"),'%dd de %mname del %yyyy'));
       $('#hour').val(list.init_hour + " - " + list.end_hour + " hrs");
       $('#allow_guests_previous_minutes').val(list.allow_guests_previous_minutes || "15");
 
       $('#name').val(list.name || "");
+      $('#status').val(HelperEvents.status(list.status));
+      $('#estimated_price').val("$ " + parseFloat(list.event_place_estimated_price).toFixed(2));
 
       if(list.guests_attributes && Object.keys(list.guests_attributes).length > 0){
 
@@ -192,6 +209,19 @@
           }
         }
       }
+
+      if(list.editable == false){
+        $('input#name').attr('readonly', true);
+        $('select#allow_guests_previous_minutes').prop('disabled', true);
+        $('.new-guests-buttons').hide();
+        $('.app .header #submit-button').hide();
+      }
+
+      if(!(list.event_id && list.editable)){
+        $('.cancel-event-button').hide();
+      }
+
+      this.reCountGuests();
     };
 
     this.getList = function(){
@@ -199,6 +229,9 @@
         event_id: this.event_id,
         event_place_name: this.event_place_name,
         event_place_id: this.event_place_id,
+        event_place_max_people: this.event_place_max_people,
+        event_place_estimated_price: this.event_place_estimated_price,
+        status: this.event_status,
         date: this.date,
         init_hour: this.init_hour,
         end_hour: this.end_hour,
@@ -233,8 +266,8 @@
       var form = this.getList();
       console.log(form);
 
-      if(form.name.length == 0){
-        Alert.open('Nombre','Debe ingresar un nombre válido para continuar. Por ejemplo: "Cumple Ani"','Aceptar');
+      if(this.countGuests() > this.event_place_max_people){
+        Alert.open('Invitados','No se permite reservar un evento con más de ' + this.event_place_max_people + ' invitados en ' + this.event_place_name + '.','Aceptar');
         return false;
       }
 
@@ -324,6 +357,7 @@
       }
 
       cs.desSelectAll();
+      this.reCountGuests();
     }
 
     this.openMenuNew = function(){
@@ -347,6 +381,53 @@
         back_to: app.SCREENS.EVENT_FORM
       });
     };
+
+    this.countGuests = function(){
+      var total = 0;
+      $('.guest').each(function(){
+        if($(this).find('#erased').val() != "true"){
+          total++;
+        }
+      });
+
+      return total;
+    }
+
+    this.reCountGuests = function(){
+      $('#total_guests').html(this.countGuests());
+    }
+
+    this.cancelEvent = function(){
+      Confirm.open({
+        title: "Cancelar Evento",
+        msg: "¿Desea continuar?",
+        success_button: "Continuar",
+        cancel_button: "Cancelar",
+        callback_success: function(){
+
+          app.pageLoading('show');
+
+          Server.send({
+            route : [PrivateData.get('current_server_portal'),'app','events','cancel'],
+            data : {
+              event_id: cs.event_id
+            },
+            callback : function(data, success){
+              if(success){
+                if(data.event){
+                  cs.back();
+                }else{
+                  Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+                }
+              }else{
+                app.pageLoading('hide');
+                Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+              }
+            }
+          });
+        }
+      })
+    }
 
   }
 </script>
