@@ -167,6 +167,7 @@ var app = {
             PrivateData.set('module_expense_active',data.module_expense_active);
             PrivateData.set('module_guard_active',data.module_guard_active);
             PrivateData.set('module_events_active',data.module_events_active);
+            PrivateData.set('time_zone_offset',(parseInt(data.time_zone_offset)/36000).toFixed(1).replace('.','') + "00");
 
             if(data.person_avatar){
               PrivateData.set('current_person_avatar',data.person_avatar);
@@ -180,6 +181,9 @@ var app = {
     }else{
       app.update_config_callback();
     }
+  },
+  resetConfig : function(){
+    PrivateData.set('last_config_sync',0);
   },
   selectLiMenu: function(x){
     if(x == 'sign_out'){
@@ -401,7 +405,8 @@ var PrivateData = {
     last_config_sync: "lcsyd",
     module_expense_active: "meadd",
     module_guard_active: "mgadd",
-    module_events_active: "mevad"
+    module_events_active: "mevad",
+    time_zone_offset: "tzofs"
   },
   booleans : ["is_login","is_demo"],
   get : function(key){
@@ -412,7 +417,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.0.113") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.1.35") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];

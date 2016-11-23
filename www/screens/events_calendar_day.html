@@ -132,11 +132,12 @@
 
           for(var i in data.event_place.interval_hours){
             var hour = data.event_place.interval_hours[i];
-            var date_block = new Date(Extends.formatDate(cs.selected_day,'%yyyy-%mm-%ddT') + hour + ":00" );
+            var date_block = new Date(Extends.formatDate(cs.selected_day,'%yyyy-%mm-%ddT') + hour + ":00" + PrivateData.get('time_zone_offset'));
 
 
             var tmp = $('#block_example').clone().appendTo('.day-scroll .day');
             tmp.removeAttr('id');
+            console.log(date_block, init_calendar);
             if(date_block < init_calendar){
               tmp.addClass('disabled');
               tmp.find('.content').html('No disponible');

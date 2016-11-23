@@ -160,7 +160,7 @@
 
       $('#event_place').val(list.event_place_name == 'in_house' ? ('Mi ' + PrivateData.get('current_group_identificator_one')) : list.event_place_name);
       $('#max_people').html(list.event_place_max_people);
-      $('#date').val(Extends.formatDate(new Date(list.date + "T12:00:00"),'%dd de %mname del %yyyy'));
+      $('#date').val(Extends.formatDate(new Date(list.date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%dd de %mname del %yyyy'));
       $('#hour').val(list.init_hour + " - " + list.end_hour + " hrs");
       $('#allow_guests_previous_minutes').val(list.allow_guests_previous_minutes || "15");
 
@@ -288,7 +288,7 @@
             if(data.event){
               app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
                 event_place_id: cs.event_place_id,
-                selected_day: new Date(cs.date + 'T12:00:00')
+                selected_day: new Date(cs.date + 'T00:00:00' + PrivateData.get('time_zone_offset'))
               });
             }else{
               Alert.open('Fecha del evento','La fecha ingresada se encuentra ocupada por otro evento.','Aceptar');
@@ -307,7 +307,7 @@
     this.back = function(){
       app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
         event_place_id: this.event_place_id,
-        selected_day: new Date(this.date + 'T12:00:00')
+        selected_day: new Date(this.date + 'T00:00:00' + PrivateData.get('time_zone_offset'))
       });
     };
 

@@ -126,7 +126,7 @@
     this.setMonth = function(callback){
       this.callback_get_month = callback;
 
-      $('.header .section-name').html(Extends.formatDate(new Date(this.current_month + "-01T12:00:00"),'%mabbr. del %yyyy'));
+      $('.header .section-name').html(Extends.formatDate(new Date(this.current_month + "-01T00:00:00" + PrivateData.get('time_zone_offset')),'%mabbr. del %yyyy'));
 
       Server.send({
         route : [PrivateData.get('current_server_portal'),'app','group_current_accounts','index'],
@@ -151,7 +151,7 @@
                 tmp.find('#real_date').html("<span class='label-benefit'>BONIFICADO</span>");
 
               }else{
-                tmp.find('#real_date').html(Extends.formatDate(new Date(entry.real_date + "T00:00:00"),'%yyyy/%mm/%dd'));
+                tmp.find('#real_date').html(Extends.formatDate(new Date(entry.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%yyyy/%mm/%dd'));
               }
 
               tmp.find('#value').html(entry.value.toFixed(2));
@@ -201,8 +201,8 @@
               tmp.show();
             }
 
-            $('#init_balance #init_balance_date').html(Extends.formatDate(new Date(cs.current_month + "-01T12:00:00"),'%dd de %mname'));
-            $('#end_balance #end_balance_date').html(Extends.formatDate(Extends.lastDayMonth(new Date(cs.current_month + "-01T12:00:00")),'%dd de %mname'));
+            $('#init_balance #init_balance_date').html(Extends.formatDate(new Date(cs.current_month + "-01T00:00:00" + PrivateData.get('time_zone_offset')),'%dd de %mname'));
+            $('#end_balance #end_balance_date').html(Extends.formatDate(Extends.lastDayMonth(new Date(cs.current_month + "-01T00:00:00" + PrivateData.get('time_zone_offset'))),'%dd de %mname'));
             $('#init_balance #value').html(data.monthly_balance.init_balance.toFixed(2));
             $('#end_balance #value').html(data.monthly_balance.end_balance.toFixed(2));
 
