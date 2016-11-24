@@ -254,6 +254,18 @@ app.SCREENS = {
     section_name: "",
     html: "events_calendar_day"
   },
+  EVENTS_TERMS: {
+    icon_left: [
+    {
+      icon: "chevron-left",
+      func: function(){
+        cs.back();
+      }
+    }
+    ],
+    section_name: "Reglamento",
+    html: "events_terms"
+  },
   EVENT_FORM: {
     icon_left: [
     {

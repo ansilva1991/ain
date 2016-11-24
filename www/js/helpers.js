@@ -55,5 +55,8 @@ var HelperEvents = {
       'rejected' : 'Rechazado',
       'canceled' : 'Cancelado'
     }[status];
+  },
+  event_place_name : function(name){
+    return name == 'in_house' ? ('Mi ' + PrivateData.get('current_group_identificator_one')) : name;
   }
 }

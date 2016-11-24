@@ -158,7 +158,7 @@
       this.init_hour = list.init_hour;
       this.end_hour = list.end_hour;
 
-      $('#event_place').val(list.event_place_name == 'in_house' ? ('Mi ' + PrivateData.get('current_group_identificator_one')) : list.event_place_name);
+      $('#event_place').val(HelperEvents.event_place_name(list.event_place_name));
       $('#max_people').html(list.event_place_max_people);
       $('#date').val(Extends.formatDate(new Date(list.date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%dd de %mname del %yyyy'));
       $('#hour').val(list.init_hour + " - " + list.end_hour + " hrs");

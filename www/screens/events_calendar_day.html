@@ -61,6 +61,7 @@
     this.event_place_name;
     this.is_processing = false;
     this.over_debt_limit = false;
+    this.availability_days_of_week;
 
     this.start = function(opts){
       opts = opts || {};
@@ -84,19 +85,6 @@
         cs.goTo(year + "-" + month + "-07T12:00:00");
       });
 
-      $('.event-calendar-day').append(this.createDOMWeek(new Date(this.scroll_init_day_integer - 604800000),{
-        addClass: 'right'
-      }));
-      $('.event-calendar-day').append(this.createDOMWeek(new Date(this.scroll_init_day_integer),{
-        addClass: 'center'
-      }));
-      $('.event-calendar-day').append(this.createDOMWeek(new Date(this.scroll_init_day_integer + 604800000),{
-        addClass: 'left'
-      }));
-
-      $('.end_days_number.center').scrollLeft(window.innerWidth * 0.01);
-      $('.end_days_number.center').addClass('available-scroll');
-
       $('.header .section-name').html(Extends.formatDate(new Date(this.scroll_init_day_integer),'%mabbr. de %yyyy'));
 
       setTimeout(function(){
@@ -106,6 +94,20 @@
       app.liActive('events');
 
       this.getInfo(function(){
+
+        $('.event-calendar-day').append(cs.createDOMWeek(new Date(cs.scroll_init_day_integer - 604800000),{
+          addClass: 'right'
+        }));
+        $('.event-calendar-day').append(cs.createDOMWeek(new Date(cs.scroll_init_day_integer),{
+          addClass: 'center'
+        }));
+        $('.event-calendar-day').append(cs.createDOMWeek(new Date(cs.scroll_init_day_integer + 604800000),{
+          addClass: 'left'
+        }));
+
+        $('.end_days_number.center').scrollLeft(window.innerWidth * 0.01);
+        $('.end_days_number.center').addClass('available-scroll');
+
         app.pageLoading('hide');
       });
     }
@@ -125,8 +127,27 @@
         callback : function(data, success){
           console.log(data);
 
+          if(data.terms){
+            app.loadScreen(app.SCREENS.EVENTS_TERMS,{
+              event_place_id: cs.event_place_id,
+            });
+
+            return false;
+          }
+
+          if(data.new_date){
+            app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
+              event_place_id: cs.event_place_id,
+              selected_day: new Date(data.new_date + 'T00:00:00' + PrivateData.get('time_zone_offset'))
+            });
+
+            return false;
+          }
+
+          cs.availability_days_of_week = data.event_place.availability_days_of_week;
+
           cs.over_debt_limit = data.event_place.over_debt_limit;
-          cs.event_place_name = data.event_place.name;
+          cs.event_place_name = HelperEvents.event_place_name(data.event_place.name);
 
           var init_calendar = new Date(data.event_place.init_calendar);
 
@@ -247,20 +268,26 @@
         }
 
         tmp.attr('data-date',days[i].time);
-        tmp.tap(function(){
-          var date = $(this).data('date');
-          cs.selected_day = new Date(date + "T12:00:00");
 
-          $('.days-number .day').removeClass('selected');
-          $(this).addClass('selected');
+        if(!this.availability_days_of_week[days[i].wday]){
+          tmp.addClass('disabled');
+        }else{
+          tmp.tap(function(){
+            var date = $(this).data('date');
+            cs.selected_day = new Date(date + "T12:00:00");
 
-          cs.closeCalendar();
+            $('.days-number .day').removeClass('selected');
+            $(this).addClass('selected');
 
-          app.pageLoading('show');
-          cs.getInfo(function(){
-            app.pageLoading('hide');
+            cs.closeCalendar();
+
+            app.pageLoading('show');
+            cs.getInfo(function(){
+              app.pageLoading('hide');
+            });
           });
-        });
+        }
+
       }
 
       days_number.css({ 'display' : 'block' });

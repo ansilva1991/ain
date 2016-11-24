@@ -99,11 +99,11 @@
 
               if(event_place.in_house){
                 tmp.addClass('back-house');
-                tmp.find('#name').html('Mi ' + PrivateData.get('current_group_identificator_one'));
               }else{
                 tmp.addClass('back-' + event_place.type);
-                tmp.find('#name').html(event_place.name);
               }
+
+              tmp.find('#name').html(HelperEvents.event_place_name(event_place.name));
 
               tmp.tap(function(){
                 var id = $(this).data('id');
