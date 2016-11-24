@@ -120,5 +120,12 @@
       });
     }
 
+    this.info = function(){
+      app.loadScreen(app.SCREENS.EXPENSES_INFO,{
+        back_to : app.SCREENS.EXPENSES_SHOW_FULL,
+        expenses_id : this.entry_id
+      });
+    }
+
   }
 </script>

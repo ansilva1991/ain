@@ -329,12 +329,20 @@ app.SCREENS = {
   },
   EXPENSES_SHOW_FULL: {
     icon_left: [
-    {
-      icon: "chevron-left",
-      func: function(){
-        cs.back();
+      {
+        icon: "chevron-left",
+        func: function(){
+          cs.back();
+        }
       }
-    }
+    ],
+    icon_right: [
+      {
+        icon: "info-circle",
+        func: function(){
+          cs.info();
+        }
+      }
     ],
     section_name: "EXPENSAS",
     html: "expenses_show_full"
@@ -360,6 +368,14 @@ app.SCREENS = {
       }
     }
     ],
+    icon_right: [
+      {
+        icon: "info-circle",
+        func: function(){
+          cs.info();
+        }
+      }
+    ],
     section_name: "EXPENSAS",
     html: "expenses_show_nothing"
   },
@@ -372,8 +388,28 @@ app.SCREENS = {
       }
     }
     ],
+    icon_right: [
+      {
+        icon: "info-circle",
+        func: function(){
+          cs.info();
+        }
+      }
+    ],
     section_name: "EXPENSAS",
     html: "expenses_show_per_meter"
+  },
+  EXPENSES_INFO: {
+    icon_left: [
+    {
+      icon: "chevron-left",
+      func: function(){
+        cs.back();
+      }
+    }
+    ],
+    section_name: "Información",
+    html: "expenses_info"
   },
   GUARD: {
     icon_left: [

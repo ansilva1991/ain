@@ -4411,6 +4411,50 @@ button.btn.btn-orange:disabled{
   font-size: 16px !important;
 }
 
+.app>.content .page .expenses-info{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  overflow: auto;
+}
+
+.app>.content .page .expenses-info legend{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .expenses-info form>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+}
+
+.app>.content .page .expenses-info .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .expenses-info .surcharge{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #eee;
+  padding-left: 10px;
+  color: #777;
+  overflow: hidden;
+}
+
+.app>.content .page .expenses-info .surcharge h5{
+  font-size: 14px;
+  color: #777;
+  float: left;
+}
+
+.app>.content .page .expenses-info .surcharge h5:last-child{
+  float: right;
+}
+
 .app>.content .page .welcome{
   width: 100%;
   position: fixed;
