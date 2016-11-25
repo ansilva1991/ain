@@ -1,7 +1,7 @@
 var app = {
-  VERSION: 207,
-  MINIUM_VERSION_LOGUINED: 206,
-  ENV: "development",
+  VERSION: 208,
+  MINIUM_VERSION_LOGUINED: 208,
+  ENV: "production",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -99,6 +99,8 @@ var app = {
   onBackButton: function(){
     if($('.app .menu').hasClass('open')){
       app.closeMenu();
+    }else if($('.app .content .page>.context-menu').hasClass('open')){
+      app.closeContextMenu();
     }else if(cs && cs.back){
       cs.back();
     }else{
@@ -133,6 +135,12 @@ var app = {
   },
   closeMenu: function(){
     $('.app .menu').removeClass('open');
+  },
+  openContextMenu: function(){
+    $('.app .content .page>.context-menu').addClass('open');
+  },
+  closeContextMenu: function(){
+    $('.app .content .page>.context-menu').removeClass('open');
   },
   pageLoading: function(x){
     x == 'show' ? $('.app .content .loading').show() : $('.app .content .loading').hide();

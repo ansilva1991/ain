@@ -78,6 +78,14 @@
   </div>
 </div>
 
+<div class="context-menu">
+  <div class="backdrop" onclick="app.closeContextMenu()"></div>
+  <div class="menu">
+    <div onclick="cs.viewTicketPayment();">Ver boleto de pago</div>
+    <!--<div>Ver lugares de pago habilitados</div>-->
+  </div>
+</div>
+
 <script type="text/javascript">
   function c(){
     this.callback_get_month;
@@ -215,16 +223,16 @@
       });
     };
 
-    this.back = function(){
-      app.loadScreen(app.SCREENS.EVENTS);
-    };
-
     this.toggleCalendar = function(){
       $('.expenses').toggleClass('open-calendar');
 
       if($('.expenses').hasClass('open-calendar')){
         this.updateCalendar();
       }
+    }
+
+    this.viewTicketPayment = function(){
+      app.loadScreen(app.SCREENS.EXPENSES_TICKET_PAYMENT);
     }
 
   }

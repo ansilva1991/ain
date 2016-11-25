@@ -68,6 +68,65 @@ button.btn.btn-orange:disabled{
   margin-left: -150px;
 }
 
+.context-menu .backdrop{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+}
+
+.context-menu.open .backdrop{
+  display: block;
+}
+
+.context-menu .menu{
+  width: 250px;
+  background-color: #eee;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 99;
+
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  transition: transform 200ms ease;
+
+  -webkit-transform: translate3d(150%,0,0);
+  -moz-transform: translate3d(150%,0,0);
+  -ms-transform: translate3d(150%,0,0);
+  -o-transform: translate3d(150%,0,0);
+  transform: translate3d(150%,0,0);
+}
+
+.context-menu.open .menu{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+
+.context-menu .menu div{
+  width: 100%;
+  height: 60px;
+  font-size: 16px;
+  padding-left: 10px;
+  line-height: 60px;
+  border-bottom: 1px solid #ccc;
+  color: #777;
+}
+
+.context-menu .menu div:active{
+  background-color: #ccc;
+}
+
 .modal-alert{
   width: 100%;
   position: fixed;
@@ -498,7 +557,7 @@ button.btn.btn-orange:disabled{
 }
 
 .login.init form>.row.form{
-  bottom: -291px;
+  bottom: -300px;
 }
 
 .login form>.row.form .cell{
@@ -534,7 +593,7 @@ button.btn.btn-orange:disabled{
 
 .login form .input{
   width: 100%;
-  height: 53px;
+  height: 55px;
   overflow: hidden;
 }
 
@@ -665,7 +724,7 @@ button.btn.btn-orange:disabled{
 
 .forgot-password form .input{
   width: 100%;
-  height: 53px;
+  height: 55px;
   overflow: hidden;
 }
 
@@ -779,7 +838,7 @@ button.btn.btn-orange:disabled{
 
 .register-code form .input{
   width: 100%;
-  height: 53px;
+  height: 55px;
   overflow: hidden;
 }
 
@@ -4524,6 +4583,105 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.content .page .expenses-info .surcharge h5:last-child{
+  float: right;
+}
+
+.app>.content .page .expenses-ticket-payment{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+}
+
+.app>.content .page .expenses-ticket-payment .item{
+  width: 100%;
+  display: table;
+  padding: 10px 15px;
+  color: #777;
+  border-bottom: 1px solid #ccc;
+}
+
+.app>.content .page .expenses-ticket-payment .item.balance{
+  background-color: #eee;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .info{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .info h4{
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .expenses-ticket-payment .item.balance .row .info h4{
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .info h5{
+  margin: 0px;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .value{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .value h5{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.app>.content .page .expenses-ticket-payment .item .label-benefit{
+  background: #ffa400;
+  color: #fff;
+  padding: 2px 5px;
+  font-size: 13px;
+}
+
+.app>.content .page .expenses-ticket-payment .item.balance .row .value h5{
+  margin: 0px;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .value h6{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+}
+
+.app>.content .page .expenses-ticket-payment .total{
+  width: 100%;
+  height: 50px;
+  background-color: #ffa400;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: fixed;
+  bottom: 0px;
+}
+
+.app>.content .page .expenses-ticket-payment .total>span:last-child{
   float: right;
 }
 

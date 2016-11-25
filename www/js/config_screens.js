@@ -329,12 +329,18 @@ app.SCREENS = {
     }
     ],
     icon_right:[
-    {
-      icon: "calendar",
-      func: function(){
-        cs.toggleCalendar();
+      {
+        icon: "calendar",
+        func: function(){
+          cs.toggleCalendar();
+        }
+      },
+      {
+        icon: "ellipsis-v",
+        func: function(){
+          app.openContextMenu();
+        }
       }
-    }
     ],
     section_name: "Ago. del 2016",
     html: "expenses"
@@ -422,6 +428,18 @@ app.SCREENS = {
     ],
     section_name: "Información",
     html: "expenses_info"
+  },
+  EXPENSES_TICKET_PAYMENT: {
+    icon_left: [
+    {
+      icon: "chevron-left",
+      func: function(){
+        cs.back();
+      }
+    }
+    ],
+    section_name: "Boleto de pago",
+    html: "expenses_ticket_payment"
   },
   GUARD: {
     icon_left: [
