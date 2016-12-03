@@ -506,6 +506,17 @@ app.SCREENS = {
     ],
     section_name: "Configuración",
     html: "configurations"
+  },USEFUL_INFO: {
+    icon_left: [
+    {
+      icon: "bars",
+      func: function(){
+        app.openMenu();
+      }
+    }
+    ],
+    section_name: "Información Útil",
+    html: "useful_info"
   },
   TEST: {
     icon_left: {

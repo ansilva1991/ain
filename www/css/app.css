@@ -4935,3 +4935,120 @@ button.btn.btn-orange:disabled{
   text-transform: uppercase;
   margin-left: 20px;
 }
+
+.app>.content .page .list.useful_info{
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  top: 114px;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  transition: transform 200ms ease;
+}
+
+.app>.content .page .list.useful_info.useful_phones{
+  left: 100%;
+}
+
+.app>.content .page .list.useful_info.general_regulations{
+  left: 0%;
+}
+
+.app>.content .page .list.useful_info>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+}
+
+.app>.content .page .useful_info .general-regulation{
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  color: #777;
+  padding: 15px 20px;
+  display: table;
+}
+
+.app>.content .page .useful_info .general-regulation .row{
+  display: table-row;
+}
+
+.app>.content .page .useful_info .general-regulation .info{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .useful_info .general-regulation .icon{
+  width: 50px;
+  display: table-cell;
+  font-size: 25px;
+  vertical-align: middle;
+  text-align: right;
+  color: #ffa400;
+}
+
+.app>.content .page .useful_info .general-regulation h4{
+  margin: 0px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .useful_info .general-regulation h5{
+  margin: 0px;
+  font-size: 12px;
+}
+
+.app>.content .page .useful_info .general-regulation:active{
+  background-color: rgba(0,0,0,0.1);
+}
+
+.app>.content .page .useful_info .useful-phone{
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  color: #777;
+  padding: 10px 20px;
+  display: table;
+}
+
+.app>.content .page .useful_info .useful-phone .row{
+  display: table-row;
+}
+
+.app>.content .page .useful_info .useful-phone .info{
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.app>.content .page .useful_info .useful-phone .enterprise{
+  display: table-cell;
+  font-size: 12px;
+  vertical-align: bottom;
+  text-align: right;
+  color: #777;
+}
+
+.app>.content .page .useful_info .useful-phone h4{
+  margin: 0px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .useful_info .useful-phone #enterprise{
+  margin: 0px;
+  font-size: 12px;
+}
+
+.app>.content .page .useful_info .useful-phone h3{
+  margin: 0px;
+  font-size: 18px;
+  text-align: right;
+}
+
+.app>.content .page .useful_info .useful-phone:active{
+  background-color: rgba(0,0,0,0.1);
+}

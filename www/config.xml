@@ -99,6 +99,7 @@
         <splash platform="ios" src="res/screens/ios/screen-ipad-landscape-2x.png" width="2048" height="1536" />
     </platform>
     <access origin="*" />
+    <access origin="tel:*" launch-external="yes" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <allow-intent href="http://*/*" />

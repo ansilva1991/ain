@@ -24,77 +24,79 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-.icon-signout:before {
+.icon-informacion:before {
   content: "\e900";
 }
-.icon-accessin:before {
+.icon-signout:before {
   content: "\e901";
 }
-.icon-people-bubble:before {
+.icon-accessin:before {
   content: "\e902";
 }
-.icon-app-operator:before {
+.icon-people-bubble:before {
   content: "\e903";
 }
-.icon-client-employee:before {
+.icon-app-operator:before {
   content: "\e904";
 }
-.icon-family:before {
+.icon-client-employee:before {
   content: "\e905";
 }
-.icon-family-with-access:before {
+.icon-family:before {
   content: "\e906";
 }
-.icon-family-with-access2:before {
+.icon-family-with-access:before {
   content: "\e907";
 }
-.icon-people:before {
+.icon-family-with-access2:before {
   content: "\e908";
 }
-.icon-person:before {
+.icon-people:before {
   content: "\e909";
 }
-.icon-person-admin:before {
+.icon-person:before {
   content: "\e90a";
 }
-.icon-person-employee:before {
+.icon-person-admin:before {
   content: "\e90b";
 }
-.icon-person-owner-group:before {
+.icon-person-employee:before {
   content: "\e90c";
 }
-.icon-authorizations:before {
+.icon-person-owner-group:before {
   content: "\e90d";
 }
-.icon-batch:before {
+.icon-authorizations:before {
   content: "\e90e";
 }
-.icon-communications:before {
+.icon-batch:before {
   content: "\e90f";
 }
-.icon-config:before {
+.icon-communications:before {
   content: "\e910";
 }
-.icon-department:before {
+.icon-config:before {
   content: "\e911";
 }
-.icon-events:before {
+.icon-department:before {
   content: "\e912";
 }
-.icon-person-add:before {
+.icon-events:before {
   content: "\e913";
 }
-.icon-expenses:before {
+.icon-person-add:before {
   content: "\e914";
 }
-.icon-guard:before {
+.icon-expenses:before {
   content: "\e915";
 }
-.icon-help:before {
+.icon-guard:before {
   content: "\e916";
 }
-.icon-registration_codes:before {
+.icon-help:before {
   content: "\e917";
+}
+.icon-registration_codes:before {
+  content: "\e918";
 }
 

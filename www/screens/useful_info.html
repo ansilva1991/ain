@@ -1,0 +1,197 @@
+<div class="sub-header col-2">
+  <div class="item active" data-item="0" onclick="cs.selectTab(this);">
+    REGLAMENTOS
+  </div>
+  <div class="item" data-item="1" onclick="cs.selectTab(this);">
+    TELÉFONOS
+  </div>
+  <div class="line">
+    <div class="pointer"></div>
+  </div>
+</div>
+<div class="list useful_info general_regulations">
+  <h5 id="none">
+    No se encontraron reglamentos.
+  </h5>
+  <div id="example_general_regulation" style="display: none;">
+    <div class="row">
+      <div class="info">
+        <h4 id="name"></h4>
+        <h5>Última modificación <span id="updated_at"></span></h5>
+      </div>
+      <div class="icon">
+        <i class="fa fa-file-o"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="list useful_info useful_phones">
+  <h5 id="none">
+    No se encontraron teléfonos.
+  </h5>
+  <div id="example_useful_phone" style="display: none;">
+    <h4><span id="name"></span> - <span id="enterprise"></span></h4>
+    <h3><i class="fa fa-phone"></i> <span id="phone"></span></h3>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(){
+
+      $('.list.useful_info.useful_phones').swipeRight(function(){
+        cs.selectTab($('.sub-header .item')[0]);
+      });
+
+      $('.list.useful_info.general_regulations').swipeLeft(function(){
+        cs.selectTab($('.sub-header .item')[1]);
+      });
+
+      app.liActive('useful_info');
+
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      });
+    }
+
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app','useful_info','index'],
+        data : {},
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+
+            if(data.phones.length > 0){
+              $('.list.useful_phones #none').hide();
+
+              for(var i in data.phones){
+                var phone = data.phones[i];
+                var tmp = $('#example_useful_phone').clone().insertBefore('#example_useful_phone');
+                tmp.removeAttr('id');
+                tmp.addClass('useful-phone');
+
+                tmp.find('#name').html(phone.name);
+                tmp.find('#enterprise').html(phone.enterprise);
+                tmp.find('#phone').html(phone.phone);
+                tmp.attr('data-phone', phone.phone);
+
+                tmp.tap(function(){
+                  var phone = $(this).data('phone');
+
+                  window.open('tel://' + phone,'_system');
+                });
+
+                tmp.show();
+              }
+            }
+
+            if(data.general_regulations.length > 0){
+              $('.list.general_regulations #none').hide();
+
+              for(var i in data.general_regulations){
+                var general_regulation = data.general_regulations[i];
+                var tmp = $('#example_general_regulation').clone().insertBefore('#example_general_regulation');
+                tmp.removeAttr('id');
+                tmp.addClass('general-regulation');
+
+                if(general_regulation.name_event_place){
+                  tmp.find('#name').html('Reglamento de ' + HelperEvents.event_place_name(general_regulation.name_event_place));
+                }else{
+                  tmp.find('#name').html(general_regulation.name);
+                }
+
+                tmp.find('#updated_at').html(general_regulation.updated_at);
+                tmp.attr('data-url',general_regulation.url);
+                tmp.tap(function(){
+                  var url = $(this).data('url');
+
+
+                });
+
+                tmp.show();
+              }
+            }
+
+            cs.callback_get_info();
+          }
+        }
+      });
+    }
+
+    this.openGeneralRegulation = function(x){
+      var uri = $(x).data('uri');
+      var file = $(x).data('filename');
+      var element = x;
+
+      app.openFile(file,false,function(e){
+        if(e.status == 9){
+          cs.downloadGeneralRegulation(element);
+        }
+      });
+    }
+
+    this.downloadGeneralRegulation = function(x){
+      var uri = $(x).data('uri');
+      var file = $(x).data('filename');
+
+      $(x).parents('.chat-message').find('.attachment.loading-bar').show();
+
+      Server.download({
+        from: PrivateData.get('current_server_portal') + uri,
+        to: file,
+        progress: function(n){
+          //console.log(this);
+          this.extra_data.loading_bar.find('.in').css({
+            width: (n.loaded*100/n.total) + '%'
+          });
+
+          this.extra_data.loading_bar.find('.label').html((n.loaded*100/n.total).toFixed(1) + '%');
+        },
+        success: function(e){
+          $('[data-filename="' + e.name + '"]').parents('.chat-message').find('.attachment.loading-bar').hide();
+          app.openFile(e.nativeURL,true);
+        },
+        error: function(er){
+          console.log(er);
+        },
+        extra_data: {
+          loading_bar: $(x).parents('.chat-message').find('.attachment.loading-bar'),
+          file_name: file
+        }
+      })
+    }
+
+    this.selectTab = function(x){
+
+      var item = $(x).data('item');
+
+      (item == 1) ? $('.useful_info.button').show() : $('.useful_info.button').hide();
+
+      $('.sub-header .item').removeClass('active');
+      $('.sub-header .item[data-item="' + item + '"]').addClass('active');
+      $('.sub-header .line .pointer').css({
+        '-webkit-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-moz-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-ms-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-o-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        'transform': 'translate3d(' + (100 * item) + '%,0,0)'
+      });
+
+      $('.list.useful_info').removeClass('active');
+      $($('.list.useful_info')[item]).addClass('active');
+
+      $('.list.useful_info').css({
+        '-webkit-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-moz-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-ms-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-o-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        'transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)'
+      });
+    }
+  }
+</script>

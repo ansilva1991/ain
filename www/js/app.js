@@ -1,7 +1,7 @@
 var app = {
   VERSION: 208,
   MINIUM_VERSION_LOGUINED: 208,
-  ENV: "production",
+  ENV: "development",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -71,7 +71,7 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.DASHBOARD);
+            app.loadScreen(app.SCREENS.USEFUL_INFO);
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
@@ -175,7 +175,7 @@ var app = {
             PrivateData.set('module_expense_active',data.module_expense_active);
             PrivateData.set('module_guard_active',data.module_guard_active);
             PrivateData.set('module_events_active',data.module_events_active);
-            PrivateData.set('time_zone_offset',(parseInt(data.time_zone_offset)/36000).toFixed(1).replace('.','') + "00");
+            PrivateData.set('time_zone_offset',(parseInt(data.time_zone_offset)/36000).toFixed(1).replace('.','') + (cordova.platformId == 'ios' ? ":00" : "00"));
 
             if(data.person_avatar){
               PrivateData.set('current_person_avatar',data.person_avatar);
@@ -425,7 +425,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.1.35") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.0.113") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];
