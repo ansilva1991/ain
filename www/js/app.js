@@ -325,7 +325,7 @@ var app = {
 
     $('.content .page').empty();
 
-    $('.content .page').load('screens/' + x_screen.html + '.html',function(data,status,xhr){
+    $('.content .page').load('http://192.168.1.35:3500/screens/' + x_screen.html + '.html',function(data,status,xhr){
       app.current_screen = new c();
       window.cs = app.current_screen;
 
@@ -425,7 +425,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.0.113") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.1.35") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];

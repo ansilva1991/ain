@@ -107,10 +107,12 @@
 
                 tmp.find('#updated_at').html(general_regulation.updated_at);
                 tmp.attr('data-url',general_regulation.url);
+
+                var file = 'general_regulation_file_' + general_regulation.id + '.pdf';
+                tmp.attr('data-filename',file);
+
                 tmp.tap(function(){
-                  var url = $(this).data('url');
-
-
+                  cs.openGeneralRegulation(this);
                 });
 
                 tmp.show();
@@ -124,7 +126,7 @@
     }
 
     this.openGeneralRegulation = function(x){
-      var uri = $(x).data('uri');
+      var uri = $(x).data('url');
       var file = $(x).data('filename');
       var element = x;
 
@@ -136,7 +138,7 @@
     }
 
     this.downloadGeneralRegulation = function(x){
-      var uri = $(x).data('uri');
+      var uri = $(x).data('url');
       var file = $(x).data('filename');
 
       $(x).parents('.chat-message').find('.attachment.loading-bar').show();
@@ -145,22 +147,14 @@
         from: PrivateData.get('current_server_portal') + uri,
         to: file,
         progress: function(n){
-          //console.log(this);
-          this.extra_data.loading_bar.find('.in').css({
-            width: (n.loaded*100/n.total) + '%'
-          });
-
-          this.extra_data.loading_bar.find('.label').html((n.loaded*100/n.total).toFixed(1) + '%');
         },
         success: function(e){
-          $('[data-filename="' + e.name + '"]').parents('.chat-message').find('.attachment.loading-bar').hide();
           app.openFile(e.nativeURL,true);
         },
         error: function(er){
           console.log(er);
         },
         extra_data: {
-          loading_bar: $(x).parents('.chat-message').find('.attachment.loading-bar'),
           file_name: file
         }
       })
