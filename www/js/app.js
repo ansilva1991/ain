@@ -1,7 +1,7 @@
 var app = {
-  VERSION: 208,
-  MINIUM_VERSION_LOGUINED: 208,
-  ENV: "development",
+  VERSION: 209,
+  MINIUM_VERSION_LOGUINED: 209,
+  ENV: "production",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -71,7 +71,7 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.USEFUL_INFO);
+            app.loadScreen(app.SCREENS.DASHBOARD);
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
@@ -325,7 +325,7 @@ var app = {
 
     $('.content .page').empty();
 
-    $('.content .page').load('http://192.168.1.35:3500/screens/' + x_screen.html + '.html',function(data,status,xhr){
+    $('.content .page').load('screens/' + x_screen.html + '.html',function(data,status,xhr){
       app.current_screen = new c();
       window.cs = app.current_screen;
 

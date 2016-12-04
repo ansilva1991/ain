@@ -23,7 +23,7 @@
   <form>
     <div class="row logo">
       <div class="cell">
-        <span class="icon-people-bubble"></span>
+        <span class="icon-people-bubble login-logo"></span>
         <span class="icon-accessin"></span>
       </div>
     </div>
@@ -80,6 +80,7 @@
     this.is_processing = false;
     this.email_login = undefined;
     this.one_signal_ids;
+    this.type_server = "real";
 
     this.start = function(opts){
       opts = opts || {};
@@ -109,11 +110,11 @@
     this.processLogin = function(){
       var form = Extends.serializeForm('.login form');
 
-      var type_server = 'real';
-
-      if(form.email.search("test:") == 0){
-        type_server = 'test';
-        form.email = form.email.replace('test:','');
+      if(form.email.search("connecttotest@accessin.net") == 0){
+        this.type_server = 'test';
+        $('.login #email').val('');
+        $('.icon-people-bubble').attr('class','fa fa-wrench login-logo');
+        return false;
       }
 
       $('.login #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
@@ -128,7 +129,7 @@
 
       if(ids){
         Server.send({
-          route : [Server.serverUrl(type_server),'app','login'],
+          route : [Server.serverUrl(this.type_server),'app','login'],
           data : {
             login: form,
             device: {

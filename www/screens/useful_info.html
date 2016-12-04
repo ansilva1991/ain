@@ -143,15 +143,20 @@
 
       $(x).parents('.chat-message').find('.attachment.loading-bar').show();
 
+      ModalLoading.open("Descargando PDF", "Espere un momento...");
+
       Server.download({
         from: PrivateData.get('current_server_portal') + uri,
         to: file,
         progress: function(n){
         },
         success: function(e){
+          ModalLoading.close();
           app.openFile(e.nativeURL,true);
         },
         error: function(er){
+          ModalLoading.close();
+          Alert.open('Lo Sentimos','Ocurrío un error al intentar descargar los datos, por favor intenta nuevamente.','Aceptar');
           console.log(er);
         },
         extra_data: {
