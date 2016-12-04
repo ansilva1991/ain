@@ -1,6 +1,6 @@
 var app = {
-  VERSION: 209,
-  MINIUM_VERSION_LOGUINED: 209,
+  VERSION: 210,
+  MINIUM_VERSION_LOGUINED: 208,
   ENV: "production",
   load_screen_ajax: false,
   current_screen: false,

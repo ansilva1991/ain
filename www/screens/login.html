@@ -117,6 +117,10 @@
         return false;
       }
 
+      if(form.email == "demoapple@accessin.net"){
+        this.type_server = 'test';
+      }
+
       $('.login #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
       $('.login #submit').prop('disabled', true);
       this.is_processing = true;
