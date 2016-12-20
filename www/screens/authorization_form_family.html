@@ -1,10 +1,14 @@
 <div class="authorization-form-family">
+  <div class="checked-data">
+    Los datos de esta persona no pueden ser modificados por que se encuentran verificados. Si los datos son incorrectos haga click aqui para comenzar la denuncia. Disculpe las molestias<br>
+    <small>Datos verificados por <span id="checked_by"></span> el <span id="checked_date"></span></small>
+  </div>
   <form class="form-horizontal">
     <input type="hidden" id="auth_code">
     <div class="input-avatar">
       <img src="img/avatar.png" id="avatar">
       <canvas width="128" height="128"></canvas>
-      <div class="buttons">
+      <div class="buttons hide_input">
         <button type="button" onclick="cs.avatarFrom('gallery');">
           <i class="fa fa-image"></i>
         </button>
@@ -13,19 +17,19 @@
         </button>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group not_editable">
       <label for="name">NOMBRE</label>
       <input type="text" name="name" id="name" class="form-control">
     </div>
-    <div class="form-group">
+    <div class="form-group not_editable">
       <label for="last_name">APELLIDO</label>
       <input type="text" name="last_name" id="last_name" class="form-control">
     </div>
-    <div class="form-group">
+    <div class="form-group not_editable">
       <label for="real_id">DNI</label>
       <input type="number" name="real_id" id="real_id" class="form-control">
     </div>
-    <div class="form-group">
+    <div class="form-group hide_input">
       <label for="sex">SEXO</label>
       <div class="form-radios">
         <div class="row" id="sex">
@@ -44,11 +48,11 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide_input">
       <label for="birthdate">FECHA DE NACIMIENTO</label>
       <input type="date" name="birthdate" id="birthdate" class="form-control">
     </div>
-    <div class="form-group">
+    <div class="form-group hide_input">
       <label for="phone">Teléfono de contacto</label>
       <input type="tel" name="phone" id="phone" class="form-control">
     </div>
@@ -62,7 +66,7 @@
       </div>
     </div>
     <div class="form-dropdown">
-      <div class="form-group">
+      <div class="form-group not_editable">
         <label for="email">EMAIL</label>
         <input type="text" name="email" id="email" class="form-control">
       </div>
@@ -102,6 +106,7 @@
       opts = opts || {};
 
       this.person_id = opts.person_id;
+      this.editable = true;
 
       $(window).resize(function(){
         Extends.scrollToInputFocus('.authorization-form-family');
@@ -128,6 +133,10 @@
           cs.has_access = false;
         }
       });
+
+      if(opts.real_id){
+        $('#real_id').val(opts.real_id);
+      }
 
       app.liActive('authorizations');
       this.getPersonInfo(function(){
@@ -160,12 +169,28 @@
             $('#name').val(data.person.name);
             $('#last_name').val(data.person.last_name);
             $('#real_id').val(data.person.real_id);
-            $($('#sex .radio')[data.person.sex]).addClass('checked');
-            console.log(data.person.birthdate);
-            $('#birthdate').val(data.person.birthdate);
-            $('#phone').val(data.person.phone);
-            $('#email').val(data.person.email);
             $('#id').val(data.person.id);
+
+            if(data.person.editable){
+              $('#email').val(data.person.email);
+              $($('#sex .radio')[data.person.sex]).addClass('checked');
+              $('#birthdate').val(data.person.birthdate);
+              $('#phone').val(data.person.phone);
+            }else{
+              $('.hide_input').hide();
+
+              if(data.person.email){
+                $('#email').val("123456789");
+                $('#email').attr('type','password');
+              }
+
+              $('.checked-data').show();
+              $('#checked_by').html(data.person.checked_by);
+              $('#checked_date').html(Extends.formatDate(new Date(data.person.checked_at + "T00:00:00" + PrivateData.get('time_zone_offset')),'%dd de %mname del %yyyy'));
+
+              $('.not_editable input').attr('readonly', true);
+              cs.editable = false; 
+            }
 
             cs.auth_code = data.person.auth_code;
 
@@ -198,50 +223,52 @@
 
       console.log(form);
 
-      if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
-        Alert.open('Nombre','Debe ingresar un nombre válido para continuar.','Aceptar');
-        return false;
-      }
-
-      if(form.last_name.length == 0 || !form.last_name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
-        Alert.open('Apellido','Debe ingresar un apellido válido para continuar.','Aceptar');
-        return false;
-      }
-
-      if(form.sex == undefined){
-        Alert.open('Sexo','Debe seleccionar un sexo para continuar.','Aceptar');
-        return false;
-      }
-
-      if(form.real_id.length == 0 || !form.real_id.match(/^[0-9]+$/)){
-        Alert.open('DNI','Debe ingresar un DNI válido para continuar.','Aceptar');
-        return false;
-      }
-
-      if(form.birthdate.length == 0){
-        Alert.open('Fecha de nacimiento','Debe seleccionar una fecha de nacimiento válida para continuar.','Aceptar');
-        return false;
-      }
-
-      if(this.has_access && (form.email.length == 0 || !form.email.match(/^([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+$/i))){
-        Alert.open('Email','Debe ingresar un email válido para continuar.','Aceptar');
-        return false;
-      }
-
-      if(this.person_id == PrivateData.get('current_person_id')){
-        if(form.password && (form.password.length < 4 || form.password.length > 20)){
-          Alert.open('Contraseña','La contraseña debe tener entre 4 y 20 caracteres.','Aceptar');
+      if(this.editable){
+        if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+          Alert.open('Nombre','Debe ingresar un nombre válido para continuar.','Aceptar');
           return false;
         }
 
-        if((form.password || form.password_confirmation) && (form.password != form.password_confirmation)){
-          Alert.open('Repita Contraseña','Las contraseñas no coinciden.','Aceptar');
+        if(form.last_name.length == 0 || !form.last_name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+          Alert.open('Apellido','Debe ingresar un apellido válido para continuar.','Aceptar');
           return false;
         }
-      }
 
-      if(this.avatar_change){
-        form.data_avatar = $('canvas')[0].toDataURL("image/jpeg", 0.8).split(',')[1];
+        if(form.sex == undefined){
+          Alert.open('Sexo','Debe seleccionar un sexo para continuar.','Aceptar');
+          return false;
+        }
+
+        if(form.real_id.length == 0 || !form.real_id.match(/^[0-9]+$/)){
+          Alert.open('DNI','Debe ingresar un DNI válido para continuar.','Aceptar');
+          return false;
+        }
+
+        if(form.birthdate.length == 0){
+          Alert.open('Fecha de nacimiento','Debe seleccionar una fecha de nacimiento válida para continuar.','Aceptar');
+          return false;
+        }
+
+        if(this.has_access && (form.email.length == 0 || !form.email.match(/^([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+$/i))){
+          Alert.open('Email','Debe ingresar un email válido para continuar.','Aceptar');
+          return false;
+        }
+
+        if(this.person_id == PrivateData.get('current_person_id')){
+          if(form.password && (form.password.length < 4 || form.password.length > 20)){
+            Alert.open('Contraseña','La contraseña debe tener entre 4 y 20 caracteres.','Aceptar');
+            return false;
+          }
+
+          if((form.password || form.password_confirmation) && (form.password != form.password_confirmation)){
+            Alert.open('Repita Contraseña','Las contraseñas no coinciden.','Aceptar');
+            return false;
+          }
+        }
+
+        if(this.avatar_change){
+          form.data_avatar = $('canvas')[0].toDataURL("image/jpeg", 0.8).split(',')[1];
+        }
       }
 
       $('#submit-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
@@ -253,6 +280,7 @@
         route : [PrivateData.get('current_server_portal'),'app','people',(this.person_id == 0 || this.person_id) ? 'update_family' : 'create_family'],
         data : {
           person: form,
+          person_id: this.person_id,
           person_auth_code : this.auth_code,
           has_access : this.has_access
         },

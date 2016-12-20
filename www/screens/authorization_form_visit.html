@@ -1,14 +1,18 @@
 <div class="authorization-form-visit">
+  <div class="checked-data">
+    Los datos de esta persona no pueden ser modificados por que se encuentran verificados. Si los datos son incorrectos haga click aqui para comenzar la denuncia. Disculpe las molestias<br>
+    <small>Datos verificados por <span id="checked_by"></span> el <span id="checked_date"></span></small>
+  </div>
   <form class="form-horizontal">
-    <div class="form-group">
+    <div class="form-group not_editable">
       <label for="name">NOMBRE</label>
       <input type="text" name="name" id="name" class="form-control">
     </div>
-    <div class="form-group">
+    <div class="form-group not_editable">
       <label for="last_name">APELLIDO</label>
       <input type="text" name="last_name" id="last_name" class="form-control">
     </div>
-    <div class="form-group">
+    <div class="form-group not_editable">
       <label for="real_id">DNI</label>
       <input type="number" name="real_id" id="real_id" class="form-control">
     </div>
@@ -30,12 +34,17 @@
       opts = opts || {};
 
       this.person_id = opts.person_id;
+      this.editable = true;
 
       $(window).resize(function(){
         Extends.scrollToInputFocus('.authorization-form-visit');
       });
 
       Extends.name('#name, #last_name');
+
+      if(opts.real_id){
+        $('#real_id').val(opts.real_id);
+      }
 
       app.liActive('authorizations');
 
@@ -66,6 +75,15 @@
             $('#real_id').val(data.person.real_id);
             $('#due_date').val(data.person.auth_due_date);
 
+            if(!data.person.editable){
+              $('.checked-data').show();
+              $('#checked_by').html(data.person.checked_by);
+              $('#checked_date').html(Extends.formatDate(new Date(data.person.checked_at + "T00:00:00" + PrivateData.get('time_zone_offset')),'%dd de %mname del %yyyy'));
+              
+              $('.not_editable input').attr('readonly', true);
+              cs.editable = false; 
+            }
+
             cs.auth_code = data.person.auth_code;
             cs.callback_get_person_info();
           }
@@ -79,19 +97,21 @@
 
       console.log(form);
 
-      if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
-        Alert.open('Nombre','Debe ingresar un nombre válido para continuar.','Aceptar');
-        return false;
-      }
+      if(this.editable){
+        if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+          Alert.open('Nombre','Debe ingresar un nombre válido para continuar.','Aceptar');
+          return false;
+        }
 
-      if(form.last_name.length == 0 || !form.last_name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
-        Alert.open('Apellido','Debe ingresar un apellido válido para continuar.','Aceptar');
-        return false;
-      }
+        if(form.last_name.length == 0 || !form.last_name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+          Alert.open('Apellido','Debe ingresar un apellido válido para continuar.','Aceptar');
+          return false;
+        }
 
-      if(form.real_id.length == 0 || !form.real_id.match(/^[0-9]+$/)){
-        Alert.open('DNI','Debe ingresar un DNI válido para continuar.','Aceptar');
-        return false;
+        if(form.real_id.length == 0 || !form.real_id.match(/^[0-9]+$/)){
+          Alert.open('DNI','Debe ingresar un DNI válido para continuar.','Aceptar');
+          return false;
+        }
       }
 
       if(form.due_date.length == 0){
@@ -108,6 +128,7 @@
         route : [PrivateData.get('current_server_portal'),'app','people',this.person_id ? 'update_visit' : 'create_visit'],
         data : {
           person: form,
+          person_id: this.person_id,
           person_auth_code : this.auth_code
         },
         callback : function(data, success){

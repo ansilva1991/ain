@@ -317,15 +317,21 @@
     };
 
     this.newFamily = function(){
-      app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY);
+      app.loadScreen(app.SCREENS.NEW_AUTHORIZATION_REAL_ID,{
+        go_to : app.SCREENS.AUTHORIZATION_FORM_FAMILY
+      });
     };
 
     this.newVisit = function(){
-      app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_VISIT);
+      app.loadScreen(app.SCREENS.NEW_AUTHORIZATION_REAL_ID,{
+        go_to : app.SCREENS.AUTHORIZATION_FORM_VISIT
+      });
     };
 
     this.newEmployee = function(){
-      app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE);
+      app.loadScreen(app.SCREENS.NEW_AUTHORIZATION_REAL_ID,{
+        go_to : app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE
+      });
     };
 
   }

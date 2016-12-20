@@ -2988,6 +2988,15 @@ button.btn.btn-orange:disabled{
   padding-bottom: 20px;
 }
 
+.app>.content .page .authorization-form-family .checked-data, .app>.content .page .authorization-form-visit .checked-data, .app>.content .page .authorization-form-employee .checked-data{
+  width: 100%;
+  background-color: #40bbea;
+  color: #fff;
+  font-size: 14px;
+  padding: 20px;
+  display: none;
+}
+
 .app>.content .page .authorization-form-family canvas{
   position: fixed;
   top: -200px;

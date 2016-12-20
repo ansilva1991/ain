@@ -39,6 +39,27 @@ app.SCREENS = {
     section_name: "Autorizaciones",
     html: "authorizations"
   },
+  NEW_AUTHORIZATION_REAL_ID: {
+    icon_left: [
+    {
+      icon: "chevron-left",
+      func: function(){
+        cs.back();
+      }
+    }
+    ],
+    icon_right: [
+    {
+      text: "Listo <i class='fa fa-check'></i>",
+      func: function(){
+        cs.submit();
+      },
+      id: 'submit-button'
+    }
+    ],
+    section_name: "Nueva autorización",
+    html: "new_authorization_real_id"
+  },
   AUTHORIZATION_FORM_FAMILY: {
     icon_left: [
     {
