@@ -87,7 +87,7 @@
       this.callback_get_data = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','guard','index'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'guard','index'],
         data : {},
         callback : function(data, success){
           console.log(data);

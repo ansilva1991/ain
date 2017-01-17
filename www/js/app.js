@@ -1,6 +1,7 @@
 var app = {
-  VERSION: 210,
-  MINIUM_VERSION_LOGUINED: 208,
+  VERSION: 211,
+  PORTAL_VERSION: 211,
+  MINIUM_VERSION_LOGUINED: 211,
   ENV: "development",
   load_screen_ajax: false,
   current_screen: false,
@@ -157,7 +158,7 @@ var app = {
       app.pageLoading('show');
       console.log('SYNC CONFIG');
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','config','sync'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'config','sync'],
         data : {
           avatar_last_change: PrivateData.get('current_person_avatar_last_change') || 0
         },
@@ -179,6 +180,13 @@ var app = {
 
             if(data.person_avatar){
               PrivateData.set('current_person_avatar',data.person_avatar);
+            }
+
+            if(data.new_update){
+              if(PrivateData.get('last_update_popup') != Extends.formatDate(new Date(),'%yyyy-%mm-%dd')){
+                PrivateData.set('last_update_popup', Extends.formatDate(new Date(),'%yyyy-%mm-%dd'));
+                NewUpdate.open();
+              }
             }
 
             app.update_config_callback();
@@ -206,7 +214,7 @@ var app = {
           ModalLoading.open('Cerrando Sesión', "Espere un momento por favor");
 
           Server.send({
-            route : [PrivateData.get('current_server_portal'),'app','people','sign_out'],
+            route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people','sign_out'],
             data : {},
             callback : function(data, success){
               if(success){
@@ -325,13 +333,15 @@ var app = {
 
     $('.content .page').empty();
 
-    $('.content .page').load('screens/' + x_screen.html + '.html',function(data,status,xhr){
-      app.current_screen = new c();
-      window.cs = app.current_screen;
+    app.updateConfig(function(){
+      app.updateMenuInfo();
+      $('.content .page').load('screens/' + x_screen.html + '.html',function(data,status,xhr){
+        app.current_screen = new c();
+        window.cs = app.current_screen;
 
-      app.current_screen.start(app.load_screen_opts);
+        app.current_screen.start(app.load_screen_opts);
+      });
     });
-
   },
   in_dev : function(){
     return app.ENV == 'development';
@@ -340,6 +350,43 @@ var app = {
     return app.ENV == 'demo';
   }
 };
+
+var NewUpdate = {
+  open : function(){
+    $('.modal-new-update').show();
+    $('.modal-new-update .content-update>p').hide();
+    $('.modal-new-update .content-update>i').show();
+
+    Server.send({
+      route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'config','get_last_update_info'],
+      data : {},
+      callback : function(data, success){
+        console.log(data);
+        if(success){
+          $('.modal-new-update .content-update>p').html(data.info);
+          $('.modal-new-update .content-update>i').hide();
+          $('.modal-new-update .content-update>p').show();
+        }
+      }
+    });
+  },
+  update : function(){
+    $('.modal-new-update button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+    $('.modal-new-update button').prop('disabled', true);
+
+    if(cordova.platformId == 'ios'){
+      window.open('itms-apps://itunes.apple.com/app/id1165550210','_system');
+    }else{
+      window.open('market://details?id=com.accessin.app','_system');
+    }
+
+    $('.modal-new-update button').html('Actualizar ahora');
+    $('.modal-new-update button').prop('disabled', false);
+  },
+  close : function(){
+    $('.modal-new-update').remove();
+  }
+}
 
 var Alert = {
   open : function(title,msg,button){
@@ -411,6 +458,7 @@ var PrivateData = {
     current_client_name: "cvjjf",
     current_client_picture_menu_n: "cbjjf",
     last_config_sync: "lcsyd",
+    last_update_popup: "vcsyd",
     module_expense_active: "meadd",
     module_guard_active: "mgadd",
     module_events_active: "mevad",
@@ -425,7 +473,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","192.168.1.35") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","127.0.0.1") : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];

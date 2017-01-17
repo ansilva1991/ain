@@ -48,7 +48,7 @@
       this.is_processing = true;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','people','comprobate_real_id'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people','comprobate_real_id'],
         data : {
           person: form
         },

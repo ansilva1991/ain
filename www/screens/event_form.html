@@ -130,7 +130,7 @@
       this.callback_get_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','events','edit_event'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','edit_event'],
         data : {
           event_place_id: this.event_place_id,
           date: this.date,
@@ -276,7 +276,7 @@
       this.is_processing = true;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','events',this.event_id ? 'update_event' : 'create_event'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events',this.event_id ? 'update_event' : 'create_event'],
         data : {
           event: form,
           event_id: this.event_id
@@ -407,7 +407,7 @@
           app.pageLoading('show');
 
           Server.send({
-            route : [PrivateData.get('current_server_portal'),'app','events','cancel'],
+            route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','cancel'],
             data : {
               event_id: cs.event_id
             },

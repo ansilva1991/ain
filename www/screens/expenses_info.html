@@ -34,7 +34,7 @@
       this.callback_get_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','group_current_accounts','expenses_info'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'group_current_accounts','expenses_info'],
         data : {
           id: this.expenses_id
         },

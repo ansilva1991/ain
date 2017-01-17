@@ -60,7 +60,7 @@
       this.callback_get_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','useful_info','index'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'useful_info','index'],
         data : {},
         callback : function(data, success){
           console.log(data);
@@ -106,7 +106,11 @@
                 }
 
                 tmp.find('#updated_at').html(general_regulation.updated_at);
-                tmp.attr('data-url',general_regulation.url);
+                if(general_regulation.url_dynamic){
+                  tmp.attr('data-url',[PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'useful_info',general_regulation.url_dynamic,'event_place_rules']);
+                }else{
+                  tmp.attr('data-url',general_regulation.url);
+                }
 
                 var file = 'general_regulation_file_' + general_regulation.id + '.pdf';
                 tmp.attr('data-filename',file);

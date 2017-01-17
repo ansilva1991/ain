@@ -85,7 +85,7 @@
       this.callback_get_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','events','index'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','index'],
         data : {},
         callback : function(data, success){
           if(success){
@@ -200,7 +200,7 @@
           app.pageLoading('show');
 
           Server.send({
-            route : [PrivateData.get('current_server_portal'),'app','events','destroy_guest_lists'],
+            route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','destroy_guest_lists'],
             data : {
               ids: cs.selectedItems
             },

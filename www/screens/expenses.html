@@ -137,7 +137,7 @@
       $('.header .section-name').html(Extends.formatDate(new Date(this.current_month + "-01T00:00:00" + PrivateData.get('time_zone_offset')),'%mabbr. del %yyyy'));
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','group_current_accounts','index'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'group_current_accounts','index'],
         data : {
           month: this.current_month
         },

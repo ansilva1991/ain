@@ -60,7 +60,7 @@
       this.callback_get_record_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','guard','show_record'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'guard','show_record'],
         data : {
           record_id: this.record_id
         },

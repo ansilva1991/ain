@@ -114,7 +114,7 @@
       this.callback_update_auths = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','people','index'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people','index'],
         data : {},
         callback : function(data, success){
           console.log(data);
@@ -266,7 +266,7 @@
           app.pageLoading('show');
 
           Server.send({
-            route : [PrivateData.get('current_server_portal'),'app','people','destroy'],
+            route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people','destroy'],
             data : {
               ids: cs.selectedItems
             },

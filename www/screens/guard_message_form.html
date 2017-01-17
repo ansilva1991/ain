@@ -44,7 +44,7 @@
       this.callback_get_message_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','guard','show_message'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'guard','show_message'],
         data : {
           message_id: this.message_id
         },
@@ -91,7 +91,7 @@
       this.is_processing = true;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','guard','create_message'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'guard','create_message'],
         data : {
           message: {
             description: form.description

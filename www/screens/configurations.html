@@ -63,7 +63,7 @@
       this.callback_get_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','config','get'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'config','get'],
         data : {},
         callback : function(data, success){
           console.log(data);
@@ -94,7 +94,7 @@
       this.is_processing = true;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','config','update'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'config','update'],
         data : {
           config: {
             notificate_new_expenses: $('#notificate_new_expenses').is(':checked'),

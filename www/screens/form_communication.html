@@ -64,7 +64,7 @@
       this.callback_get_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','communications','get_reasons'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'communications','get_reasons'],
         data : {},
         callback : function(data, success){
           console.log(data);
@@ -101,7 +101,7 @@
 
       this.is_processing = true;
 
-      var route = [PrivateData.get('current_server_portal'),'app','communications','create'];
+      var route = [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'communications','create'];
       var data = {
         communication: {
           title: form.title,

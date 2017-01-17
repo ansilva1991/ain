@@ -1,7 +1,7 @@
 var Server = {
   ACCESSIN_URL: 'http://accessin.net',
   TEST_ACCESSIN_URL: 'http://test.accessin.net:4000',
-  DEV_URL: 'http://192.168.1.35:4000',
+  DEV_URL: 'http://127.0.0.1:4000',
   last_ajax: undefined,
   upload_success_callback: function(){},
   upload_error_callback: function(){},
@@ -40,6 +40,26 @@ var Server = {
           app.loadScreen(app.SCREENS.LOGIN);
         }else if(xhr.status == 998){
           app.loadScreen(app.SCREENS.DEPRECATED);
+        }else if(xhr.status == 997){
+          Confirm.open({
+            title: "Actualizar",
+            msg: "Se requiere actualizar la aplicación para realizar esta acción.",
+            success_button: "Actualizar",
+            cancel_button: "Más tarde",
+            callback_success: function(){
+              if(cordova.platformId == 'ios'){
+                window.open('itms-apps://itunes.apple.com/app/id1165550210','_system');
+              }else{
+                window.open('market://details?id=com.accessin.app','_system');
+              }
+            }
+          });
+
+          app.loadScreen(app.SCREENS.DASHBOARD);
+        }else if(xhr.status == 996){
+          Alert.open('Mantenimiento',"Estamos realizando tareas de mantenimiento. Es posible que algunas acciones no funcionen correctamente. Intenta nuevamente en unos instantes, disculpe las molestias.", "Continuar");
+
+          app.loadScreen(app.SCREENS.DASHBOARD);
         }else{
           xhr.callback_tmp({}, false)
         }

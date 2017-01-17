@@ -119,7 +119,7 @@
       $('.day-scroll .day .block').remove();
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','events','get_day'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','get_day'],
         data : {
           event_place_id: this.event_place_id,
           date: Extends.formatDate(this.selected_day,'%yyyy-%mm-%dd')

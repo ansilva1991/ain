@@ -113,7 +113,7 @@
       this.callback_get_communication_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','communications','show'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'communications','show'],
         data : {
           id: this.communication_id
         },
@@ -249,7 +249,7 @@
       app.pageLoading('show');
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','communications','add_simple_comment'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'communications','add_simple_comment'],
         data : {
           communication_id: this.communication_id,
           comment: comment
@@ -366,7 +366,7 @@
           app.pageLoading('show');
 
           Server.send({
-            route : [PrivateData.get('current_server_portal'),'app','communications','vote'],
+            route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'communications','vote'],
             data : {
               quiz_id: cs.communication_quiz_id,
               vote: cs.quiz_vote_id

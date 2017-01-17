@@ -105,7 +105,7 @@
       this.callback_get_person_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','people','edit_employee'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people','edit_employee'],
         data : {
           person_id: this.person_id
         },
@@ -184,7 +184,7 @@
       this.is_processing = true;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','people',this.person_id ? 'update_employee' : 'create_employee'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people',this.person_id ? 'update_employee' : 'create_employee'],
         data : {
           person: form,
           person_id: this.person_id,

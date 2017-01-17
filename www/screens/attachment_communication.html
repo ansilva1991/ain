@@ -38,7 +38,7 @@
       this.is_processing = true;
 
       Server.upload({
-        route : [PrivateData.get('current_server_portal'),'app','communications','add_comment_with_attachment'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'communications','add_comment_with_attachment'],
         data : {
           communication_id: this.communication_id,
           comment: comment

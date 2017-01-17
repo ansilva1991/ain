@@ -49,7 +49,7 @@
       this.callback_get_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','events','get_guests_from_list'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','get_guests_from_list'],
         data : {
           list_id: this.list_id
         },

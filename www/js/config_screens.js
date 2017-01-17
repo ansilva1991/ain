@@ -57,7 +57,7 @@ app.SCREENS = {
       id: 'submit-button'
     }
     ],
-    section_name: "Nueva autorización",
+    section_name: "autorizaciónes",
     html: "new_authorization_real_id"
   },
   AUTHORIZATION_FORM_FAMILY: {

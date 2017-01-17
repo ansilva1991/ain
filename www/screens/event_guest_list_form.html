@@ -69,7 +69,7 @@
       this.callback_get_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','events','edit_guest_list'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','edit_guest_list'],
         data : {
           list_id: this.list_id
         },
@@ -100,7 +100,7 @@
       this.is_processing = true;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','events',this.list_id ? 'update_guest_list' : 'create_guest_list'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events',this.list_id ? 'update_guest_list' : 'create_guest_list'],
         data : {
           list: form,
           id: this.list_id

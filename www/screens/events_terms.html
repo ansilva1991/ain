@@ -31,7 +31,7 @@
       this.callback_get_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','events','event_place_get_terms'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','event_place_get_terms'],
         data : {
           event_place_id: this.event_place_id
         },
@@ -52,7 +52,7 @@
       $('#submit').prop('disabled', true);
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','events','event_place_accept_terms'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','event_place_accept_terms'],
         data : {
           event_place_id: this.event_place_id
         },

@@ -41,7 +41,7 @@
       this.callback_get_info = callback;
 
       Server.send({
-        route : [PrivateData.get('current_server_portal'),'app','events','get_event_lists'],
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','get_event_lists'],
         data : {},
         callback : function(data, success){
           if(success){
