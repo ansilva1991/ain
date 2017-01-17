@@ -69,13 +69,19 @@
         callback : function(data, success){
           console.log(data);
 
-          for(var i in data.reasons){
-            var tmp = $('<option></option>').appendTo('#communication_reason_id');
-            tmp.attr('value',data.reasons[i][1]);
-            tmp.html(data.reasons[i][0]);
-          }
+          if(success){
+            for(var i in data.reasons){
+              var tmp = $('<option></option>').appendTo('#communication_reason_id');
+              tmp.attr('value',data.reasons[i][1]);
+              tmp.html(data.reasons[i][0]);
+            }
 
-          cs.callback_get_info();
+            cs.callback_get_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.COMMUNICATIONS);
+          }
         }
       });
     };
@@ -121,15 +127,29 @@
           file_name : 'image.jpg',
           file_uri : form.attachment,
           callback : function(data, success){
-            cs.submitSuccess(data,success);
-        }});
+            if(success){
+              cs.submitSuccess(data,success);
+            }else{
+              Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+              app.loadScreen(app.SCREENS.COMMUNICATIONS);
+            }
+          }
+        });
       }else{
         Server.send({
           route : route,
           data : data,
           callback : function(data, success){
-            cs.submitSuccess(data,success);
-        }});
+            if(success){
+              cs.submitSuccess(data,success);
+            }else{
+              Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+              app.loadScreen(app.SCREENS.COMMUNICATIONS);
+            }
+          }
+        });
       }
     };
 

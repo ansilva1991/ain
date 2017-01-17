@@ -67,20 +67,25 @@
         data : {},
         callback : function(data, success){
           console.log(data);
+          if(success){
+            if(data.config.notificate_new_expenses){
+              $('#notificate_new_expenses').prop('checked',true).change();
+            }
 
-          if(data.config.notificate_new_expenses){
-            $('#notificate_new_expenses').prop('checked',true).change();
+            if(data.config.notificate_new_communication){
+              $('#notificate_new_communication').prop('checked',true).change();
+            }
+
+            if(data.config.notificate_new_communication_message){
+              $('#notificate_new_communication_message').prop('checked',true).change();
+            }
+
+            cs.callback_get_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.DASHBOARD);
           }
-
-          if(data.config.notificate_new_communication){
-            $('#notificate_new_communication').prop('checked',true).change();
-          }
-
-          if(data.config.notificate_new_communication_message){
-            $('#notificate_new_communication_message').prop('checked',true).change();
-          }
-
-          cs.callback_get_info();
         }
       });
     }
@@ -106,7 +111,7 @@
 
           if(success){
             if(data.device){
-              
+
             }else{
               Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
             }

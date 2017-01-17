@@ -79,13 +79,17 @@
               $('.checked-data').show();
               $('#checked_by').html(data.person.checked_by);
               $('#checked_date').html(Extends.formatDate(new Date(data.person.checked_at + "T00:00:00" + PrivateData.get('time_zone_offset')),'%dd de %mname del %yyyy'));
-              
+
               $('.not_editable input').attr('readonly', true);
-              cs.editable = false; 
+              cs.editable = false;
             }
 
             cs.auth_code = data.person.auth_code;
             cs.callback_get_person_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.AUTHORIZATIONS);
           }
         }
       });

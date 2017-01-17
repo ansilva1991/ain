@@ -53,38 +53,43 @@
         data : {},
         callback : function(data, success){
           console.log(data);
+          if(success){
+            for(var i in data.communications){
+              var communication = data.communications[i];
+              var tmp = $('#example').clone().appendTo('.list.communications');
+              tmp.removeAttr('id');
+              tmp.addClass('item');
 
-          for(var i in data.communications){
-            var communication = data.communications[i];
-            var tmp = $('#example').clone().appendTo('.list.communications');
-            tmp.removeAttr('id');
-            tmp.addClass('item');
+              tmp.find('.status').addClass(communication.status);
+              tmp.find('#name').html(communication.last_comment_person);
+              tmp.find('#title').html(Extends.truncate(communication.title,30));
+              tmp.attr('data-id', communication.id);
 
-            tmp.find('.status').addClass(communication.status);
-            tmp.find('#name').html(communication.last_comment_person);
-            tmp.find('#title').html(Extends.truncate(communication.title,30));
-            tmp.attr('data-id', communication.id);
+              if(communication.reason == 'penalty'){
+                tmp.find('#name').html('Descargo de multa');
+              }
 
-            if(communication.reason == 'penalty'){
-              tmp.find('#name').html('Descargo de multa');
-            }
+              tmp.tap(function(){
+                var id = $(this).data('id');
 
-            tmp.tap(function(){
-              var id = $(this).data('id');
-
-              app.loadScreen(app.SCREENS.VIEW_COMMUNICATION,{
-                communication_id: id
+                app.loadScreen(app.SCREENS.VIEW_COMMUNICATION,{
+                  communication_id: id
+                });
               });
-            });
 
-            if(communication.last_comment_person_avatar){
-              tmp.find('img').attr('src',communication.last_comment_person_avatar);
+              if(communication.last_comment_person_avatar){
+                tmp.find('img').attr('src',communication.last_comment_person_avatar);
+              }
+
+              tmp.show();
             }
 
-            tmp.show();
-          }
+            cs.callback_get_data();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
 
-          cs.callback_get_data();
+            app.loadScreen(app.SCREENS.DASHBOARD);
+          }
         }
       });
     }

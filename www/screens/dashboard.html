@@ -1,5 +1,5 @@
 <div class="dashboard">
-  <h4>BIENVENIDO A LA<br>COMUNIDAD ACCESSIN</h4>
+  <h4 onclick="cs.dev();">BIENVENIDO A LA<br>COMUNIDAD ACCESSIN</h4>
   <div class="separator"></div>
   <div class="item" onclick="app.selectLiMenu(app.SCREENS.EVENTS);" data-module="events">
     <div class="icon">
@@ -52,7 +52,7 @@
 </div>
 <script type="text/javascript">
   function c(){
-
+    this.dev_count = 0;
     this.start = function(){
 
       if(!PrivateData.get('module_expense_active')){
@@ -68,6 +68,14 @@
       }
 
       app.pageLoading('hide');
+    }
+
+    this.dev = function(){
+      this.dev_count++;
+
+      if(this.dev_count > 50){
+        app.loadScreen(app.SCREENS.DEVELOPER);
+      }
     }
 
   }

@@ -2,7 +2,7 @@
   <form>
     <div class="row">
       <div class="cell">
-        <span class="icon-people-bubble"></span>
+        <span onclick="cs.dev();" class="icon-people-bubble"></span>
       </div>
     </div>
     <div class="row">
@@ -76,7 +76,7 @@
 
 <script type="text/javascript">
   function c(){
-
+    this.dev_count = 0;
     this.is_processing = false;
     this.email_login = undefined;
     this.one_signal_ids;
@@ -287,6 +287,14 @@
     this.registerCodeBack = function(){
       if(this.is_processing){ return false; }
       $('.layer').removeClass('active-register-code');
+    }
+
+    this.dev = function(){
+      this.dev_count++;
+
+      if(this.dev_count > 50){
+        app.loadScreen(app.SCREENS.DEVELOPER);
+      }
     }
 
   }

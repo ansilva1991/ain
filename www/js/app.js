@@ -36,6 +36,20 @@ var app = {
     });
   },
   onDeviceReady: function() {
+
+    if(PrivateData.get('debug_weinre_ip') != ""){
+
+      var xhrObj =  new XMLHttpRequest();
+      xhrObj.open('GET', 'http://' + PrivateData.get('debug_weinre_ip') + '/target/target-script-min.js#anonymous', false);
+      xhrObj.send('');
+      var se = document.createElement('script');
+      se.text = xhrObj.responseText;
+
+      window.WeinreServerURL = "http://" + PrivateData.get('debug_weinre_ip') + "/";
+
+      document.getElementsByTagName('head')[0].appendChild(se);
+    }
+
     console.log('deviceready');
     console.log(cordova.platformId);
     console.log(device.uuid);
@@ -109,6 +123,8 @@ var app = {
     }
   },
   updateMenuInfo: function(){
+    if(!PrivateData.get('current_auth_code')){ return false; }
+
     if(PrivateData.get('current_person_avatar')){
       $('.app>.menu .content .header img').attr('src',PrivateData.get('current_person_avatar'));
     }
@@ -120,15 +136,21 @@ var app = {
     });
 
     if(!PrivateData.get('module_expense_active')){
-      $('.app>.menu .content [data-module="expenses"]').remove();
+      $('.app>.menu .content [data-module="expenses"]').hide();
+    }else{
+      $('.app>.menu .content [data-module="expenses"]').show();
     }
 
     if(!PrivateData.get('module_guard_active')){
-      $('.app>.menu .content [data-module="guard"]').remove();
+      $('.app>.menu .content [data-module="guard"]').hide();
+    }else{
+      $('.app>.menu .content [data-module="guard"]').show();
     }
 
     if(!PrivateData.get('module_events_active')){
-      $('.app>.menu .content [data-module="events"]').remove();
+      $('.app>.menu .content [data-module="events"]').hide();
+    }else{
+      $('.app>.menu .content [data-module="events"]').show();
     }
   },
   openMenu: function(){
@@ -154,7 +176,7 @@ var app = {
   updateConfig: function(callback){
     app.update_config_callback = callback;
 
-    if((new Date()).getTime() - (PrivateData.get('last_config_sync') || 0) > 10800000){
+    if(PrivateData.get('current_auth_code') && (new Date()).getTime() - (PrivateData.get('last_config_sync') || 0) > 10800000){
       app.pageLoading('show');
       console.log('SYNC CONFIG');
       Server.send({
@@ -462,7 +484,8 @@ var PrivateData = {
     module_expense_active: "meadd",
     module_guard_active: "mgadd",
     module_events_active: "mevad",
-    time_zone_offset: "tzofs"
+    time_zone_offset: "tzofs",
+    debug_weinre_ip: "weine"
   },
   booleans : ["is_login","is_demo"],
   get : function(key){

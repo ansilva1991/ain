@@ -1,4 +1,25 @@
 app.SCREENS = {
+  DEVELOPER: {
+    icon_left: [
+    {
+      icon: "chevron-left",
+      func: function(){
+        cs.back();
+      }
+    }
+    ],
+    icon_right: [
+    {
+      text: "Listo <i class='fa fa-check'></i>",
+      func: function(){
+        cs.submit();
+      },
+      id: 'submit-button'
+    }
+    ],
+    section_name: "Developer",
+    html: "developer"
+  },
   LOGIN: {
     html: "login",
     header: false

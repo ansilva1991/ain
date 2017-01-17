@@ -126,100 +126,105 @@
         },
         callback : function(data, success){
           console.log(data);
+          if(success){
+            if(data.terms){
+              app.loadScreen(app.SCREENS.EVENTS_TERMS,{
+                event_place_id: cs.event_place_id,
+              });
 
-          if(data.terms){
-            app.loadScreen(app.SCREENS.EVENTS_TERMS,{
-              event_place_id: cs.event_place_id,
-            });
-
-            return false;
-          }
-
-          if(data.new_date){
-            app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
-              event_place_id: cs.event_place_id,
-              selected_day: new Date(data.new_date + 'T00:00:00' + PrivateData.get('time_zone_offset'))
-            });
-
-            return false;
-          }
-
-          cs.availability_days_of_week = data.event_place.availability_days_of_week;
-
-          cs.over_debt_limit = data.event_place.over_debt_limit;
-          cs.event_place_name = HelperEvents.event_place_name(data.event_place.name);
-
-          var init_calendar = new Date(data.event_place.init_calendar);
-
-          for(var i in data.event_place.interval_hours){
-            var hour = data.event_place.interval_hours[i];
-            var date_block = new Date(Extends.formatDate(cs.selected_day,'%yyyy-%mm-%ddT') + hour + ":00" + PrivateData.get('time_zone_offset'));
-
-
-            var tmp = $('#block_example').clone().appendTo('.day-scroll .day');
-            tmp.removeAttr('id');
-            if(date_block < init_calendar){
-              tmp.addClass('disabled');
-              tmp.find('.content').html('No disponible');
+              return false;
             }
 
-            tmp.attr('data-hour',hour);
-            tmp.find('#hour').html(hour);
-            tmp.show();
-          }
-
-          for(var hour in data.events){
-            for(var i in data.events[hour]){
-              var event = data.events[hour][i];
-              var tmp = $('#example').clone().appendTo('.day-scroll .day .block[data-hour="' + hour + '"] .content');
-              tmp.removeAttr('id');
-              tmp.addClass(event.status);
-
-              if(!event.its_me){
-                tmp.addClass('other');
-              }else{
-              tmp.tap(function(){
-                var id = $(this).data('id');
-
-                app.loadScreen(app.SCREENS.EVENT_FORM,{
-                  event_id: id
-                });
+            if(data.new_date){
+              app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
+                event_place_id: cs.event_place_id,
+                selected_day: new Date(data.new_date + 'T00:00:00' + PrivateData.get('time_zone_offset'))
               });
+
+              return false;
+            }
+
+            cs.availability_days_of_week = data.event_place.availability_days_of_week;
+
+            cs.over_debt_limit = data.event_place.over_debt_limit;
+            cs.event_place_name = HelperEvents.event_place_name(data.event_place.name);
+
+            var init_calendar = new Date(data.event_place.init_calendar);
+
+            for(var i in data.event_place.interval_hours){
+              var hour = data.event_place.interval_hours[i];
+              var date_block = new Date(Extends.formatDate(cs.selected_day,'%yyyy-%mm-%ddT') + hour + ":00" + PrivateData.get('time_zone_offset'));
+
+
+              var tmp = $('#block_example').clone().appendTo('.day-scroll .day');
+              tmp.removeAttr('id');
+              if(date_block < init_calendar){
+                tmp.addClass('disabled');
+                tmp.find('.content').html('No disponible');
               }
 
-              tmp.attr('data-id',event.id);
-              if(data.event_place.visible_who_resersed || event.its_me){
-                tmp.find('#person_full_name').html(event.person);
-                tmp.find('#status').html(HelperEvents.status(event.status));
-                tmp.find('#group_identificator').html(event.group_identificator);
-              }else{
-                tmp.find('#person_full_name').html("Reservado");
-              }
-              tmp.find('#interval').html(event.init_hour + " - " + event.end_hour);
-
+              tmp.attr('data-hour',hour);
+              tmp.find('#hour').html(hour);
               tmp.show();
             }
-          }
 
-          $('.day-scroll .day>.block .content').tap(function(){
+            for(var hour in data.events){
+              for(var i in data.events[hour]){
+                var event = data.events[hour][i];
+                var tmp = $('#example').clone().appendTo('.day-scroll .day .block[data-hour="' + hour + '"] .content');
+                tmp.removeAttr('id');
+                tmp.addClass(event.status);
 
-            if($(this).html() == "" && !$(this).parent().hasClass('disabled')){
-              if(cs.over_debt_limit){
-                Alert.open("Límite superado","No puede realizar nuevas reservas en " + cs.event_place_name + " por que superó el límite de deuda disponible. Para más información comuniquese con su Administrador.", "Continuar");
-              }else{
-                var init_hour = $(this).parent().data('hour');
+                if(!event.its_me){
+                  tmp.addClass('other');
+                }else{
+                tmp.tap(function(){
+                  var id = $(this).data('id');
 
-                app.loadScreen(app.SCREENS.EVENT_FORM,{
-                  event_place_id: cs.event_place_id,
-                  date: Extends.formatDate(cs.selected_day,'%yyyy-%mm-%dd'),
-                  init_hour: init_hour
+                  app.loadScreen(app.SCREENS.EVENT_FORM,{
+                    event_id: id
+                  });
                 });
+                }
+
+                tmp.attr('data-id',event.id);
+                if(data.event_place.visible_who_resersed || event.its_me){
+                  tmp.find('#person_full_name').html(event.person);
+                  tmp.find('#status').html(HelperEvents.status(event.status));
+                  tmp.find('#group_identificator').html(event.group_identificator);
+                }else{
+                  tmp.find('#person_full_name').html("Reservado");
+                }
+                tmp.find('#interval').html(event.init_hour + " - " + event.end_hour);
+
+                tmp.show();
               }
             }
-          });
 
-          cs.is_processing = false;
-          cs.callback_get_info();
+            $('.day-scroll .day>.block .content').tap(function(){
+
+              if($(this).html() == "" && !$(this).parent().hasClass('disabled')){
+                if(cs.over_debt_limit){
+                  Alert.open("Límite superado","No puede realizar nuevas reservas en " + cs.event_place_name + " por que superó el límite de deuda disponible. Para más información comuniquese con su Administrador.", "Continuar");
+                }else{
+                  var init_hour = $(this).parent().data('hour');
+
+                  app.loadScreen(app.SCREENS.EVENT_FORM,{
+                    event_place_id: cs.event_place_id,
+                    date: Extends.formatDate(cs.selected_day,'%yyyy-%mm-%dd'),
+                    init_hour: init_hour
+                  });
+                }
+              }
+            });
+
+            cs.is_processing = false;
+            cs.callback_get_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.EVENTS);
+          }
         }
       });
     };
