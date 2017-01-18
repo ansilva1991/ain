@@ -2,7 +2,7 @@ var app = {
   VERSION: 211,
   PORTAL_VERSION: 211,
   MINIUM_VERSION_LOGUINED: 211,
-  ENV: "development",
+  ENV: "production",
   DEV_IP: "192.168.0.113",
   load_screen_ajax: false,
   current_screen: false,
@@ -38,7 +38,7 @@ var app = {
   },
   onDeviceReady: function() {
 
-    if(PrivateData.get('debug_weinre_ip') != ""){
+    if(PrivateData.get('debug_weinre_ip') && PrivateData.get('debug_weinre_ip') != ""){
 
       var xhrObj =  new XMLHttpRequest();
       xhrObj.open('GET', 'http://' + PrivateData.get('debug_weinre_ip') + '/target/target-script-min.js#anonymous', false);
