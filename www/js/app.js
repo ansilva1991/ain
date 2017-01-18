@@ -3,6 +3,7 @@ var app = {
   PORTAL_VERSION: 211,
   MINIUM_VERSION_LOGUINED: 211,
   ENV: "development",
+  DEV_IP: "192.168.0.113",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -212,6 +213,8 @@ var app = {
             }
 
             app.update_config_callback();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos de configuración, por favor intenta nuevamente.','Aceptar');
           }
         }
       });
@@ -496,7 +499,7 @@ var PrivateData = {
     }
   },
   set : function(key,value){
-    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0","127.0.0.1") : value);
+    return localStorage[PrivateData.hide_fields[key]] = Security.encrypt(value.constructor == String ? value.replace("0.0.0.0",app.DEV_IP) : value);
   },
   delete : function(key){
     delete localStorage[PrivateData.hide_fields[key]];
