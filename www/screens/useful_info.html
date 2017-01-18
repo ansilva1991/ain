@@ -107,7 +107,7 @@
 
                 tmp.find('#updated_at').html(general_regulation.updated_at);
                 if(general_regulation.url_dynamic){
-                  tmp.attr('data-url',[PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'useful_info',general_regulation.url_dynamic,'event_place_rules']);
+                  tmp.attr('data-url',['','app',"v" + app.PORTAL_VERSION,'useful_info',general_regulation.url_dynamic,'event_place_rules'].join('/'));
                 }else{
                   tmp.attr('data-url',general_regulation.url);
                 }
