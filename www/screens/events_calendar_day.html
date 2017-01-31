@@ -62,8 +62,10 @@
     this.is_processing = false;
     this.over_debt_limit = false;
     this.availability_days_of_week;
+    this.day_is_loading = false;
 
     this.start = function(opts){
+      console.log('START');
       opts = opts || {};
 
       this.event_place_id = opts.event_place_id;
@@ -87,10 +89,6 @@
 
       $('.header .section-name').html(Extends.formatDate(new Date(this.scroll_init_day_integer),'%mabbr. de %yyyy'));
 
-      setTimeout(function(){
-        cs.scrolling_days_number = false;
-      },100);
-
       app.liActive('events');
 
       this.getInfo(function(){
@@ -108,11 +106,17 @@
         $('.end_days_number.center').scrollLeft(window.innerWidth * 0.01);
         $('.end_days_number.center').addClass('available-scroll');
 
+        setTimeout(function(){
+          cs.scrolling_days_number = false;
+        },100);
+
         app.pageLoading('hide');
       });
     }
 
     this.getInfo = function(callback){
+      console.log('***GET INFO***');
+      this.day_is_loading = true;
       this.is_processing = true;
       this.callback_get_info = callback;
 
@@ -171,6 +175,8 @@
             for(var hour in data.events){
               for(var i in data.events[hour]){
                 var event = data.events[hour][i];
+                $('.day-scroll .day .block[data-hour="' + hour + '"]').removeClass('disabled');
+                $('.day-scroll .day .block[data-hour="' + hour + '"] .content').html('');
                 var tmp = $('#example').clone().appendTo('.day-scroll .day .block[data-hour="' + hour + '"] .content');
                 tmp.removeAttr('id');
                 tmp.addClass(event.status);
@@ -219,6 +225,7 @@
             });
 
             cs.is_processing = false;
+            cs.day_is_loading = false;
             cs.callback_get_info();
           }else{
             Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
@@ -278,6 +285,8 @@
           tmp.addClass('disabled');
         }else{
           tmp.tap(function(){
+            if(cs.day_is_loading){ return true; }
+            console.log('tap');
             var date = $(this).data('date');
             cs.selected_day = new Date(date + "T12:00:00");
 

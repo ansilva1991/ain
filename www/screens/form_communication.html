@@ -127,13 +127,7 @@
           file_name : 'image.jpg',
           file_uri : form.attachment,
           callback : function(data, success){
-            if(success){
-              cs.submitSuccess(data,success);
-            }else{
-              Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
-
-              app.loadScreen(app.SCREENS.COMMUNICATIONS);
-            }
+            cs.submitSuccess(data,success);
           }
         });
       }else{
@@ -141,13 +135,7 @@
           route : route,
           data : data,
           callback : function(data, success){
-            if(success){
-              cs.submitSuccess(data,success);
-            }else{
-              Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
-
-              app.loadScreen(app.SCREENS.COMMUNICATIONS);
-            }
+            cs.submitSuccess(data,success);
           }
         });
       }
