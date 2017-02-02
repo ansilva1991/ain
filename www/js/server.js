@@ -60,6 +60,8 @@ var Server = {
           Alert.open('Mantenimiento',"Estamos realizando tareas de mantenimiento. Es posible que algunas acciones no funcionen correctamente. Intenta nuevamente en unos instantes, disculpe las molestias.", "Continuar");
 
           app.loadScreen(app.SCREENS.DASHBOARD);
+        }else if(xhr.status == 200 && xhr.responseText == ""){
+          xhr.callback_tmp({}, false);
         }else{
           xhr.callback_tmp({}, false)
         }
