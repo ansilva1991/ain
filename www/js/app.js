@@ -1,8 +1,8 @@
 var app = {
-  VERSION: 211,
+  VERSION: 213,
   PORTAL_VERSION: 211,
   MINIUM_VERSION_LOGUINED: 211,
-  ENV: "development",
+  ENV: "production",
   DEV_IP: "192.168.1.35",
   load_screen_ajax: false,
   current_screen: false,
