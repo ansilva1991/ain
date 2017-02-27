@@ -53,6 +53,7 @@
 <script type="text/javascript">
   function c(){
     this.dev_count = 0;
+    this.is_dashboard = false;
     this.start = function(){
 
       if(!PrivateData.get('module_expense_active')){
@@ -67,7 +68,12 @@
         $('.dashboard [data-module="events"]').remove();
       }
 
-      app.pageLoading('hide');
+      if(!app.load_with_notification){
+        app.pageLoading('hide');
+        this.is_dashboard = true;
+      }else{
+        app.load_with_notification = false;
+      }
       console.log('dashboard_start');
     }
 

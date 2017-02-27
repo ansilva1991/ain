@@ -10,6 +10,8 @@ var app = {
   config_sync_consecutive_errors: 0,
   if_device_initialized: false,
   data_from_notification: {},
+  load_with_notification: false,
+  interval_notification: undefined,
   initialize: function() {
     this.bindEvents();
   },
@@ -121,10 +123,12 @@ var app = {
 
     if(app.if_device_initialized){
       console.log('INICIALIZADO');
+      app.load_with_notification = true;
       app.loadScreen(app.SCREENS[data.screen],data.data);
     }else{
       console.log('NO INICIALIZADO');
       app.data_from_notification = data;
+      interval_notification = setInterval(function(){ app.dashboardComprobateNotification(); },100);
     }
 
   },
@@ -142,6 +146,18 @@ var app = {
       cs.back();
     }else{
       navigator.app.exitApp();
+    }
+  },
+  dashboardComprobateNotification: function(){
+    if(app.current_screen && app.current_screen.is_dashboard){
+
+      if(interval_notification){
+        clearInterval(interval_notification);
+      }
+
+      var data = app.data_from_notification;
+      app.loadScreen(app.SCREENS[data.screen],data.data);
+      app.data_from_notification = {};
     }
   },
   updateMenuInfo: function(){
