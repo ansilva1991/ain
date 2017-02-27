@@ -2,11 +2,12 @@ var app = {
   VERSION: 213,
   PORTAL_VERSION: 211,
   MINIUM_VERSION_LOGUINED: 211,
-  ENV: "production",
-  DEV_IP: "192.168.1.35",
+  ENV: "development",
+  DEV_IP: "192.168.1.37",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
+  config_sync_consecutive_errors: 0,
   initialize: function() {
     this.bindEvents();
   },
@@ -54,7 +55,7 @@ var app = {
     console.log('deviceready');
     console.log(cordova.platformId);
     console.log(device.uuid);
-
+    
     localStorage.uuid = localStorage.uuid || Extends.generateUUID();
 
     if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
@@ -75,6 +76,9 @@ var app = {
       app.closeMenu();
     });
 
+    app.redirect_to_appropiate_screen();
+  },
+  redirect_to_appropiate_screen: function(){
     if(PrivateData.get('is_login')){
 
       if(!PrivateData.get('logined_version') || PrivateData.get('logined_version') < app.MINIUM_VERSION_LOGUINED){
@@ -91,7 +95,7 @@ var app = {
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
-        })
+        });
       }else{
         app.loadScreen(app.SCREENS.SELECT_AUTH);
       }
@@ -188,6 +192,8 @@ var app = {
         callback : function(data, success){
           console.log(data);
           if(success){
+            app.config_sync_consecutive_errors = 0;
+
             PrivateData.set('current_person_full_name',data.person_full_name);
             PrivateData.set('current_group_identificator',data.group_identificator);
             PrivateData.set('current_client_name',data.client_name);
@@ -214,7 +220,16 @@ var app = {
 
             app.update_config_callback();
           }else{
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos de configuración, por favor intenta nuevamente.','Aceptar');
+            app.config_sync_consecutive_errors += 1;
+
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos de configuración, por favor intenta nuevamente.','Aceptar',function(){
+              if(app.config_sync_consecutive_errors > 2){
+                PrivateData.clear();
+                app.loadScreen(app.SCREENS.LOGIN);
+              }else{
+                app.redirect_to_appropiate_screen();
+              }
+            });
           }
         }
       });
@@ -414,14 +429,17 @@ var NewUpdate = {
 }
 
 var Alert = {
-  open : function(title,msg,button){
+  callback : function(){},
+  open : function(title,msg,button,callback){
     $('.modal-alert h4 span').html(title);
     $('.modal-alert p').html(msg);
     $('.modal-alert button').html(button);
     $('.modal-alert').addClass('open');
+    Alert.callback = callback || function(){};
   },
   close : function(){
     $('.modal-alert').removeClass('open');
+    Alert.callback();
   }
 }
 

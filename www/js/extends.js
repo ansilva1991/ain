@@ -57,7 +57,9 @@ var Extends = {
     });
   },
   scrollToInputFocus : function(selector_css){
-    $(selector_css).scrollTop(($(selector_css).scrollTop() + $(':focus').offset().top) - window.innerHeight + 60);
+    if($(':focus').length > 0){
+      $(selector_css).scrollTop(($(selector_css).scrollTop() + $(':focus').offset().top) - window.innerHeight + 60);
+    }
   },
   formatDate : function(date,format){
     var months_name_abbr = ['-','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
