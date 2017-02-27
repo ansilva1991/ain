@@ -2,7 +2,7 @@ var app = {
   VERSION: 213,
   PORTAL_VERSION: 211,
   MINIUM_VERSION_LOGUINED: 211,
-  ENV: "development",
+  ENV: "production",
   DEV_IP: "192.168.1.37",
   load_screen_ajax: false,
   current_screen: false,
@@ -119,6 +119,10 @@ var app = {
       data = jsonData.notification.payload.additionalData;
     }else{
       data = JSON.parse(jsonData.notification.payload.additionalData);
+    }
+
+    if(data.d){
+      data = Security.decrypt(data.d);
     }
 
     if(app.if_device_initialized){
