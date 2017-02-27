@@ -8,6 +8,8 @@ var app = {
   current_screen: false,
   header_icon_clicks: {},
   config_sync_consecutive_errors: 0,
+  if_device_initialized: false,
+  data_from_notification: {},
   initialize: function() {
     this.bindEvents();
   },
@@ -55,7 +57,7 @@ var app = {
     console.log('deviceready');
     console.log(cordova.platformId);
     console.log(device.uuid);
-    
+
     localStorage.uuid = localStorage.uuid || Extends.generateUUID();
 
     if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
@@ -77,6 +79,7 @@ var app = {
     });
 
     app.redirect_to_appropiate_screen();
+    app.if_device_initialized = true;
   },
   redirect_to_appropiate_screen: function(){
     if(PrivateData.get('is_login')){
@@ -106,9 +109,22 @@ var app = {
   onNotificationOpenedCallback: function(jsonData){
     console.log('onNotificationOpenedCallback: ');
     console.log(jsonData);
-    var data = JSON.parse(jsonData.notification.payload.additionalData);
 
-    app.loadScreen(app.SCREENS[data.screen],data.data);
+    var data;
+
+    if(jsonData.notification.payload.additionalData.constructor == Object){
+      data = jsonData.notification.payload.additionalData;
+    }else{
+      data = JSON.parse(jsonData.notification.payload.additionalData);
+    }
+
+    if(app.if_device_initialized){
+      console.log('INICIALIZADO');
+      app.loadScreen(app.SCREENS[data.screen],data.data);
+    }else{
+      console.log('NO INICIALIZADO');
+      app.data_from_notification = data;
+    }
 
   },
   onNotificationReceivedCallback: function(jsonData){
