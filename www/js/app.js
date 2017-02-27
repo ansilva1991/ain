@@ -79,7 +79,6 @@ var app = {
     });
 
     app.redirect_to_appropiate_screen();
-    app.if_device_initialized = true;
   },
   redirect_to_appropiate_screen: function(){
     if(PrivateData.get('is_login')){
@@ -98,6 +97,8 @@ var app = {
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
+
+          app.if_device_initialized = true;
         });
       }else{
         app.loadScreen(app.SCREENS.SELECT_AUTH);
