@@ -43,14 +43,44 @@ var app = {
   },
   onDeviceReady: function() {
 
+    if(PrivateData.get('debug_weinre_ip') && PrivateData.get('debug_weinre_ip') != ""){
+
+      var xhrObj =  new XMLHttpRequest();
+      xhrObj.open('GET', 'http://' + PrivateData.get('debug_weinre_ip') + '/target/target-script-min.js#anonymous', false);
+      xhrObj.send('');
+      var se = document.createElement('script');
+      se.text = xhrObj.responseText;
+
+      window.WeinreServerURL = "http://" + PrivateData.get('debug_weinre_ip') + "/";
+
+      document.getElementsByTagName('head')[0].appendChild(se);
+    }
+
     console.log('deviceready');
+    console.log(cordova.platformId);
+    console.log(device.uuid);
+
+    localStorage.uuid = localStorage.uuid || Extends.generateUUID();
 
     if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
 
       window.plugins.OneSignal.startInit("c121ee3a-dcad-4171-a489-12a59f102a04", "44425877825").handleNotificationOpened(app.onNotificationOpenedCallback).handleNotificationReceived(app.onNotificationReceivedCallback).inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification).endInit();
     }
 
-    //app.redirect_to_appropiate_screen();
+    if (cordova.platformId == 'android') {
+      StatusBar.backgroundColorByHexString("#DC9929");
+    }
+
+    $(window).resize(function(){
+      app.windowResize();
+    });
+
+    var hammertime = new Hammer($('.app>.menu')[0]);
+    hammertime.on('swipeleft', function(ev) {
+      app.closeMenu();
+    });
+
+    app.redirect_to_appropiate_screen();
   },
   redirect_to_appropiate_screen: function(){
     if(PrivateData.get('is_login')){
@@ -82,6 +112,32 @@ var app = {
   onNotificationOpenedCallback: function(jsonData){
     console.log('onNotificationOpenedCallback: ');
     console.log(jsonData);
+
+    var data;
+
+    if(jsonData.notification.payload.additionalData.constructor == Object){
+      data = jsonData.notification.payload.additionalData;
+    }else{
+      data = JSON.parse(jsonData.notification.payload.additionalData);
+    }
+
+    if(data.d){
+      data = Security.decrypt(data.d);
+    }
+
+    console.log(data);
+    clearInterval(app.interval_notification);
+
+    app.data_from_notification = data;
+
+    if(app.if_device_initialized){
+      console.log('INICIALIZADO');
+      app.load_with_notification = true;
+      app.processNotification();
+    }else{
+      console.log('NO INICIALIZADO');
+      app.interval_notification = setInterval(function(){ app.dashboardComprobateNotification(); },100);
+    }
 
   },
   onNotificationReceivedCallback: function(jsonData){
