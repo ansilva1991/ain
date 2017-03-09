@@ -126,15 +126,16 @@ var app = {
     }
 
     console.log(data);
+    clearInterval(interval_notification);
+
+    app.data_from_notification = data;
 
     if(app.if_device_initialized){
       console.log('INICIALIZADO');
-      app.data_from_notification = data;
+      app.load_with_notification = true;
       app.processNotification();
     }else{
       console.log('NO INICIALIZADO');
-      app.load_with_notification = true;
-      app.data_from_notification = data;
       interval_notification = setInterval(function(){ app.dashboardComprobateNotification(); },100);
     }
 
@@ -174,7 +175,6 @@ var app = {
 
     if(PrivateData.get('current_group_id') == data.group_id){
       app.loadScreen(app.SCREENS[data.screen],data.data);
-      app.data_from_notification = {};
     }else{
       app.pageLoading('show');
 
@@ -201,6 +201,8 @@ var app = {
         }
       });
     }
+
+    app.data_from_notification = {};
   },
   updateMenuInfo: function(){
     if(!PrivateData.get('current_auth_code')){ return false; }
