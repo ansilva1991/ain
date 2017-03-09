@@ -24,7 +24,7 @@
         <string>We are using your photos and camera for profile photos.</string>
     </gap:config-file>
 
-    <preference name="AndroidLaunchMode" value="singleTask" />
+    <preference name="AndroidLaunchMode" value="singleInstance" />
 
     <!-- Recommend the newest cli but requires cli-5.1.1+ and gradle for Android. -->
     <!-- If the below settings are not compatible with your project set the "PGB ANT" version above. -->
