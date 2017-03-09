@@ -130,7 +130,8 @@ var app = {
     if(app.if_device_initialized){
       console.log('INICIALIZADO');
       app.load_with_notification = true;
-      app.loadScreen(app.SCREENS[data.screen],data.data);
+      app.data_from_notification = data;
+      app.processNotification();
     }else{
       console.log('NO INICIALIZADO');
       app.data_from_notification = data;
@@ -161,9 +162,44 @@ var app = {
         clearInterval(interval_notification);
       }
 
-      var data = app.data_from_notification;
+      app.processNotification();
+    }
+  },
+  processNotification: function(){
+    if(!PrivateData.get('is_login')){
+      return true;
+    }
+
+    var data = app.data_from_notification;
+
+    if(PrivateData.get('current_group_id') == data.group_id){
       app.loadScreen(app.SCREENS[data.screen],data.data);
       app.data_from_notification = {};
+    }else{
+      app.pageLoading('show');
+
+      Server.send({
+        route : [PrivateData.get('country_server_url'),'app','get_auth_for_me_from_notification'],
+        data : {
+          client_id: data.client_id,
+          group_id: data.group_id
+        },
+        callback : function(data, success){
+          console.log(data);
+
+          if(success){
+            PrivateData.set('current_auth_code',data.auth.code);
+            PrivateData.set('current_server_portal',data.auth.url);
+            PrivateData.set('current_group_id',data.auth.group_id);
+            app.resetConfig();
+
+            app.updateConfig(function(){
+              app.updateMenuInfo();
+              app.processNotification();
+            });
+          }
+        }
+      });
     }
   },
   updateMenuInfo: function(){
@@ -545,6 +581,7 @@ var PrivateData = {
     current_person_full_name: "esjjc",
     current_person_avatar: "avjjc",
     current_person_avatar_last_change: "avlcc",
+    current_group_id: "esjic",
     current_group_identificator: "esjjf",
     current_group_identificator_one: "esjjo",
     current_group_identificator_others: "esjot",
