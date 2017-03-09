@@ -113,32 +113,6 @@ var app = {
     console.log('onNotificationOpenedCallback: ');
     console.log(jsonData);
 
-    var data;
-
-    if(jsonData.notification.payload.additionalData.constructor == Object){
-      data = jsonData.notification.payload.additionalData;
-    }else{
-      data = JSON.parse(jsonData.notification.payload.additionalData);
-    }
-
-    if(data.d){
-      data = Security.decrypt(data.d);
-    }
-
-    console.log(data);
-    clearInterval(app.interval_notification);
-
-    app.data_from_notification = data;
-
-    if(app.if_device_initialized){
-      console.log('INICIALIZADO');
-      app.load_with_notification = true;
-      app.processNotification();
-    }else{
-      console.log('NO INICIALIZADO');
-      app.interval_notification = setInterval(function(){ app.dashboardComprobateNotification(); },100);
-    }
-
   },
   onNotificationReceivedCallback: function(jsonData){
     console.log('onNotificationReceivedCallback: ');
