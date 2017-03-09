@@ -80,7 +80,7 @@ var app = {
       app.closeMenu();
     });
 
-    app.redirect_to_appropiate_screen();
+    //app.redirect_to_appropiate_screen();
   },
   redirect_to_appropiate_screen: function(){
     if(PrivateData.get('is_login')){
