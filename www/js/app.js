@@ -126,7 +126,7 @@ var app = {
     }
 
     console.log(data);
-    clearInterval(interval_notification);
+    clearInterval(app.interval_notification);
 
     app.data_from_notification = data;
 
@@ -136,7 +136,7 @@ var app = {
       app.processNotification();
     }else{
       console.log('NO INICIALIZADO');
-      interval_notification = setInterval(function(){ app.dashboardComprobateNotification(); },100);
+      app.interval_notification = setInterval(function(){ app.dashboardComprobateNotification(); },100);
     }
 
   },
@@ -159,8 +159,8 @@ var app = {
   dashboardComprobateNotification: function(){
     if(app.current_screen && app.current_screen.is_dashboard){
 
-      if(interval_notification){
-        clearInterval(interval_notification);
+      if(app.interval_notification){
+        clearInterval(app.interval_notification);
       }
 
       app.processNotification();
