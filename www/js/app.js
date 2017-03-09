@@ -43,42 +43,12 @@ var app = {
   },
   onDeviceReady: function() {
 
-    if(PrivateData.get('debug_weinre_ip') && PrivateData.get('debug_weinre_ip') != ""){
-
-      var xhrObj =  new XMLHttpRequest();
-      xhrObj.open('GET', 'http://' + PrivateData.get('debug_weinre_ip') + '/target/target-script-min.js#anonymous', false);
-      xhrObj.send('');
-      var se = document.createElement('script');
-      se.text = xhrObj.responseText;
-
-      window.WeinreServerURL = "http://" + PrivateData.get('debug_weinre_ip') + "/";
-
-      document.getElementsByTagName('head')[0].appendChild(se);
-    }
-
     console.log('deviceready');
-    console.log(cordova.platformId);
-    console.log(device.uuid);
-
-    localStorage.uuid = localStorage.uuid || Extends.generateUUID();
 
     if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
 
       window.plugins.OneSignal.startInit("c121ee3a-dcad-4171-a489-12a59f102a04", "44425877825").handleNotificationOpened(app.onNotificationOpenedCallback).handleNotificationReceived(app.onNotificationReceivedCallback).inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification).endInit();
     }
-
-    if (cordova.platformId == 'android') {
-      StatusBar.backgroundColorByHexString("#DC9929");
-    }
-
-    $(window).resize(function(){
-      app.windowResize();
-    });
-
-    var hammertime = new Hammer($('.app>.menu')[0]);
-    hammertime.on('swipeleft', function(ev) {
-      app.closeMenu();
-    });
 
     //app.redirect_to_appropiate_screen();
   },
