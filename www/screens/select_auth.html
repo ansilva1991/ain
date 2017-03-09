@@ -31,6 +31,8 @@
     };
 
     this.processLogin = function(){
+      app.load_with_notification = false;
+
       app.updateConfig(function(){
         app.updateMenuInfo();
         if(localStorage['welcome_' + PrivateData.get('email_logined')]){
