@@ -17,6 +17,11 @@
 
       this.go_to = opts.go_to;
 
+      $('.authorization-form-family form').submit(function(){
+        cs.submit();
+        return false;
+      });
+
       $(window).resize(function(){
         Extends.scrollToInputFocus('.authorization-form-family');
       });

@@ -26,7 +26,7 @@ app.SCREENS = {
   },
   SELECT_AUTH: {
     html: "select_auth",
-    header: false
+    section_name: "<span class='dashboard-icon icon-authorizations'></span><span class='dashboard-text'>Mis autorizaciones</span>"
   },
   REGISTER: {
     html: "register",

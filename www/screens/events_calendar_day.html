@@ -103,7 +103,6 @@
           addClass: 'left'
         }));
 
-        $('.end_days_number.center').scrollLeft(window.innerWidth * 0.01);
         $('.end_days_number.center').addClass('available-scroll');
 
         setTimeout(function(){
@@ -306,56 +305,67 @@
 
       days_number.css({ 'display' : 'block' });
       days_number.addClass('end_days_number');
-      days_number.scroll(function(){
-        console.log('scroll');
-        var scroll = $(this).scrollLeft();
-        if(!cs.scrolling_days_number){
-          cs.scrolling_days_number = true;
 
-          if(scroll > (window.innerWidth * 0.01)){
-            var this_day = parseInt($('.end_days_number.left').data('init_day'));
-            var other_day = this_day + 604800000;
+      var hammertime = new Hammer(days_number[0]);
+      hammertime.on('swiperight', function(ev) {
+        cs.backWeek();
+      });
 
-            $('.end_days_number.right').remove();
-            $('.end_days_number.center').addClass('right').removeClass('center');
-            $('.end_days_number.left').removeClass('left').addClass('center');
-
-            $('.header .section-name').html(Extends.formatDate(new Date(this_day),'%mabbr. de %yyyy'));
-
-            $('.event-calendar-day').append(cs.createDOMWeek(new Date(other_day),{
-              addClass: 'left'
-            }));
-
-            cs.updateCalendarSelected();
-          }
-
-          if(scroll < (window.innerWidth * 0.01)){
-            var this_day = parseInt($('.end_days_number.right').data('init_day'));
-            var other_day = this_day - 604800000;
-            $('.end_days_number.left').remove();
-            $('.end_days_number.center').addClass('left').removeClass('center');
-            $('.end_days_number.right').removeClass('right').addClass('center');
-
-            $('.header .section-name').html(Extends.formatDate(new Date(this_day),'%mabbr. de %yyyy'));
-
-            $('.event-calendar-day').append(cs.createDOMWeek(new Date(other_day),{
-              addClass: 'right'
-            }));
-
-            cs.updateCalendarSelected();
-          }
-
-          $('.end_days_number.center').scrollLeft(window.innerWidth * 0.01);
-
-          setTimeout(function(){
-            cs.scrolling_days_number = false;
-            $('.end_days_number.center').addClass('available-scroll');
-          },300);
-        }
+      hammertime.on('swipeleft', function(ev) {
+        cs.nextWeek();
       });
 
       return days_number;
     };
+
+    this.nextWeek = function(){
+      if(!cs.scrolling_days_number){
+          cs.scrolling_days_number = true;
+        var this_day = parseInt($('.end_days_number.left').data('init_day'));
+        var other_day = this_day + 604800000;
+
+        $('.end_days_number.right').remove();
+        $('.end_days_number.center').addClass('right').removeClass('center');
+        $('.end_days_number.left').removeClass('left').addClass('center');
+
+        $('.header .section-name').html(Extends.formatDate(new Date(this_day),'%mabbr. de %yyyy'));
+
+        $('.event-calendar-day').append(cs.createDOMWeek(new Date(other_day),{
+          addClass: 'left'
+        }));
+
+        cs.updateCalendarSelected();
+
+        setTimeout(function(){
+          cs.scrolling_days_number = false;
+          $('.end_days_number.center').addClass('available-scroll');
+        },300);
+      }
+    }
+
+    this.backWeek = function(){
+      if(!cs.scrolling_days_number){
+          cs.scrolling_days_number = true;
+        var this_day = parseInt($('.end_days_number.right').data('init_day'));
+        var other_day = this_day - 604800000;
+        $('.end_days_number.left').remove();
+        $('.end_days_number.center').addClass('left').removeClass('center');
+        $('.end_days_number.right').removeClass('right').addClass('center');
+
+        $('.header .section-name').html(Extends.formatDate(new Date(this_day),'%mabbr. de %yyyy'));
+
+        $('.event-calendar-day').append(cs.createDOMWeek(new Date(other_day),{
+          addClass: 'right'
+        }));
+
+        cs.updateCalendarSelected();
+
+        setTimeout(function(){
+          cs.scrolling_days_number = false;
+          $('.end_days_number.center').addClass('available-scroll');
+        },300);
+      }
+    }
 
     this.getWeek = function(init_day){
       var days = [];

@@ -2,7 +2,7 @@ var app = {
   VERSION: 213,
   PORTAL_VERSION: 211,
   MINIUM_VERSION_LOGUINED: 211,
-  ENV: "production",
+  ENV: "development",
   DEV_IP: "192.168.1.37",
   load_screen_ajax: false,
   current_screen: false,
@@ -125,6 +125,8 @@ var app = {
       data = Security.decrypt(data.d);
     }
 
+    console.log(data);
+
     if(app.if_device_initialized){
       console.log('INICIALIZADO');
       app.load_with_notification = true;
@@ -194,6 +196,13 @@ var app = {
     }else{
       $('.app>.menu .content [data-module="events"]').show();
     }
+
+    if(PrivateData.get('current_authorizations_number') < 2){
+      $('.app>.menu .content .header #btn_select_auth').hide();
+    }else{
+      $('.app>.menu .content .header #btn_select_auth').show();
+    }
+
   },
   openMenu: function(){
     $('.app .menu').addClass('open');
@@ -209,6 +218,10 @@ var app = {
   },
   pageLoading: function(x){
     x == 'show' ? $('.app .content .loading').show() : $('.app .content .loading').hide();
+  },
+  goToSelectAuth: function(){
+    app.closeMenu();
+    app.loadScreen(app.SCREENS.SELECT_AUTH);
   },
   liActive: function(x){
     $('.app .menu .list .item').removeClass('active');
@@ -537,6 +550,7 @@ var PrivateData = {
     current_group_identificator_others: "esjot",
     current_client_name: "cvjjf",
     current_client_picture_menu_n: "cbjjf",
+    current_authorizations_number: "cnjjf",
     last_config_sync: "lcsyd",
     last_update_popup: "vcsyd",
     module_expense_active: "meadd",

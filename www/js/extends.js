@@ -41,12 +41,12 @@ var Extends = {
     });
   },
   inputCheckBox : function(){
-    $('.checkbox.for_tap').tap(function(){
+    /*$('.checkbox.for_tap').tap(function(){
       $(this).toggleClass('checked');
 
       $(this).find('input[type="checkbox"]').prop('checked',$(this).hasClass('checked'));
       $(this).find('input[type="checkbox"]').change();
-    });
+    });*/
 
     $('.checkbox.for_tap input[type="checkbox"]').change(function(){
       if($(this).is(':checked')){
@@ -55,6 +55,16 @@ var Extends = {
         $(this).parents('.checkbox.for_tap').removeClass('checked');
       }
     });
+
+    $('.checkbox.for_tap').each(function(){
+      this.addEventListener('touchstart',function(){
+        $(this).toggleClass('checked');
+
+        $(this).find('input[type="checkbox"]').prop('checked',$(this).hasClass('checked'));
+        $(this).find('input[type="checkbox"]').change();
+      });
+    });
+
   },
   scrollToInputFocus : function(selector_css){
     if($(':focus').length > 0){
