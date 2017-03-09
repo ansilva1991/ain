@@ -24,6 +24,10 @@
         <string>We are using your photos and camera for profile photos.</string>
     </gap:config-file>
 
+    <gap:config-file platform="android" parent="/manifest/application">
+        <activity android:launchMode="singleTask" />
+    </gap:config-file>
+
     <!-- Recommend the newest cli but requires cli-5.1.1+ and gradle for Android. -->
     <!-- If the below settings are not compatible with your project set the "PGB ANT" version above. -->
     <preference name="android-build-tool" value="gradle" />
