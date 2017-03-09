@@ -18,7 +18,7 @@
     <preference name="StatusBarOverlaysWebView" value="false"/>
     <preference name="StatusBarBackgroundColor" value="#DC9929" />
     <preference name="KeyboardShrinksView" value="true" />
-    <gap:plugin name="onesignal-cordova-plugin" source="npm" spec="~2.0.10" />
+    <gap:plugin name="onesignal-cordova-plugin" source="npm" spec="2.0.10" />
 
     <gap:config-file platform="ios" parent="NSPhotoLibraryUsageDescription" overwrite="true">
         <string>We are using your photos and camera for profile photos.</string>
