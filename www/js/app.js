@@ -129,11 +129,11 @@ var app = {
 
     if(app.if_device_initialized){
       console.log('INICIALIZADO');
-      app.load_with_notification = true;
       app.data_from_notification = data;
       app.processNotification();
     }else{
       console.log('NO INICIALIZADO');
+      app.load_with_notification = true;
       app.data_from_notification = data;
       interval_notification = setInterval(function(){ app.dashboardComprobateNotification(); },100);
     }
