@@ -31,7 +31,7 @@
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-console" source="npm" spec="~1.0.2" />
     <plugin name="cordova-plugin-device" source="npm" spec="~1.1.1" />
-    <plugin name="phonegap-mobile-accessibility" source="npm" spec="~1.0.5" />
+    <plugin name="phonegap-plugin-mobile-accessibility" source="npm" spec="~1.0.5" />
     <plugin name="cordova-plugin-device-orientation" source="npm" spec="~1.0.2" />
     <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-file" source="npm" spec="~4.1.1" />
