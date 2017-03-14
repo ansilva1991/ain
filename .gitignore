@@ -1,6 +1,9 @@
 /hooks/*
 /plugins/*
 /platforms/browser/
+/platforms/android/build/
+/platforms/android/CordovaLib/build/
+/platforms/android/android-release.apk
 /.cordova/*
 /.npm*
 /config.xml
