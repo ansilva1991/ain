@@ -1,0 +1,126 @@
+<div class="import-guests-list">
+  <div class="guests-lists">
+    <h5 id="none">
+      La lista no cuenta con invitados.
+    </h5>
+    <div id="example" style="display: none;">
+      <input type="hidden" id="name">
+      <input type="hidden" id="last_name">
+      <input type="hidden" id="real_id">
+      <div class="row">
+        <div class="icon">
+          <span class="icon-person"></span>
+          <i class="fa fa-check"></i>
+        </div>
+        <div class="info">
+          <h4 id="full_name"></h4>
+          <h5 id="real_id_label"></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.list_id;
+    this.list;
+    this.back_to;
+    this.callback_get_info;
+
+    this.start = function(opts){
+
+      this.list_id = opts.list_id;
+      this.list = opts.list;
+      this.back_to = opts.back_to;
+
+      $('.guests-lists .item').tap(function(){
+        $(this).toggleClass('selected');
+      });
+
+      app.liActive('events');
+
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      });
+    }
+
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','get_guests_from_list'],
+        data : {
+          list_id: this.list_id
+        },
+        callback : function(data, success){
+          if(success){
+            if(data.guest_lists.length > 0){
+
+              $('#none').hide();
+
+              for(var i in data.guest_lists){
+                var guest = data.guest_lists[i];
+                var tmp = $('#example').clone().insertBefore('#example');
+                tmp.removeAttr('id');
+
+                tmp.find('#name').val(guest.name);
+                tmp.find('#last_name').val(guest.last_name);
+                tmp.find('#real_id').val(guest.real_id);
+
+                tmp.find('#full_name').html(guest.last_name + " " + guest.name);
+                tmp.find('#real_id_label').html(guest.real_id || "No ingresado");
+
+                tmp.addClass('item');
+                tmp.tap(function(){
+                  $(this).toggleClass('selected');
+                });
+
+                tmp.show();
+              }
+            }
+
+            cs.callback_get_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.DASHBOARD);
+          }
+        }
+      });
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.IMPORT_GUESTS_LIST,{
+        list: this.list,
+        back_to: this.back_to
+      });
+    }
+
+    this.submit = function(){
+
+      if($('.item.selected').length == 0){
+        Alert.open('Invitados','Debe seleccionar al menos un invitado.','Aceptar');
+        return false;
+      }
+
+      $('.item.selected').each(function(){
+        var name = $(this).find('#name').val();
+        var last_name = $(this).find('#last_name').val();
+        var real_id = $(this).find('#real_id').val();
+
+        var id = (new Date()).getTime() + "" + Math.round(Math.random() * 9999);
+        cs.list.guests_attributes[id] = {
+          name : name,
+          last_name : last_name,
+          real_id : real_id
+        }
+      });
+
+      app.loadScreen(this.back_to,{
+        list: this.list
+      });
+    }
+
+  };
+</script>

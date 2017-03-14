@@ -1,0 +1,102 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?27j2tw');
+  src:  url('../fonts/icomoon.eot?27j2tw#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?27j2tw') format('truetype'),
+    url('../fonts/icomoon.woff?27j2tw') format('woff'),
+    url('../fonts/icomoon.svg?27j2tw#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-informacion:before {
+  content: "\e900";
+}
+.icon-signout:before {
+  content: "\e901";
+}
+.icon-accessin:before {
+  content: "\e902";
+}
+.icon-people-bubble:before {
+  content: "\e903";
+}
+.icon-app-operator:before {
+  content: "\e904";
+}
+.icon-client-employee:before {
+  content: "\e905";
+}
+.icon-family:before {
+  content: "\e906";
+}
+.icon-family-with-access:before {
+  content: "\e907";
+}
+.icon-family-with-access2:before {
+  content: "\e908";
+}
+.icon-people:before {
+  content: "\e909";
+}
+.icon-person:before {
+  content: "\e90a";
+}
+.icon-person-admin:before {
+  content: "\e90b";
+}
+.icon-person-employee:before {
+  content: "\e90c";
+}
+.icon-person-owner-group:before {
+  content: "\e90d";
+}
+.icon-authorizations:before {
+  content: "\e90e";
+}
+.icon-batch:before {
+  content: "\e90f";
+}
+.icon-communications:before {
+  content: "\e910";
+}
+.icon-config:before {
+  content: "\e911";
+}
+.icon-department:before {
+  content: "\e912";
+}
+.icon-events:before {
+  content: "\e913";
+}
+.icon-person-add:before {
+  content: "\e914";
+}
+.icon-expenses:before {
+  content: "\e915";
+}
+.icon-guard:before {
+  content: "\e916";
+}
+.icon-help:before {
+  content: "\e917";
+}
+.icon-registration_codes:before {
+  content: "\e918";
+}
+

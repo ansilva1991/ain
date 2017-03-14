@@ -1,0 +1,181 @@
+<div class="register">
+  <form>
+    <span class="icon-people-bubble"></span>
+    <div class="form-group">
+      <label for="name">NOMBRE</label>
+      <input type="text" name="name" class="form-control" id="name">
+    </div>
+    <div class="form-group">
+      <label for="last_name">APELLIDO</label>
+      <input type="text" name="last_name" class="form-control" id="last_name">
+    </div>
+    <div class="form-group">
+      <label for="real_id">DNI</label>
+      <input type="number" name="real_id" class="form-control" id="real_id" readonly>
+    </div>
+    <div class="form-group">
+      <label for="sex">SEXO</label>
+      <div class="form-radios" id="sex">
+        <div class="row">
+          <div class="radio" data-n="0">
+            <div class="circle"></div>
+            <span>Masculino</span>
+          </div>
+          <div class="radio" data-n="1">
+            <div class="circle"></div>
+            <span>Femenino</span>
+          </div>
+          <div class="radio" data-n="2">
+            <div class="circle"></div>
+            <span>Otro</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="birthdate">FECHA DE NACIMIENTO</label>
+      <input type="date" name="birthdate" class="form-control" id="birthdate">
+    </div>
+    <div class="form-group">
+      <label for="phone">Teléfono de contacto</label>
+      <input type="tel" name="phone" class="form-control" id="phone">
+    </div>
+    <div class="form-group">
+      <label for="email">EMAIL</label>
+      <input type="email" name="email" class="form-control" id="email">
+    </div>
+    <div class="form-group">
+      <label for="password">CONTRASEÑA</label>
+      <input type="password" name="password" class="form-control" id="password">
+    </div>
+    <div class="form-group">
+      <label for="password_confirmation">REPITA CONTRASEÑA</label>
+      <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
+    </div>
+    <button class="btn btn-block btn-orange" type="button" onclick="cs.submit();" id="submit">CONTINUAR</button>
+    <h5 onclick="cs.back();">Volver</h5>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.init_opts = {};
+    this.is_processing = false;
+
+    this.start = function(opts){
+      this.init_opts = opts;
+      app.windowResize = function(){
+        Extends.scrollToInputFocus('.register');
+      };
+
+      Extends.name('#name, #last_name');
+
+      $('form').submit(function(){
+        return false;
+      });
+
+      $('#name').val(opts.person.name || "");
+      $('#last_name').val(opts.person.last_name || "");
+      $('#real_id').val(opts.person.real_id || "");
+      $('#birthdate').val(opts.person.birthdate || "");
+      $('#phone').val(opts.person.phone || "");
+      $('#email').val(opts.person.email || "");
+      $('#sex [data-n="' + opts.person.sex + '"]').addClass('checked');
+
+      Extends.inputRadios('.form-radios');
+
+      app.pageLoading('hide');
+    }
+
+    this.back = function(){
+      if(this.is_processing){ return false; }
+      app.loadScreen(app.SCREENS.REGISTER_TERMS_AND_CONDITIONS, this.init_opts);
+    };
+
+    this.submit = function(){
+      var form = Extends.serializeForm('.register form');
+      form.sex = $('#sex .checked').data('n');
+
+      if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+        Alert.open('Nombre','Debe ingresar un nombre válido para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.last_name.length == 0 || !form.last_name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+        Alert.open('Apellido','Debe ingresar un apellido válido para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.sex == undefined){
+        Alert.open('Sexo','Debe seleccionar un sexo para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.real_id.length == 0 || !form.real_id.match(/^[0-9]+$/)){
+        Alert.open('DNI','Debe ingresar un DNI válido para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.birthdate.length == 0){
+        Alert.open('Fecha de nacimiento','Debe seleccionar una fecha de nacimiento válida para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.phone.length == 0){
+        Alert.open('Teléfono de contacto','Debe ingresar un teléfono de contacto válido para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.email.length == 0 || !form.email.match(/^([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+$/i)){
+        Alert.open('Email','Debe ingresar un email válido para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.password.length < 4 || form.password.length > 20){
+        Alert.open('Contraseña','La contraseña debe tener entre 4 y 20 caracteres.','Aceptar');
+        return false;
+      }
+
+      if(form.password != form.password_confirmation){
+        Alert.open('Repita Contraseña','Las contraseñas no coinciden.','Aceptar');
+        return false;
+      }
+
+      $('.register #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('.register #submit').prop('disabled', true);
+      this.is_processing = true;
+
+      Server.send({
+        route : [Server.serverUrl(),'app','register'],
+        data : {
+          code: this.init_opts.code,
+          country_server_id: this.init_opts.country_server_id,
+          person: form
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            if(data.data.errors && Object.keys(data.data.errors).length > 0){
+              if(data.data.errors.email){
+                Alert.open('Email','El email ingresado ya se encuentra en uso.','Aceptar');
+              }else {
+                Alert.open('Lo Sentimos','Ocurrío un error al intentar registrarse, por favor intenta nuevamente.','Aceptar');
+              }
+            }else{
+              app.loadScreen(app.SCREENS.LOGIN,{
+                success_register: true
+              });
+            }
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar registrarse, por favor intenta nuevamente.','Aceptar');
+          }
+
+          cs.is_processing = false;
+          $('.register #submit').html('CONTINUAR');
+          $('.register #submit').prop('disabled', false);
+        }
+      })
+    }
+
+  }
+</script>

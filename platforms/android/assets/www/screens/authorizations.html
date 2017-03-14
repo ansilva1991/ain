@@ -1,0 +1,340 @@
+<div class="sub-header col-3">
+  <div class="item active" data-item="0" onclick="cs.selectTab(this);">
+    RESIDENTES
+  </div>
+  <div class="item" data-item="1" onclick="cs.selectTab(this);">
+    VISITAS
+  </div>
+  <div class="item" data-item="2" onclick="cs.selectTab(this);">
+    EMPLEADOS
+  </div>
+  <div class="line">
+    <div class="pointer"></div>
+  </div>
+</div>
+
+<div id="example_item" style="display: none;">
+  <img src="img/avatar.png">
+  <i class="fa fa-check"></i>
+  <div class="info">
+    <h5 id="name"></h5>
+    <h4 id="type"></h4>
+  </div>
+</div>
+
+<div class="list authorizations families">
+</div>
+<div class="list authorizations visits">
+  <h5 id="none">
+    No se encontraron visitas autorizados a su propiedad.
+  </h5>
+</div>
+<div class="list authorizations employees">
+  <h5 id="none">
+    No se encontraron empleados autorizados a su propiedad.
+  </h5>
+</div>
+
+<div class="header-actions">
+  <div class="icon" onclick="cs.desSelectAll();">
+    <i class="fa fa-chevron-left"></i>
+  </div>
+  <div class="section-name" id="number_selected"></div>
+   <div class="icon right" onclick="cs.confirmErased();">
+    <i class="fa fa-trash"></i>
+  </div>
+</div>
+
+<div class="new-authorization-buttons">
+  <div class="backdrop" onclick="cs.closeMenuNew();"></div>
+  <button class="new" onclick="cs.openMenuNew();">
+    <i class="fa fa-plus"></i>
+  </button>
+  <div class="add-button new-family">
+    <button type="button" onclick="cs.newFamily();">
+      <span class="icon-family"></span>
+    </button>
+    <h5>Agregar Familiar</h5>
+  </div>
+  <div class="add-button new-visit">
+    <button type="button" onclick="cs.newVisit();">
+      <span class="icon-person"></span>
+    </button>
+    <h5>Agregar Visita</h5>
+  </div>
+  <div class="add-button new-employee">
+    <button type="button" onclick="cs.newEmployee();">
+      <span class="icon-person-employee"></span>
+    </button>
+    <h5>Agregar Empleado</h5>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.mode = 'list';
+    this.selectedItems = [];
+    this.callback_update_auths;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      var hammertime = new Hammer($('.list.authorizations.families')[0]);
+      hammertime.on('swipeleft', function(ev) {
+        cs.selectTab($('.sub-header .item')[1]);
+      });
+
+      var hammertime = new Hammer($('.list.authorizations.visits')[0]);
+      hammertime.on('swiperight', function(ev) {
+        cs.selectTab($('.sub-header .item')[0]);
+      });
+
+      hammertime.on('swipeleft', function(ev) {
+        cs.selectTab($('.sub-header .item')[2]);
+      });
+
+      var hammertime = new Hammer($('.list.authorizations.employees')[0]);
+      hammertime.on('swiperight', function(ev) {
+        cs.selectTab($('.sub-header .item')[1]);
+      });
+
+      if(opts.open_in){
+        cs.selectTab($('.sub-header .item')[opts.open_in]);
+      }
+
+      app.liActive('authorizations');
+
+      this.updateAuthorizations(function(){
+        app.pageLoading('hide');
+      });
+
+    }
+
+    this.updateAuthorizations = function(callback){
+      this.callback_update_auths = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people','index'],
+        data : {},
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            $('.authorizations .item').remove();
+
+            $('.authorizations #none').show();
+
+            for(var i in data.people){
+              var person = data.people[i];
+              var tmp = $('#example_item').clone();
+
+              if(["AuthorizationOwnerGroup","AuthorizationFamilyWithAccess","AuthorizationFamily"].indexOf(person.type) > -1){
+                tmp.appendTo('.list.authorizations.families');
+                tmp.data('type', 'family');
+
+                if(person.type == "AuthorizationOwnerGroup"){
+                  tmp.find('#type').html('Propietario');
+                  tmp.addClass('owner_group');
+                }else if(person.type == "AuthorizationFamilyWithAccess"){
+                  tmp.find('#type').html('Familiar con Accesso');
+                }else{
+                  tmp.find('#type').html('Familiar');
+                }
+              }else if(["AuthorizationVisit"].indexOf(person.type) > -1){
+                tmp.appendTo('.list.authorizations.visits');
+                tmp.data('type', 'visit');
+                tmp.find('#type').html('Visita');
+
+                $('.authorizations.visits #none').hide();
+              }else if(["AuthorizationEmployee"].indexOf(person.type) > -1){
+                tmp.appendTo('.list.authorizations.employees');
+                tmp.data('type', 'employee');
+                tmp.find('#type').html('Empleado');
+
+                $('.authorizations.employees #none').hide();
+              }
+
+              if(person.avatar){
+                tmp.find('img').attr('src',person.avatar);
+
+                if(person.id == PrivateData.get('current_person_id')){
+                  PrivateData.set('current_person_avatar',person.avatar);
+                }
+              }
+
+              tmp.data('id',person.id);
+              tmp.find('#name').html(person.full_name);
+
+              tmp.removeAttr('id');
+              tmp.addClass('item');
+
+              tmp.tap(function(){
+                cs.tabItem(this);
+              });
+
+              tmp.longTap(function(){
+                cs.selectItem($(this).data('id'));
+              });
+
+              tmp.show();
+            }
+
+            cs.callback_update_auths();
+
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.DASHBOARD);
+          }
+        }
+      });
+    };
+
+    this.tabItem = function(x){
+      if(cs.mode == 'select'){
+        cs.selectItem($(x).data('id'));
+      }else if(cs.mode == 'list'){
+        if($(x).data('type') == 'family'){
+          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY,{
+            person_id: $(x).data('id')
+          });
+        }
+
+        if($(x).data('type') == 'visit'){
+          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_VISIT,{
+            person_id: $(x).data('id')
+          });
+        }
+
+        if($(x).data('type') == 'employee'){
+          app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE,{
+            person_id: $(x).data('id')
+          });
+        }
+      }
+    }
+
+    this.selectItem = function(id){
+      var i = this.selectedItems.indexOf(id);
+
+      if(i > -1){
+        this.selectedItems.splice(i,1);
+        $('.authorizations .item[data-id="' + id + '"]').removeClass('selected');
+      }else{
+        $('.authorizations .item[data-id="' + id + '"]').addClass('selected');
+        this.selectedItems.push(id);
+      }
+
+      this.checkMode();
+    };
+
+    this.desSelectAll = function(){
+      $('.authorizations .item').removeClass('selected');
+      this.selectedItems = [];
+
+      this.checkMode();
+    };
+
+    this.checkMode = function(){
+      if(this.selectedItems.length > 0){
+        this.mode = 'select';
+
+        $('.header-actions #number_selected').html(this.selectedItems.length);
+        $('.header-actions').show();
+      }else{
+        this.mode = 'list';
+        $('.header-actions').hide();
+      }
+    };
+
+    this.confirmErased = function(){
+      console.log(this.selectedItems);
+      Confirm.open({
+        title: "Eliminar",
+        msg: "¿Está seguro que deseas eliminar los elementos seleccionados?",
+        success_button: "Continuar",
+        cancel_button: "Cancelar",
+        callback_success: function(){
+          if(cs.selectedItems.indexOf(PrivateData.get('current_person_id')) > -1){
+            Alert.open('Lo sentimos','No puedes eliminarte a ti mismo.','Aceptar');
+            return false;
+          }
+
+          for(var i in cs.selectedItems){
+            if($('.item.owner_group[data-id="' + cs.selectedItems[i] + '"]').length > 0){
+              Alert.open('Lo sentimos','No puedes eliminar al propietario.','Aceptar');
+              return false;
+            }
+          }
+          app.pageLoading('show');
+
+          Server.send({
+            route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people','destroy'],
+            data : {
+              ids: cs.selectedItems
+            },
+            callback : function(data, success){
+              if(success){
+                app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+              }else{
+                app.pageLoading('hide');
+                Alert.open('Lo sentimos','Ocurrío un error al eliminar, intenta nuevamente por favor.','Aceptar');
+              }
+            }
+          });
+
+          cs.desSelectAll();
+        }
+      });
+    }
+
+    this.selectTab = function(x){
+      this.desSelectAll();
+
+      var item = $(x).data('item');
+      $('.sub-header .item').removeClass('active');
+      $('.sub-header .item[data-item="' + item + '"]').addClass('active');
+      $('.sub-header .line .pointer').css({
+        '-webkit-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-moz-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-ms-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-o-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        'transform': 'translate3d(' + (100 * item) + '%,0,0)'
+      });
+
+      $('.list.authorizations').css({
+        '-webkit-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-moz-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-ms-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-o-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        'transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)'
+      });
+    }
+
+    this.openMenuNew = function(){
+      $('.new-authorization-buttons').addClass('open');
+    };
+
+    this.closeMenuNew = function(){
+      $('.new-authorization-buttons').removeClass('open');
+    };
+
+    this.newFamily = function(){
+      app.loadScreen(app.SCREENS.NEW_AUTHORIZATION_REAL_ID,{
+        go_to : app.SCREENS.AUTHORIZATION_FORM_FAMILY
+      });
+    };
+
+    this.newVisit = function(){
+      app.loadScreen(app.SCREENS.NEW_AUTHORIZATION_REAL_ID,{
+        go_to : app.SCREENS.AUTHORIZATION_FORM_VISIT
+      });
+    };
+
+    this.newEmployee = function(){
+      app.loadScreen(app.SCREENS.NEW_AUTHORIZATION_REAL_ID,{
+        go_to : app.SCREENS.AUTHORIZATION_FORM_EMPLOYEE
+      });
+    };
+
+  }
+</script>

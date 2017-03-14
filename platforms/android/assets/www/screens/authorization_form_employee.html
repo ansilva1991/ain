@@ -1,0 +1,243 @@
+<div class="authorization-form-employee">
+  <div class="checked-data">
+    Los datos de esta persona no pueden ser modificados por que se encuentran verificados. Si los datos son incorrectos haga click aqui para comenzar la denuncia. Disculpe las molestias<br>
+    <small>Datos verificados por <span id="checked_by"></span> el <span id="checked_date"></span></small>
+  </div>
+  <form class="form-horizontal">
+    <div class="form-group not_editable">
+      <label for="name">NOMBRE</label>
+      <input type="text" name="name" id="name" class="form-control">
+    </div>
+    <div class="form-group not_editable">
+      <label for="last_name">APELLIDO</label>
+      <input type="text" name="last_name" id="last_name" class="form-control">
+    </div>
+    <div class="form-group not_editable">
+      <label for="real_id">DNI</label>
+      <input type="number" name="real_id" id="real_id" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="due_date">FECHA DE Vencimiento</label>
+      <input type="date" name="due_date" id="due_date" class="form-control">
+    </div>
+    <div class="form-group-checkbox">
+      <label for="name">¿Empleado de obra?</label>
+      <div class="checkbox for_tap">
+        <input type="checkbox" id="is_constructor">
+        <div class="box">
+          <div class="pointer"></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-dropdown">
+      <div class="form-group">
+        <label for="art_due_date">Vencimiento de ART</label>
+        <input type="date" name="art_due_date" id="art_due_date" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="vehicle_secure_due_date">Vencimiento seguro del vehículo</label>
+        <input type="date" name="vehicle_secure_due_date" id="vehicle_secure_due_date" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="good_conduct_due_date">Vencimiento cert. buena conducta</label>
+        <input type="date" name="good_conduct_due_date" id="good_conduct_due_date" class="form-control">
+      </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.person_id;
+    this.auth_code;
+    this.callback_get_person_info;
+    this.is_processing = false;
+    this.started = false;
+    this.is_constructor = false;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.person_id = opts.person_id;
+      this.editable = true;
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.authorization-form-employee');
+      });
+
+      Extends.name('#name, #last_name');
+      Extends.inputCheckBox();
+
+      $('#is_constructor').change(function(){
+
+        if($(this).is(':checked')){
+          $('.form-dropdown').addClass('open');
+          cs.is_constructor = true;
+          if(cs.started){
+            setTimeout(function(){
+              $('.authorization-form-employee').scrollToBottom(250);
+            },200);
+          }
+        }else{
+          $('.form-dropdown').removeClass('open');
+          cs.is_constructor = false;
+        }
+      });
+
+      if(opts.real_id){
+        $('#real_id').val(opts.real_id);
+      }
+
+      app.liActive('authorizations');
+
+      this.getPersonInfo(function(){
+        app.pageLoading('hide');
+        cs.started = true;
+      });
+    }
+
+    this.getPersonInfo = function(callback){
+      if(!this.person_id){
+        callback();
+        return true;
+      }
+
+      this.callback_get_person_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people','edit_employee'],
+        data : {
+          person_id: this.person_id
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            $('#name').val(data.person.name);
+            $('#last_name').val(data.person.last_name);
+            $('#real_id').val(data.person.real_id);
+            $('#due_date').val(data.person.auth_due_date);
+            if(data.person.art_due_date){
+              $('#art_due_date').val(data.person.art_due_date);
+            }
+            if(data.person.vehicle_secure_due_date){
+              $('#vehicle_secure_due_date').val(data.person.vehicle_secure_due_date);
+            }
+            if(data.person.good_conduct_due_date){
+              $('#good_conduct_due_date').val(data.person.good_conduct_due_date);
+            }
+
+            if(!data.person.editable){
+              $('.checked-data').show();
+              $('#checked_by').html(data.person.checked_by);
+              $('#checked_date').html(Extends.formatDate(new Date(data.person.checked_at + "T00:00:00" + PrivateData.get('time_zone_offset')),'%dd de %mname del %yyyy'));
+
+              $('.not_editable input').attr('readonly', true);
+              cs.editable = false;
+            }
+
+            cs.auth_code = data.person.auth_code;
+
+            if(data.person.is_constructor){
+
+              $('#is_constructor').prop('checked', true);
+              $('#is_constructor').change();
+              cs.is_constructor = true;
+            }
+
+            cs.callback_get_person_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+          }
+        }
+      });
+    };
+
+    this.submit = function(){
+      if(this.is_processing){ return false; }
+      var form = Extends.serializeForm('.authorization-form-employee form');
+
+      console.log(form);
+
+      if(this.editable){
+        if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+          Alert.open('Nombre','Debe ingresar un nombre válido para continuar.','Aceptar');
+          return false;
+        }
+
+        if(form.last_name.length == 0 || !form.last_name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+          Alert.open('Apellido','Debe ingresar un apellido válido para continuar.','Aceptar');
+          return false;
+        }
+
+        if(form.real_id.length == 0 || !form.real_id.match(/^[0-9]+$/)){
+          Alert.open('DNI','Debe ingresar un DNI válido para continuar.','Aceptar');
+          return false;
+        }
+      }
+
+      if(form.due_date.length == 0){
+        Alert.open('Fecha de Vencimiento','Debe seleccionar una fecha de vencimiento válida para continuar.','Aceptar');
+        return false;
+      }
+
+      $('#submit-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('#submit-button').removeClass('text');
+
+      this.is_processing = true;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people',this.person_id ? 'update_employee' : 'create_employee'],
+        data : {
+          person: form,
+          person_id: this.person_id,
+          person_auth_code : this.auth_code,
+          is_constructor : this.is_constructor
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            if(Object.keys(data.errors).length > 0){
+              if(data.errors["authorizations.person_id"]){
+                var error = data.errors["authorizations.person_id"][0];
+                if(error == 'is_owner'){
+                  Alert.open('Propietario','Esta persona ya es propietario.','Aceptar');
+                }
+
+                if(error == 'taken'){
+                  Alert.open('Propietario','Esta persona ya es familiar.','Aceptar');
+                }
+              }else if(data.errors.real_id){
+                var error = data.errors.real_id[0];
+
+                if(error == 'taken'){
+                  Alert.open('DNI','El DNI ingresado se encuentra asignado a otra persona.','Aceptar');
+                }
+              }else{
+                Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+              }
+            }else{
+              app.loadScreen(app.SCREENS.AUTHORIZATIONS,{
+                open_in: 2
+              })
+            }
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+          }
+
+          cs.is_processing = false;
+          $('#submit-button').html("Listo <i class='fa fa-check'></i>");
+          $('#submit-button').addClass('text');
+        }
+      });
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.AUTHORIZATIONS,{
+        open_in: 2
+      });
+    };
+
+  }
+</script>

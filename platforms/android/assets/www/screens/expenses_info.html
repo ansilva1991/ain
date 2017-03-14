@@ -1,0 +1,75 @@
+<div class="expenses-info">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="name">EXPENSAS</label>
+      <input type="text" id="expenses_real_date" class="form-control" readonly>
+    </div>
+    <legend>RECARGOS</legend>
+    <h5 id="none">Esta liquidación no cuenta con recargos.</h5>
+    <div id="example" style="display: none;">
+      <h5 id="label_date"></h5>
+      <h5 id="label_percentage"><span></span> %</h5>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.expenses_id;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.expenses_id = opts.expenses_id;
+      this.back_to = opts.back_to;
+
+      app.liActive('expenses');
+
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      })
+    }
+
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'group_current_accounts','expenses_info'],
+        data : {
+          id: this.expenses_id
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+
+            $('#expenses_real_date').val(Extends.formatDate(new Date(data.expenses.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%mname del %yyyy'))
+
+            if(data.surcharges){            
+              $('#none').hide();
+
+              for(var i in data.surcharges){
+                var surcharge = data.surcharges[i];
+                var tmp = $('#example').clone().insertBefore('#example');
+                tmp.removeAttr('id');
+                tmp.addClass('surcharge');
+
+                tmp.find('#label_date').html(Extends.formatDate(new Date(surcharge.date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%dd de %mname del %yyyy'));
+                tmp.find('#label_percentage span').html(surcharge.percentage.toFixed(2));
+
+                tmp.show();
+              }
+            }
+
+            cs.callback_get_info();
+          }
+        }
+      });
+    };
+
+    this.back = function(){
+      app.loadScreen(this.back_to,{
+        entry_id: this.expenses_id
+      });
+    };
+  }
+</script>

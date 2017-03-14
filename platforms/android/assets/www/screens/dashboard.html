@@ -1,0 +1,89 @@
+<div class="dashboard">
+  <h4 onclick="cs.dev();">BIENVENIDO A LA<br>COMUNIDAD ACCESSIN</h4>
+  <div class="separator"></div>
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.EVENTS);" data-module="events">
+    <div class="icon">
+      <span class="icon-events"></span>
+    </div>
+    <div class="text">
+      Eventos
+    </div>
+  </div>
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.COMMUNICATIONS);">
+    <div class="icon">
+      <span class="icon-communications"></span>
+    </div>
+    <div class="text">
+      Comunicaciones
+    </div>
+  </div>
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.EXPENSES);" data-module="expenses">
+    <div class="icon">
+      <span class="icon-expenses"></span>
+    </div>
+    <div class="text">
+      Expensas
+    </div>
+  </div>
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.GUARD);" data-module="guard">
+    <div class="icon">
+      <span class="icon-guard"></span>
+    </div>
+    <div class="text">
+      Portería
+    </div>
+  </div>
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.AUTHORIZATIONS);">
+    <div class="icon">
+      <span class="icon-authorizations"></span>
+    </div>
+    <div class="text">
+      Autorizaciones
+    </div>
+  </div>
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.USEFUL_INFO);">
+    <div class="icon">
+      <span class="icon-informacion"></span>
+    </div>
+    <div class="text">
+      Información Útil
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function c(){
+    this.dev_count = 0;
+    this.is_dashboard = false;
+    this.start = function(){
+
+      if(!PrivateData.get('module_expense_active')){
+        $('.dashboard [data-module="expenses"]').remove();
+      }
+
+      if(!PrivateData.get('module_guard_active')){
+        $('.dashboard [data-module="guard"]').remove();
+      }
+
+      if(!PrivateData.get('module_events_active')){
+        $('.dashboard [data-module="events"]').remove();
+      }
+
+      if(!app.load_with_notification){
+        app.pageLoading('hide');
+      }else{
+        app.load_with_notification = false;
+        this.is_dashboard = true;
+      }
+      console.log('dashboard_start');
+    }
+
+    this.dev = function(){
+      this.dev_count++;
+
+      if(this.dev_count > 50){
+        app.loadScreen(app.SCREENS.DEVELOPER);
+      }
+    }
+
+  }
+</script>

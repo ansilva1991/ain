@@ -1,0 +1,5218 @@
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+  box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-weight: normal;
+}
+
+body {
+  -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+  height:100%;
+  margin:0px;
+  padding:0px;
+  width:100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button{
+  outline: none;
+}
+
+button.btn{
+  border: none;
+  background-color: #bbb;
+  height: 50px;
+  color: #fff;
+  font-size: 18px;
+}
+
+button.btn-left{
+  float: left;
+}
+
+button.btn-right{
+  float: right;
+}
+
+button.btn-block{
+  width: 100%;
+  display: block;
+}
+
+button.btn-semitransparent{
+  background-color: rgba(0,0,0,0.25);
+}
+
+button.btn.btn-orange{
+  background-color: #ffa400;
+  color: #fff;
+}
+
+button.btn.btn-orange:disabled{
+  background-color: #ffb52f;
+}
+
+.text-uppercase{
+  text-transform: uppercase;
+}
+
+.toast{
+  width: 300px;
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  margin-left: -150px;
+}
+
+.context-menu .backdrop{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+}
+
+.context-menu.open .backdrop{
+  display: block;
+}
+
+.context-menu .menu{
+  width: 250px;
+  background-color: #eee;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 99;
+
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  transition: transform 200ms ease;
+
+  -webkit-transform: translate3d(150%,0,0);
+  -moz-transform: translate3d(150%,0,0);
+  -ms-transform: translate3d(150%,0,0);
+  -o-transform: translate3d(150%,0,0);
+  transform: translate3d(150%,0,0);
+}
+
+.context-menu.open .menu{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+
+.context-menu .menu div{
+  width: 100%;
+  height: 60px;
+  font-size: 16px;
+  padding-left: 10px;
+  line-height: 60px;
+  border-bottom: 1px solid #ccc;
+  color: #777;
+}
+
+.context-menu .menu div:active{
+  background-color: #ccc;
+}
+
+.modal-new-update{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+}
+
+.modal-new-update .content{
+  width: 90%;
+  left: 50%;
+  margin-left: -45%;
+  position: fixed;
+  top: 50px;
+  bottom: 50px;
+  background-color: #fff;
+  padding: 10px;
+  padding-top: 20px;
+}
+
+@media (orientation:landscape) {
+  .modal-new-update .content{
+    top: 10px;
+    bottom: 10px;
+  }
+}
+
+.modal-new-update .content>h1{
+  color: #ffa400;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px;
+}
+
+.modal-new-update .content>.line{
+  width: 60px;
+  height: 2px;
+  background-color: #ffa400;
+}
+
+.modal-new-update .content>.content-update{
+  width: calc(100% - 20px);
+  position: absolute;
+  left: 10px;
+  top: 50px;
+  bottom: 115px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.modal-new-update .content>.content-update p{
+  margin: 0px;
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  list-style-type: none;
+  color: #777;
+  font-size: 14px;
+}
+
+.modal-new-update .content>.content-update>i{
+  color: #ccc;
+  font-size: 50px;
+  text-align: center;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -25px;
+}
+
+.modal-new-update .content>.actions{
+  width: calc(100% - 20px);
+  position: absolute;
+  left: 10px;
+  bottom: 0px;
+}
+
+.modal-new-update .content>.actions h5{
+  text-align: center;
+  text-transform: uppercase;
+  color: #777;
+}
+
+.modal-alert{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(0,0,0,0.5);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.modal-alert .content{
+  width: 320px;
+  position: fixed;
+  left: 50%;
+  right: 0px;
+  top: 0px;
+  background-color: #fff;
+  margin-left: -160px;
+
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,-100%,0);
+  -moz-transform: translate3d(0,-100%,0);
+  -ms-transform: translate3d(0,-100%,0);
+  -o-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+
+.modal-alert .content h4{
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #ffa400;
+  margin: 0px;
+  font-weight: bold;
+}
+
+.modal-alert .content h4 .line{
+  width: 40px;
+  height: 2px;
+  background-color: #ffa400;
+}
+
+.modal-alert .content p{
+  padding: 10px 10px;
+  color: #777;
+  margin: 0px;
+}
+
+.modal-alert .content button{
+  height: 40px;
+  border: none;
+  font-size: 18px;
+  color: #ffa400;
+  background-color: #fff;
+  float: right;
+  margin-right: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.modal-alert.open{
+  display: block;
+  opacity: 1;
+  bottom: 0px;
+}
+
+.modal-alert.open .content{
+  -webkit-transform: translate3d(0,100px,0);
+  -moz-transform: translate3d(0,100px,0);
+  -ms-transform: translate3d(0,100px,0);
+  -o-transform: translate3d(0,100px,0);
+  transform: translate3d(0,100px,0);
+}
+
+.modal-confirm{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(0,0,0,0.5);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.modal-confirm .content{
+  width: 320px;
+  position: fixed;
+  left: 50%;
+  right: 0px;
+  top: 0px;
+  background-color: #fff;
+  margin-left: -160px;
+
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,-100%,0);
+  -moz-transform: translate3d(0,-100%,0);
+  -ms-transform: translate3d(0,-100%,0);
+  -o-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+
+.modal-confirm .content h4{
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #ffa400;
+  margin: 0px;
+  font-weight: bold;
+}
+
+.modal-confirm .content h4 .line{
+  width: 40px;
+  height: 2px;
+  background-color: #ffa400;
+}
+
+.modal-confirm .content p{
+  padding: 10px 10px;
+  color: #777;
+  margin: 0px;
+}
+
+.modal-confirm .content button{
+  height: 40px;
+  border: none;
+  font-size: 18px;
+  color: #ffa400;
+  background-color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0px;
+}
+
+.modal-confirm .content button#success{
+  float: right;
+  margin-right: 10px;
+}
+
+.modal-confirm .content button#cancel{
+  float: left;
+  margin-left: 10px;
+}
+
+.modal-confirm.open{
+  display: block;
+  opacity: 1;
+  bottom: 0px;
+}
+
+.modal-confirm.open .content{
+  -webkit-transform: translate3d(0,100px,0);
+  -moz-transform: translate3d(0,100px,0);
+  -ms-transform: translate3d(0,100px,0);
+  -o-transform: translate3d(0,100px,0);
+  transform: translate3d(0,100px,0);
+}
+
+.modal-loading{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(0,0,0,0.5);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.modal-loading .content{
+  width: 320px;
+  position: fixed;
+  left: 50%;
+  right: 0px;
+  top: 0px;
+  background-color: #fff;
+  margin-left: -160px;
+  text-align: center;
+  padding-bottom: 20px;
+
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,-100%,0);
+  -moz-transform: translate3d(0,-100%,0);
+  -ms-transform: translate3d(0,-100%,0);
+  -o-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+
+.modal-loading .content h4{
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #ffa400;
+  margin: 0px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.modal-loading .content h4 .line{
+  width: 40px;
+  height: 2px;
+  background-color: #ffa400;
+}
+
+.modal-loading .content p{
+  padding: 10px 10px;
+  color: #777;
+  margin: 0px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-loading .content>i{
+  font-size: 50px;
+  color: #ffa400;
+}
+
+.modal-loading.open{
+  display: block;
+  opacity: 1;
+  bottom: 0px;
+}
+
+.modal-loading.open .content{
+  -webkit-transform: translate3d(0,100px,0);
+  -moz-transform: translate3d(0,100px,0);
+  -ms-transform: translate3d(0,100px,0);
+  -o-transform: translate3d(0,100px,0);
+  transform: translate3d(0,100px,0);
+}
+
+.spinner {
+  width: 70px;
+  text-align: center;
+  margin: auto;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #ffa400;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.1) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0.1);
+    transform: scale(0.1);
+  } 40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+.deprecated{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+}
+
+.deprecated .content{
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 50px;
+  padding: 30px;
+}
+
+.deprecated .content span{
+  color: #ffa400;
+  font-size: 100px;
+}
+
+.deprecated .content h4{
+  color: #777;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.deprecated .content button{
+  text-transform: uppercase;
+}
+
+.login{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #ff9900;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-image: url(../img/back_gradient_login.png);
+  background-size: 100% 100%;
+
+  -webkit-transition: -webkit-transform 200ms ease, bottom 200ms ease;
+  -moz-transition: -moz-transform 200ms ease, bottom 200ms ease;
+  -ms-transition: -ms-transform 200ms ease, bottom 200ms ease;
+  -o-transition: -o-transform 200ms ease, bottom 200ms ease;
+  transition: transform 200ms ease, bottom 200ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.login form{
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  min-height: 500px;
+  left: 10%;
+  position: absolute;
+}
+
+.login form>.row.logo{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+}
+
+.login form>.row.logo>.cell{
+  width: 100%;
+  height: 100%;
+  padding-bottom: 284px;
+
+  -webkit-transition: padding-bottom 1000ms ease;
+  -moz-transition: padding-bottom 1000ms ease;
+  -ms-transition: padding-bottom 1000ms ease;
+  -o-transition: padding-bottom 1000ms ease;
+  transition: padding-bottom 1000ms ease;
+}
+
+.login.init form>.row.logo>.cell span.icon-people-bubble{
+  font-size: 170px;
+  margin-top: -160px;
+}
+
+.login.init form>.row.logo>.cell span.icon-accessin{
+  opacity: 1;
+}
+
+.login form span.login-logo{
+  width: 100%;
+  position: relative;
+  top: 50%;
+  margin-top: -75px;
+  text-align: center;
+  color: #fff;
+  font-size: 150px;
+  display: block;
+
+  -webkit-transition: margin-top 1000ms ease, font-size 1000ms ease;
+  -moz-transition: margin-top 1000ms ease, font-size 1000ms ease;
+  -ms-transition: margin-top 1000ms ease, font-size 1000ms ease;
+  -o-transition: margin-top 1000ms ease, font-size 1000ms ease;
+  transition: margin-top 1000ms ease, font-size 1000ms ease;
+}
+
+.login form span.icon-accessin{
+  width: 100%;
+  position: relative;
+  top: 50%;
+  opacity: 0;
+  font-size: 260px;
+  margin-top: -75px;
+  text-align: center;
+  color: #fff;
+  display: block;
+
+  -webkit-transition: opacity 1000ms ease;
+  -moz-transition: opacity 1000ms ease;
+  -ms-transition: opacity 1000ms ease;
+  -o-transition: opacity 1000ms ease;
+  transition: opacity 1000ms ease;
+}
+
+.login.init form>.row.logo .cell{
+  padding: 0px;
+}
+
+.login.init form>.row.form{
+  bottom: -300px;
+}
+
+.login form>.row.form .cell{
+  width: 100%;
+  margin: auto;
+  max-width: 500px;
+}
+
+.login form>.row.form{
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+
+  -webkit-transition: bottom 1000ms ease;
+  -moz-transition: bottom 1000ms ease;
+  -ms-transition: bottom 1000ms ease;
+  -o-transition: bottom 1000ms ease;
+  transition: bottom 1000ms ease;
+}
+
+@media screen and (min-height: 700px){
+  .login form>.row.form{
+    bottom: 50px;
+  }
+}
+
+@media screen and (min-height: 900px){
+  .login form>.row.form{
+    bottom: 100px;
+  }
+}
+
+
+.login form .input{
+  width: 100%;
+  height: 55px;
+  overflow: hidden;
+}
+
+.login form input{
+  width: 100%;
+  height: 35px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+  line-height: 30px;
+  font-size: 16px;
+  color: #fff;
+  outline: none;
+  border-radius: 0px;
+}
+
+.login form label{
+  width: 100%;
+  text-align: left;
+  color: #fff;
+  font-size: 16px;
+  display: block;
+}
+
+.login form .password{
+  width: 100%;
+  height: 50px;
+  display: table;
+  margin-top: 20px;
+  border-bottom: 1px solid #fff;
+}
+
+.login form .password .row{
+  display: table-row;
+}
+
+.login form .password .cell{
+  height: 50px;
+  padding: 0px;
+  margin: 0px;
+  display: table-cell;
+  width: 100%;
+  vertical-align: top;
+}
+
+.login form .password input{
+  border: none;
+}
+
+.login form .password button{
+  width: 100px;
+  height: 49px;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  color: #fff;
+  padding: 0px;
+}
+
+
+.login form button.btn{
+  margin-top: 40px;
+  text-transform: uppercase;
+}
+
+.login form h5{
+  font-size: 16px;
+  color: #fff;
+  padding-bottom: 30px;
+  margin-bottom: 0px;
+}
+
+.forgot-password{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-image: url(../img/back_gradient_login.png);
+  background-size: 100% 100%;
+
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  transition: transform 200ms ease;
+
+  -webkit-transform: translate3d(-100%,0,0);
+  -moz-transform: translate3d(-100%,0,0);
+  -ms-transform: translate3d(-100%,0,0);
+  -o-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+}
+
+.forgot-password form{
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  max-width: 400px;
+  display: table;
+}
+
+.forgot-password form>.row{
+  display: table-row;
+  height: 100%;
+}
+
+.forgot-password form>.row>.cell{
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.forgot-password form span.icon-people-bubble{
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 150px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.forgot-password form .input{
+  width: 100%;
+  height: 55px;
+  overflow: hidden;
+}
+
+.forgot-password form input{
+  width: 100%;
+  height: 35px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+  line-height: 30px;
+  font-size: 12px;
+  color: #fff;
+  outline: none;
+  border-radius: 0px;
+}
+
+.forgot-password form label{
+  width: 100%;
+  text-align: left;
+  color: #fff;
+  font-size: 16px;
+  display: block;
+}
+
+.forgot-password form button.btn{
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+.forgot-password form h4{
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  display: block;
+}
+
+.forgot-password form h5{
+  font-size: 16px;
+  color: #fff;
+  padding-bottom: 60px;
+  margin-bottom: 0px;
+}
+
+@media screen and (min-height: 700px){
+  .forgot-password form h5{
+    bottom: 80px;
+  }
+}
+
+@media screen and (min-height: 900px){
+  .forgot-password form h5{
+    margin-bottom: 130px;
+  }
+}
+
+.register-code{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-image: url(../img/back_gradient_login.png);
+  background-size: 100% 100%;
+
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  transition: transform 200ms ease;
+
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.register-code form{
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  max-width: 400px;
+  display: table;
+}
+
+.register-code form>.row{
+  display: table-row;
+  height: 100%;
+}
+
+.register-code form>.row>.cell{
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.register-code form span.icon-people-bubble{
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 150px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.register-code form .input{
+  width: 100%;
+  height: 55px;
+  overflow: hidden;
+}
+
+.register-code form input{
+  width: 100%;
+  height: 35px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+  line-height: 30px;
+  font-size: 12px;
+  color: #fff;
+  outline: none;
+  text-transform: uppercase;
+  border-radius: 0px;
+}
+
+.register-code form label{
+  width: 100%;
+  text-align: left;
+  color: #fff;
+  font-size: 16px;
+  display: block;
+}
+
+.register-code form button.btn{
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+.register-code form h4{
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  display: block;
+}
+
+.register-code form h5{
+  font-size: 16px;
+  color: #fff;
+  padding-bottom: 60px;
+  margin-bottom: 0px;
+}
+
+@media screen and (min-height: 700px){
+  .register-code form h5{
+    bottom: 80px;
+  }
+}
+
+@media screen and (min-height: 900px){
+  .register-code form h5{
+    margin-bottom: 130px;
+  }
+}
+
+.login.active-forgot-password{
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.forgot-password.active-forgot-password{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.register-code.active-forgot-password{
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.login.active-register-code{
+  -webkit-transform: translate3d(-100%,0,0);
+  -moz-transform: translate3d(-100%,0,0);
+  -ms-transform: translate3d(-100%,0,0);
+  -o-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+}
+
+.forgot-password.active-register-code{
+  -webkit-transform: translate3d(-100%,0,0);
+  -moz-transform: translate3d(-100%,0,0);
+  -ms-transform: translate3d(-100%,0,0);
+  -o-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+}
+
+.register-code.active-register-code{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.register{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.register form{
+  width: 90%;
+  margin: auto;
+  max-width: 400px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.register form span.icon-people-bubble{
+  width: 100%;
+  display: block;
+  text-align: center;
+  color: #ffa400;
+  font-size: 100px;
+}
+
+.register form>.form-group{
+  width: 100%;
+  margin-top: 15px;
+}
+
+.register form>.form-group>label{
+  width: 100%;
+  text-transform: uppercase;
+  display: block;
+  text-align: left;
+  color: #777;
+  font-size: 14px;
+}
+
+.register form>.form-group>.form-control{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 0px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  display: block;
+  text-align: left;
+  outline: none;
+  color: #777;
+  font-size: 16px;
+  background: none;
+  background-color: #fafafa;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0px;
+}
+
+.register form>.form-group .form-radios{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  display: table;
+  padding-top: 20px;
+}
+
+.register form>.form-group .form-radios .row{
+  display: table-row;
+}
+
+.register form>.form-group .form-radios .radio{
+  width: 33.333333333333333%;
+  display: table-cell;
+  overflow: hidden;
+}
+
+.register form>.form-group .form-radios .radio .circle{
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ffa400;
+  background: #fff;
+  border-radius: 50%;
+  margin-right: 5px;
+  float: left;
+}
+
+.register form>.form-group .form-radios .radio.checked .circle{
+  background: #ffa400;
+}
+
+.register form>.form-group .form-radios .radio span{
+  height: 20px;
+  line-height: 20px;
+  color: #777;
+  float: left;
+}
+
+
+.register form>.form-group>.form-control:focus{
+  border-bottom: 1px solid #ffa400;
+}
+
+.register form>.form-group>.form-control[readonly]{
+  color: #aaa;
+  border-bottom: 1px solid #ccc;
+}
+
+.register form>.form-group-checkbox{
+  width: 100%;
+  margin-top: 15px;
+}
+
+.register form>.form-group-checkbox>label{
+  text-transform: uppercase;
+  float: left;
+  text-align: left;
+  color: #939393;
+  font-size: 14px;
+}
+
+.register form>.form-group-checkbox>input{
+  float: right;
+}
+
+.register form button{
+  margin-top: 10px;
+}
+
+.register form h5{
+  font-size: 14px;
+  color: #777;
+}
+
+.register>form .input-number{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 10px;
+}
+
+.register>form .input-number label{
+  width: 100%;
+  height: 60px;
+  display: block;
+  font-size: 14px;
+  line-height: 60px;
+  color: #bbb;
+  text-align: left;
+}
+
+.register>form .input-number input{
+  width: 1px;
+  height: 1px;
+  border: none;
+  outline: none;
+}
+
+.register>form .input-number.focus label{
+  display: none;
+}
+
+.register>form .input-number.focus input{
+  width: 100%;
+  height: 58px;
+  margin-top: 1px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+
+.register>form .input-date{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 10px;
+}
+
+.register>form .input-date label{
+  width: 100%;
+  height: 60px;
+  display: block;
+  font-size: 14px;
+  line-height: 60px;
+  color: #bbb;
+  text-align: left;
+}
+
+.register>form .input-date input{
+  /*width: 1px;
+  height: 1px;*/
+  font-size: 1px;
+  border: none;
+  outline: none;
+  opacity: 0;
+}
+
+.register>form .input-date.focus label{
+  display: none;
+}
+
+.register>form .input-date.focus input{
+  width: 100%;
+  height: 58px;
+  margin-top: 1px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  background-color: #fff;
+  opacity: 1;
+}
+
+.register-terms-and-conditions{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #fff;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.register-terms-and-conditions span.icon-people-bubble{
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  font-size: 50px;
+  line-height: 100px;
+  color: #ffa400;
+}
+
+.register-terms-and-conditions .content{
+  width: 90%;
+  position: fixed;
+  left: 5%;
+  top: 100px;
+  bottom: 150px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 20px;
+  color: #777;
+  text-align: left;
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+}
+
+.register-terms-and-conditions .bottom{
+  width: 100%;
+  height: 150px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  padding: 0px 20px;
+  padding-top: 20px;
+}
+
+.register-terms-and-conditions h5{
+  font-size: 14px;
+  color: #777;
+  margin: 0px;
+  margin-top: 15px;
+}
+
+.app{
+  width: 100%;
+}
+
+.app>.header{
+  width: 100%;
+  height: 60px;
+  background-color: #ffa400;
+  position: fixed;
+  top: 0px;
+  display: none;
+}
+
+.app>.header.black{
+  background: #000;
+}
+
+.app>.header .icon{
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+  color: #fff;
+  padding-top: 13px;
+  float: left;
+  text-align: center;
+}
+
+.app>.header .icon:active{
+  background: rgba(255,255,255,0.1);
+}
+
+.app>.header .icon.text{
+  width: initial;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 60px;
+  padding: 0px 10px;
+}
+
+.app>.header .icon.right{
+  float: right;
+}
+
+.app>.header .icon.example{
+  display: none;
+}
+
+.app>.header .section-name{
+  line-height: 58px;
+  font-size: 16px;
+  color: #fff;
+  float: left;
+  text-transform: uppercase;
+}
+
+.app>.header .section-name .dashboard-icon{
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  float: left;
+  text-align: center;
+  line-height: 60px;
+}
+
+.app>.header .section-name .dashboard-text{
+  height: 60px;
+  float: left;
+  margin-left: 10px;
+}
+
+.app>.content{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+}
+
+.app>.content .loading{
+  width: 100%;
+  display: none;
+  top: 60px;
+  padding-top: 40px;
+  position: fixed;
+  bottom: 0px;
+  background-color: #fff;
+}
+
+.app>.menu{
+}
+
+.app>.menu .backdrop{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(0,0,0,0.5);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.app>.menu .content{
+  width: 300px;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: #fff;
+
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(-100%,0,0);
+  -moz-transform: translate3d(-100%,0,0);
+  -ms-transform: translate3d(-100%,0,0);
+  -o-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+
+}
+
+.app>.menu.open .backdrop{
+  bottom: 0px;
+  opacity: 1;
+}
+
+.app>.menu.open .content{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.menu .content .header{
+  width: 100%;
+  height: 150px;
+  background-color: #ffa400;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  padding-top: 10px;
+  color: #fff;
+  z-index: 99;
+}
+
+.app>.menu .content .header img{
+  width: 90px;
+  height: 90px;
+  border-radius: 90px;
+  float: left;
+  margin-left: 10px;
+  border: 3px solid #fff;
+}
+
+.app>.menu .content .header h4{
+  width: 190px;
+  text-align: right;
+  margin: 0px;
+  margin-top: 10px;
+  padding: 0px;
+  font-size: 16px;
+  float: left;
+}
+
+.app>.menu .content .header h3{
+  width: 190px;
+  height: 34px;
+  text-align: right;
+  margin: 0px;
+  padding: 0px;
+  font-size: 16px;
+  float: left;
+  text-transform: uppercase;
+  line-height: 34px;
+}
+
+.app>.menu .content .header h5{
+  width: 100%;
+  height: 39px;
+  text-align: left;
+  margin: 0px;
+  margin-top: 10px;
+  padding: 0px;
+  padding-left: 10px;
+  font-size: 18px;
+  float: left;
+  background: rgba(0,0,0,0.5);
+  line-height: 39px;
+}
+
+.app>.menu .content .list{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  padding-top: 150px;
+  overflow-y: auto;
+}
+
+.app>.menu .content .item{
+  width: 100%;
+  height: 60px;
+  color: #6d6e71;
+}
+
+.app>.menu .content .item .icon{
+  width: 40px;
+  height: 60px;
+  float: left;
+  line-height: 60px;
+  margin-left: 15px;
+  font-size: 25px;
+}
+
+.app>.menu .content .item .label{
+  height: 40px;
+  float: left;
+  line-height: 60px;
+  margin-left: 10px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.app>.menu .content .item.active{
+  background-color: #ffa400;
+  color: #fff;
+}
+
+.app>.menu .content .item.active .icon i{
+  color: #fff;
+}
+
+/* SCREENS */
+
+.app>.content .page .sub-header{
+  width: 100%;
+  height: 54px;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  background-color: #ffa400;
+}
+
+.app>.content .page .sub-header .item{
+  width: 100%;
+  height: 50px;
+  color: #F5DAAE;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  line-height: 50px;
+  float: left;
+}
+
+.app>.content .page .sub-header .item{
+
+}
+
+.app>.content .page .sub-header .item.active{
+  color: #fff;
+}
+
+.app>.content .page .sub-header .line{
+  width: 100%;
+  height: 4px;
+  float: left;
+}
+
+.app>.content .page .sub-header .line .pointer{
+  width: 100%;
+  height: 4px;
+  background: #fff;
+}
+
+.app>.content .page .sub-header.col-2 .item, .app>.content .page .sub-header.col-2 .line .pointer{
+  width: 50%;
+}
+
+.app>.content .page .sub-header.col-3 .item, .app>.content .page .sub-header.col-3 .line .pointer{
+  width: 33.3333333333333333333%;
+}
+
+.app>.content .page .sub-header .item, .app>.content .page .sub-header .line .pointer{
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
+  transition: transform 400ms ease;
+}
+
+.app>.content .page .sub-header.insta-move .item, .app>.content .page .sub-header .line .pointer{
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.app>.content .page .list{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+.app>.content .page .list.authorizations{
+  top: 114px;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  transition: transform 200ms ease;
+}
+
+.app>.content .page .list.authorizations.families{
+  left: 0px;
+}
+
+.app>.content .page .list.authorizations.visits{
+  left: 100%;
+}
+
+.app>.content .page .list.authorizations.employees{
+  left: 200%;
+}
+
+.app>.content .page .list.authorizations .item{
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid #e8e8e8;
+  color: #777;
+}
+
+.app>.content .page .list.authorizations>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
+
+.app>.content .page .list.authorizations .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list.authorizations .item img{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+  border: 1px solid #eee;
+}
+
+.app>.content .page .list.authorizations .item .info{
+  height: 80px;
+  float: left;
+  margin-left: 10px;
+}
+
+.app>.content .page .list.authorizations .item .info h5{
+  font-size: 16px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  margin-top: 17px;
+}
+
+.app>.content .page .list.authorizations .item .info h4{
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  margin-top: 2px;
+}
+
+.app>.content .page .list.authorizations .item i.fa.fa-check{
+  display: none;
+}
+
+.app>.content .page .list.authorizations .item.selected{
+  background-color: #f3f3f3;
+}
+
+.app>.content .page .list.authorizations .item.selected img{
+  display: none;
+}
+
+.app>.content .page .list.authorizations .item.selected i.fa.fa-check{
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+  border: 1px solid #ffa400;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  background: #ffa400;
+  font-size: 30px;
+}
+
+.app>.content .page .list.communications{
+  top: 60px;
+}
+
+.app>.content .page .list.communications .item{
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid #e8e8e8;
+  color: #777;
+  position: relative;
+}
+
+.app>.content .page .list.communications .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list.communications .item img{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+  border: 1px solid #eee;
+}
+
+.app>.content .page .list.communications .item .status{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 46px;
+  left: 46px;
+  border-radius: 50%;
+  border: 2px #ccc solid;
+  background: #fff;
+  font-size: 16px;
+  text-align: center;
+  line-height: 22px;
+}
+
+.app>.content .page .list.communications .item .status>i{
+  display: none;
+}
+
+.app>.content .page .list.communications .item .status.pending>i.fa-eye-slash{
+  display: inline;
+  color: #777;
+}
+
+.app>.content .page .list.communications .item .status.in_progress>i.fa-clock-o{
+  display: inline;
+  color: #777;
+}
+
+.app>.content .page .list.communications .item .status.resolved{
+  background: #ffa400;
+  border-color: #ffa400;
+}
+
+.app>.content .page .list.communications .item .status.resolved>i.fa-check{
+  display: inline;
+  color: #fff;
+}
+
+.app>.content .page .list.communications .item .info{
+  height: 80px;
+  float: left;
+  margin-left: 10px;
+}
+
+.app>.content .page .list.communications .item .info h5{
+  font-size: 16px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  margin-top: 17px;
+  color: #777;
+}
+
+.app>.content .page .list.communications .item .info h4{
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  margin-top: 2px;
+  color: #777;
+}
+
+.app>.content .page .list.communications .item>i.fa.fa-check{
+  display: none;
+}
+
+.app>.content .page .list.communications .item.selected{
+  background-color: #f3f3f3;
+}
+
+.app>.content .page .list.communications .item.selected img{
+  display: none;
+}
+
+.app>.content .page .list.communications .item.selected i.fa.fa-check{
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+  border: 1px solid #ffa400;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  background: #ffa400;
+  font-size: 30px;
+}
+
+.app>.content .page .new-communication-button button.new{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  text-align: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0px;
+}
+
+.app>.content .page .list.events{
+  top: 114px;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  transition: transform 200ms ease;
+}
+
+.app>.content .page .list.events.insta-move{
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.app>.content .page .list.events>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
+
+.app>.content .page .list.events.event_places{
+  left: 0px;
+  background: #222;
+}
+
+.app>.content .page .list.events.guest_lists{
+  left: 100%;
+}
+
+.app>.content .page .list.events.event_places .item{
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.app>.content .page .list.events.event_places .item.back-house{
+  background-image: url(../img/back_event_place_house.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-party_room{
+  background-image: url(../img/back_event_place_sum.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-court_tennis{
+  background-image: url(../img/back_event_place_tennis_court.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-court_football{
+  background-image: url(../img/back_event_place_football_court.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-court_voley{
+  background-image: url(../img/back_event_place_voley_court.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-court_beach_voley{
+  background-image: url(../img/back_event_place_beach_voley_court.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-course_golf{
+  background-image: url(../img/back_event_place_golf_course.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-cricket_golf{
+  background-image: url(../img/back_event_place_cricket_course.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-kindergarten{
+  background-image: url(../img/back_event_place_kindergarten.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-laundry{
+  background-image: url(../img/back_event_place_laundry.png);
+}
+
+.app>.content .page .list.events.event_places .item h4{
+  width: 100%;
+  height: 50px;
+  margin: 0px;
+  line-height: 50px;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  padding-left: 20px;
+  margin-top: 150px;
+  font-size: 18px;
+}
+
+
+.app>.content .page .list.events.guest_lists .item{
+  width: 100%;
+  height: 80px;
+  display: table;
+  border-top: 1px solid #ccc;
+  color: #777;
+}
+
+.app>.content .page .list.events.guest_lists .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list.events.guest_lists .item.selected{
+  background-color: #f3f3f3;
+}
+
+.app>.content .page .list.events.guest_lists .item i.fa.fa-check{
+  display: none;
+}
+.app>.content .page .list.events.guest_lists .item.selected .icon span.icon-people{
+  display: none;
+}
+
+.app>.content .page .list.events.guest_lists .item.selected i.fa.fa-check{
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  float: left;
+  border: 1px solid #ffa400;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  background: #ffa400;
+  font-size: 30px;
+}
+
+.app>.content .page .list.events.guest_lists .item .row{
+  display: table-row;
+}
+
+.app>.content .page .list.events.guest_lists .item .row .icon{
+  width: 60px;
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 10px;
+}
+
+.app>.content .page .list.events.guest_lists .item .row .icon span{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  border: 1px #eee solid;
+  background-color: #fff;
+  color: #dbdddf;
+  text-align: center;
+  line-height: 57px;
+  font-size: 35px;
+  display: block;
+}
+
+.app>.content .page .list.events.guest_lists .item .row .info{
+  width: 100%;
+  display: table-cell;
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
+.app>.content .page .list.events.guest_lists .item .row .info h4{
+  margin: 0px;
+  font-weight: normal;
+}
+
+.app>.content .page .list.events.guest_lists .item .row .info h5{
+  margin: 0px;
+  margin-top: 5px;
+  font-weight: normal;
+}
+
+.app>.content .page .new-event-guest-lists{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  padding: 0px;
+}
+
+.app>.content .page .guest_lists.active .new-event-guest-lists{
+
+}
+
+.app>.content .page .event-guest-list-form .new-event-guest-lists{
+
+  display: block;
+}
+
+.app>.content .page .event-guest-list-form{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  overflow: auto;
+}
+
+.app>.content .page .event-guest-list-form form>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+}
+
+.app>.content .page .event-guest-list-form .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .event-guest-list-form .guest{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #eee;
+  padding-left: 10px;
+  color: #777;
+  overflow: hidden;
+}
+
+.app>.content .page .event-guest-list-form .guest.selected{
+  background: #f3f3f3;
+}
+
+.app>.content .page .event-guest-list-form .guest h4{
+  width: 100%;
+  margin: 0px;
+  margin-top: 10px;
+  font-weight: normal;
+}
+
+.app>.content .page .event-guest-list-form .guest h5{
+  width: 100%;
+  margin: 0px;
+  margin-top: 5px;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.app>.content .page .event-guest-form .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .event-calendar-day{
+  width: 100%;
+}
+
+.app>.content .page .event-calendar-day.open-calendar>.days-number{
+  top: 300px;
+}
+
+.app>.content .page .event-calendar-day>.days-number{
+  width: 100%;
+  height: 85px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background: #f9f9f9;
+  position: fixed;
+  top: 60px;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+
+  -webkit-transition: -webkit-transform 300ms ease, top 300ms ease;
+  -moz-transition: -moz-transform 300ms ease, top 300ms ease;
+  -ms-transition: -ms-transform 300ms ease, top 300ms ease;
+  -o-transition: -o-transform 300ms ease, top 300ms ease;
+  transition: transform 300ms ease, top 300ms ease;
+
+  display: none;
+}
+
+.app>.content .page .event-calendar-day>.days-number.available-scroll{
+  overflow-x: auto;
+}
+
+.app>.content .page .event-calendar-day>.days-number.left{
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.app>.content .page .event-calendar-day>.days-number.right{
+  -webkit-transform: translate3d(-100%,0,0);
+  -moz-transform: translate3d(-100%,0,0);
+  -ms-transform: translate3d(-100%,0,0);
+  -o-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+}
+
+.app>.content .page .event-calendar-day>.days-number .content{
+  width: 100%;
+  padding-left: 1%;
+  padding-right: 1%;
+  height: 85px;
+  overflow: hidden;
+}
+
+.app>.content .page .event-calendar-day>.days-number .day{
+  width: 14.285714285714286%;
+  height: 85px;
+  float: left;
+  display: none;
+}
+
+.app>.content .page .event-calendar-day>.days-number .day label{
+  width: 100%;
+  height: 30px;
+  color: #d2d2d2;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  font-size: 12px;
+  line-height: 30px;
+}
+
+.app>.content .page .event-calendar-day>.days-number .day.today label{
+  color: #ffa400;
+}
+
+.app>.content .page .event-calendar-day>.days-number .day.disabled label{
+  color: #eee;
+}
+
+.app>.content .page .event-calendar-day>.days-number .day.disabled .number{
+  color: #eee;
+}
+
+.app>.content .page .event-calendar-day>.days-number .day .number{
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 50%;
+  color: #777;
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  margin: auto;
+}
+
+.app>.content .page .event-calendar-day>.days-number .day.selected .number{
+  background: #ffa400;
+  color: #fff;
+}
+
+.app>.content .page .event-calendar-day>.days-number h1{
+  width: 800px;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll{
+  width: 100%;
+  position: fixed;
+  top: 145px;
+  bottom: 0px;
+  left: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #fff;
+
+  -webkit-transition: top 300ms ease;
+  -moz-transition: top 300ms ease;
+  -ms-transition: top 300ms ease;
+  -o-transition: top 300ms ease;
+  transition: top 300ms ease;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day{
+  width: 100%;
+  display: table;
+  margin-top: 10px;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block{
+  height: 60px;
+  display: table-row;
+}
+.app>.content .page .event-calendar-day>.day-scroll .day .block.disabled .content{
+  background: #eee;
+  border-color: #ccc;
+  text-align: center;
+  color: #777;
+  font-size: 12px;
+  line-height: 60px;
+  text-transform: uppercase;
+}
+
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .label{
+  display: table-cell;
+  vertical-align: top;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .label h5{
+  width: 60px;
+  font-weight: normal;
+  font-size: 14px;
+  text-align: center;
+  margin: 0px;
+  color: #555;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content{
+  width: 100%;
+  display: table-cell;
+  border-bottom: 1px solid #eee;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event{
+  width: 100%;
+  height: 60px;
+  background-color: #f8b13a;
+  color: #fff;
+  padding: 10px;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event.pending{
+  background-color: #eee;
+  color: #777;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event.rejected{
+  background-color: #cc3f44;
+  color: #fff;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event.canceled{
+  background-color: #0e62c7;
+  color: #fff;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event:active{
+  background-color: #e09d2e;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event.other{
+  background-color: #eee;
+  color: #555;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .line{
+  width: 100%;
+  display: block;
+  font-size: 14px;
+  height: 24px;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .line .name{
+  float: left;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .line .status{
+  float: right;
+  text-transform: uppercase;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .line .hour{
+  float: right;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block .content .event .line .group{
+  float: left;
+  font-weight: bold;
+}
+
+.app>.content .page .event-calendar-day .current-day{
+  position: fixed;
+  bottom: 30px;
+  right: 0px;
+  width: 70px;
+  text-align: center;
+  background: #fff;
+  padding-top: 5px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.app>.content .page .event-calendar-day .current-day h5{
+  font-size: 20px;
+  margin: 0px;
+}
+
+.app>.content .page .event-calendar-day .current-day h4{
+  font-size: 25px;
+  margin: 0px;
+}
+
+
+.app>.content .page .event-calendar-day.open-calendar>.days-number{
+  top: 360px;
+}
+
+.app>.content .page .event-calendar-day.open-calendar>.day-scroll{
+  top: 445px;
+}
+
+.app>.content .page .event-calendar-day>.calendar{
+  width: 100%;
+  height: 300px;
+  position: fixed;
+  top: 60px;
+  background: #ffa400;
+}
+
+.app>.content .page .event-calendar-day>.calendar .years{
+  width: 100%;
+  height: 60px;
+}
+
+.app>.content .page .event-calendar-day>.calendar .years .year{
+  width: 33.3333333%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  float: left;
+  color: rgba(255,255,255,0.75);
+}
+
+.app>.content .page .event-calendar-day>.calendar .years .year.selected{
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+.app>.content .page .event-calendar-day>.calendar .months{
+  width: 100%;
+  height: 240px;
+}
+
+.app>.content .page .event-calendar-day>.calendar .months .month{
+  width: 33.3333333%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  float: left;
+  color: rgba(255,255,255,0.75);
+}
+.app>.content .page .event-calendar-day>.calendar .months .month.selected{
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+.app>.content .page .event-form{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  overflow: auto;
+}
+
+.app>.content .page .event-form form>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
+
+.app>.content .page .event-form .form-horizontal{
+  width: 90% !important;
+  padding-bottom: 100px;
+}
+
+.app>.content .page .event-form .guest{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #eee;
+  padding-left: 10px;
+  color: #777;
+  overflow: hidden;
+}
+
+.app>.content .page .event-form .guest.selected{
+  background: #f3f3f3;
+}
+
+.app>.content .page .event-form .guest h4{
+  width: 100%;
+  margin: 0px;
+  margin-top: 10px;
+  font-weight: normal;
+}
+
+.app>.content .page .event-form .guest h5{
+  width: 100%;
+  margin: 0px;
+  margin-top: 5px;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.app>.content .page .event-form .new-guests-buttons{
+}
+
+.app>.content .page .event-form .new-guests-buttons .backdrop{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(255,255,255,0.75);
+  opacity: 0;
+}
+
+.app>.content .page .event-form .new-guests-buttons.open .backdrop{
+  bottom: 0px;
+  opacity: 1;
+}
+
+.app>.content .page .event-form .new-guests-buttons button.new{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  text-align: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0px;
+}
+
+.app>.content .page .event-form .new-guests-buttons.open button.new{
+  display: none;
+}
+
+.app>.content .page .event-form .new-guests-buttons .add-button{
+  width: 340px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .event-form .new-guests-buttons .add-button h5{
+  font-size: 18px;
+  height: 73px;
+  line-height: 60px;
+  margin: 0px;
+  margin-right: 10px;
+  float: right;
+  color: #555;
+  display: none;
+  text-transform: uppercase;
+}
+
+.app>.content .page .event-form .new-guests-buttons .add-button button{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  text-align: 60px;
+  float: right;
+  display: none;
+  padding: 0px;
+}
+
+.app>.content .page .event-form .new-guests-buttons.open .add-button h5, .app>.content .page .event-form .new-guests-buttons.open .add-button button{
+  display: block;
+}
+
+.app>.content .page .event-form .new-guests-buttons.open .add-button.new-visit{
+  -webkit-transform: translate3d(0,-75px,0);
+  -moz-transform: translate3d(0,-75px,0);
+  -ms-transform: translate3d(0,-75px,0);
+  -o-transform: translate3d(0,-75px,0);
+  transform: translate3d(0,-75px,0);
+}
+
+@media screen and (min-width: 480px){
+  .app>.content .page .event-form .new-guests-buttons button.new{
+    bottom: 30px;
+    right: 30px;
+  }
+
+  .app>.content .page .event-form .new-guests-buttons .add-button{
+    bottom: 30px;
+    right: 30px;
+  }
+}
+
+.app>.content .page .events-terms{
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  top: 60px;
+  left: 0px;
+  right: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.app>.content .page .events-terms .title{
+  width: 100%;
+  color: #777;
+  font-size: 18px;
+  text-transform: uppercase;
+  background-color: #fff;
+  margin-top: 20px;
+}
+
+.app>.content .page .events-terms .terms{
+  width: 100%;
+  top: 60px;
+  bottom: 113px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  color: #777;
+  padding: 20px;
+  padding-top: 0px;
+}
+
+.app>.content .page .events-terms .terms legend{
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 10px 0px;
+}
+
+.app>.content .page .events-terms .terms h5{
+  margin: 10px 0px;
+}
+
+.app>.content .page .events-terms .buttons{
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  padding: 0px 20px;
+}
+
+.app>.content .page .events-terms .buttons .link{
+  width: 100%;
+  height: 60px;
+  font-size: 14px;
+  appearance: none;
+  background-color: transparent;
+  color: #777;
+  text-align: center;
+  border: none;
+
+}
+
+.app>.content .page .list.guard{
+  top: 114px;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  transition: transform 200ms ease;
+}
+
+.app>.content .page .list.guard.insta-move{
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.app>.content .page .list.guard>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
+
+.app>.content .page .list.guard.messages{
+  left: 100%;
+}
+
+.app>.content .page .list.guard.records{
+  left: 0%;
+}
+
+.app>.content .page .list.guard.messages .item{
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid #ccc;
+  display: table;
+}
+
+.app>.content .page .list.guard.messages .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list.guard.messages .item .row{
+  display: table-row;
+}
+
+.app>.content .page .list.guard.messages .item .row>div{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .list.guard.messages .item .row>div.icon{
+  width: 60px;
+  padding: 0px 10px;
+}
+
+.app>.content .page .list.guard.messages .item .icon i{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  border: 1px #eee solid;
+  background-color: #fff;
+  color: #dbdddf;
+  text-align: center;
+  line-height: 57px;
+  font-size: 35px;
+  display: block;
+}
+
+.app>.content .page .list.guard.messages .item .info {
+  padding-left: 15px;
+}
+
+.app>.content .page .list.guard.messages .item .info h4{
+  margin: 0px;
+  color: #777;
+}
+
+.app>.content .page .list.guard.messages .item .info h5{
+  margin: 0px;
+  color: #777;
+}
+
+.app>.content .page .list.guard.messages .item .info .checks{
+  width: 100%;
+  text-align: right;
+  padding-right: 10px;
+  margin-top: 8px;
+}
+
+.app>.content .page .list.guard.messages .item .info .checks span{
+  color: #777;
+  font-size: 12px;
+}
+
+.app>.content .page .list.guard.messages .item .info .checks i{
+  color: #ccc;
+}
+
+.app>.content .page .list.guard.messages .item.view .info .checks i{
+  color: #ffa400;
+}
+
+.app>.content .page .list.guard.records .item{
+  width: 100%;
+  height: 70px;
+  border-top: 1px solid #ccc;
+  display: table;
+  padding-right: 10px;
+}
+
+.app>.content .page .list.guard.records .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list.guard.records .item .row{
+  display: table-row;
+}
+
+.app>.content .page .list.guard.records .item .row>div{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .list.guard.records .item .row>div.icon{
+  width: 60px;
+  padding: 0px 10px;
+}
+
+.app>.content .page .list.guard.records .item .icon span{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px #ffa400 solid;
+  background-color: #ffa400;
+  color: #fff;
+  text-align: center;
+  line-height: 37px;
+  font-size: 24px;
+  display: block;
+}
+
+.app>.content .page .list.guard.records .item .info h4{
+  margin: 0px;
+  color: #777;
+}
+
+.app>.content .page .list.guard.records .item .info h4 span:last-child{
+  float: right;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .list.guard.records .item .info h5{
+  margin: 0px;
+  color: #777;
+}
+
+.app>.content .page .list.guard.records .item .info h5 span:last-child{
+  float: right;
+  font-size: 12px;
+}
+
+.app>.content .page .list.guard.records .item .info .checks{
+  width: 100%;
+  text-align: right;
+  padding-right: 10px;
+  margin-top: 2px;
+}
+
+.app>.content .page .list.guard.records .item .info .checks span{
+  color: #777;
+  font-size: 12px;
+}
+
+.app>.content .page .list.guard.records .item .info .checks i{
+  color: #ccc;
+}
+
+.app>.content .page .list.guard.records .item.view .info .checks i{
+  color: #ffa400;
+}
+
+.app>.content .page .guard.button{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+}
+
+.app>.content .page .guard-message-form{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .guard-message-form .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .guard-message-form .form-horizontal h5{
+  color: #777;
+}
+
+.app>.content .page .guard-message-form .form-horizontal h5 i{
+  color: #ffa400;
+}
+
+.app>.content .page .send-attachment-menu{
+}
+
+.app>.content .page .send-attachment-menu.open .backdrop{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: rgba(0,0,0,0.1);
+}
+
+.app>.content .page .send-attachment-menu .menu{
+  width: 100%;
+  height: 100px;
+  background: #fff;
+  position: fixed;
+  bottom: 60px;
+  border-top: 1px solid #ccc;
+
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  transition: transform 200ms ease;
+
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.app>.content .page .send-attachment-menu.open .menu{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .send-attachment-menu .menu .content{
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.app>.content .page .send-attachment-menu .menu .content .type{
+  width: 50%;
+  float: left;
+  text-align: center;
+  padding-top: 16px;
+}
+
+.app>.content .page .send-attachment-menu .menu .content .type:active{
+  background: rgba(0,0,0,0.1);
+}
+
+.app>.content .page .send-attachment-menu .menu .content .icon{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background: #ffa400;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 24px;
+  line-height: 50px;
+  color: #fff;
+  margin: auto;
+}
+
+.app>.content .page .send-attachment-menu .menu .content h5{
+  margin: 0px;
+  margin-top: 5px;
+  color: #555;
+}
+
+
+.app .header-actions{
+  width: 100%;
+  height: 60px;
+  background-color: #777;
+  position: fixed;
+  top: 0px;
+  display: none;
+}
+
+.app .header-actions .icon{
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  color: #fff;
+  margin-left: 20px;
+  padding-top: 13px;
+  float: left;
+}
+
+.app .header-actions .icon.right{
+  float: right;
+}
+
+.app .header-actions .section-name{
+  line-height: 58px;
+  font-size: 20px;
+  color: #fff;
+  float: left;
+}
+
+.app>.content .page .new-authorization-buttons{
+}
+
+.app>.content .page .new-authorization-buttons .backdrop{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(255,255,255,0.75);
+  opacity: 0;
+}
+
+.app>.content .page .new-authorization-buttons.open .backdrop{
+  bottom: 0px;
+  opacity: 1;
+}
+
+.app>.content .page .new-authorization-buttons button.new{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  text-align: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0px;
+}
+
+.app>.content .page .new-authorization-buttons.open button.new{
+  display: none;
+}
+
+.app>.content .page .new-authorization-buttons .add-button{
+  width: 340px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .new-authorization-buttons .add-button h5{
+  font-size: 18px;
+  height: 73px;
+  line-height: 60px;
+  margin: 0px;
+  margin-right: 10px;
+  float: right;
+  color: #555;
+  display: none;
+  text-transform: uppercase;
+}
+
+.app>.content .page .new-authorization-buttons .add-button button{
+  width: 60px;
+  height: 60px;
+  background-color: #ffa400;
+  border-radius: 60px;
+  border: none;
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  text-align: 60px;
+  float: right;
+  display: none;
+  padding: 0px;
+}
+
+.app>.content .page .new-authorization-buttons.open .add-button h5, .app>.content .page .new-authorization-buttons.open .add-button button{
+  display: block;
+}
+
+.app>.content .page .new-authorization-buttons.open .add-button.new-visit{
+  -webkit-transform: translate3d(0,-75px,0);
+  -moz-transform: translate3d(0,-75px,0);
+  -ms-transform: translate3d(0,-75px,0);
+  -o-transform: translate3d(0,-75px,0);
+  transform: translate3d(0,-75px,0);
+}
+
+.app>.content .page .new-authorization-buttons.open .add-button.new-employee{
+  -webkit-transform: translate3d(0,-150px,0);
+  -moz-transform: translate3d(0,-150px,0);
+  -ms-transform: translate3d(0,-150px,0);
+  -o-transform: translate3d(0,-150px,0);
+  transform: translate3d(0,-150px,0);
+}
+
+@media screen and (min-width: 480px){
+  .app>.content .page .new-authorization-buttons button.new{
+    bottom: 30px;
+    right: 30px;
+  }
+
+  .app>.content .page .new-authorization-buttons .add-button{
+    bottom: 30px;
+    right: 30px;
+  }
+}
+
+.app>.content .page .authorization-form-family{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .authorization-form-family .checked-data, .app>.content .page .authorization-form-visit .checked-data, .app>.content .page .authorization-form-employee .checked-data{
+  width: 100%;
+  background-color: #40bbea;
+  color: #fff;
+  font-size: 14px;
+  padding: 20px;
+  display: none;
+}
+
+.app>.content .page .authorization-form-family canvas{
+  position: fixed;
+  top: -200px;
+  left: -200px;
+}
+
+.app>.content .page .authorization-form-family .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .authorization-form-visit{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .authorization-form-visit .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .authorization-form-employee{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .authorization-form-employee .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .form-horizontal{
+  width: 100%;
+  margin: auto;
+}
+
+.app>.content .page .form-horizontal .form-dropdown{
+  max-height: 0;
+  overflow: hidden;
+}
+
+.app>.content .page .form-horizontal .form-dropdown.open{
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.app>.content .page .form-horizontal .form-group{
+  width: 100%;
+  margin-top: 15px;
+}
+
+.app>.content .page .form-horizontal .form-group>label{
+  width: 100%;
+  text-transform: uppercase;
+  display: block;
+  text-align: left;
+  color: #939393;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .form-horizontal .form-group>.form-control{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  display: block;
+  text-align: left;
+  outline: none;
+  color: #555;
+  font-size: 16px;
+  background: none;
+  background-color: #fafafa;
+  padding: 5px;
+  border-radius: 0px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.app>.content .page .form-horizontal .form-group>textarea.form-control{
+  height: 200px;
+  resize: none;
+  line-height: 21px;
+}
+
+.app>.content .page .form-horizontal .form-group>.form-control:focus{
+  border-bottom: 1px solid #ffa400;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox{
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox>label{
+  height: 70px;
+  text-transform: uppercase;
+  float: left;
+  text-align: left;
+  color: #939393;
+  font-size: 14px;
+  line-height: 70px;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox input[type="checkbox"]{
+  display: none;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox .checkbox{
+  width: 50px;
+  float: right;
+  height: 70px;
+  padding-top: 20px;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox .checkbox>.box{
+  width: 50px;
+  height: 30px;
+  margin: auto;
+  background-color: #e2e2e2;
+  border-radius: 30px;
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox .checkbox>.box>.pointer{
+  width: 30px;
+  height: 30px;
+  background-color: #ababab;
+  border-radius: 30px;
+
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .form-horizontal .form-group-checkbox .checkbox.checked>.box>.pointer{
+  background-color: #ffa400;
+
+  -webkit-transform: translate3d(20px,0,0);
+  -moz-transform: translate3d(20px,0,0);
+  -ms-transform: translate3d(20px,0,0);
+  -o-transform: translate3d(20px,0,0);
+  transform: translate3d(20px,0,0);
+}
+
+.app>.content .page .form-horizontal .form-group .form-radios{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  display: table;
+  padding-top: 20px;
+}
+
+.app>.content .page .form-horizontal .form-group .form-radios .row{
+  display: table-row;
+}
+
+.app>.content .page .form-horizontal .form-group .form-radios .radio{
+  width: 33.333333333333333%;
+  display: table-cell;
+  overflow: hidden;
+}
+
+.app>.content .page .form-horizontal .form-group .form-radios .radio .circle{
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ffa400;
+  background: #fff;
+  border-radius: 50%;
+  margin-right: 5px;
+  float: left;
+}
+
+.app>.content .page .form-horizontal .form-group .form-radios .radio.checked .circle{
+  background: #ffa400;
+}
+
+.app>.content .page .form-horizontal .form-group .form-radios .radio span{
+  height: 20px;
+  line-height: 20px;
+  color: #939393;
+  float: left;
+}
+
+.app>.content .page .form-horizontal .form-group>.file{
+  width: 100%;
+}
+
+.app>.content .page .form-horizontal .form-group>.file .options{
+  width: 100%;
+  overflow: hidden;
+}
+
+.app>.content .page .form-horizontal .form-group>.file .option{
+  width: 50%;
+  text-align: center;
+  float: left;
+}
+
+.app>.content .page .form-horizontal .form-group>.file .option button{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  background: #ffa400;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 40px;
+  padding: 0px;
+}
+
+.app>.content .page .form-horizontal .form-group>.file .attachment{
+  width: 100%;
+  display: none;
+}
+
+.app>.content .page .form-horizontal .form-group>.file .attachment .box{
+  width: 200px;
+  height: 145px;
+  background: #eee;
+  background-image: url(../img/communications_back.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .form-horizontal legend{
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #777;
+}
+
+.app>.content .page .form-horizontal .input-number{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 20px;
+}
+
+.app>.content .page .form-horizontal .input-number label{
+  width: 100%;
+  height: 60px;
+  display: block;
+  font-size: 20px;
+  line-height: 60px;
+  color: #bbb;
+}
+
+.app>.content .page .form-horizontal .input-number input{
+  width: 1px;
+  height: 1px;
+  border: none;
+  outline: none;
+}
+
+.app>.content .page .form-horizontal .input-number.focus label{
+  display: none;
+}
+
+.app>.content .page .form-horizontal .input-number.focus input{
+  width: 100%;
+  height: 58px;
+  margin-top: 1px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+
+.app>.content .page .form-horizontal .input{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 20px;
+}
+
+
+.app>.content .page .form-horizontal .input input, .app>.content .page .form-horizontal .input select{
+  width: 100%;
+  height: 58px;
+  margin-top: 1px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  background-color: #fff;
+}
+
+.app>.content .page .form-horizontal .input-date{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  padding-left: 20px;
+}
+
+.app>.content .page .form-horizontal .input-date label{
+  width: 100%;
+  height: 60px;
+  display: block;
+  font-size: 20px;
+  line-height: 60px;
+  color: #bbb;
+}
+
+.app>.content .page .form-horizontal .input-date input{
+  /*width: 1px;
+  height: 1px;*/
+  font-size: 1px;
+  border: none;
+  outline: none;
+  opacity: 0;
+}
+
+.app>.content .page .form-horizontal .input-date.focus label{
+  display: none;
+}
+
+.app>.content .page .form-horizontal .input-date.focus input{
+  width: 100%;
+  height: 58px;
+  margin-top: 1px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  background-color: #fff;
+  opacity: 1;
+}
+
+.app>.content .page .form-horizontal>left{
+  width: 100%;
+  padding: 0px 10px;
+}
+
+.app>.content .page .form-horizontal>left h4{
+  text-align: left;
+  font-size: 20px;
+}
+
+.app>.content .page .form-horizontal>blockquote{
+  width: 100%;
+  padding: 10px;
+  margin: 0px;
+}
+
+.app>.content .page .form-horizontal>blockquote h4{
+  font-size: 20px;
+  color: #555;
+  margin: 0px;
+}
+
+.app>.content .page .form-horizontal>blockquote h5{
+  font-size: 16px;
+  color: #555;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.app>.content .page .form-horizontal .input-avatar{
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.app>.content .page .form-horizontal .input-avatar img{
+  width: 160px;
+  height: 160px;
+  border-radius: 128px;
+  border: 2px solid #ccc;
+}
+
+.app>.content .page .form-horizontal .input-avatar .buttons{
+  width: 130px;
+  margin: auto;
+}
+
+.app>.content .page .form-horizontal .input-avatar .buttons button{
+  width: 64px;
+  height: 50px;
+  float: left;
+  font-size: 30px;
+  border: none;
+  background-color: #ffa400;
+  color: #fff;
+  margin-left: 1px;
+  padding: 0px;
+}
+
+.app>.content .page center{
+  width: 100%;
+  padding: 0px 10px;
+  color: #777;
+}
+
+.app>.content .page center h4{
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.app>.content .page center h5{
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.app>.content .page .chat-list{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 60px;
+  left: 0px;
+  right: 0px;
+  background-color: #eee;
+  /*background-image: url(../img/communications_back.jpg);*/
+  background-size: cover;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
+
+.app>.content .page .chat-input{
+  width: 100%;
+  height: 60px;
+  background-color: #ffa400;
+  position: fixed;
+  bottom: 0px;
+  padding: 7px;
+}
+
+.app>.content .page .chat-input.disabled{
+  opacity: 0.5;
+}
+
+.app>.content .page .chat-input .content-parent{
+  width: 100%;
+  display: table;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.app>.content .page .chat-input .content{
+  display: table-row;
+  background-color: #fff;
+}
+
+.app>.content .page .chat-input .content .input{
+  width: 100%;
+  display: table-cell;
+}
+
+.app>.content .page .chat-input .content .button{
+  width: 50px;
+  display: table-cell;
+}
+
+.app>.content .page .chat-input input#comment{
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  height: 45px;
+  padding-left: 10px;
+  font-size: 18px;
+  outline: none;
+}
+
+.app>.content .page .chat-input input#submit{
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0px;
+}
+
+.app>.content .page .chat-input button{
+  width: 100%;
+  height: 45px;
+  background-color: #fff;
+  border: none;
+  font-size: 20px;
+  color: #ffa400;
+}
+
+.app>.content .page .chat-list .penalty{
+  width: 90%;
+  margin: auto;
+  background: #fff;
+  padding: 10px;
+  display: none;
+}
+
+.app>.content .page .chat-list .penalty h4{
+  color: #777;
+  margin: 0px;
+}
+
+.app>.content .page .chat-list .penalty h5{
+  color: #777;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.app>.content .page .chat-list .chat-message-block{
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.app>.content .page .chat-list .chat-message-block .content{
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  color: #777;
+  background: #fff;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.app>.content .page .chat-list .chat-message{
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.app>.content .page .chat-list .chat-message>.content{
+  max-width: 90%;
+  min-height: 60px;
+  background-color: #fff;
+  padding: 10px;
+  float: right;
+}
+
+.app>.content .page .chat-list .chat-message.left>.content{
+  float: left;
+}
+
+.app>.content .page .chat-list .chat-message>.arrow-right{
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #fff;
+  float: right;
+  margin-top: 10px;
+  margin-right: 5px;
+  display: block;
+}
+
+.app>.content .page .chat-list .chat-message.left>.arrow-right{
+  display: none;
+}
+
+.app>.content .page .chat-list .chat-message>.arrow-left{
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #fff;
+  float: left;
+  margin-top: 10px;
+  display: none;
+}
+
+.app>.content .page .chat-list .chat-message.left>.arrow-left{
+  display: block;
+}
+
+.app>.content .page .chat-list .chat-message>.content>h5{
+  font-weight: normal;
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  color: #555;
+}
+
+.app>.content .page .chat-list .chat-message>.content>.quiz{
+  width: 100%;
+  overflow: hidden;
+  display: none;
+}
+
+.app>.content .page .chat-list .chat-message>.content>.quiz .option{
+  width: 100%;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.app>.content .page .chat-list .chat-message>.content>.quiz .option .circle{
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 2px solid #ffa400;
+  border-radius: 50%;
+  float: left;
+}
+
+.app>.content .page .chat-list .chat-message>.content>.quiz .option.selected .circle{
+  background: #ffa400;
+}
+
+.app>.content .page .chat-list .chat-message>.content>.quiz .option .label{
+  font-size: 12px;
+  margin-top: 4px;
+  margin-left: 5px;
+  color: #777;
+  float: left;
+}
+
+.app>.content .page .chat-list .chat-message>.content>h4{
+  font-weight: normal;
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 10px;
+  color: #777;
+}
+
+.app>.content .page .chat-list .chat-message>.content>h6{
+  text-align: right;
+  font-weight: normal;
+  font-size: 12px;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 10px;
+  color: #777;
+}
+
+.app>.content .page .chat-list .chat-message>.content>h6 i{
+  color: #ccc;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.img{
+  width: 100%;
+  padding: 10px 0px;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.img img{
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.file{
+  width: 100%;
+  background: rgba(0,0,0,0.03);
+  padding: 10px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.file i{
+  width: 25px;
+  display: block;
+  float: left;
+  font-size: 25px;
+  color: #ffa400;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.file h5{
+  display: block;
+  float: left;
+  font-size: 12px;
+  color: #555;
+  margin: 0px;
+  margin-left: 5px;
+  padding: 0px;
+  line-height: 25px;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.loading-bar{
+  width: 100%;
+  display: none;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.loading-bar .box{
+  width: 100%;
+  height: 10px;
+  background: #eee;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.loading-bar .box .in{
+  width: 0%;
+  height: 10px;
+  background: #ffa400;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment.loading-bar .label{
+  color: #777;
+  font-size: 12px;
+}
+
+.app>.content .page .chat-list .chat-message>.content .attachment:active{
+  background: rgba(0,0,0,0.1);
+}
+
+.app>.content .page .form-communication{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+.app>.content .page .form-communication .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .attachment-communication{
+  width: 100%;
+  position: fixed;
+  top: 50px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: #000;
+}
+
+.app>.content .page .attachment-communication .image{
+  width: 100%;
+  position: fixed;
+  top: 65px;
+  bottom: 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.app>.content .page .attachment-communication .input{
+  width: 100%;
+  position: fixed;
+  bottom: 10px;
+  padding: 0px 20px;
+}
+
+.app>.content .page .attachment-communication .input input{
+  width: 100%;
+  height: 50px;
+  background: #000;
+  border: none;
+  border-bottom: 1px solid #fff;
+  border-radius: 0px;
+  padding-left: 5px;
+  outline: none;
+  color: #fff;
+}
+
+.app>.content .page .attachment-communication .input input:focus{
+  border-bottom: 1px solid #ffa400;
+}
+
+.app>.content .page .info_communication{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  overflow: auto;
+  padding: 10px;
+  background: #eee;
+}
+
+.app>.content .page .info_communication .block{
+  width: 100%;
+  background: #fff;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.app>.content .page .info_communication .block>h4{
+  margin: 0px;
+  font-size: 18px;
+  color: #555;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.app>.content .page .info_communication .block>h5{
+  margin: 0px;
+  font-size: 16px;
+  color: #999;
+}
+
+.app>.content .page .info_communication .block .participant{
+  width: 100%;
+  height: 80px;
+}
+
+.app>.content .page .info_communication .block .participant img{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+}
+
+.app>.content .page .info_communication .block .participant .info{
+  height: 80px;
+  float: left;
+  margin-left: 10px;
+}
+
+.app>.content .page .info_communication .block .participant .info h5{
+  font-size: 16px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  color: #000;
+  margin-top: 15px;
+}
+
+.app>.content .page .info_communication .block .participant .info h4{
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 20px;
+  color: #555;
+  margin-top: 5px;
+}
+
+.app>.content .page .info_communication .block .participant.selected{
+  background-color: #ff0000;
+}
+
+.app>.content .page .list-configurations{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app>.content .page .list-configurations .item{
+  width: 100%;
+  height: 70px;
+  border-bottom: 1px solid #ccc;
+}
+
+.app>.content .page .list-configurations .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list-configurations .input{
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  display: table;
+  padding: 10px 20px;
+}
+
+.app>.content .page .list-configurations .input .content{
+  width: 100%;
+  display: table-row;
+}
+
+.app>.content .page .list-configurations .input .content .label{
+  width: 100%;
+  display: table-cell;
+  vertical-align: top;
+}
+
+.app>.content .page .list-configurations .input .content .label h4{
+  margin: 0px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #777;
+}
+
+.app>.content .page .list-configurations .input .content .label h5{
+  margin: 0px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #777;
+  margin-top: 10px;
+  padding-right: 10px;
+}
+
+.app>.content .page .list-configurations .input .content .checkbox{
+  width: 50px;
+  float: right;
+  height: 60px;
+  padding-top: 10px;
+}
+
+.app>.content .page .list-configurations .input .content .checkbox>input{
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: fixed;
+  top: -10px;
+  left: -10px;
+}
+
+.app>.content .page .list-configurations .input .content .checkbox>.box{
+  width: 50px;
+  height: 30px;
+  margin: auto;
+  background-color: #e2e2e2;
+  border-radius: 30px;
+}
+
+.app>.content .page .list-configurations .input .content .checkbox>.box>.pointer{
+  width: 30px;
+  height: 30px;
+  background-color: #ababab;
+  border-radius: 30px;
+
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .list-configurations .input .content .checkbox.checked>.box>.pointer{
+  background-color: #ffa400;
+
+  -webkit-transform: translate3d(20px,0,0);
+  -moz-transform: translate3d(20px,0,0);
+  -ms-transform: translate3d(20px,0,0);
+  -o-transform: translate3d(20px,0,0);
+  transform: translate3d(20px,0,0);
+}
+
+
+.app>.content .page .import-guests-list .guests-lists{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app>.content .page .import-guests-list .guests-lists>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item{
+  width: 100%;
+  height: 80px;
+  display: table;
+  border-top: 1px solid #ccc;
+  color: #777;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item.selected{
+  background-color: #f3f3f3;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item i.fa.fa-check{
+  display: none;
+}
+.app>.content .page .import-guests-list .guests-lists .item.selected .icon span.icon-person{
+  display: none;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item.selected i.fa.fa-check{
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  float: left;
+  border: 1px solid #ffa400;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  background: #ffa400;
+  font-size: 30px;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row{
+  display: table-row;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row .icon{
+  width: 60px;
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 10px;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row .icon span{
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  border: 1px #eee solid;
+  background-color: #fff;
+  color: #dbdddf;
+  text-align: center;
+  line-height: 57px;
+  font-size: 35px;
+  display: block;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row .info{
+  width: 100%;
+  display: table-cell;
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row .info h4{
+  margin: 0px;
+  font-weight: normal;
+}
+
+.app>.content .page .import-guests-list .guests-lists .item .row .info h5{
+  margin: 0px;
+  margin-top: 5px;
+  font-weight: normal;
+}
+
+.app>.content .page .expenses{
+  width: 100%;
+}
+
+.app>.content .page .expenses>.day-scroll{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 106px;
+  left: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #fff;
+
+  -webkit-transition: top 300ms ease;
+  -moz-transition: top 300ms ease;
+  -ms-transition: top 300ms ease;
+  -o-transition: top 300ms ease;
+  transition: top 300ms ease;
+}
+
+.app>.content .page .expenses>.day-scroll .item{
+  width: 100%;
+  display: table;
+  padding: 10px 15px;
+  color: #777;
+  border-bottom: 1px solid #ccc;
+}
+
+.app>.content .page .expenses>.day-scroll .item.balance{
+  background-color: #eee;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .info{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .info h4{
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .expenses>.day-scroll .item.balance .row .info h4{
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .info h5{
+  margin: 0px;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .value{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .value h5{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.app>.content .page .expenses>.day-scroll .item .label-benefit{
+  background: #ffa400;
+  color: #fff;
+  padding: 2px 5px;
+  font-size: 13px;
+}
+
+.app>.content .page .expenses>.day-scroll .item.balance .row .value h5{
+  margin: 0px;
+}
+
+.app>.content .page .expenses>.day-scroll .item .row .value h6{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+}
+
+.app>.content .page .expenses.open-calendar>.day-scroll{
+  top: 360px;
+  bottom: 0px;
+}
+
+.app>.content .page .expenses>.calendar{
+  width: 100%;
+  height: 300px;
+  position: fixed;
+  top: 60px;
+  background: #ffa400;
+}
+
+.app>.content .page .expenses>.calendar .years{
+  width: 100%;
+  height: 60px;
+}
+
+.app>.content .page .expenses>.calendar .years .year{
+  width: 33.3333333%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  float: left;
+  color: rgba(255,255,255,0.75);
+}
+
+.app>.content .page .expenses>.calendar .years .year.selected{
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+.app>.content .page .expenses>.calendar .months{
+  width: 100%;
+  height: 240px;
+}
+
+.app>.content .page .expenses>.calendar .months .month{
+  width: 33.3333333%;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  float: left;
+  color: rgba(255,255,255,0.5);
+}
+.app>.content .page .expenses>.calendar .months .month.selected{
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+.app>.content .page .expenses>.totals{
+  width: 100%;
+  position: fixed;
+  height: 105px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.app>.content .page .expenses>.totals .item{
+  width: 100%;
+  display: table;
+  color: #fff;
+  padding: 12px 10px;
+  background-color: #ffb124;
+}
+
+.app>.content .page .expenses>.totals .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses>.totals .item .row .info{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.app>.content .page .expenses>.totals .item .row .info h4{
+  margin: 0px;
+  font-size: 12px;
+}
+
+.app>.content .page .expenses>.totals .item .row .value{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.app>.content .page .expenses>.totals .item .row .value h5{
+  width: 100px;
+  margin: 0px;
+}
+
+.app>.content .page .expenses>.totals .item:last-child{
+  padding: 24px 10px;
+  background-color: #ffa400;
+}
+
+.app>.content .page .expenses>.totals .item:last-child h4{
+  font-size: 16px !important;
+}
+
+.app>.content .page .expenses.open-calendar>.totals{
+  display: none;
+}
+
+.app>.content .page .expenses-show-full{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  bottom: 0px;
+}
+
+.app>.content .page .expenses-show-full .scroll{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  bottom: 145px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app>.content .page .expenses-show-full .category{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: #eee;
+  color: #777;
+  padding-left: 20px;
+}
+
+.app>.content .page .expenses-show-full .item{
+  width: 100%;
+  display: table;
+  padding: 10px 15px;
+  color: #777;
+  border-top: 1px solid #eee;
+}
+
+.app>.content .page .expenses-show-full .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-show-full .item .row>div{
+  width: 100%;
+  display: table-cell;
+}
+
+.app>.content .page .expenses-show-full .item .row>div.amount{
+  width: 100px;
+}
+
+.app>.content .page .expenses-show-full .item .row .info h4{
+  margin: 0px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.app>.content .page .expenses-show-full .item .row .info h5{
+  margin: 0px;
+}
+
+.app>.content .page .expenses-show-full .item .row .amount h6{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+  opacity: 0;
+}
+
+.app>.content .page .expenses-show-full .item .row .amount h5{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.app>.content .page .expenses-show-full>.totals{
+  width: 100%;
+  position: fixed;
+  height: 144px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.app>.content .page .expenses-show-full>.totals .item{
+  width: 100%;
+  display: table;
+  color: #fff;
+  padding: 12px 10px;
+  background-color: #ffb124;
+  border: none;
+}
+
+.app>.content .page .expenses-show-full>.totals .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-show-full>.totals .item .row .info{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.app>.content .page .expenses-show-full>.totals .item .row .info h4{
+  margin: 0px;
+  font-size: 12px;
+}
+
+.app>.content .page .expenses-show-full>.totals .item .row .value{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.app>.content .page .expenses-show-full>.totals .item .row .value h5{
+  width: 100px;
+  margin: 0px;
+}
+
+.app>.content .page .expenses-show-full>.totals .item:first-child{
+  /*background: #ffbb40;*/
+}
+
+.app>.content .page .expenses-show-full>.totals .item:first-child h4{
+  font-size: 12px;
+}
+
+.app>.content .page .expenses-show-full>.totals .item:last-child{
+  padding: 24px 10px;
+  background-color: #ffa400;
+}
+
+.app>.content .page .expenses-show-full>.totals .item:last-child h4{
+  font-size: 16px !important;
+}
+
+.app>.content .page .expenses-show-pdf{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  bottom: 0px;
+}
+
+.app>.content .page .expenses-show-pdf h6{
+  width: 100%;
+  text-align: center;
+  color: #777;
+  font-size: 20px;
+  padding: 0px 20px;
+}
+
+.app>.content .page .expenses-show-pdf .bar{
+  width: 300px;
+  height: 16px;
+  background: #eee;
+  margin: auto;
+}
+
+.app>.content .page .expenses-show-pdf .bar .inner{
+  width: 30%;
+  height: 16px;
+  background: #ffa400;
+}
+
+.app>.content .page .expenses-show-nothing{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  bottom: 0px;
+}
+
+.app>.content .page .expenses-show-nothing .scroll{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  bottom: 145px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app>.content .page .expenses-show-nothing .category{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: #eee;
+  color: #777;
+  padding-left: 20px;
+}
+
+.app>.content .page .expenses-show-nothing .item{
+  width: 100%;
+  display: table;
+  padding: 10px 15px;
+  color: #777;
+  border-top: 1px solid #eee;
+}
+
+.app>.content .page .expenses-show-nothing .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-show-nothing .item .row>div{
+  width: 100%;
+  display: table-cell;
+}
+
+.app>.content .page .expenses-show-nothing .item .row>div.amount{
+  width: 100px;
+}
+
+.app>.content .page .expenses-show-nothing .item .row .info h4{
+  margin: 0px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.app>.content .page .expenses-show-nothing .item .row .info h5{
+  margin: 0px;
+}
+
+.app>.content .page .expenses-show-nothing .item .row .amount h6{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+  opacity: 0;
+}
+
+.app>.content .page .expenses-show-nothing .item .row .amount h5{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.app>.content .page .expenses-show-nothing>.totals{
+  width: 100%;
+  position: fixed;
+  height: 105px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item{
+  width: 100%;
+  display: table;
+  color: #fff;
+  padding: 12px 10px;
+  background-color: #ffb124;
+  border: none;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item .row .info{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item .row .info h4{
+  margin: 0px;
+  font-size: 12px;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item .row .value{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item .row .value h5{
+  width: 100px;
+  margin: 0px;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item:first-child{
+  /*background: #ffbb40;*/
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item:first-child h4{
+  font-size: 12px;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item:last-child{
+  padding: 24px 10px;
+  background-color: #ffa400;
+}
+
+.app>.content .page .expenses-show-nothing>.totals .item:last-child h4{
+  font-size: 16px !important;
+}
+
+.app>.content .page .expenses-info{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  overflow: auto;
+}
+
+.app>.content .page .expenses-info legend{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .expenses-info form>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+}
+
+.app>.content .page .expenses-info .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .expenses-info .surcharge{
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #eee;
+  padding-left: 10px;
+  color: #777;
+  overflow: hidden;
+}
+
+.app>.content .page .expenses-info .surcharge h5{
+  font-size: 14px;
+  color: #777;
+  float: left;
+}
+
+.app>.content .page .expenses-info .surcharge h5:last-child{
+  float: right;
+}
+
+.app>.content .page .expenses-ticket-payment{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+}
+
+.app>.content .page .expenses-ticket-payment .item{
+  width: 100%;
+  display: table;
+  padding: 10px 15px;
+  color: #777;
+  border-bottom: 1px solid #ccc;
+}
+
+.app>.content .page .expenses-ticket-payment .item.balance{
+  background-color: #eee;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .info{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .info h4{
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .expenses-ticket-payment .item.balance .row .info h4{
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .info h5{
+  margin: 0px;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .value{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .value h5{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.app>.content .page .expenses-ticket-payment .item .label-benefit{
+  background: #ffa400;
+  color: #fff;
+  padding: 2px 5px;
+  font-size: 13px;
+}
+
+.app>.content .page .expenses-ticket-payment .item.balance .row .value h5{
+  margin: 0px;
+}
+
+.app>.content .page .expenses-ticket-payment .item .row .value h6{
+  width: 100px;
+  display: block;
+  text-align: right;
+  margin: 0px;
+}
+
+.app>.content .page .expenses-ticket-payment .total{
+  width: 100%;
+  height: 50px;
+  background-color: #ffa400;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: fixed;
+  bottom: 0px;
+}
+
+.app>.content .page .expenses-ticket-payment .total>span:last-child{
+  float: right;
+}
+
+.app>.content .page .welcome{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: #fff;
+}
+
+.app>.content .page .welcome .view{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 70px;
+  left: 0px;
+}
+
+.app>.content .page .welcome .view .layer{
+  width: 100%;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  bottom: 70px;
+  left: 0px;
+  background: #fff;
+  text-align: center;
+
+  -webkit-transition: -webkit-transform 400ms ease;
+  -moz-transition: -moz-transform 400ms ease;
+  -ms-transition: -ms-transform 400ms ease;
+  -o-transition: -o-transform 400ms ease;
+  transition: transform 400ms ease;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.app>.content .page .welcome .view .layer.a{ left: 0%; }
+.app>.content .page .welcome .view .layer.b{ left: 100%; }
+.app>.content .page .welcome .view .layer.c{ left: 200%; }
+.app>.content .page .welcome .view .layer.d{ left: 300%; }
+.app>.content .page .welcome .view .layer.e{ left: 400%; }
+.app>.content .page .welcome .view .layer.f{ left: 500%; }
+.app>.content .page .welcome .view .layer.g{ left: 600%; }
+.app>.content .page .welcome .view .layer.h{ left: 700%; }
+
+.app>.content .page .welcome .view .layer h4{
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  color: #777;
+  font-weight: normal;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 40px;
+}
+
+.app>.content .page .welcome .view .layer h3{
+  width: 100%;
+  margin: auto;
+  max-width: 400px;
+  text-align: left;
+  color: #ffa400;
+  font-weight: normal;
+  padding-left: 30px;
+  font-size: 20px;
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.app>.content .page .welcome .view .layer h5{
+  width: 100%;
+  margin: auto;
+  max-width: 400px;
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: block;
+  margin-top: 30px;
+}
+
+.app>.content .page .welcome .view .layer.first .img{
+  width: 300px;
+  height: 200px;
+  margin: auto;
+  overflow: hidden;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+.app>.content .page .welcome .view .layer.first .img img{
+  width: 100%;
+  margin-top: -36px;
+}
+
+.app>.content .page .welcome .view .layer.second .img{
+  width: 250px;
+  margin: auto;
+}
+.app>.content .page .welcome .view .layer.second .img img{
+  width: 100%;
+}
+
+.app>.content .page .welcome .view .layer.third .img{
+  width: 250px;
+  margin: auto;
+}
+.app>.content .page .welcome .view .layer.third .img img{
+  width: 100%;
+}
+
+.app>.content .page .welcome .view .layer.third h5{
+  margin-top: 10px;
+}
+
+.app>.content .page .welcome .controls{
+  width: 100%;
+  height: 70px;
+  bottom: 0px;
+  position: fixed;
+  display: table;
+}
+
+.app>.content .page .welcome .view .layer .separator{
+  width: 70px;
+  height: 1px;
+  background: #ffa400;
+  margin-top: 10px;
+}
+
+.app>.content .page .welcome .controls .row{
+  display: table-row;
+}
+
+.app>.content .page .welcome .controls .row>div{
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.app>.content .page .welcome .controls .row>div.arrow{
+  width: 50px;
+}
+
+.app>.content .page .welcome .controls .row .arrow i{
+  width: 50px;
+  height: 70px;
+  line-height: 70px;
+  color: #ffa400;
+  text-align: center;
+  font-size: 20px;
+}
+
+.app>.content .page .welcome .controls .row .last{
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  color: #ffa400;
+  text-align: right;
+  font-size: 16px;
+  padding-right: 15px;
+  display: none;
+}
+
+.app>.content .page .welcome .controls .row>div.arrow.disabled{
+  opacity: 0;
+}
+
+.app>.content .page .welcome .controls .row .points .content{
+  width: 134px;
+  margin: auto;
+}
+.app>.content .page .welcome .controls .row .points .point{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  float: left;
+  background: #ccc;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.app>.content .page .welcome .controls .row .points .point.active{
+  background: #ffa400;
+}
+
+@media (max-height: 550px) {
+  .app>.content .page .welcome .view .layer.second .img{
+    width: 200px;
+  }
+  .app>.content .page .welcome .view .layer.third .img{
+    width: 200px;
+  }
+}
+
+.app>.content .page .dashboard{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .dashboard>h4{
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffa400;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.app>.content .page .dashboard>.separator{
+  width: 100px;
+  height: 4px;
+  background-color: #ffa400;
+  margin: 20px auto;
+}
+
+.app>.content .page .dashboard .item{
+  width: 95%;
+  height: 70px;
+  background: #ffa400;
+  margin-left: 2.5%;
+  margin-top: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.app>.content .page .dashboard .item .icon{
+  width: 70px;
+  height: 70px;
+  color: #fff;
+  float: left;
+  font-size: 40px;
+  line-height: 78px;
+  text-align: center;
+  background-color: #f19b00;
+}
+
+.app>.content .page .dashboard .item .text{
+  float: left;
+  color: #fff;
+  line-height: 70px;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-left: 20px;
+}
+
+.app>.content .page .select-auth{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .select-auth .item{
+  width: 95%;
+  height: 70px;
+  background: #ffa400;
+  margin-left: 2.5%;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.app>.content .page .select-auth .item .icon{
+  width: 70px;
+  height: 70px;
+  color: #fff;
+  float: left;
+  font-size: 40px;
+  line-height: 78px;
+  text-align: center;
+  background-color: #f19b00;
+}
+
+.app>.content .page .select-auth .item .text{
+  float: left;
+  color: #fff;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
+.app>.content .page .select-auth .item .text h4{
+  font-size: 16px;
+  margin: 0px;
+  margin-top: 9px;
+}
+
+.app>.content .page .list.useful_info{
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  top: 114px;
+  -webkit-transition: -webkit-transform 200ms ease;
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  transition: transform 200ms ease;
+}
+
+.app>.content .page .list.useful_info.useful_phones{
+  left: 100%;
+}
+
+.app>.content .page .list.useful_info.general_regulations{
+  left: 0%;
+}
+
+.app>.content .page .list.useful_info>h5{
+  width: 100%;
+  color: #777;
+  text-align: center;
+}
+
+.app>.content .page .useful_info .general-regulation{
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  color: #777;
+  padding: 15px 20px;
+  display: table;
+}
+
+.app>.content .page .useful_info .general-regulation .row{
+  display: table-row;
+}
+
+.app>.content .page .useful_info .general-regulation .info{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .useful_info .general-regulation .icon{
+  width: 50px;
+  display: table-cell;
+  font-size: 25px;
+  vertical-align: middle;
+  text-align: right;
+  color: #ffa400;
+}
+
+.app>.content .page .useful_info .general-regulation h4{
+  margin: 0px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .useful_info .general-regulation h5{
+  margin: 0px;
+  font-size: 12px;
+}
+
+.app>.content .page .useful_info .general-regulation:active{
+  background-color: rgba(0,0,0,0.1);
+}
+
+.app>.content .page .useful_info .useful-phone{
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  color: #777;
+  padding: 10px 20px;
+  display: table;
+}
+
+.app>.content .page .useful_info .useful-phone .row{
+  display: table-row;
+}
+
+.app>.content .page .useful_info .useful-phone .info{
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.app>.content .page .useful_info .useful-phone .enterprise{
+  display: table-cell;
+  font-size: 12px;
+  vertical-align: bottom;
+  text-align: right;
+  color: #777;
+}
+
+.app>.content .page .useful_info .useful-phone h4{
+  margin: 0px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .useful_info .useful-phone #enterprise{
+  margin: 0px;
+  font-size: 12px;
+}
+
+.app>.content .page .useful_info .useful-phone h3{
+  margin: 0px;
+  font-size: 18px;
+  text-align: right;
+}
+
+.app>.content .page .useful_info .useful-phone:active{
+  background-color: rgba(0,0,0,0.1);
+}

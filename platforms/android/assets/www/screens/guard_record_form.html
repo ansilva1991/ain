@@ -1,0 +1,101 @@
+<div class="authorization-form-visit guard-record-form">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="terminal">PUERTA</label>
+      <input type="text" class="form-control" readonly id="terminal">
+    </div>
+    <div class="form-group">
+      <label for="operator">GUARDÍA</label>
+      <input type="text" class="form-control" readonly id="operator">
+    </div>
+    <div class="form-group">
+      <label for="person_full_name">PERSONA</label>
+      <input type="text" class="form-control" readonly id="person_full_name">
+    </div>
+    <div class="form-group">
+      <label for="real_id">DNI</label>
+      <input type="text" class="form-control" readonly id="real_id">
+    </div>
+    <div class="form-group">
+      <label for="date">FECHA</label>
+      <input type="text" class="form-control" readonly id="date">
+    </div>
+    <div class="form-group">
+      <label for="type">TIPO</label>
+      <input type="text" class="form-control" readonly id="type">
+    </div>
+    <div class="form-group">
+      <label for="responsible">AUTORIZADO POR</label>
+      <input type="text" class="form-control" readonly id="responsible">
+    </div>
+    <div class="form-group">
+      <label for="accompanist">ACOMPAÑANTES</label>
+      <input type="text" class="form-control" readonly id="accompanist">
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.record_id;
+    this.callback_get_record_info;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.record_id = opts.record_id;
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.guard-record-form');
+      });
+
+      app.liActive('guard');
+
+      this.getRecordInfo(function(){
+        app.pageLoading('hide');
+      });
+    }
+
+    this.getRecordInfo = function(callback){
+      this.callback_get_record_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'guard','show_record'],
+        data : {
+          record_id: this.record_id
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            $('#terminal').val(data.record.terminal);
+            $('#operator').val(data.record.operator);
+            $('#person_full_name').val(data.record.person);
+            $('#real_id').val(data.record.real_id);
+            $('#date').val(Extends.formatDate(new Date(data.record.date),'%dd de %mabbr. del %yyyy a las %hh:%ii hrs'));
+            $('#accompanist').val(data.record.accompanist == 0 ? 'Sin acompañantes' : data.record.accompanist);
+            $('#responsible').val(data.record.responsible || "Administración");
+
+            if(data.record.type == 'GuardRecordIn'){
+              $('#type').val('INGRESO');
+            }else{
+              $('#type').val('EGRESO');
+            }
+
+            cs.callback_get_record_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.GUARD);
+          }
+        }
+      });
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.GUARD,{
+        open_in: 0
+      });
+    };
+
+  }
+</script>

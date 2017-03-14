@@ -1,0 +1,269 @@
+<div class="sub-header col-2 insta-move">
+  <div class="item active" data-item="0" onclick="cs.selectTab(this);">
+    LUGARES
+  </div>
+  <div class="item" data-item="1" onclick="cs.selectTab(this);">
+    INVITADOS
+  </div>
+  <div class="line">
+    <div class="pointer"></div>
+  </div>
+</div>
+<div class="list events event_places insta-move">
+  <div id="example" class="item" style="display: none;">
+    <h4 id="name"></h4>
+  </div>
+</div>
+<div class="list events guest_lists insta-move">
+  <h5 id="none">
+    No se encontraron listas de invitados.
+  </h5>
+  <div  id="example" class="item" style="display: none;">
+    <div class="row">
+      <div class="icon">
+        <span class="icon-people"></span>
+        <i class="fa fa-check"></i>
+      </div>
+      <div class="info">
+        <h4 id="name"></h4>
+        <h5 id="guests"><span></span> invitados</h5>
+      </div>
+    </div>
+  </div>
+  <button class="new-event-guest-lists" onclick="cs.newEventGuestList();">
+    <i class="fa fa-plus"></i>
+  </button>
+</div>
+
+<div class="header-actions">
+  <div class="icon" onclick="cs.desSelectAll();">
+    <i class="fa fa-chevron-left"></i>
+  </div>
+  <div class="section-name" id="number_selected"></div>
+   <div class="icon right" onclick="cs.confirmErased();">
+    <i class="fa fa-trash"></i>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  function c(){
+    this.mode = 'list';
+    this.selectedItems = [];
+    this.callback_get_info;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      var hammertime = new Hammer($('.list.events.event_places')[0]);
+      hammertime.on('swipeleft', function(ev) {
+        cs.selectTab($('.sub-header .item')[1]);
+      });
+
+      var hammertime = new Hammer($('.list.events.guest_lists')[0]);
+      hammertime.on('swiperight', function(ev) {
+        cs.selectTab($('.sub-header .item')[0]);
+      });
+
+      if(opts.open_in){
+        cs.selectTab($('.sub-header .item')[opts.open_in]);
+      }
+
+      app.liActive('events');
+
+      this.getInfo(function(){
+        $('.insta-move').removeClass('insta-move');
+        app.pageLoading('hide');
+      });
+    }
+
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','index'],
+        data : {},
+        callback : function(data, success){
+          if(success){
+            console.log(data);
+
+            for(var i in data.event_places){
+              var event_place = data.event_places[i];
+              var tmp = $('.event_places #example').clone().insertBefore('.event_places #example');
+              tmp.removeAttr('id');
+              tmp.attr('data-id', event_place.id);
+
+              if(event_place.in_house){
+                tmp.addClass('back-house');
+              }else{
+                tmp.addClass('back-' + event_place.type);
+              }
+
+              tmp.find('#name').html(HelperEvents.event_place_name(event_place.name));
+
+              tmp.tap(function(){
+                var id = $(this).data('id');
+
+                app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
+                  event_place_id: id
+                });
+              });
+
+              tmp.show();
+            }
+
+            if(data.guest_lists.length > 0){
+
+              $('.guest_lists #none').hide();
+
+              for(var i in data.guest_lists){
+                var guest_list = data.guest_lists[i];
+                var tmp = $('.guest_lists #example').clone().insertBefore('.guest_lists #example');
+                tmp.removeAttr('id');
+
+                tmp.attr('data-id', guest_list.id);
+                tmp.find('#name').html(guest_list.name);
+                tmp.find('#guests span').html(guest_list.guests);
+
+                tmp.tap(function(){
+                  if(cs.mode == 'select'){
+                    cs.selectItem($(this).data('id'));
+                  }else if(cs.mode == 'list'){
+                    var id = $(this).data('id');
+
+                    app.loadScreen(app.SCREENS.EVENT_GUEST_LIST_FORM,{
+                      list_id: id
+                    });
+                  }
+                });
+
+                tmp.longTap(function(){
+                  cs.selectItem($(this).data('id'));
+                });
+
+                tmp.show();
+              }
+            }
+
+            cs.callback_get_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.DASHBOARD);
+          }
+        }
+      });
+
+    };
+
+    this.selectItem = function(id){
+      var i = this.selectedItems.indexOf(id);
+
+      if(i > -1){
+        this.selectedItems.splice(i,1);
+        $('.events.guest_lists .item[data-id="' + id + '"]').removeClass('selected');
+      }else{
+        $('.events.guest_lists .item[data-id="' + id + '"]').addClass('selected');
+        this.selectedItems.push(id);
+      }
+
+      this.checkMode();
+    };
+
+    this.desSelectAll = function(){
+      $('.events.guest_lists .item').removeClass('selected');
+      this.selectedItems = [];
+
+      this.checkMode();
+    };
+
+    this.checkMode = function(){
+      if(this.selectedItems.length > 0){
+        this.mode = 'select';
+
+        $('.header-actions #number_selected').html(this.selectedItems.length);
+        $('.header-actions').show();
+      }else{
+        this.mode = 'list';
+        $('.header-actions').hide();
+      }
+    };
+
+    this.confirmErased = function(){
+
+      Confirm.open({
+        title: "Eliminar",
+        msg: "¿Está seguro que deseas eliminar los elementos seleccionados?",
+        success_button: "Continuar",
+        cancel_button: "Cancelar",
+        callback_success: function(){
+          app.pageLoading('show');
+
+          Server.send({
+            route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'events','destroy_guest_lists'],
+            data : {
+              ids: cs.selectedItems
+            },
+            callback : function(data, success){
+              if(success){
+                app.loadScreen(app.SCREENS.EVENTS,{
+                  open_in: 1
+                });
+              }else{
+                app.pageLoading('hide');
+                Alert.open('Lo sentimos','Ocurrío un error al eliminar, intenta nuevamente por favor.','Aceptar');
+              }
+            }
+          });
+
+          cs.desSelectAll();
+        }
+      });
+    }
+
+    this.selectTab = function(x){
+      this.desSelectAll();
+
+      var item = $(x).data('item');
+
+      $('.new-event-guest-lists').hide();
+      if(item == 1){
+        $('.new-event-guest-lists').show();
+      }
+
+      $('.sub-header .item').removeClass('active');
+      $('.sub-header .item[data-item="' + item + '"]').addClass('active');
+      $('.sub-header .line .pointer').css({
+        '-webkit-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-moz-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-ms-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        '-o-transform': 'translate3d(' + (100 * item) + '%,0,0)',
+        'transform': 'translate3d(' + (100 * item) + '%,0,0)'
+      });
+
+      $('.list.events').removeClass('active');
+      $($('.list.events')[item]).addClass('active');
+
+      $('.list.events').css({
+        '-webkit-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-moz-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-ms-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        '-o-transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)',
+        'transform': 'translate3d(-' + (parseInt(item) * 100) + '%,0,0)'
+      });
+    }
+
+    this.openMenuNew = function(){
+      $('.new-authorization-buttons').addClass('open');
+    };
+
+    this.closeMenuNew = function(){
+      $('.new-authorization-buttons').removeClass('open');
+    };
+
+    this.newEventGuestList = function(){
+      app.loadScreen(app.SCREENS.EVENT_GUEST_LIST_FORM);
+    };
+
+  }
+</script>

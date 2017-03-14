@@ -1,0 +1,312 @@
+<div class="forgot-password layer">
+  <form>
+    <div class="row">
+      <div class="cell">
+        <span onclick="cs.dev();" class="icon-people-bubble"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cell">
+        <h4>Se enviará un email con intrucciones para recuperar su contraseña.<br>Cualquier duda o consulta comuniquese a soporte@accessin.net</h4>
+        <div class="input">
+          <label>EMAIL</label>
+          <input type="email" id="email" name="email">
+        </div>
+        <button class="btn btn-block btn-orange" type="submit" onclick="cs.processForgotPassword()" id="submit">Recuperar contraseña</button>
+        <h5 onclick="cs.forgotPasswordBack();">Volver</h5>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="login layer init">
+  <form>
+    <div class="row logo">
+      <div class="cell">
+        <span class="icon-people-bubble login-logo"></span>
+        <span class="icon-accessin"></span>
+      </div>
+    </div>
+    <div class="row form">
+      <div class="cell">
+        <div class="input">
+          <label>EMAIL</label>
+          <input type="email" id="email" name="email">
+        </div>
+        <div class="password">
+          <div class="row">
+            <div class="cell">
+              <div class="input">
+                <label>CONTRASEÑA</label>
+                <input type="password" id="password" name="password">
+              </div>
+            </div>
+            <div class="cell">
+              <button onclick="cs.forgotPassword();" type="button">Olvide mi contraseña</button>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-block btn-orange" type="submit" onclick="cs.processLogin();" id="submit">INGRESAR</button>
+        <h5 onclick="cs.registerCode();">¿Primera vez en AccessIN?</h5>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="register-code layer">
+  <form>
+    <div class="row">
+      <div class="cell">
+        <span class="icon-people-bubble"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cell">
+        <h4>Bienvenido a AccessIn, ingrese por favor el código propocionado por su Administrador.</h4>
+        <div class="input">
+          <label>CÓDIGO</label>
+          <input type="text" id="code" maxlength="8" size="8" name="code">
+        </div>
+        <button class="btn btn-block btn-orange" type="submit" onclick="cs.processRegister();" id="submit">PROCESAR</button>
+        <h5 onclick="cs.registerCodeBack();">Volver</h5>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.dev_count = 0;
+    this.is_processing = false;
+    this.email_login = undefined;
+    this.one_signal_ids;
+    this.type_server = "real";
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      app.windowResize = function(){
+        Extends.scrollToInputFocus('.layer');
+      };
+
+      $('.forgot-password form').submit(function(){
+        cs.processForgotPassword();
+        return false;
+      });
+
+      $('.login form').submit(function(){
+        cs.processLogin();
+        return false;
+      });
+
+      $('.register-code form').submit(function(){
+        cs.processRegister();
+        return false;
+      });
+
+      if(opts.success_register){
+        $('.login').toggleClass('init');
+
+        Alert.open('Bienvenido','Ingresa con tus datos para comenzar a disfrutar de AccessIn.','Aceptar');
+
+      }else{
+        setTimeout(function(){
+          $('.login').toggleClass('init');
+        },2000);
+      }
+
+      app.pageLoading('hide');
+    }
+
+    this.processLogin = function(){
+      var form = Extends.serializeForm('.login form');
+
+      if(form.email.search("connecttotest@accessin.net") == 0){
+        this.type_server = 'test';
+        $('.login #email').val('');
+        $('.icon-people-bubble').attr('class','fa fa-wrench login-logo');
+        return false;
+      }
+
+      if(form.email == "demoapple@accessin.net"){
+        this.type_server = 'test';
+      }
+
+      $('.login #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('.login #submit').prop('disabled', true);
+      this.is_processing = true;
+      this.email_login = form.email;
+
+      PrivateData.clear();
+      PrivateData.set('is_login',false);
+
+      var ids = this.oneSignalReady();
+
+      if(ids){
+        Server.send({
+          route : [Server.serverUrl(this.type_server),'app','login'],
+          data : {
+            login: form,
+            device: {
+              model: device.model,
+              platform: device.platform,
+              version: device.version,
+              uuid: localStorage.uuid,
+              one_signal_push_token: ids.pushToken,
+              one_signal_user_id: ids.userId,
+              original_uuid: device.uuid
+            }
+          },
+          callback : function(data, success){
+            if(success){
+              console.log(data);
+              if(data.demo){
+                PrivateData.set('is_demo', true);
+                PrivateData.set('is_login',true);
+                PrivateData.set('logined_version',app.VERSION);
+                PrivateData.set('current_person_id',0);
+                PrivateData.set('email_logined','demo@accessin.net');
+                PrivateData.set('current_auth_code','demo_owner');
+                PrivateData.set('current_server_portal','http://demo.accessin.net');
+
+                app.ifDemo();
+                app.updateConfig(function(){
+                  app.loadScreen(app.SCREENS.WELCOME);
+                });
+
+              }else if(data.auths.length == 0){
+                Alert.open('Datos incorrectos','El email y la contraseña no son correctos.','Aceptar');
+              }else{
+                console.log(data);
+                PrivateData.set('country_server_id',data.auths[0].id);
+                PrivateData.set('country_server_url',data.auths[0].host);
+                PrivateData.set('email_logined',cs.email_login);
+                PrivateData.set('current_person_id',data.auths[0].auths[0].person_id);
+                PrivateData.set('is_login',true);
+                PrivateData.set('logined_version',app.VERSION);
+
+                app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
+              }
+            }else{
+              Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
+            }
+
+            $('.login #submit').html('INGRESAR');
+            $('.login #submit').prop('disabled', false);
+            cs.is_processing = false;
+          }
+        });
+      }
+    }
+
+    this.processForgotPassword = function(){
+      var form = Extends.serializeForm('.forgot-password form');
+
+      $('.forgot-password #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('.forgot-password #submit').prop('disabled', true);
+      this.is_processing = true;
+
+      Server.send({
+        route : [Server.serverUrl(),'app','request_reset_password'],
+        data : form,
+        callback : function(data, success){
+          if(success){
+            if(data.status == 'success'){
+              Alert.open('Exitosamente','Se envio un email con instrucciones para recuperar su contraseña.','Aceptar');
+            }else{
+              Alert.open('Email incorrecto','El email ingresado no se encuentra registrado.','Aceptar');
+            }
+          }else{
+            Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
+          }
+
+          cs.is_processing = false;
+          $('.forgot-password #submit').html('Recuperar Contraseña');
+          $('.forgot-password #submit').prop('disabled', false);
+        }
+      })
+    }
+
+    this.processRegister = function(){
+      var form = Extends.serializeForm('.register-code form');
+
+      $('.register-code #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('.register-code #submit').prop('disabled', true);
+      this.is_processing = true;
+
+      Server.send({
+        route : [Server.serverUrl(),'app','register_code'],
+        data : form,
+        callback : function(data, success){
+          if(success){
+            if(data.status == 'success'){
+              console.log(data);
+              app.loadScreen(app.SCREENS.REGISTER_TERMS_AND_CONDITIONS,{
+                code: data.data.code,
+                country_server_id: data.data.id,
+                person: data.data.data.person
+              });
+            }else{
+              Alert.open('Código incorrecto','El código ingresado es incorrecto o ya esta en uso.','Aceptar');
+            }
+          }else{
+            Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
+          }
+
+          cs.is_processing = false;
+          $('.register-code #submit').html('PROCESAR');
+          $('.register-code #submit').prop('disabled', false);
+        }
+      })
+    }
+
+    this.oneSignalReady = function(){
+      if(this.one_signal_ids){
+        return this.one_signal_ids;
+      }else{
+        if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
+          window.plugins.OneSignal.getIds(function(ids){
+            cs.one_signal_ids = ids;
+            cs.processLogin();
+          });
+          return false;
+        }else{
+          return {
+            pushToken: "",
+            userId: ""
+          };
+        }
+
+      }
+    }
+
+    this.forgotPassword = function(){
+      if(this.is_processing){ return false; }
+      $('.layer').addClass('active-forgot-password');
+    }
+
+    this.forgotPasswordBack = function(){
+      if(this.is_processing){ return false; }
+      $('.layer').removeClass('active-forgot-password');
+    }
+
+    this.registerCode = function(){
+      if(this.is_processing){ return false; }
+      $('.layer').addClass('active-register-code');
+    }
+
+    this.registerCodeBack = function(){
+      if(this.is_processing){ return false; }
+      $('.layer').removeClass('active-register-code');
+    }
+
+    this.dev = function(){
+      this.dev_count++;
+
+      if(this.dev_count > 50){
+        app.loadScreen(app.SCREENS.DEVELOPER);
+      }
+    }
+
+  }
+</script>

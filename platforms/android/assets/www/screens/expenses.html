@@ -1,0 +1,243 @@
+<div class="expenses">
+  <div class="calendar">
+    <div class="years">
+      <div class="year" data-year="2015">2015</div>
+      <div class="year" data-year="2016">2016</div>
+      <div class="year" data-year="2017">2017</div>
+    </div>
+    <div class="months">
+      <div class="month" data-month="1">Enero</div>
+      <div class="month" data-month="2">Febrero</div>
+      <div class="month" data-month="3">Marzo</div>
+      <div class="month" data-month="4">Abril</div>
+      <div class="month" data-month="5">Mayo</div>
+      <div class="month" data-month="6">Junio</div>
+      <div class="month" data-month="7">Julio</div>
+      <div class="month" data-month="8">Agosto</div>
+      <div class="month" data-month="9">Septiembre</div>
+      <div class="month" data-month="10">Octubre</div>
+      <div class="month" data-month="11">Noviembre</div>
+      <div class="month" data-month="12">Diciembre</div>
+    </div>
+  </div>
+  <div id="example_item" style="display: none;">
+    <div class="row">
+      <div class="info">
+        <h4 id="type"></h4>
+        <h5 id="description"></h5>
+      </div>
+      <div class="value">
+        <h6 id="real_date"></h6>
+        <h5>$ <span id="value"></span></h5>
+      </div>
+    </div>
+  </div>
+  <div class="day-scroll">
+    <div class="item balance" id="init_balance">
+      <div class="row">
+        <div class="info">
+          <h4>Saldo al <span id="init_balance_date"></span></h4>
+        </div>
+        <div class="value">
+          <h5>$ <span id="value"></span></h5>
+        </div>
+      </div>
+    </div>
+    <div class="item balance" id="end_balance">
+      <div class="row">
+        <div class="info">
+          <h4>Saldo al <span id="end_balance_date"></span></h4>
+        </div>
+        <div class="value">
+          <h5>$ <span id="value"></span></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="totals">
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Total del mes</h4>
+        </div>
+        <div class="value">
+          <h5>$ <span id="total_month">-</span></h5>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="row">
+        <div class="info">
+          <h4>Saldo actual</h4>
+        </div>
+        <div class="value">
+          <h5>$ <span id="current_balance">-</span></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="context-menu">
+  <div class="backdrop" onclick="app.closeContextMenu()"></div>
+  <div class="menu">
+    <div onclick="cs.viewTicketPayment();">Ver boleto de pago</div>
+    <!--<div>Ver lugares de pago habilitados</div>-->
+  </div>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.callback_get_month;
+    this.current_month;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.current_month = opts.month || Extends.formatDate(new Date(),'%yyyy-%mm');
+
+      $('.expenses .years .year').tap(function(){
+        $('.expenses .years .year').removeClass('selected');
+        $('.expenses .months .month').removeClass('selected');
+        $(this).addClass('selected');
+      });
+
+      $('.expenses .months .month').tap(function(){
+        var year = parseInt($('.expenses .years .year.selected').data('year'));
+        var month = parseInt($(this).data('month'));
+
+        cs.current_month = year + "-" + ((month/10).toFixed(1).replace('.',''));
+
+        cs.toggleCalendar();
+        app.pageLoading('show');
+        cs.setMonth(function(){
+          app.pageLoading('hide');
+        });
+      });
+
+      app.liActive('expenses');
+
+      this.setMonth(function(){
+        app.pageLoading('hide');
+      });
+
+    }
+
+    this.updateCalendar = function(){
+      $('.expenses .calendar .year').removeClass('selected');
+      $('.expenses .calendar .month').removeClass('selected');
+
+      $('.expenses .calendar .year[data-year="' + this.current_month.split('-')[0] + '"]').addClass('selected');
+      $('.expenses .calendar .month[data-month="' + parseInt(this.current_month.split('-')[1]) + '"]').addClass('selected');
+    }
+
+    this.setMonth = function(callback){
+      this.callback_get_month = callback;
+
+      $('.header .section-name').html(Extends.formatDate(new Date(this.current_month + "-01T00:00:00" + PrivateData.get('time_zone_offset')),'%mabbr. del %yyyy'));
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'group_current_accounts','index'],
+        data : {
+          month: this.current_month
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+
+            $('.item.entry').remove();
+
+            for(var i in data.entries){
+              var entry = data.entries[i];
+              var tmp = $('#example_item').clone().insertBefore('.day-scroll #end_balance');
+              tmp.removeAttr('id');
+
+              tmp.find('#type').html(HelperExpenses.entry_type(entry));
+              tmp.find('#description').html(HelperExpenses.entry_description(entry));
+
+              if(entry.benefit){
+                tmp.find('#real_date').html("<span class='label-benefit'>BONIFICADO</span>");
+
+              }else{
+                tmp.find('#real_date').html(Extends.formatDate(new Date(entry.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%yyyy/%mm/%dd'));
+              }
+
+              tmp.find('#value').html(entry.value.toFixed(2));
+
+              tmp.attr('data-id',entry.id);
+
+              if(entry.type == 'GroupCurrentAccountEntryExpenses'){
+                if(entry.expenses_pack.type == 'GroupCurrentAccountExpensesPackFull'){
+                  tmp.tap(function(){
+                    var id = $(this).data('id');
+                    app.loadScreen(app.SCREENS.EXPENSES_SHOW_FULL,{
+                      entry_id: id
+                    })
+                  });
+                }
+
+                if(entry.expenses_pack.type == 'GroupCurrentAccountExpensesPackPdf'){
+                  tmp.tap(function(){
+                    var id = $(this).data('id');
+                    app.loadScreen(app.SCREENS.EXPENSES_SHOW_PDF,{
+                      entry_id: id
+                    })
+                  });
+                }
+
+                if(entry.expenses_pack.type == 'GroupCurrentAccountExpensesPackNothing'){
+                  tmp.tap(function(){
+                    var id = $(this).data('id');
+                    app.loadScreen(app.SCREENS.EXPENSES_SHOW_NOTHING,{
+                      entry_id: id
+                    })
+                  });
+                }
+
+                if(entry.expenses_pack.type == 'GroupCurrentAccountExpensesPackPerMeter'){
+                  tmp.tap(function(){
+                    var id = $(this).data('id');
+                    app.loadScreen(app.SCREENS.EXPENSES_SHOW_PER_METER,{
+                      entry_id: id
+                    })
+                  });
+                }
+              }
+
+              tmp.addClass('item');
+              tmp.addClass('entry');
+              tmp.show();
+            }
+
+            $('#init_balance #init_balance_date').html(Extends.formatDate(new Date(cs.current_month + "-01T00:00:00" + PrivateData.get('time_zone_offset')),'%dd de %mname'));
+            $('#end_balance #end_balance_date').html(Extends.formatDate(Extends.lastDayMonth(new Date(cs.current_month + "-01T00:00:00" + PrivateData.get('time_zone_offset'))),'%dd de %mname'));
+            $('#init_balance #value').html(data.monthly_balance.init_balance.toFixed(2));
+            $('#end_balance #value').html(data.monthly_balance.end_balance.toFixed(2));
+
+            $('#total_month').html(data.monthly_balance.balance.toFixed(2));
+            $('#current_balance').html(data.current_balance.toFixed(2));
+
+            cs.callback_get_month();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.DASHBOARD);
+          }
+        }
+      });
+    };
+
+    this.toggleCalendar = function(){
+      $('.expenses').toggleClass('open-calendar');
+
+      if($('.expenses').hasClass('open-calendar')){
+        this.updateCalendar();
+      }
+    }
+
+    this.viewTicketPayment = function(){
+      app.loadScreen(app.SCREENS.EXPENSES_TICKET_PAYMENT);
+    }
+
+  }
+</script>

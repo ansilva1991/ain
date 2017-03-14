@@ -1,0 +1,88 @@
+<div class="expenses-ticket-payment">
+  <div id="example_item" style="display: none;">
+    <div class="row">
+      <div class="info">
+        <h4 id="type"></h4>
+        <h5 id="description"></h5>
+      </div>
+      <div class="value">
+        <h6 id="real_date"></h6>
+        <h5>$ <span id="value"></span></h5>
+      </div>
+    </div>
+  </div>
+  <div class="total">
+    <span>Total a pagar</span>
+    <span>$ <span id="n">-</span></span>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.expenses_id;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.expenses_id = opts.expenses_id;
+      this.back_to = opts.back_to;
+
+      app.liActive('expenses');
+
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      })
+    }
+
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'group_current_accounts','show_ticket_payment'],
+        data : {},
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+
+            for(var i in data.entries){
+              var entry = data.entries[i];
+              var tmp = $('#example_item').clone().insertBefore('#example_item');
+              tmp.removeAttr('id');
+
+              tmp.find('#type').html(HelperExpenses.entry_type(entry));
+              tmp.find('#description').html(HelperExpenses.entry_description(entry));
+
+              if(entry.benefit){
+                tmp.find('#real_date').html("<span class='label-benefit'>BONIFICADO</span>");
+
+              }else{
+                tmp.find('#real_date').html(Extends.formatDate(new Date(entry.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%yyyy/%mm/%dd'));
+              }
+
+              tmp.find('#value').html(entry.value.toFixed(2));
+
+              tmp.attr('data-id',entry.id);
+
+
+              tmp.addClass('item');
+              tmp.addClass('entry');
+              tmp.show();
+            }
+
+            $('#n').html(parseFloat(data.total).toFixed(2))
+
+            cs.callback_get_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.EXPENSES);
+          }
+        }
+      });
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.EXPENSES);
+    };
+  }
+</script>

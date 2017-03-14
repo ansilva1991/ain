@@ -1,0 +1,39 @@
+<div class="authorization-form-visit">
+  <form class="form-horizontal">
+    <div class="form-group not_editable">
+      <label for="weinre_ip">Weinre Ip <small>127.0.0.1:8080</small></label>
+      <input type="text" name="weinre_ip" id="weinre_ip" class="form-control">
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.authorization-form-visit');
+      });
+
+      $('#weinre_ip').val(PrivateData.get('debug_weinre_ip') || "");
+
+      app.pageLoading('hide');
+    }
+
+    this.submit = function(){
+      if(this.is_processing){ return false; }
+      var form = Extends.serializeForm('.authorization-form-visit form');
+
+      PrivateData.set('debug_weinre_ip',form.weinre_ip);
+
+      Alert.open("Developer","Información seteada.","Continuar");
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.DASHBOARD);
+    };
+
+  }
+</script>

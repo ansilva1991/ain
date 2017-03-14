@@ -1,0 +1,87 @@
+<div class="authorization-form-family">
+  <form class="form-horizontal">
+    <div class="form-group not_editable">
+      <label for="real_id">DNI</label>
+      <input type="number" name="real_id" id="real_id" class="form-control">
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.go_to;
+    this.is_processing = false;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.go_to = opts.go_to;
+
+      $('.authorization-form-family form').submit(function(){
+        cs.submit();
+        return false;
+      });
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.authorization-form-family');
+      });
+
+      app.liActive('authorizations');
+      app.pageLoading('hide');
+
+      cs.started = true;
+    }
+
+
+    this.submit = function(){
+      if(this.is_processing){ return false; }
+
+      var form = Extends.serializeForm('.authorization-form-family form');
+
+      console.log(form);
+
+      if(form.real_id.length == 0 || !form.real_id.match(/^[0-9]+$/)){
+        Alert.open('DNI','Debe ingresar un DNI válido para continuar.','Aceptar');
+        return false;
+      }
+
+      this.real_id = form.real_id;
+
+      $('#submit-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('#submit-button').removeClass('text');
+
+      this.is_processing = true;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'people','comprobate_real_id'],
+        data : {
+          person: form
+        },
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            if(data.exists){
+              app.loadScreen(cs.go_to,{
+                person_id: data.person_id
+              });
+            }else{
+              app.loadScreen(cs.go_to,{
+                real_id: cs.real_id
+              });
+            }
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+          }
+
+          cs.is_processing = false;
+          $('#submit-button').html("Listo <i class='fa fa-check'></i>");
+          $('#submit-button').addClass('text');
+        }
+      });
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+    };
+  }
+</script>
