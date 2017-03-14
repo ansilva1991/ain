@@ -2,6 +2,8 @@
 /plugins/*
 /platforms/browser/
 /platforms/android/build/
+/platforms/android/.gradle/*
+/platforms/android/.gradle
 /platforms/android/CordovaLib/build/
 /platforms/android/android-release.apk
 /.cordova/*
