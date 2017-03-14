@@ -3,7 +3,7 @@ var app = {
   PORTAL_VERSION: 211,
   MINIUM_VERSION_LOGUINED: 211,
   ENV: "development",
-  DEV_IP: "192.168.1.55",
+  DEV_IP: "192.168.1.37",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -100,7 +100,6 @@ var app = {
             app.loadScreen(app.SCREENS.WELCOME);
           }
 
-          app.if_device_initialized = true;
         });
       }else{
         app.loadScreen(app.SCREENS.SELECT_AUTH);
@@ -108,8 +107,25 @@ var app = {
     }else{
       app.loadScreen(app.SCREENS.LOGIN);
     }
+
+    app.if_device_initialized = true;
   },
   onNotificationOpenedCallback: function(jsonData){
+    jsonData = {
+      notification: {
+        payload:{
+          additionalData:{
+            screen : 'VIEW_COMMUNICATION',
+            data : {
+              communication_id: 7
+            },
+            group_id: 4,
+            client_id: 1
+          }
+        }
+      }
+    }
+
     console.log('onNotificationOpenedCallback: ');
     console.log(jsonData);
 
@@ -132,10 +148,10 @@ var app = {
 
     if(app.if_device_initialized){
       console.log('INICIALIZADO');
-      app.load_with_notification = true;
       app.processNotification();
     }else{
       console.log('NO INICIALIZADO');
+      app.load_with_notification = true;
       app.interval_notification = setInterval(function(){ app.dashboardComprobateNotification(); },100);
     }
 
@@ -157,6 +173,7 @@ var app = {
     }
   },
   dashboardComprobateNotification: function(){
+    console.log('interval notification run');
     if(app.current_screen && app.current_screen.is_dashboard){
 
       if(app.interval_notification){
@@ -175,6 +192,7 @@ var app = {
 
     if(PrivateData.get('current_group_id') == data.group_id){
       app.loadScreen(app.SCREENS[data.screen],data.data);
+      app.data_from_notification = {};
     }else{
       app.pageLoading('show');
 
@@ -202,7 +220,6 @@ var app = {
       });
     }
 
-    app.data_from_notification = {};
   },
   updateMenuInfo: function(){
     if(!PrivateData.get('current_auth_code')){ return false; }
@@ -335,7 +352,7 @@ var app = {
 
       Confirm.open({
         title: "Cerrar sesión",
-        msg: "¿Estas seguro que deseas cerrar sesión?",
+        msg: "¿Está seguro que deseas cerrar sesión?",
         success_button: "Continuar",
         cancel_button: "Cancelar",
         callback_success: function(){
@@ -376,6 +393,7 @@ var app = {
   },
   windowResize: function(){},
   loadScreen: function(x_screen,opts){
+    if(!x_screen || x_screen == ""){ return false; }
     console.log('loadScreen: ' + x_screen.html);
     console.log('loadScreen(opts): ' + JSON.stringify(opts|| {}));
 

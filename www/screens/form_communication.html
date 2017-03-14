@@ -42,9 +42,15 @@
   function c(){
     this.is_processing = false;
     this.callback_get_info;
+    this.confirm_submit = false;
 
     this.start = function(opts){
       opts = opts || {};
+
+      $('.form-communication form').submit(function(){
+        cs.submit();
+        return false;
+      });
 
       $(window).resize(function(){
         Extends.scrollToInputFocus('.form-communication');
@@ -99,6 +105,21 @@
 
       if(form.comment.length == 0){
         Alert.open('Mensaje','Debe ingresar un mensaje válido para continuar.','Aceptar');
+        return false;
+      }
+
+      if(!this.confirm_submit){
+        Confirm.open({
+          title: "Enviar comunicación",
+          msg: "¿Está seguro de enviar esta comunicación a la Administración",
+          success_button: "Enviar",
+          cancel_button: "Cancelar",
+          callback_success: function(){
+              cs.confirm_submit = true;
+              cs.submit();
+            }
+        });
+
         return false;
       }
 
@@ -173,7 +194,8 @@
           'background-image' : 'url(' + imageURI + ')'
         });
         $('#attachment_file input').val(imageURI);
-      },function(){
+      },function(e){
+        console.log(e);
         Alert.open('Lo Sentimos','Ocurrío un error al intentar leer el archivo, por favor intenta nuevamente.','Aceptar');
       },{
         quality: 90,

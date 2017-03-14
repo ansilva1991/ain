@@ -1,8 +1,9 @@
 <div class="events-terms">
-  <div class="title">
-    Términos y condiciones (<span id="name"></span>)
-  </div>
   <div class="terms">
+    <div class="title">
+      Términos y condiciones para el uso de <span id="name"></span>
+    </div>
+    <div id="content"></div>
   </div>
   <div class="buttons">
     <button class="btn btn-orange btn-block text-uppercase" id="submit" onclick="cs.accept();">
@@ -39,7 +40,7 @@
           console.log(data);
           if(success){
             $('#name').html(HelperEvents.event_place_name(data.name));
-            $('.terms').html(data.terms);
+            $('.terms #content').html(data.terms);
             cs.callback_get_info();
           }else{
             Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');

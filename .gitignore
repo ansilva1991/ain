@@ -1,7 +1,8 @@
 /hooks/*
 /plugins/*
-/platforms/*
+/platforms/browser/
 /.cordova/*
 /.npm*
 /config.xml
 /package.json
+npm-debug.log

@@ -2575,17 +2575,16 @@ button.btn.btn-orange:disabled{
 
 .app>.content .page .events-terms .title{
   width: 100%;
-  padding: 0px 20px;
-  padding-top: 20px;
   color: #777;
-  font-size: 20px;
+  font-size: 18px;
   text-transform: uppercase;
   background-color: #fff;
+  margin-top: 20px;
 }
 
 .app>.content .page .events-terms .terms{
   width: 100%;
-  top: 125px;
+  top: 60px;
   bottom: 113px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -4988,6 +4987,15 @@ button.btn.btn-orange:disabled{
   background: #ffa400;
 }
 
+@media (max-height: 550px) {
+  .app>.content .page .welcome .view .layer.second .img{
+    width: 200px;
+  }
+  .app>.content .page .welcome .view .layer.third .img{
+    width: 200px;
+  }
+}
+
 .app>.content .page .dashboard{
   width: 100%;
   position: fixed;
@@ -5191,6 +5199,7 @@ button.btn.btn-orange:disabled{
   margin: 0px;
   font-size: 18px;
   margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
 .app>.content .page .useful_info .useful-phone #enterprise{
