@@ -71,6 +71,10 @@ var app = {
       StatusBar.backgroundColorByHexString("#DC9929");
     }
 
+    if(MobileAccessibility){
+      MobileAccessibility.usePreferredTextZoom(false);
+    }
+
     $(window).resize(function(){
       app.windowResize();
     });
@@ -111,7 +115,7 @@ var app = {
     app.if_device_initialized = true;
   },
   onNotificationOpenedCallback: function(jsonData){
-    jsonData = {
+    /*jsonData = {
       notification: {
         payload:{
           additionalData:{
@@ -124,7 +128,7 @@ var app = {
           }
         }
       }
-    }
+    }*/
 
     console.log('onNotificationOpenedCallback: ');
     console.log(jsonData);
