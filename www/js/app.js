@@ -3,7 +3,7 @@ var app = {
   PORTAL_VERSION: 211,
   MINIUM_VERSION_LOGUINED: 211,
   ENV: "development",
-  DEV_IP: "192.168.1.37",
+  DEV_IP: "192.168.1.55",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -379,9 +379,16 @@ var app = {
   takeFromCamera: function(success,error,options){
 
     onPhotoDataSuccess = success;
-    onPhotoDataFail = error;
+    onPhotoDataFail = app.cameraCanceled;
+
+    app.camera_callback_error = error;
 
     navigator.camera.getPicture(onPhotoDataSuccess, onPhotoDataFail,options);
+  },
+  cameraCanceled: function(e){
+    if(e != "Camera cancelled."){
+      app.camera_callback_error();
+    }
   },
   headerIconClick: function(function_id){
     app.header_icon_clicks[function_id]();

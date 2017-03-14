@@ -161,6 +161,28 @@
                 "parents": {
                     "/resources": []
                 }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://ssl.gstatic.com/accessibility/javascript/android/*\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"MobileAccessibility\"><param name=\"android-package\" value=\"com.phonegap.plugin.mobileaccessibility.MobileAccessibility\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
             }
         }
     },
@@ -223,6 +245,9 @@
             "PACKAGE_NAME": "com.accessin.app"
         },
         "onesignal-cordova-plugin": {
+            "PACKAGE_NAME": "com.accessin.app"
+        },
+        "phonegap-plugin-mobile-accessibility": {
             "PACKAGE_NAME": "com.accessin.app"
         }
     },
@@ -610,6 +635,20 @@
             "clobbers": [
                 "OneSignal"
             ]
+        },
+        {
+            "file": "plugins/phonegap-plugin-mobile-accessibility/www/mobile-accessibility.js",
+            "id": "phonegap-plugin-mobile-accessibility.mobile-accessibility",
+            "clobbers": [
+                "window.MobileAccessibility"
+            ]
+        },
+        {
+            "file": "plugins/phonegap-plugin-mobile-accessibility/www/MobileAccessibilityNotifications.js",
+            "id": "phonegap-plugin-mobile-accessibility.MobileAccessibilityNotifications",
+            "clobbers": [
+                "MobileAccessibilityNotifications"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -632,6 +671,7 @@
         "cordova-plugin-vibration": "2.1.1",
         "cordova-plugin-whitelist": "1.2.2",
         "cordova-plugin-file-opener2": "2.0.2",
-        "onesignal-cordova-plugin": "2.0.11"
+        "onesignal-cordova-plugin": "2.0.11",
+        "phonegap-plugin-mobile-accessibility": "1.0.5-dev"
     }
 }

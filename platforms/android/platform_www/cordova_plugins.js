@@ -382,6 +382,20 @@ module.exports = [
         "clobbers": [
             "OneSignal"
         ]
+    },
+    {
+        "file": "plugins/phonegap-plugin-mobile-accessibility/www/mobile-accessibility.js",
+        "id": "phonegap-plugin-mobile-accessibility.mobile-accessibility",
+        "clobbers": [
+            "window.MobileAccessibility"
+        ]
+    },
+    {
+        "file": "plugins/phonegap-plugin-mobile-accessibility/www/MobileAccessibilityNotifications.js",
+        "id": "phonegap-plugin-mobile-accessibility.MobileAccessibilityNotifications",
+        "clobbers": [
+            "MobileAccessibilityNotifications"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -406,7 +420,8 @@ module.exports.metadata =
     "cordova-plugin-vibration": "2.1.1",
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-file-opener2": "2.0.2",
-    "onesignal-cordova-plugin": "2.0.11"
+    "onesignal-cordova-plugin": "2.0.11",
+    "phonegap-plugin-mobile-accessibility": "1.0.5-dev"
 };
 // BOTTOM OF METADATA
 });
