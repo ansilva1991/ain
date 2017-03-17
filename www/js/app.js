@@ -71,7 +71,7 @@ var app = {
       StatusBar.backgroundColorByHexString("#DC9929");
     }
 
-    if(MobileAccessibility){
+    if(typeof MobileAccessibility !== 'undefined'){
       MobileAccessibility.usePreferredTextZoom(false);
     }
 
