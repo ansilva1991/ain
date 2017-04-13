@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.accessin.app" versionCode="20022" version="2.2.2" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.accessin.app" versionCode="20023" version="2.2.3" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>AccessIn</name>
     <description>
         Administración de barrios privados
@@ -21,6 +21,10 @@
     <gap:plugin name="onesignal-cordova-plugin" source="npm" spec="^2.0.10" />
 
     <gap:config-file platform="ios" parent="NSPhotoLibraryUsageDescription" overwrite="true">
+        <string>We are using your photos and camera for profile photos.</string>
+    </gap:config-file>
+
+    <gap:config-file platform="ios" parent="NSCameraUsageDescription" overwrite="true">
         <string>We are using your photos and camera for profile photos.</string>
     </gap:config-file>
 
