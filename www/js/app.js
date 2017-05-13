@@ -1,6 +1,6 @@
 var app = {
-  VERSION: 222,
-  PORTAL_VERSION: 211,
+  VERSION: 224,
+  PORTAL_VERSION: 224,
   MINIUM_VERSION_LOGUINED: 222,
   ENV: "development",
   DEV_IP: "192.168.1.37",
@@ -99,7 +99,8 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.DASHBOARD);
+            //app.loadScreen(app.SCREENS.DASHBOARD);
+            app.loadScreen(app.SCREENS.EXPENSES_TICKET_PAYMENT);
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }

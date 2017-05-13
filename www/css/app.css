@@ -4702,9 +4702,60 @@ button.btn.btn-orange:disabled{
   bottom: 0px;
   left: 0px;
   right: 0px;
+}
+
+.app>.content .page .expenses-ticket-payment .header-info{
+  width: 100%;
+  height: 140px;
+  position: fixed;
+  top: 60px;
+  left: 0px;
+  right: 0px;
+  background-color: #ffa400;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 0px 20px;
+}
+
+.app>.content .page .expenses-ticket-payment .header-info h3{
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.app>.content .page .expenses-ticket-payment .header-info h4{
+  margin: 0px;
+}
+
+.app>.content .page .expenses-ticket-payment .header-info h6{
+  margin: 0px;
+  margin-bottom: 25px;
+}
+
+.app>.content .page .expenses-ticket-payment .header-info h5{
+  margin: 0px;
+  text-align: right;
+}
+
+.app>.content .page .expenses-ticket-payment .header-info h5 .big{
+  font-size: 25px;
+}
+
+.app>.content .page .expenses-ticket-payment .header-info center{
+  margin: 0px;
+  margin-top: 5px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.app>.content .page .expenses-ticket-payment .list{
+  width: 100%;
+  position: fixed;
+  top: 200px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-bottom: 50px;
 }
 
 .app>.content .page .expenses-ticket-payment .item{
@@ -4776,16 +4827,17 @@ button.btn.btn-orange:disabled{
   margin: 0px;
 }
 
-.app>.content .page .expenses-ticket-payment .total{
+.app>.content .page .expenses-ticket-payment button{
+  display: none;
+}
+
+.app>.content .page .expenses-ticket-payment.with_payment .list{
+  bottom: 60px;
+}
+
+.app>.content .page .expenses-ticket-payment.with_payment button{
   width: 100%;
-  height: 50px;
-  background-color: #ffa400;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 16px;
-  line-height: 50px;
-  padding-left: 10px;
-  padding-right: 10px;
+  display: block;
   position: fixed;
   bottom: 0px;
 }

@@ -1,20 +1,26 @@
-<div class="expenses-ticket-payment">
-  <div id="example_item" style="display: none;">
-    <div class="row">
-      <div class="info">
-        <h4 id="type"></h4>
-        <h5 id="description"></h5>
-      </div>
-      <div class="value">
-        <h6 id="real_date"></h6>
-        <h5>$ <span id="value"></span></h5>
+<div class="expenses-ticket-payment with_payment">
+  <div class="header-info">
+    <h3>LOTE A 25</h3>
+    <h4>Cepas Guaymallen locales</h4>
+    <h6># 00234</h6>
+    <h5><small>Total a pagar</small> <span class="big">$ 999999.99</span></h5>
+    <h5><small>Fecha de cierre</small> 30/04/2017</h5>
+  </div>
+  <div class="list">
+    <div id="example_item" style="display: none;">
+      <div class="row">
+        <div class="info">
+          <h4 id="type"></h4>
+          <h5 id="description"></h5>
+        </div>
+        <div class="value">
+          <h6 id="real_date"></h6>
+          <h5>$ <span id="value"></span></h5>
+        </div>
       </div>
     </div>
   </div>
-  <div class="total">
-    <span>Total a pagar</span>
-    <span>$ <span id="n">-</span></span>
-  </div>
+  <button type="button" class="btn btn-orange btn-block">PAGAR <i class="fa fa-check"></i></button>
 </div>
 
 <script type="text/javascript">
