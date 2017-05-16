@@ -1,12 +1,17 @@
-<div class="expenses-ticket-payment with_payment">
+<div class="expenses-ticket-payment">
   <div class="header-info">
-    <h3>LOTE A 25</h3>
-    <h4>Cepas Guaymallen locales</h4>
-    <h6># 00234</h6>
-    <h5><small>Total a pagar</small> <span class="big">$ 999999.99</span></h5>
-    <h5><small>Fecha de cierre</small> 30/04/2017</h5>
+    <h3 id="group_identificator"></h3>
+    <h4 id="client_identificator"></h4>
+    <h6># <span id="payment_ticket_id"></span></h6>
+    <h5><small>Total a pagar</small> <span class="big">$ <span id="total"></span></span></h5>
+    <h5><small>Fecha de cierre</small> <span id="block_date"></span></h5>
   </div>
   <div class="list">
+    <div class="header">Vencimientos</div>
+    <div id="example_due_date" style="display: none;" class="item-due-date">
+      $ <span id="value"></span> HASTA EL <span id="date"></span>
+    </div>
+    <div class="header" id="point_items">Detalle</div>
     <div id="example_item" style="display: none;">
       <div class="row">
         <div class="info">
@@ -20,7 +25,7 @@
       </div>
     </div>
   </div>
-  <button type="button" class="btn btn-orange btn-block">PAGAR <i class="fa fa-check"></i></button>
+  <button type="button" class="btn btn-orange btn-block" onclick="cs.pay()">PAGAR <i class="fa fa-check"></i></button>
 </div>
 
 <script type="text/javascript">
@@ -32,8 +37,12 @@
 
       this.expenses_id = opts.expenses_id;
       this.back_to = opts.back_to;
+      this.payment_ticket_id;
 
       app.liActive('expenses');
+
+      $('.expenses-ticket-payment #group_identificator').html(PrivateData.get('current_group_identificator_one') + " " + PrivateData.get('current_group_identificator'));
+      $('.expenses-ticket-payment #client_identificator').html(PrivateData.get('current_client_name'));
 
       this.getInfo(function(){
         app.pageLoading('hide');
@@ -47,8 +56,15 @@
         route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'group_current_accounts','show_ticket_payment'],
         data : {},
         callback : function(data, success){
-          console.log(data);
+          console.info(data);
           if(success){
+
+            $('#payment_ticket_id').html(Extends.numberToDigits(data.payment_ticket.id,5));
+            $('#total').html(parseFloat(data.payment_ticket.total).toFixed(2));
+            $('#block_date').html(Extends.formatDate(new Date(data.payment_ticket.block_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%yyyy/%mm/%dd'));
+            if(data.payment_ticket.payment_method_active){
+              $('.expenses-ticket-payment').addClass('with_payment');
+            }
 
             for(var i in data.entries){
               var entry = data.entries[i];
@@ -75,7 +91,18 @@
               tmp.show();
             }
 
-            $('#n').html(parseFloat(data.total).toFixed(2))
+            for(var i in data.payment_ticket.due_dates){
+              var due_date = data.payment_ticket.due_dates[i];
+              var tmp = $('#example_due_date').clone().insertBefore('#example_due_date');
+              tmp.removeAttr('id');
+
+              tmp.find('#value').html(parseFloat(due_date.value).toFixed(2));
+              tmp.find('#date').html(Extends.formatDate(new Date(due_date.date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%yyyy/%mm/%dd'));
+
+              tmp.show();
+            }
+
+            cs.payment_ticket_id = data.payment_ticket.id;
 
             cs.callback_get_info();
           }else{
@@ -90,5 +117,11 @@
     this.back = function(){
       app.loadScreen(app.SCREENS.EXPENSES);
     };
+
+    this.pay = function(){
+      app.loadScreen(app.SCREENS.PAYMENT_METHODS_SIRO,{
+        payment_ticket_id : cs.payment_ticket_id
+      });
+    }
   }
 </script>

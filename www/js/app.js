@@ -3,7 +3,7 @@ var app = {
   PORTAL_VERSION: 224,
   MINIUM_VERSION_LOGUINED: 222,
   ENV: "development",
-  DEV_IP: "192.168.1.37",
+  DEV_IP: "192.168.1.14",
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -99,8 +99,7 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            //app.loadScreen(app.SCREENS.DASHBOARD);
-            app.loadScreen(app.SCREENS.EXPENSES_TICKET_PAYMENT);
+            app.loadScreen(app.SCREENS.DASHBOARD);
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
@@ -443,6 +442,8 @@ var app = {
           tmp.addClass('text');
         }
 
+        tmp.attr('id',x_screen.icon_left[i].id);
+
         var function_id = Math.round(Math.random() * 99999999999);
 
         tmp.attr('onclick','app.headerIconClick(' + function_id + ')');
@@ -474,6 +475,8 @@ var app = {
           tmp.html(x_screen.icon_right[i].text);
           tmp.addClass('text');
         }
+
+        tmp.attr('id',x_screen.icon_right[i].id);
 
         var function_id = Math.round(Math.random() * 99999999999);
 

@@ -1,0 +1,107 @@
+<div class="payment-methods-siro">
+  <h1>¿Comó querés pagar?</h1>
+  <h3>Por favor, seleccioná que método de pago querés utilizar</h3>
+  <button type="button" onclick="cs.openRedLink();">
+    <img src="img/logo_redlink.png">
+    <img src="img/logo_pagomiscuentas.png">
+    <div>PAGOMISCUENTAS | RED LINK</div>
+  </button>
+  <div class="separator"></div>
+  <button type="button" onclick="cs.openRapipago();">
+    <img src="img/logo_pagofacil.png">
+    <img src="img/logo_rapipago.png">
+    <div>RAPIPAGO | PAGO FACÍL</div>
+  </button>
+</div>
+
+<div class="payment-methods-siro-redlink">
+  <img src="img/logo_redlink.png">
+  <img src="img/logo_pagomiscuentas.png">
+
+  <h3>Lee las siguientes instrucciones para realizar tu pago mediante PagoMisCuentas o Red Link</h3>
+  <h5>1. Ingresa desde la opción PagoMisCuentas | RedLink de tu HomeBanking</h5>
+  <h5>2. Luego ingresar con tu clave personal, seleccioná la categoría > <b>Consorcios</b> > <b>Banco Roela SIRO</b></h5>
+  <h5>3. Ahora deberás ingresar tu código de pago electrónico:</h5>
+  <h4 id="redlink_code"></h4>
+</div>
+
+<div class="payment-methods-siro-rapipago">
+  <img src="img/logo_pagofacil.png">
+  <img src="img/logo_rapipago.png">
+
+  <h3>Presenta este código en cualquier sucursal de Rapipago, PagoFacíl o Provincia Pagos</h3>
+
+  <h4 id="rapipago_code"></h4>
+
+  <h3>56 dígitos</h3>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.expenses_id;
+    this.status = 0;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.expenses_id = opts.expenses_id;
+      this.back_to = opts.back_to;
+      this.payment_ticket_id = opts.payment_ticket_id;
+
+      app.liActive('expenses');
+
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      })
+    }
+
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'group_current_accounts','payment_ticket_siro_info'],
+        data : {
+          payment_ticket_id: cs.payment_ticket_id
+        },
+        callback : function(data, success){
+          console.info(data);
+          if(success){
+
+            $('#redlink_code').html(data.redlink_code);
+            $('#rapipago_code').html(data.siro_close_barcode);
+
+            cs.callback_get_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.EXPENSES);
+          }
+        }
+      });
+    };
+
+    this.back = function(){
+      if(this.status == 0){
+        app.loadScreen(app.SCREENS.EXPENSES_TICKET_PAYMENT);
+      }else if(this.status == 1){
+        $('.payment-methods-siro').show();
+        $('.payment-methods-siro-redlink').hide();
+        $('.payment-methods-siro-rapipago').hide();
+
+        this.status = 0;
+      }
+    };
+
+    this.openRedLink = function(){
+      this.status = 1;
+      $('.payment-methods-siro').hide();
+      $('.payment-methods-siro-redlink').show();
+    };
+
+    this.openRapipago = function(){
+      this.status = 1;
+      $('.payment-methods-siro').hide();
+      $('.payment-methods-siro-rapipago').show();
+    };
+  }
+</script>
