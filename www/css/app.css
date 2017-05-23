@@ -4976,15 +4976,35 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.content .page .payment-methods-siro-redlink h4{
-  width: 180px;
-  height: 30px;
-  line-height: 30px;
+  width: 230px;
+  height: 40px;
+  line-height: 40px;
   color: #fff;
-  font-size: 14px;
+  font-size: 18px;
   text-align: center;
   font-weight: bold;
   background-color: #ffa400;
   margin: auto;
+}
+
+.app>.content .page .payment-methods-siro-redlink h6{
+  margin: 0px;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #777;
+}
+
+.app>.content .page .payment-methods-siro-redlink button{
+  width: 100%;
+  background-color: #fff;
+  border: none;
+}
+
+.app>.content .page .payment-methods-siro-redlink button:active{
+  background-color: #eee;
 }
 
 .app>.content .page .payment-methods-siro-rapipago{

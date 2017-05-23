@@ -90,6 +90,9 @@ var Extends = {
 
     return format;
   },
+  numberToDigits : function(n,digits){
+    return (n/Math.pow(10,digits - 1)).toFixed(digits - 1).replace('.','');
+  },
   lastDayMonth : function(date){
     return new Date(date.getFullYear(), date.getMonth() + 1,0,0,0,0);
   },

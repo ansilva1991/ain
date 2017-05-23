@@ -1,15 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.accessin.app" version="2.1.4" versionCode="20014" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.accessin.app" version="2.2.3" versionCode="20023" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
+    <feature name="Clipboard">
+        <param name="android-package" value="com.verso.cordova.clipboard.Clipboard" />
+    </feature>
     <feature name="Camera">
         <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
-    </feature>
-    <feature name="File">
-        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
-        <param name="onload" value="true" />
-    </feature>
-    <feature name="Capture">
-        <param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
     </feature>
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
@@ -19,6 +15,13 @@
     </feature>
     <feature name="Notification">
         <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="FileOpener2">
+        <param name="android-package" value="io.github.pwlin.cordova.plugins.fileopener2.FileOpener2" />
     </feature>
     <feature name="FileTransfer">
         <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
@@ -34,6 +37,9 @@
     </feature>
     <feature name="Media">
         <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
+    </feature>
+    <feature name="Capture">
+        <param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
     </feature>
     <feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
@@ -52,9 +58,6 @@
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
-    </feature>
-    <feature name="FileOpener2">
-        <param name="android-package" value="io.github.pwlin.cordova.plugins.fileopener2.FileOpener2" />
     </feature>
     <feature name="OneSignalPush">
         <param name="android-package" value="com.plugin.gcm.OneSignalPush" />
@@ -102,6 +105,9 @@
     <preference name="KeyboardShrinksView" value="true" />
     <gap:plugin name="onesignal-cordova-plugin" source="npm" spec="^2.0.10" />
     <gap:config-file overwrite="true" parent="NSPhotoLibraryUsageDescription" platform="ios">
+        <string>We are using your photos and camera for profile photos.</string>
+    </gap:config-file>
+    <gap:config-file overwrite="true" parent="NSCameraUsageDescription" platform="ios">
         <string>We are using your photos and camera for profile photos.</string>
     </gap:config-file>
     <preference name="android-build-tool" value="gradle" />

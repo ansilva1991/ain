@@ -12,7 +12,7 @@
           <label>EMAIL</label>
           <input type="email" id="email" name="email">
         </div>
-        <button class="btn btn-block btn-orange" type="submit" onclick="cs.processForgotPassword()" id="submit">Recuperar contraseña</button>
+        <button class="btn btn-block btn-orange" type="submit" id="submit">Recuperar contraseña</button>
         <h5 onclick="cs.forgotPasswordBack();">Volver</h5>
       </div>
     </div>
@@ -42,11 +42,11 @@
               </div>
             </div>
             <div class="cell">
-              <button onclick="cs.forgotPassword();" type="button">Olvide mi contraseña</button>
+              <button onclick="cs.forgotPassword();" type="button">Olvidé mi contraseña</button>
             </div>
           </div>
         </div>
-        <button class="btn btn-block btn-orange" type="submit" onclick="cs.processLogin();" id="submit">INGRESAR</button>
+        <button class="btn btn-block btn-orange" type="submit" id="submit">INGRESAR</button>
         <h5 onclick="cs.registerCode();">¿Primera vez en AccessIN?</h5>
       </div>
     </div>
@@ -67,7 +67,7 @@
           <label>CÓDIGO</label>
           <input type="text" id="code" maxlength="8" size="8" name="code">
         </div>
-        <button class="btn btn-block btn-orange" type="submit" onclick="cs.processRegister();" id="submit">PROCESAR</button>
+        <button class="btn btn-block btn-orange" type="submit" id="submit">PROCESAR</button>
         <h5 onclick="cs.registerCodeBack();">Volver</h5>
       </div>
     </div>
@@ -168,6 +168,7 @@
                 PrivateData.set('email_logined','demo@accessin.net');
                 PrivateData.set('current_auth_code','demo_owner');
                 PrivateData.set('current_server_portal','http://demo.accessin.net');
+                PrivateData.set('current_authorizations_number',1);
 
                 app.ifDemo();
                 app.updateConfig(function(){
@@ -188,7 +189,7 @@
                 app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
               }
             }else{
-              Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
+              Alert.open('Lo sentimos','Ocurrió un error, intente nuevamente por favor.','Aceptar');
             }
 
             $('.login #submit').html('INGRESAR');
@@ -217,7 +218,7 @@
               Alert.open('Email incorrecto','El email ingresado no se encuentra registrado.','Aceptar');
             }
           }else{
-            Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
+            Alert.open('Lo sentimos','Ocurrió un error intente nuevamente por favor.','Aceptar');
           }
 
           cs.is_processing = false;
@@ -250,7 +251,7 @@
               Alert.open('Código incorrecto','El código ingresado es incorrecto o ya esta en uso.','Aceptar');
             }
           }else{
-            Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
+            Alert.open('Lo sentimos','Ocurrió un error intente nuevamente por favor.','Aceptar');
           }
 
           cs.is_processing = false;
@@ -264,7 +265,7 @@
       if(this.one_signal_ids){
         return this.one_signal_ids;
       }else{
-        if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
+        if(app.onesignal_active && window.plugins.OneSignal && window.plugins.OneSignal.startInit){
           window.plugins.OneSignal.getIds(function(ids){
             cs.one_signal_ids = ids;
             cs.processLogin();

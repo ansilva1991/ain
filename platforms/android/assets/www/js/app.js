@@ -1,9 +1,10 @@
 var app = {
-  VERSION: 222,
-  PORTAL_VERSION: 211,
+  VERSION: 224,
+  PORTAL_VERSION: 224,
   MINIUM_VERSION_LOGUINED: 222,
-  ENV: "production",
-  DEV_IP: "192.168.1.55",
+  ENV: "development",
+  DEV_IP: "10.0.200.123",
+  onesignal_active: false,
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -71,7 +72,7 @@ var app = {
       StatusBar.backgroundColorByHexString("#DC9929");
     }
 
-    if(MobileAccessibility){
+    if(typeof MobileAccessibility !== 'undefined'){
       MobileAccessibility.usePreferredTextZoom(false);
     }
 
@@ -99,7 +100,10 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.DASHBOARD);
+            //app.loadScreen(app.SCREENS.DASHBOARD);
+            app.loadScreen(app.SCREENS.PAYMENT_METHODS_SIRO,{
+              payment_ticket_id: 1
+            });
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
@@ -331,7 +335,7 @@ var app = {
           }else{
             app.config_sync_consecutive_errors += 1;
 
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos de configuración, por favor intenta nuevamente.','Aceptar',function(){
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar recibir los datos de configuración, por favor intenta nuevamente.','Aceptar',function(){
               if(app.config_sync_consecutive_errors > 2){
                 PrivateData.clear();
                 app.loadScreen(app.SCREENS.LOGIN);
@@ -442,6 +446,8 @@ var app = {
           tmp.addClass('text');
         }
 
+        tmp.attr('id',x_screen.icon_left[i].id);
+
         var function_id = Math.round(Math.random() * 99999999999);
 
         tmp.attr('onclick','app.headerIconClick(' + function_id + ')');
@@ -473,6 +479,8 @@ var app = {
           tmp.html(x_screen.icon_right[i].text);
           tmp.addClass('text');
         }
+
+        tmp.attr('id',x_screen.icon_right[i].id);
 
         var function_id = Math.round(Math.random() * 99999999999);
 
