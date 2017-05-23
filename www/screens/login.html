@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="cell">
-              <button onclick="cs.forgotPassword();" type="button">Olvide mi contraseña</button>
+              <button onclick="cs.forgotPassword();" type="button">Olvidé mi contraseña</button>
             </div>
           </div>
         </div>
@@ -189,7 +189,7 @@
                 app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
               }
             }else{
-              Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
+              Alert.open('Lo sentimos','Ocurrió un error, intente nuevamente por favor.','Aceptar');
             }
 
             $('.login #submit').html('INGRESAR');
@@ -218,7 +218,7 @@
               Alert.open('Email incorrecto','El email ingresado no se encuentra registrado.','Aceptar');
             }
           }else{
-            Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
+            Alert.open('Lo sentimos','Ocurrió un error intente nuevamente por favor.','Aceptar');
           }
 
           cs.is_processing = false;
@@ -251,7 +251,7 @@
               Alert.open('Código incorrecto','El código ingresado es incorrecto o ya esta en uso.','Aceptar');
             }
           }else{
-            Alert.open('Lo sentimos','Ocurrío un error intente nuevamente por favor.','Aceptar');
+            Alert.open('Lo sentimos','Ocurrió un error intente nuevamente por favor.','Aceptar');
           }
 
           cs.is_processing = false;
@@ -265,7 +265,7 @@
       if(this.one_signal_ids){
         return this.one_signal_ids;
       }else{
-        if(window.plugins.OneSignal && window.plugins.OneSignal.startInit){
+        if(app.onesignal_active && window.plugins.OneSignal && window.plugins.OneSignal.startInit){
           window.plugins.OneSignal.getIds(function(ids){
             cs.one_signal_ids = ids;
             cs.processLogin();

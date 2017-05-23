@@ -146,7 +146,7 @@
 
             cs.callback_get_person_info();
           }else{
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
 
             app.loadScreen(app.SCREENS.AUTHORIZATIONS);
           }
@@ -223,7 +223,7 @@
                   Alert.open('DNI','El DNI ingresado se encuentra asignado a otra persona.','Aceptar');
                 }
               }else{
-                Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+                Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
               }
             }else{
               app.loadScreen(app.SCREENS.AUTHORIZATIONS,{
@@ -231,7 +231,7 @@
               })
             }
           }else{
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
           }
 
           cs.is_processing = false;

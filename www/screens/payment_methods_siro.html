@@ -7,7 +7,7 @@
     <div>PAGOMISCUENTAS | RED LINK</div>
   </button>
   <div class="separator"></div>
-  <button type="button" onclick="cs.openRapipago();">
+  <button type="button" onclick="cs.openRapipagoPDF();">
     <img src="img/logo_pagofacil.png">
     <img src="img/logo_rapipago.png">
     <div>RAPIPAGO | PAGO FACÍL</div>
@@ -34,6 +34,7 @@
   <h4 id="rapipago_code"></h4>
 
   <h3>56 dígitos</h3>
+  <button type="button" onclick="cs.sendRapiPagoToEmail()" id="btn_send_rapipago_to_email"><i class="fa fa-envelope"></i> Enviar instrucciones al email</button>
 </div>
 
 <script type="text/javascript">
@@ -70,15 +71,75 @@
             $('#redlink_code').html(data.redlink_code);
             $('#rapipago_code').html(data.siro_close_barcode);
 
+            cs.rapipago_ticket_uri = data.rapipago_ticket_uri;
+            cs.rapipago_ticket_filename = data.rapipago_ticket_filename;
+
             cs.callback_get_info();
           }else{
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
 
             app.loadScreen(app.SCREENS.EXPENSES);
           }
         }
       });
     };
+
+    this.openRapipagoPDF = function(){
+      var file = cs.rapipago_ticket_filename;
+
+      app.openFile(file,false,function(e){
+        if(e.status == 9){
+          cs.downloadRapipagoPDF();
+        }
+      });
+    }
+
+    this.downloadRapipagoPDF = function(){
+      var uri = cs.rapipago_ticket_uri;
+      var file = cs.rapipago_ticket_filename;
+
+      ModalLoading.open("Descargando PDF", "Espere un momento...");
+
+      Server.download({
+        from: PrivateData.get('current_server_portal') + uri,
+        to: file,
+        progress: function(n){
+        },
+        success: function(e){
+          ModalLoading.close();
+          app.openFile(e.nativeURL,true);
+        },
+        error: function(er){
+          ModalLoading.close();
+          Alert.open('Lo Sentimos','Ocurrió un error al intentar descargar los datos, por favor intenta nuevamente.','Aceptar');
+          console.log(er);
+        },
+        extra_data: {
+          file_name: file
+        }
+      })
+    }
+
+    this.sendRapiPagoToEmail = function(callback){
+
+      $('#btn_send_rapipago_to_email').html('<i class="fa fa-circle-o-notch fa-spin"></i> Enviando...');
+      $('#btn_send_rapipago_to_email').prop('disabled', true);
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'group_current_accounts','send_ticket_siro_to_email'],
+        data : {
+          payment_ticket_id: cs.payment_ticket_id
+        },
+        callback : function(data, success){
+          console.info(data);
+          if(success){
+            $('#btn_send_rapipago_to_email').html('<i class="fa fa-check"></i> Enviado Exitosamente');
+          }else{
+            $('#btn_send_rapipago_to_email').prop('disabled', false);
+          }
+        }
+      });
+    }
 
     this.back = function(){
       if(this.status == 0){

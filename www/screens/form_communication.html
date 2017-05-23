@@ -84,7 +84,7 @@
 
             cs.callback_get_info();
           }else{
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
 
             app.loadScreen(app.SCREENS.COMMUNICATIONS);
           }
@@ -170,10 +170,10 @@
             communication_id: data.communication
           });
         }else{
-          Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+          Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
         }
       }else{
-        Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+        Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
       }
 
       this.is_processing = false;
@@ -196,7 +196,7 @@
         $('#attachment_file input').val(imageURI);
       },function(e){
         console.log(e);
-        Alert.open('Lo Sentimos','Ocurrío un error al intentar leer el archivo, por favor intenta nuevamente.','Aceptar');
+        Alert.open('Lo Sentimos','Ocurrió un error al intentar leer el archivo, por favor intenta nuevamente.','Aceptar');
       },{
         quality: 90,
         targetWidth: 800,

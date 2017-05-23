@@ -143,7 +143,7 @@
             cs.processList(data.list);
             cs.callback_get_info();
           }else{
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
 
             app.loadScreen(app.SCREENS.EVENTS);
           }
@@ -297,7 +297,7 @@
               Alert.open('Fecha del evento','La fecha ingresada se encuentra ocupada por otro evento.','Aceptar');
             }
           }else{
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
           }
 
           cs.is_processing = false;
@@ -420,11 +420,11 @@
                 if(data.event){
                   cs.back();
                 }else{
-                  Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+                  Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
                 }
               }else{
                 app.pageLoading('hide');
-                Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+                Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
               }
             }
           });
