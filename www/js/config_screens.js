@@ -381,7 +381,8 @@ app.SCREENS = {
         icon: "ellipsis-v",
         func: function(){
           app.openContextMenu();
-        }
+        },
+        id: "context-menu"
       }
     ],
     section_name: "Ago. del 2016",
@@ -559,6 +560,17 @@ app.SCREENS = {
     ],
     section_name: "Información Útil",
     html: "useful_info"
+  },PAYMENT_METHODS_SIRO: {
+    icon_left: [
+    {
+      icon: "chevron-left",
+      func: function(){
+        cs.back();
+      }
+    }
+    ],
+    section_name: "Pagar",
+    html: "payment_methods_siro"
   },
   TEST: {
     icon_left: {

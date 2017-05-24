@@ -87,7 +87,7 @@
             cs.auth_code = data.person.auth_code;
             cs.callback_get_person_info();
           }else{
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
 
             app.loadScreen(app.SCREENS.AUTHORIZATIONS);
           }
@@ -145,6 +145,14 @@
                   Alert.open('Propietario','Esta persona ya es propietario.','Aceptar');
                 }
 
+                if(error == 'is_family'){
+                  Alert.open('Familiar','Esta persona ya es familiar.','Aceptar');
+                }
+
+                if(error == 'is_employee'){
+                  Alert.open('Empleado','Esta persona ya es empleado.','Aceptar');
+                }
+
                 if(error == 'taken'){
                   Alert.open('Propietario','Esta persona ya es familiar.','Aceptar');
                 }
@@ -155,7 +163,7 @@
                   Alert.open('DNI','El DNI ingresado se encuentra asignado a otra persona.','Aceptar');
                 }
               }else{
-                Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+                Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
               }
             }else{
               app.loadScreen(app.SCREENS.AUTHORIZATIONS,{
@@ -163,7 +171,7 @@
               })
             }
           }else{
-            Alert.open('Lo Sentimos','Ocurrío un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
           }
 
           cs.is_processing = false;
