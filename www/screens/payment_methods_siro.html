@@ -7,7 +7,7 @@
     <div>PAGOMISCUENTAS | RED LINK</div>
   </button>
   <div class="separator"></div>
-  <button type="button" onclick="cs.openRapipagoPDF();">
+  <button type="button" onclick="cs.openRapipago();">
     <img src="img/logo_pagofacil.png">
     <img src="img/logo_rapipago.png">
     <div>RAPIPAGO | PAGO FACÍL</div>
@@ -36,7 +36,7 @@
 
   <h4 id="rapipago_code"></h4>
 
-  <h3>56 dígitos</h3>
+  <h3>19 dígitos</h3>
   <button type="button" onclick="cs.sendRapiPagoToEmail()" id="btn_send_rapipago_to_email"><i class="fa fa-envelope"></i> Enviar instrucciones al email</button>
 </div>
 
@@ -72,7 +72,7 @@
           if(success){
 
             $('#redlink_code').html(data.redlink_code);
-            $('#rapipago_code').html(data.siro_close_barcode);
+            $('#rapipago_code').html(data.redlink_code);
 
             cs.red_link_code = data.redlink_code;
             cs.rapipago_ticket_uri = data.rapipago_ticket_uri;

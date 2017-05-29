@@ -5018,6 +5018,7 @@ button.btn.btn-orange:disabled{
   overflow-y: auto;
   padding: 20px;
   display: none;
+  text-align: center;
 }
 
 .app>.content .page .payment-methods-siro-rapipago img{
@@ -5038,7 +5039,7 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.content .page .payment-methods-siro-rapipago h4{
-  width: 180px;
+  width: 240px;
   background-color: #ffa400;
   color: #fff;
   margin: auto;
