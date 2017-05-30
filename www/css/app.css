@@ -4958,7 +4958,7 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.content .page .payment-methods-siro-redlink img:first-child{
-  width: 50px;
+  width: 80px;
 }
 
 .app>.content .page .payment-methods-siro-redlink h3{
@@ -5028,7 +5028,7 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.content .page .payment-methods-siro-rapipago img:first-child{
-  width: 50px;
+  width: 80px;
 }
 
 .app>.content .page .payment-methods-siro-rapipago h3{
@@ -5043,7 +5043,7 @@ button.btn.btn-orange:disabled{
   background-color: #ffa400;
   color: #fff;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 30px;
   text-align: center;
   padding: 10px;
   font-size: 20px;
@@ -5058,6 +5058,7 @@ button.btn.btn-orange:disabled{
   text-transform: uppercase;
   text-align: center;
   border: none;
+  margin-top: 20px;
 }
 
 .app>.content .page .welcome{

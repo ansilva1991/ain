@@ -100,10 +100,7 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            //app.loadScreen(app.SCREENS.DASHBOARD);
-            app.loadScreen(app.SCREENS.PAYMENT_METHODS_SIRO,{
-              payment_ticket_id: 1
-            });
+            app.loadScreen(app.SCREENS.DASHBOARD);
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
