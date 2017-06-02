@@ -440,6 +440,26 @@ app.SCREENS = {
     section_name: "EXPENSAS",
     html: "expenses_show_nothing"
   },
+  EXPENSES_SHOW_FIXED_VALUE: {
+    icon_left: [
+    {
+      icon: "chevron-left",
+      func: function(){
+        cs.back();
+      }
+    }
+    ],
+    icon_right: [
+      {
+        icon: "info-circle",
+        func: function(){
+          cs.info();
+        }
+      }
+    ],
+    section_name: "EXPENSAS",
+    html: "expenses_show_fixed_value"
+  },
   EXPENSES_SHOW_PER_METER: {
     icon_left: [
     {
