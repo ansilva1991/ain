@@ -2,7 +2,7 @@ var app = {
   VERSION: 224,
   PORTAL_VERSION: 224,
   MINIUM_VERSION_LOGUINED: 222,
-  ENV: "development",
+  ENV: "production",
   DEV_IP: "10.0.200.123",
   onesignal_active: false,
   load_screen_ajax: false,
@@ -100,10 +100,7 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            //app.loadScreen(app.SCREENS.DASHBOARD);
-            app.loadScreen(app.SCREENS.PAYMENT_METHODS_SIRO,{
-              payment_ticket_id: 1
-            });
+            app.loadScreen(app.SCREENS.DASHBOARD);
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
