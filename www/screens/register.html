@@ -11,7 +11,7 @@
     </div>
     <div class="form-group">
       <label for="real_id">DNI</label>
-      <input type="number" name="real_id" class="form-control" id="real_id" readonly>
+      <input type="number" name="real_id" class="form-control" id="real_id">
     </div>
     <div class="form-group">
       <label for="sex">SEXO</label>
@@ -157,7 +157,11 @@
           if(success){
             if(data.data.errors && Object.keys(data.data.errors).length > 0){
               if(data.data.errors.email){
-                Alert.open('Email','El email ingresado ya se encuentra en uso.','Aceptar');
+                if(data.data.errors.email[0] == "Ya en uso"){
+                  Alert.open('Email','El email ingresado ya se encuentra en uso.','Aceptar');
+                }else{
+                  Alert.open('Email','El DNI ingresado pertenece a un usuario existente, el email y la contraseña ingresados no coinciden con los registrados.','Aceptar');
+                }
               }else {
                 Alert.open('Lo Sentimos','Ocurrió un error al intentar registrarse, por favor intenta nuevamente.','Aceptar');
               }
