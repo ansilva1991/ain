@@ -52,18 +52,18 @@
       var id = this.i || (new Date()).getTime();
 
       if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
-        Alert.open('Nombre','Debe ingresar un nombre válido para continuar.','Aceptar');
+        Alert.open('Nombre','Debes ingresar un nombre válido para continuar.','Aceptar');
         return false;
       }
 
       if(form.last_name.length == 0 || !form.last_name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
-        Alert.open('Apellido','Debe ingresar un apellido válido para continuar.','Aceptar');
+        Alert.open('Apellido','Debes ingresar un apellido válido para continuar.','Aceptar');
         return false;
       }
 
       if(form.real_id.length > 0){
         if(form.real_id.length == 0 || !form.real_id.match(/^[0-9]+$/)){
-          Alert.open('DNI','Debe ingresar un DNI válido para continuar.','Aceptar');
+          Alert.open('DNI','Debes ingresar un DNI válido para continuar.','Aceptar');
           return false;
         }else{
           for(var i in this.list.guests_attributes){

@@ -7,7 +7,7 @@
     </div>
     <div class="row">
       <div class="cell">
-        <h4>Se enviará un email con intrucciones para recuperar su contraseña.<br>Cualquier duda o consulta comuniquese a soporte@accessin.net</h4>
+        <h4>Se enviará un email con intrucciones para recuperar su contraseña.<br>Cualquier duda o consulta comunícate a soporte@accessin.net</h4>
         <div class="input">
           <label>EMAIL</label>
           <input type="email" id="email" name="email">
@@ -62,7 +62,7 @@
     </div>
     <div class="row">
       <div class="cell">
-        <h4>Bienvenido a AccessIn, ingrese por favor el código propocionado por su Administrador.</h4>
+        <h4>Bienvenido a AccessIn, ingresa por favor el código propocionado por tu Administrador.</h4>
         <div class="input">
           <label>CÓDIGO</label>
           <input type="text" id="code" maxlength="8" size="8" name="code">
@@ -189,7 +189,7 @@
                 app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
               }
             }else{
-              Alert.open('Lo sentimos','Ocurrió un error, intente nuevamente por favor.','Aceptar');
+              Alert.open('Lo sentimos','Ocurrió un error, intenta nuevamente por favor.','Aceptar');
             }
 
             $('.login #submit').html('INGRESAR');
@@ -213,12 +213,12 @@
         callback : function(data, success){
           if(success){
             if(data.status == 'success'){
-              Alert.open('Exitosamente','Se envio un email con instrucciones para recuperar su contraseña.','Aceptar');
+              Alert.open('Exitosamente','Se envió un email con instrucciones para recuperar su contraseña.','Aceptar');
             }else{
               Alert.open('Email incorrecto','El email ingresado no se encuentra registrado.','Aceptar');
             }
           }else{
-            Alert.open('Lo sentimos','Ocurrió un error intente nuevamente por favor.','Aceptar');
+            Alert.open('Lo sentimos','Ocurrió un error intenta nuevamente por favor.','Aceptar');
           }
 
           cs.is_processing = false;
@@ -248,10 +248,10 @@
                 person: data.data.data.person
               });
             }else{
-              Alert.open('Código incorrecto','El código ingresado es incorrecto o ya esta en uso.','Aceptar');
+              Alert.open('Código incorrecto','El código ingresado es incorrecto o ya está en uso.','Aceptar');
             }
           }else{
-            Alert.open('Lo sentimos','Ocurrió un error intente nuevamente por favor.','Aceptar');
+            Alert.open('Lo sentimos','Ocurrió un error intenta nuevamente por favor.','Aceptar');
           }
 
           cs.is_processing = false;
