@@ -210,7 +210,7 @@
 
               if($(this).html() == "" && !$(this).parent().hasClass('disabled')){
                 if(cs.over_debt_limit){
-                  Alert.open("Límite superado","No puede realizar nuevas reservas en " + cs.event_place_name + " por que superó el límite de deuda disponible. Para más información comuniquese con su Administrador.", "Continuar");
+                  Alert.open("Límite superado","No puedes realizar nuevas reservas en " + cs.event_place_name + " porque has superado el límite de deuda disponible. Para más información comunícate con tu Administrador.", "Continuar");
                 }else{
                   var init_hour = $(this).parent().data('hour');
 

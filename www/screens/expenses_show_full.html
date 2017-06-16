@@ -1,5 +1,19 @@
 <div class="expenses-show-full">
   <div class="scroll">
+    <div id="example_list" style="display: none;">
+      <div class="visual_name"></div>
+      <div id="pointer"></div>
+      <div class="subtotal">
+        <div class="row">
+          <div class="info text-left">
+            <h4>SubTotal</h4>
+          </div>
+          <div class="value text-right">
+            <h4>$ <span id="subtotal">-</span></h4>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="example_category" style="display: none;"></div>
     <div id="example_item" style="display: none;">
       <div class="row">
@@ -13,35 +27,33 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="totals">
-    <div class="item">
+    <div class="total">
       <div class="row">
-        <div class="info">
-          <h4>SubTotal</h4>
+        <div class="info text-left">
+          <h4>Total Liquidación</h4>
         </div>
-        <div class="value">
-          <h5>$ <span id="total">-</span></h5>
+        <div class="value text-right">
+          <h4>$ <span id="total">-</span></h4>
         </div>
       </div>
     </div>
-    <div class="item">
+    <div id="example_subtotal_group" style="display: none;">
       <div class="row">
-        <div class="info">
-          <h4>% de distribución</h4>
+        <div class="info text-left">
+          <h4>SubTotal <span></span> <b></b></h4>
         </div>
-        <div class="value">
-          <h5><span id="area_percentage">-</spam> %</h5>
+        <div class="value text-right">
+          <h4>$ <span id="value">-</span></h4>
         </div>
       </div>
     </div>
-    <div class="item">
+    <div class="end-total">
       <div class="row">
-        <div class="info">
-          <h4 id="total_expenses_label"></h4>
+        <div class="info text-left">
+          <h4>Total <b></b></h4>
         </div>
-        <div class="value">
-          <h5>$ <span id="total_expenses">-</span></h5>
+        <div class="value text-right">
+          <h4>$ <span id="end_total">-</span></h4>
         </div>
       </div>
     </div>
@@ -79,33 +91,59 @@
           console.log(data);
           if(success){
 
+            for(var i in data.list_area_percentages){
+              var list_area_percentage = data.list_area_percentages[i][0];
+              var tmpl = $('#example_list').clone().insertBefore('#example_list');
+
+              tmpl.removeAttr('id');
+              tmpl.find('#pointer').attr('id','pointer_list_' + list_area_percentage.id);
+              tmpl.addClass('list_area_percentage');
+              tmpl.find('.visual_name').html(list_area_percentage.visual_name);
+              tmpl.find('#subtotal').html(parseFloat(list_area_percentage.subtotal).toFixed(2));
+
+              tmpl.show();
+
+              var subtmp = $('#example_subtotal_group').clone().insertBefore('#example_subtotal_group');
+              subtmp.addClass('subtotal-group');
+              subtmp.removeAttr('id');
+              subtmp.find('.info span').html(list_area_percentage.visual_name);
+              subtmp.find('.info b').html(PrivateData.get('current_group_identificator'));
+              subtmp.find('#value').html(parseFloat(list_area_percentage.subtotal_group).toFixed(2));
+              subtmp.show();
+            }
+
             for(var i in data.details){
-              var tmpc = $('#example_category').clone().insertBefore('#example_category');
-              tmpc.removeAttr('id');
-              tmpc.addClass('category');
-              tmpc.html(data.details[i].category);
-              tmpc.show();
+              var list_area_percentage_id = data.details[i][0];
+              for(var j in data.details[i][1]){
+                var d = data.details[i][1][j];
+                var tmpc = $('#example_category').clone().insertBefore('#pointer_list_' + list_area_percentage_id);
+                tmpc.removeAttr('id');
+                tmpc.addClass('category');
+                tmpc.html(d[0].category_id);
+                tmpc.show();
 
-              for(var k in data.details[i].details){
-                var detail = data.details[i].details[k];
+                for(var k in d){
+                  var detail = d[k];
+                  var tmp = $('#example_item').clone().insertBefore('#pointer_list_' + detail.list_area_percentage_id);
+                  tmp.removeAttr('id');
+                  tmp.addClass('item');
 
-                var tmp = $('#example_item').clone().insertBefore('#example_category');
-                tmp.removeAttr('id');
-                tmp.addClass('item');
-
-                tmp.find('#provider').html(detail.provider);
-                tmp.find('#concept').html(detail.concept);
-                tmp.find('#value').html(detail.value.toFixed(2));
-                tmp.show();
+                  tmp.find('#provider').html(detail.provider);
+                  tmp.find('#concept').html(detail.concept);
+                  tmp.find('#value').html(detail.value.toFixed(2));
+                  tmp.show();
+                }
               }
+
             }
 
             $('#total').html(data.total.toFixed(2));
             $('#area_percentage').html(data.area_percentage.toFixed(2));
-            $('#total_expenses').html(data.total_expenses.toFixed(2));
+            $('#end_total').html(data.total_expenses.toFixed(2));
+            $('.end-total b').html(PrivateData.get('current_group_identificator'));
 
             $('#total_expenses_label').html('Expensas ' + Extends.formatDate(new Date(data.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%mabbr. del %yyyy'));
-            $('.header .section-name').html('Expensas ' + Extends.formatDate(new Date(data.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%mabbr. del %yyyy'));
+            $('.header .section-name').html('Expensas ' + Extends.formatDate(new Date(data.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%mabbr. %yyyy'));
 
             cs.impute_date = new Date(data.impute_date + "T00:00:00" + PrivateData.get('time_zone_offset'));
             cs.callback_get_entry();

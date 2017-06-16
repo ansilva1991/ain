@@ -1,6 +1,6 @@
 <div class="authorization-form-employee">
   <div class="checked-data">
-    Los datos de esta persona no pueden ser modificados por que se encuentran verificados. Si los datos son incorrectos haga click aqui para comenzar la denuncia. Disculpe las molestias<br>
+    Los datos de esta persona no pueden ser modificados por que se encuentran verificados. Si los datos son incorrectos envíanos un ticket. Disculpe las molestias<br>
     <small>Datos verificados por <span id="checked_by"></span> el <span id="checked_date"></span></small>
   </div>
   <form class="form-horizontal">
@@ -162,23 +162,23 @@
 
       if(this.editable){
         if(form.name.length == 0 || !form.name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
-          Alert.open('Nombre','Debe ingresar un nombre válido para continuar.','Aceptar');
+          Alert.open('Nombre','Debes ingresar un nombre válido para continuar.','Aceptar');
           return false;
         }
 
         if(form.last_name.length == 0 || !form.last_name.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
-          Alert.open('Apellido','Debe ingresar un apellido válido para continuar.','Aceptar');
+          Alert.open('Apellido','Debes ingresar un apellido válido para continuar.','Aceptar');
           return false;
         }
 
         if(form.real_id.length == 0 || !form.real_id.match(/^[0-9]+$/)){
-          Alert.open('DNI','Debe ingresar un DNI válido para continuar.','Aceptar');
+          Alert.open('DNI','Debes ingresar un DNI válido para continuar.','Aceptar');
           return false;
         }
       }
 
       if(form.due_date.length == 0){
-        Alert.open('Fecha de Vencimiento','Debe seleccionar una fecha de vencimiento válida para continuar.','Aceptar');
+        Alert.open('Fecha de Vencimiento','Debes seleccionar una fecha de vencimiento válida para continuar.','Aceptar');
         return false;
       }
 

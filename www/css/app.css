@@ -4363,9 +4363,137 @@ button.btn.btn-orange:disabled{
   position: fixed;
   top: 60px;
   left: 0px;
-  bottom: 145px;
+  bottom: 0px;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.app>.content .page .expenses-show-full .list_area_percentage{
+  width: 100%;
+}
+
+.app>.content .page .expenses-show-full .list_area_percentage .visual_name{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: #bbb;
+  color: #fff;
+  padding-left: 20px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.app>.content .page .expenses-show-full .list_area_percentage .subtotal{
+  width: 100%;
+  height: 40px;
+  background: #eee;
+  color: #777;
+  padding: 12px 15px;
+  display: table;
+}
+
+.app>.content .page .expenses-show-full .list_area_percentage .subtotal h4{
+  margin: 0px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .expenses-show-full .list_area_percentage .subtotal .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-show-full .list_area_percentage .subtotal .row div{
+  display: table-cell;
+}
+
+.app>.content .page .expenses-show-full .list_area_percentage .subtotal .row .value{
+  width: 100px;
+  text-align: right;
+}
+
+.app>.content .page .expenses-show-full .total{
+  width: 100%;
+  height: 40px;
+  background: #777;
+  color: #fff;
+  padding: 12px 15px;
+  display: table;
+}
+
+.app>.content .page .expenses-show-full .total h4{
+  margin: 0px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .expenses-show-full .total .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-show-full .total .row div{
+  display: table-cell;
+}
+
+.app>.content .page .expenses-show-full .total .row .value{
+  width: 100px;
+  text-align: right;
+}
+
+.app>.content .page .expenses-show-full .subtotal-group{
+  width: 100%;
+  height: 40px;
+  background: #eee;
+  color: #777;
+  padding: 12px 15px;
+  display: table;
+}
+
+.app>.content .page .expenses-show-full .subtotal-group h4{
+  margin: 0px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .expenses-show-full .subtotal-group .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-show-full .subtotal-group .row div{
+  display: table-cell;
+}
+
+.app>.content .page .expenses-show-full .subtotal-group .row .value{
+  width: 100px;
+  text-align: right;
+}
+
+.app>.content .page .expenses-show-full .end-total{
+  width: 100%;
+  height: 50px;
+  background: #ffa400;
+  color: #fff;
+  padding: 12px 15px;
+  display: table;
+}
+
+.app>.content .page .expenses-show-full .end-total h4{
+  margin: 0px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .expenses-show-full .end-total .row{
+  display: table-row;
+}
+
+.app>.content .page .expenses-show-full .end-total .row div{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .expenses-show-full .end-total .row .value{
+  width: 100px;
+  text-align: right;
 }
 
 .app>.content .page .expenses-show-full .category{
@@ -4375,6 +4503,8 @@ button.btn.btn-orange:disabled{
   background: #eee;
   color: #777;
   padding-left: 20px;
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
 .app>.content .page .expenses-show-full .item{

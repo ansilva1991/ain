@@ -1,9 +1,9 @@
 var app = {
-  VERSION: 224,
+  VERSION: 225,
   PORTAL_VERSION: 224,
   MINIUM_VERSION_LOGUINED: 222,
   ENV: "production",
-  DEV_IP: "10.0.200.123",
+  DEV_IP: "10.0.200.23",
   onesignal_active: false,
   load_screen_ajax: false,
   current_screen: false,
@@ -100,7 +100,11 @@ var app = {
         app.updateConfig(function(){
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
-            app.loadScreen(app.SCREENS.DASHBOARD);
+            if(app.in_dev){
+              app.loadScreen(app.SCREENS.DASHBOARD);
+            }else{
+              app.loadScreen(app.SCREENS.DASHBOARD);
+            }
           }else{
             app.loadScreen(app.SCREENS.WELCOME);
           }
