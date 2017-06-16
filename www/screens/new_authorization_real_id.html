@@ -22,6 +22,12 @@
         return false;
       });
 
+      $('#real_id').keydown(function(e){
+        if(e.keyCode == 9 || e.keyCode == 13){
+          cs.submit();
+        }
+      });
+
       $(window).resize(function(){
         Extends.scrollToInputFocus('.authorization-form-family');
       });
