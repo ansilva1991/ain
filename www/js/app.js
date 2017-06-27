@@ -1,8 +1,8 @@
 var app = {
-  VERSION: 225,
+  VERSION: 226,
   PORTAL_VERSION: 224,
   MINIUM_VERSION_LOGUINED: 222,
-  ENV: "production",
+  ENV: "development",
   DEV_IP: "10.0.200.23",
   onesignal_active: false,
   load_screen_ajax: false,
@@ -101,7 +101,7 @@ var app = {
           app.updateMenuInfo();
           if(localStorage['welcome_' + PrivateData.get('email_logined')]){
             if(app.in_dev){
-              app.loadScreen(app.SCREENS.DASHBOARD);
+              app.loadScreen(app.SCREENS.ELECTRONIC_KEYS);
             }else{
               app.loadScreen(app.SCREENS.DASHBOARD);
             }
@@ -320,6 +320,7 @@ var app = {
             PrivateData.set('module_guard_active',data.module_guard_active);
             PrivateData.set('module_events_active',data.module_events_active);
             PrivateData.set('time_zone_offset',(parseInt(data.time_zone_offset)/36000).toFixed(1).replace('.','') + (cordova.platformId == 'ios' ? ":00" : "00"));
+            PrivateData.set('current_language',data.language);
 
             if(data.person_avatar){
               PrivateData.set('current_person_avatar',data.person_avatar);
@@ -628,6 +629,7 @@ var PrivateData = {
     current_client_name: "cvjjf",
     current_client_picture_menu_n: "cbjjf",
     current_authorizations_number: "cnjjf",
+    current_language: "lnjjf",
     last_config_sync: "lcsyd",
     last_update_popup: "vcsyd",
     module_expense_active: "meadd",

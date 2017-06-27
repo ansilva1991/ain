@@ -592,6 +592,18 @@ app.SCREENS = {
     section_name: "Pagar",
     html: "payment_methods_siro"
   },
+  ELECTRONIC_KEYS: {
+    icon_left: [
+    {
+      icon: "bars",
+      func: function(){
+        app.openMenu();
+      }
+    }
+    ],
+    section_name: "Mis Llaves",
+    html: "electronic_keys"
+  },
   TEST: {
     icon_left: {
       icon: "user",

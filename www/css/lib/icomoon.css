@@ -24,79 +24,120 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-informacion:before {
+.icon-key_bold:before {
+  content: "\e925";
+}
+.icon-keys_bold:before {
+  content: "\e926";
+}
+.icon-key:before {
   content: "\e900";
 }
-.icon-signout:before {
+.icon-keys:before {
   content: "\e901";
 }
-.icon-accessin:before {
+.icon-registered:before {
   content: "\e902";
 }
-.icon-people-bubble:before {
+.icon-unregistered:before {
   content: "\e903";
 }
-.icon-app-operator:before {
+.icon-help-administrator:before {
   content: "\e904";
 }
-.icon-client-employee:before {
+.icon-help-first-time:before {
   content: "\e905";
 }
-.icon-family:before {
+.icon-help-guard:before {
   content: "\e906";
 }
-.icon-family-with-access:before {
+.icon-help-resident:before {
   content: "\e907";
 }
-.icon-family-with-access2:before {
+.icon-informacion:before {
   content: "\e908";
 }
-.icon-people:before {
+.icon-signout:before {
   content: "\e909";
 }
-.icon-person:before {
+.icon-accessin:before {
   content: "\e90a";
 }
-.icon-person-admin:before {
+.icon-people-bubble:before {
   content: "\e90b";
 }
-.icon-person-employee:before {
+.icon-app-operator:before {
   content: "\e90c";
 }
-.icon-person-owner-group:before {
+.icon-client-employee:before {
   content: "\e90d";
 }
-.icon-authorizations:before {
+.icon-family:before {
   content: "\e90e";
 }
-.icon-batch:before {
+.icon-family-with-access:before {
   content: "\e90f";
 }
-.icon-communications:before {
+.icon-family-with-access2:before {
   content: "\e910";
 }
-.icon-config:before {
+.icon-people:before {
   content: "\e911";
 }
-.icon-department:before {
+.icon-person:before {
   content: "\e912";
 }
-.icon-events:before {
+.icon-person-admin:before {
   content: "\e913";
 }
-.icon-person-add:before {
+.icon-person-employee:before {
   content: "\e914";
 }
-.icon-expenses:before {
+.icon-person-owner-group:before {
   content: "\e915";
 }
-.icon-guard:before {
+.icon-authorizations:before {
   content: "\e916";
 }
-.icon-help:before {
+.icon-batch:before {
   content: "\e917";
 }
-.icon-registration_codes:before {
+.icon-communications:before {
   content: "\e918";
 }
-
+.icon-config:before {
+  content: "\e919";
+}
+.icon-department:before {
+  content: "\e91a";
+}
+.icon-events:before {
+  content: "\e91b";
+}
+.icon-person-add:before {
+  content: "\e91c";
+}
+.icon-expenses:before {
+  content: "\e91d";
+}
+.icon-guard:before {
+  content: "\e91e";
+}
+.icon-help:before {
+  content: "\e91f";
+}
+.icon-registration_codes:before {
+  content: "\e920";
+}
+.icon-social-fb:before {
+  content: "\e921";
+}
+.icon-social-instagram:before {
+  content: "\e922";
+}
+.icon-social-lk:before {
+  content: "\e923";
+}
+.icon-social-youtube:before {
+  content: "\e924";
+}
