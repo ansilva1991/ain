@@ -99,7 +99,7 @@ app.SCREENS = {
       id: 'submit-button'
     }
     ],
-    section_name: "Familiar",
+    section_name: "",
     html: "authorization_form_family"
   },
   AUTHORIZATION_FORM_VISIT: {

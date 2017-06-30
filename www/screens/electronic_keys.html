@@ -57,7 +57,7 @@
     <h4>Powered By<br><b>QrAccess.org</b></h4>
   </div>
   <div class="block" id="success">
-    <i class="fa fa-check"></i>
+    <i class="fa fa-check-circle-o"></i>
     <h5>Puerta Abierta</h5>
     <button type="button" class="btn btn-orange btn-block text-uppercase" onclick="cs.endOpen()">Continuar</button>
     <h4>Powered By<br><b>QrAccess.org</b></h4>
@@ -129,11 +129,18 @@
 
     this.tryOpenDoor = function(id){
       this.door_id = id;
+      $('.electronic_keys-personal-code button').prop('disabled', true);
+      $('.electronic_keys-personal-code').show();
       this.code = [];
       this.updateCodeAsterisks();
-      $('.electronic_keys-personal-code').show();
 
       this.status = "personal_code";
+
+      setTimeout(function(){
+        $('.electronic_keys-personal-code button').prop('disabled', false);
+        cs.code = [];
+        cs.updateCodeAsterisks();
+      },100);
     };
 
     this.buttonDown = function(code){
@@ -184,8 +191,15 @@
         callback : function(data, success){
           console.log(data);
           if(success){
-            $('.electronic_keys-opendoor #waiting').hide();
-            $('.electronic_keys-opendoor #success').show();
+            if(data.status == "success"){
+              $('.electronic_keys-opendoor #waiting').hide();
+              $('.electronic_keys-opendoor #success').show();
+            }else{
+              Alert.open('Lo Sentimos','Ocurrió un error al intentar conectar con el dispositivo, por favor intenta nuevamente.','Aceptar');
+
+              $('.electronic_keys-opendoor').hide();
+              $('.electronic_keys-personal-code').show();
+            }
           }else{
             Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
 
@@ -199,6 +213,15 @@
     this.endOpen = function(){
       $('.electronic_keys-personal-code').hide();
       $('.electronic_keys-opendoor').hide();
+      this.status = "list";
+    };
+
+    this.back = function(){
+      if(this.status == "list"){
+        navigator.app.exitApp();
+      }else{
+        this.endOpen();
+      }
     };
 
   }

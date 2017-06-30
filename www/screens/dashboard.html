@@ -41,6 +41,14 @@
       Autorizaciones
     </div>
   </div>
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.ELECTRONIC_KEYS);" data-module="electronic_keys">
+    <div class="icon">
+      <span class="icon-keys"></span>
+    </div>
+    <div class="text">
+      Mis Llaves
+    </div>
+  </div>
   <div class="item" onclick="app.selectLiMenu(app.SCREENS.USEFUL_INFO);">
     <div class="icon">
       <span class="icon-informacion"></span>
@@ -66,6 +74,10 @@
 
       if(!PrivateData.get('module_events_active')){
         $('.dashboard [data-module="events"]').remove();
+      }
+
+      if(!PrivateData.get('module_electronic_keys_active')){
+        $('.dashboard [data-module="electronic_keys"]').remove();
       }
 
       if(!app.load_with_notification){

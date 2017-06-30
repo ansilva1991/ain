@@ -68,8 +68,7 @@
         <img src="img/authorizations.svg">
       </div>
       <h5>
-        Autoriza el ingreso de familiares, visitas y empleados. Proporciona ingreso al sistema a la persona que desees.
-        <br><br><b>¡Accede a todo esto y mucho más al instante!</b>
+        <span data-t="screens.welcome.authorizations.description"></span>
       </h5>
     </div>
     <div class="layer g third">
@@ -130,6 +129,7 @@
 
       this.updatePoints();
 
+      U.translate_screen(".app .content .page");
       app.pageLoading('hide');
     }
 

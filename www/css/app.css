@@ -3302,6 +3302,7 @@ button.btn.btn-orange:disabled{
   line-height: 20px;
   color: #939393;
   float: left;
+  font-size: 15px;
 }
 
 .app>.content .page .form-horizontal .form-group>.file{
@@ -5690,6 +5691,7 @@ button.btn.btn-orange:disabled{
   text-transform: uppercase;
   font-size: 24px;
   margin: 15px 0px;
+  margin-top: 25px;
 }
 
 .app>.content .page .electronic_keys-personal-code .code{
@@ -5715,7 +5717,7 @@ button.btn.btn-orange:disabled{
 .app>.content .page .electronic_keys-personal-code .content-keyboard{
   width: 100%;
   position: absolute;
-  bottom: 0px;
+  bottom: 20px;
   top: 150px;
 }
 
@@ -5781,7 +5783,7 @@ button.btn.btn-orange:disabled{
   left: 50%;
   top: 50%;
   margin-left: -135px;
-  margin-top: -110px;
+  margin-top: -135px;
   display: none;
 }
 
@@ -5797,7 +5799,7 @@ button.btn.btn-orange:disabled{
 }
 
 .app>.content .page .electronic_keys-opendoor .block h4{
-  font-size: 12px;
+  font-size: 17px;
   text-transform: uppercase;
   color: #777;
 }

@@ -1,17 +1,18 @@
 var U = {
   t : function(path){
     path = path.split('.');
-    if(locales.hasOwnProperty(PrivateData.get("current_language") || "es")){
-      var object = locales[PrivateData.get("current_language") || "es"];
+    var language = PrivateData.get("current_language") || "es";
+    if(locales.hasOwnProperty(language)){
+      var object = locales[language];
     }else{
-      return "translation missing: " + path;
+      return "translation missing: " + language + "." + path.join('.');
     }
 
     for(var i in path){
-      if(object.hasOwnProperty('key')){
+      if(object.hasOwnProperty(path[i])){
         object = object[path[i]]
       }else{
-        return "translation missing: " + path;
+        return "translation missing: " + language + "." + path.join('.');
       }
     }
 
