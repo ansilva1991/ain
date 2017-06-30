@@ -1,5 +1,5 @@
 var app = {
-  VERSION: 225,
+  VERSION: 226,
   PORTAL_VERSION: 224,
   MINIUM_VERSION_LOGUINED: 222,
   ENV: "production",
@@ -261,6 +261,12 @@ var app = {
       $('.app>.menu .content [data-module="events"]').show();
     }
 
+    if(!PrivateData.get('module_electronic_keys_active')){
+      $('.app>.menu .content [data-module="electronic_keys"]').hide();
+    }else{
+      $('.app>.menu .content [data-module="electronic_keys"]').show();
+    }
+
     if(PrivateData.get('current_authorizations_number') < 2){
       $('.app>.menu .content .header #btn_select_auth').hide();
     }else{
@@ -319,7 +325,9 @@ var app = {
             PrivateData.set('module_expense_active',data.module_expense_active);
             PrivateData.set('module_guard_active',data.module_guard_active);
             PrivateData.set('module_events_active',data.module_events_active);
+            PrivateData.set('module_electronic_keys_active',data.module_electronic_keys_active);
             PrivateData.set('time_zone_offset',(parseInt(data.time_zone_offset)/36000).toFixed(1).replace('.','') + (cordova.platformId == 'ios' ? ":00" : "00"));
+            PrivateData.set('current_language',data.language);
 
             if(data.person_avatar){
               PrivateData.set('current_person_avatar',data.person_avatar);
@@ -628,11 +636,13 @@ var PrivateData = {
     current_client_name: "cvjjf",
     current_client_picture_menu_n: "cbjjf",
     current_authorizations_number: "cnjjf",
+    current_language: "lnjjf",
     last_config_sync: "lcsyd",
     last_update_popup: "vcsyd",
     module_expense_active: "meadd",
     module_guard_active: "mgadd",
     module_events_active: "mevad",
+    module_electronic_keys_active: "mqrac",
     time_zone_offset: "tzofs",
     debug_weinre_ip: "weine"
   },
