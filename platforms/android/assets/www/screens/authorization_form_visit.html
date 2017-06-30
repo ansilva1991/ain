@@ -142,11 +142,11 @@
               if(data.errors["authorizations.person_id"]){
                 var error = data.errors["authorizations.person_id"][0];
                 if(error == 'is_owner'){
-                  Alert.open('Propietario','Esta persona ya es propietario.','Aceptar');
+                  Alert.open(U.t("screens.authorization_form_visit.errors.is_owner.title"),U.t("screens.authorization_form_visit.errors.is_owner.message"),U.t("screens.authorization_form_visit.errors.is_owner.button"));
                 }
 
                 if(error == 'is_family'){
-                  Alert.open('Familiar','Esta persona ya es familiar.','Aceptar');
+                  Alert.open(U.t("screens.authorization_form_visit.errors.is_family.title"),U.t("screens.authorization_form_visit.errors.is_family.message"),U.t("screens.authorization_form_visit.errors.is_family.button"));
                 }
 
                 if(error == 'is_employee'){
@@ -154,7 +154,7 @@
                 }
 
                 if(error == 'taken'){
-                  Alert.open('Propietario','Esta persona ya es familiar.','Aceptar');
+                  Alert.open(U.t("screens.authorization_form_visit.errors.is_taken.title"),U.t("screens.authorization_form_visit.errors.is_taken.message"),U.t("screens.authorization_form_visit.errors.is_taken.button"));
                 }
               }else if(data.errors.real_id){
                 var error = data.errors.real_id[0];

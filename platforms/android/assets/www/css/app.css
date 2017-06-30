@@ -3302,6 +3302,7 @@ button.btn.btn-orange:disabled{
   line-height: 20px;
   color: #939393;
   float: left;
+  font-size: 15px;
 }
 
 .app>.content .page .form-horizontal .form-group>.file{
@@ -5612,4 +5613,193 @@ button.btn.btn-orange:disabled{
 
 .app>.content .page .useful_info .useful-phone:active{
   background-color: rgba(0,0,0,0.1);
+}
+
+.app>.content .page .list.electronic_keys{
+  top: 60px;
+}
+
+.app>.content .page .list.electronic_keys .item{
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid #e8e8e8;
+  color: #777;
+  display: table;
+}
+
+.app>.content .page .list.electronic_keys .item:active{
+  background-color: #eee;
+}
+
+.app>.content .page .list.electronic_keys .item .row{
+  display: table-row;
+}
+
+.app>.content .page .list.electronic_keys .item .icon{
+  width: 80px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .list.electronic_keys .item .icon .circle{
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50%;
+  margin: auto;
+  text-align: center;
+  line-height: 63px;
+  color: #ccc;
+  border: 1px solid #ccc;
+  font-size: 30px;
+}
+
+.app>.content .page .list.electronic_keys .item .info{
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .electronic_keys-personal-code{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #fff;
+  display: none;
+}
+
+.app>.content .page .electronic_keys-personal-code .content{
+  width: 100%;
+  min-height: 300px;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.app>.content .page .electronic_keys-personal-code .legend{
+  width: 100%;
+  color: #777;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 24px;
+  margin: 15px 0px;
+  margin-top: 25px;
+}
+
+.app>.content .page .electronic_keys-personal-code .code{
+  width: 125px;
+  border-bottom: 1px solid #eee;
+  height: 30px;
+  color: #ffa400;
+  text-align: center;
+  margin: auto;
+  font-size: 24px;
+}
+
+.app>.content .page .electronic_keys-personal-code .error{
+  width: 100%;
+  color: #ff5f5f;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 18px;
+  margin: 15px 0px;
+  display: none;
+}
+
+.app>.content .page .electronic_keys-personal-code .content-keyboard{
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  top: 150px;
+}
+
+.app>.content .page .electronic_keys-personal-code .keyboard{
+  width: 100%;
+  max-width: 320px;
+  min-height: 230px;
+  height: 100%;
+  display: table;
+  margin: auto;
+}
+
+.app>.content .page .electronic_keys-personal-code .keyboard .row{
+  display: table-row;
+}
+
+.app>.content .page .electronic_keys-personal-code .keyboard .row .key{
+  width: 33.333333333333333333%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.app>.content .page .electronic_keys-personal-code .keyboard .row .key button{
+  background-color: #fff;
+  border: 1px #ffa400 solid;
+  width: 90%;
+  height: 90%;
+  font-size: 30px;
+  color: #ffa400;
+}
+
+.app>.content .page .electronic_keys-personal-code .keyboard .row .key button.check{
+  background-color: #ffa400;
+  color: #fff;
+}
+
+.app>.content .page .electronic_keys-personal-code .keyboard .row .key button.check:disabled{
+  opacity: 0.25;
+}
+
+.app>.content .page .electronic_keys-personal-code .keyboard .row .key button:active{
+  background-color: #eee;
+}
+
+.app>.content .page .electronic_keys-opendoor{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: none;
+}
+
+.app>.content .page .electronic_keys-opendoor .block{
+  width: 270px;
+  text-align: center;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -135px;
+  margin-top: -135px;
+  display: none;
+}
+
+.app>.content .page .electronic_keys-opendoor .block i{
+  color: #ffa400;
+  font-size: 80px;
+}
+
+.app>.content .page .electronic_keys-opendoor .block h5{
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #777;
+}
+
+.app>.content .page .electronic_keys-opendoor .block h4{
+  font-size: 17px;
+  text-transform: uppercase;
+  color: #777;
 }

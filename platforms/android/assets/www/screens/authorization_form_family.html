@@ -79,15 +79,7 @@
         <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
       </div>
       <center class="only-for-family">
-        <h5>
-          Se le enviará una notificación al email ingresado con las instrucciones de uso.
-        </h5>
-        <h5>
-          Al permitirle acceso al sistema, podra gestionar visitas y empleados, crear eventos, enviar y responder comunicaciones, entre otras funciones.
-        </h5>
-        <h5>
-          Recuerda que todas las gestiones realizadas por los miembros de tu familia serán tu responsabilidad y sujetos a la normativa vigente del consorcio
-        </h5>
+        <span data-t="screens.authorization_form_family.alert_family_with_access"></span>
       </center>
     </div>
   </form>
@@ -143,6 +135,7 @@
 
       app.liActive('authorizations');
       this.getPersonInfo(function(){
+        U.translate_screen(".app .content .page");
         app.pageLoading('hide');
 
         if(cs.person_id != PrivateData.get('current_person_id')){
@@ -209,7 +202,10 @@
             }
 
             if(data.person.type == 'AuthorizationOwnerGroup'){
+              $('.app>.header .section-name').html(U.t("screens.authorization_form_family.title_owner"));
               $('.only-for-family').hide();
+            }else{
+              $('.app>.header .section-name').html(U.t("screens.authorization_form_family.title"));
             }
 
             cs.callback_get_person_info();
@@ -298,11 +294,11 @@
               if(data.errors["authorizations.person_id"]){
                 var error = data.errors["authorizations.person_id"][0];
                 if(error == 'is_owner'){
-                  Alert.open('Propietario','Esta persona ya es propietario.','Aceptar');
+                  Alert.open(U.t("screens.authorization_form_family.errors.is_owner.title"),U.t("screens.authorization_form_family.errors.is_owner.message"),U.t("screens.authorization_form_family.errors.is_owner.button"));
                 }
 
                 if(error == 'is_visit'){
-                  Alert.open('Visita','Esta persona ya es visita.','Aceptar');
+                  Alert.open(U.t("screens.authorization_form_family.errors.is_visit.title"),U.t("screens.authorization_form_family.errors.is_visit.message"),U.t("screens.authorization_form_family.errors.is_visit.button"));
                 }
 
                 if(error == 'is_employee'){
@@ -310,7 +306,7 @@
                 }
 
                 if(error == 'taken'){
-                  Alert.open('Propietario','Esta persona ya es familiar.','Aceptar');
+                  Alert.open(U.t("screens.authorization_form_family.errors.taken.title"),U.t("screens.authorization_form_family.errors.taken.message"),U.t("screens.authorization_form_family.errors.taken.button"));
                 }
               }else if(data.errors.email){
                 var error = data.errors.email[0];

@@ -1,12 +1,12 @@
 <div class="sub-header col-3">
   <div class="item active" data-item="0" onclick="cs.selectTab(this);">
-    RESIDENTES
+    <span data-t="screens.authorizations.menu.residents"></span>
   </div>
   <div class="item" data-item="1" onclick="cs.selectTab(this);">
-    VISITAS
+    <span data-t="screens.authorizations.menu.visits"></span>
   </div>
   <div class="item" data-item="2" onclick="cs.selectTab(this);">
-    EMPLEADOS
+    <span data-t="screens.authorizations.menu.employees"></span>
   </div>
   <div class="line">
     <div class="pointer"></div>
@@ -26,12 +26,12 @@
 </div>
 <div class="list authorizations visits">
   <h5 id="none">
-    No se encontraron visitas autorizados a tu propiedad.
+    <span data-t="screens.authorizations.content.empty_visits"></span>
   </h5>
 </div>
 <div class="list authorizations employees">
   <h5 id="none">
-    No se encontraron empleados autorizados a tu propiedad.
+    <span data-t="screens.authorizations.content.empty_employees"></span>
   </h5>
 </div>
 
@@ -54,19 +54,19 @@
     <button type="button" onclick="cs.newFamily();">
       <span class="icon-family"></span>
     </button>
-    <h5>Agregar Familiar</h5>
+    <h5><span data-t="screens.authorizations.add.family"></span></h5>
   </div>
   <div class="add-button new-visit">
     <button type="button" onclick="cs.newVisit();">
       <span class="icon-person"></span>
     </button>
-    <h5>Agregar Visita</h5>
+    <h5><span data-t="screens.authorizations.add.visit"></span></h5>
   </div>
   <div class="add-button new-employee">
     <button type="button" onclick="cs.newEmployee();">
       <span class="icon-person-employee"></span>
     </button>
-    <h5>Agregar Empleado</h5>
+    <h5><span data-t="screens.authorizations.add.employee"></span></h5>
   </div>
 </div>
 
@@ -105,6 +105,7 @@
       app.liActive('authorizations');
 
       this.updateAuthorizations(function(){
+        U.translate_screen(".app .content .page");
         app.pageLoading('hide');
       });
 
@@ -132,23 +133,23 @@
                 tmp.data('type', 'family');
 
                 if(person.type == "AuthorizationOwnerGroup"){
-                  tmp.find('#type').html('Propietario');
+                  tmp.find('#type').html(U.t("models.authorization.types.AuthorizationOwnerGroup"));
                   tmp.addClass('owner_group');
                 }else if(person.type == "AuthorizationFamilyWithAccess"){
-                  tmp.find('#type').html('Familiar con Accesso');
+                  tmp.find('#type').html(U.t("models.authorization.types.AuthorizationFamilyWithAccess"));
                 }else{
-                  tmp.find('#type').html('Familiar');
+                  tmp.find('#type').html(U.t("models.authorization.types.AuthorizationFamily"));
                 }
               }else if(["AuthorizationVisit"].indexOf(person.type) > -1){
                 tmp.appendTo('.list.authorizations.visits');
                 tmp.data('type', 'visit');
-                tmp.find('#type').html('Visita');
+                tmp.find('#type').html(U.t("models.authorization.types.AuthorizationVisit"));
 
                 $('.authorizations.visits #none').hide();
               }else if(["AuthorizationEmployee"].indexOf(person.type) > -1){
                 tmp.appendTo('.list.authorizations.employees');
                 tmp.data('type', 'employee');
-                tmp.find('#type').html('Empleado');
+                tmp.find('#type').html(U.t("models.authorization.types.AuthorizationEmployee"));
 
                 $('.authorizations.employees #none').hide();
               }
