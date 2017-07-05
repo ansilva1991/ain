@@ -2,6 +2,7 @@
 </div>
 
 <div id="example" style="display: none;">
+  <input type="hidden" id="required_pin">
   <div class="row">
     <div class="icon">
       <div class="circle">
@@ -69,6 +70,7 @@
     this.callback_get_data;
     this.code = [];
     this.status = "list";
+    this.required_pin = true;
 
     this.start = function(){
 
@@ -93,13 +95,22 @@
               tmp.removeAttr('id');
               tmp.addClass('item');
 
+              tmp.find('#required_pin').val(device.required_pin);
               tmp.find('#name').html(device.name);
               tmp.attr('data-id', device.id);
 
               tmp.tap(function(){
                 var id = $(this).data('id');
+                var required_pin = $(this).find('#required_pin').val() == "true";
 
-                cs.tryOpenDoor(id);
+                cs.required_pin = required_pin;
+
+                if(required_pin){
+                  cs.tryOpenDoor(id);
+                }else{
+                  cs.door_id = id;
+                  cs.openDoor();
+                }
               });
 
               tmp.show();
@@ -198,13 +209,21 @@
               Alert.open('Lo Sentimos','Ocurrió un error al intentar conectar con el dispositivo, por favor intenta nuevamente.','Aceptar');
 
               $('.electronic_keys-opendoor').hide();
-              $('.electronic_keys-personal-code').show();
+              if(cs.required_pin){
+                $('.electronic_keys-personal-code').show();
+              }else{
+                $('.electronic_keys-personal-code').hide();
+              }
             }
           }else{
             Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
 
             $('.electronic_keys-opendoor').hide();
-            $('.electronic_keys-personal-code').show();
+            if(cs.required_pin){
+              $('.electronic_keys-personal-code').show();
+            }else{
+              $('.electronic_keys-personal-code').hide();
+            }
           }
         }
       });
