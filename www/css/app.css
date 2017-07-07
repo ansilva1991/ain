@@ -1933,6 +1933,74 @@ button.btn.btn-orange:disabled{
   background-image: url(../img/back_event_place_laundry.png);
 }
 
+.app>.content .page .list.events.event_places .item.back-jacuzzi{
+  background-image: url(../img/back_event_place_jacuzzi.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-grillroom{
+  background-image: url(../img/back_event_place_grillroom.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-pool{
+  background-image: url(../img/back_event_place_pool.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-tea_room{
+  background-image: url(../img/back_event_place_tea_room.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-sauna{
+  background-image: url(../img/back_event_place_sauna.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-beach_club{
+  background-image: url(../img/back_event_place_beach_club.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-stable{
+  background-image: url(../img/back_event_place_stable.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-treadmill{
+  background-image: url(../img/back_event_place_treadmill.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-kitchen{
+  background-image: url(../img/back_event_place_kitchen.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-gym{
+  background-image: url(../img/back_event_place_gym.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-playroom_nursery{
+  background-image: url(../img/back_event_place_playroom_nursery.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-nautical_nursery{
+  background-image: url(../img/back_event_place_nautical_nursery.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-barbecue{
+  background-image: url(../img/back_event_place_barbecue.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-solarium{
+  background-image: url(../img/back_event_place_solarium.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-spa{
+  background-image: url(../img/back_event_place_spa.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-olegario_big{
+  background-image: url(../img/back_event_place_olegario_big.png);
+}
+
+.app>.content .page .list.events.event_places .item.back-olegario_arlink{
+  background-image: url(../img/back_event_place_olegario_arlink.png);
+}
+
 .app>.content .page .list.events.event_places .item h4{
   width: 100%;
   height: 50px;

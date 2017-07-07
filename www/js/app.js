@@ -2,9 +2,9 @@ var app = {
   VERSION: 227,
   PORTAL_VERSION: 224,
   MINIUM_VERSION_LOGUINED: 222,
-  ENV: "development",
+  ENV: "production",
   DEV_IP: "10.0.200.23",
-  onesignal_active: false,
+  onesignal_active: true,
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -325,6 +325,7 @@ var app = {
             PrivateData.set('module_expense_active',data.module_expense_active);
             PrivateData.set('module_guard_active',data.module_guard_active);
             PrivateData.set('module_events_active',data.module_events_active);
+            PrivateData.set('hidden_authorizations',data.hidden_authorizations);
             PrivateData.set('module_electronic_keys_active',data.module_electronic_keys_active);
             PrivateData.set('time_zone_offset',(parseInt(data.time_zone_offset)/36000).toFixed(1).replace('.','') + (cordova.platformId == 'ios' ? ":00" : "00"));
             PrivateData.set('current_language',data.language);
@@ -338,6 +339,10 @@ var app = {
                 PrivateData.set('last_update_popup', Extends.formatDate(new Date(),'%yyyy-%mm-%dd'));
                 NewUpdate.open();
               }
+            }
+
+            if(data.resend_device){
+              app.reSendDevice();
             }
 
             app.update_config_callback();
@@ -522,6 +527,36 @@ var app = {
   },
   in_demo : function(){
     return app.ENV == 'demo';
+  },
+  reSendDevice : function(){
+    if(PrivateData.get('current_server_portal') && (PrivateData.get('current_server_portal') != "") && app.onesignal_active && window.plugins.OneSignal && window.plugins.OneSignal.startInit){
+          window.plugins.OneSignal.getIds(function(ids){
+
+        Server.send({
+          route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'config','sync_device'],
+          data : {
+            device: {
+              model: device.model,
+              platform: device.platform,
+              version: device.version,
+              uuid: localStorage.uuid,
+              one_signal_push_token: ids.pushToken,
+              one_signal_user_id: ids.userId,
+              original_uuid: device.uuid
+            }
+          },
+          callback : function(data, success){
+            console.log(data);
+          }
+        });
+      });
+    }
+  },
+  editMyPerson : function(){
+    app.closeMenu();
+    app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY,{
+      person_id: PrivateData.get('current_person_id')
+    });
   }
 };
 
@@ -637,6 +672,7 @@ var PrivateData = {
     current_client_picture_menu_n: "cbjjf",
     current_authorizations_number: "cnjjf",
     current_language: "lnjjf",
+    hidden_authorizations: "kkwue",
     last_config_sync: "lcsyd",
     last_update_popup: "vcsyd",
     module_expense_active: "meadd",

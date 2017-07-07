@@ -1,6 +1,14 @@
 <div class="dashboard">
   <h4 onclick="cs.dev();">BIENVENIDO A LA<br>COMUNIDAD ACCESSIN</h4>
   <div class="separator"></div>
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.ELECTRONIC_KEYS);" data-module="electronic_keys">
+    <div class="icon">
+      <span class="icon-keys"></span>
+    </div>
+    <div class="text">
+      Mis Llaves
+    </div>
+  </div>
   <div class="item" onclick="app.selectLiMenu(app.SCREENS.EVENTS);" data-module="events">
     <div class="icon">
       <span class="icon-events"></span>
@@ -39,14 +47,6 @@
     </div>
     <div class="text">
       Autorizaciones
-    </div>
-  </div>
-  <div class="item" onclick="app.selectLiMenu(app.SCREENS.ELECTRONIC_KEYS);" data-module="electronic_keys">
-    <div class="icon">
-      <span class="icon-keys"></span>
-    </div>
-    <div class="text">
-      Mis Llaves
     </div>
   </div>
   <div class="item" onclick="app.selectLiMenu(app.SCREENS.USEFUL_INFO);">
