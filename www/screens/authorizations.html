@@ -75,28 +75,83 @@
     this.mode = 'list';
     this.selectedItems = [];
     this.callback_update_auths;
+    this.hidden_visits = false;
+    this.hidden_employees = false;
 
     this.start = function(opts){
       opts = opts || {};
+      var authorizations_hiddens = PrivateData.get('hidden_authorizations').split(',');
 
-      var hammertime = new Hammer($('.list.authorizations.families')[0]);
-      hammertime.on('swipeleft', function(ev) {
-        cs.selectTab($('.sub-header .item')[1]);
-      });
+      if(authorizations_hiddens.indexOf("AuthorizationVisit") == -1 && authorizations_hiddens.indexOf("AuthorizationEmployee") == -1){
+        var hammertime = new Hammer($('.list.authorizations.families')[0]);
+        hammertime.on('swipeleft', function(ev) {
+          cs.selectTab($('.sub-header .item')[1]);
+        });
 
-      var hammertime = new Hammer($('.list.authorizations.visits')[0]);
-      hammertime.on('swiperight', function(ev) {
-        cs.selectTab($('.sub-header .item')[0]);
-      });
+        var hammertime = new Hammer($('.list.authorizations.visits')[0]);
+        hammertime.on('swiperight', function(ev) {
+          cs.selectTab($('.sub-header .item')[0]);
+        });
 
-      hammertime.on('swipeleft', function(ev) {
-        cs.selectTab($('.sub-header .item')[2]);
-      });
+        hammertime.on('swipeleft', function(ev) {
+          cs.selectTab($('.sub-header .item')[2]);
+        });
 
-      var hammertime = new Hammer($('.list.authorizations.employees')[0]);
-      hammertime.on('swiperight', function(ev) {
-        cs.selectTab($('.sub-header .item')[1]);
-      });
+        var hammertime = new Hammer($('.list.authorizations.employees')[0]);
+        hammertime.on('swiperight', function(ev) {
+          cs.selectTab($('.sub-header .item')[1]);
+        });
+      }else if(authorizations_hiddens.indexOf("AuthorizationVisit") > -1 && authorizations_hiddens.indexOf("AuthorizationEmployee") == -1){
+
+        $('.sub-header.col-3').attr('class','sub-header col-2');
+
+        this.hidden_visits = true;
+        $('.sub-header .item[data-item="1"]').hide();
+        $('.list.authorizations.visits').hide();
+        $('.add-button.new-visit').remove();
+        $('.add-button.new-employee').attr('class','add-button new-visit');
+
+        var hammertime = new Hammer($('.list.authorizations.families')[0]);
+        hammertime.on('swipeleft', function(ev) {
+          cs.selectTab($('.sub-header .item')[2]);
+        });
+
+        var hammertime = new Hammer($('.list.authorizations.employees')[0]);
+        hammertime.on('swiperight', function(ev) {
+          cs.selectTab($('.sub-header .item')[0]);
+        });
+
+      }else if(authorizations_hiddens.indexOf("AuthorizationVisit") == -1 && authorizations_hiddens.indexOf("AuthorizationEmployee") > -1){
+
+        $('.sub-header.col-3').attr('class','sub-header col-2');
+
+        this.hidden_employees = true;
+        $('.sub-header .item[data-item="2"]').hide();
+        $('.list.authorizations.employees').hide();
+        $('.add-button.new-employee').remove();
+
+        var hammertime = new Hammer($('.list.authorizations.families')[0]);
+        hammertime.on('swipeleft', function(ev) {
+          cs.selectTab($('.sub-header .item')[1]);
+        });
+
+        var hammertime = new Hammer($('.list.authorizations.visits')[0]);
+        hammertime.on('swiperight', function(ev) {
+          cs.selectTab($('.sub-header .item')[0]);
+        });
+      }else{
+
+        $('.sub-header').hide();
+        $('.app>.content .page .list.authorizations').css({ top: '60px' });
+        $('.add-button.new-employee').remove();
+        $('.add-button.new-visit').remove();
+
+        $('.new-authorization-buttons button.new').attr('onclick','cs.newFamily();');
+
+        this.hidden_visits = true;
+        this.hidden_employees = true;
+      }
+
 
       if(opts.open_in){
         cs.selectTab($('.sub-header .item')[opts.open_in]);
@@ -294,12 +349,18 @@
       var item = $(x).data('item');
       $('.sub-header .item').removeClass('active');
       $('.sub-header .item[data-item="' + item + '"]').addClass('active');
+
+      var tmp_item = item;
+      if(item == 2 && this.hidden_visits){
+        tmp_item = 1;
+      }
+
       $('.sub-header .line .pointer').css({
-        '-webkit-transform': 'translate3d(' + (100 * item) + '%,0,0)',
-        '-moz-transform': 'translate3d(' + (100 * item) + '%,0,0)',
-        '-ms-transform': 'translate3d(' + (100 * item) + '%,0,0)',
-        '-o-transform': 'translate3d(' + (100 * item) + '%,0,0)',
-        'transform': 'translate3d(' + (100 * item) + '%,0,0)'
+        '-webkit-transform': 'translate3d(' + (100 * tmp_item) + '%,0,0)',
+        '-moz-transform': 'translate3d(' + (100 * tmp_item) + '%,0,0)',
+        '-ms-transform': 'translate3d(' + (100 * tmp_item) + '%,0,0)',
+        '-o-transform': 'translate3d(' + (100 * tmp_item) + '%,0,0)',
+        'transform': 'translate3d(' + (100 * tmp_item) + '%,0,0)'
       });
 
       $('.list.authorizations').css({
