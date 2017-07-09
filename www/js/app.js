@@ -1,5 +1,5 @@
 var app = {
-  VERSION: 227,
+  VERSION: 228,
   PORTAL_VERSION: 224,
   MINIUM_VERSION_LOGUINED: 222,
   ENV: "production",
