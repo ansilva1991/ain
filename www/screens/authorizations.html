@@ -80,7 +80,7 @@
 
     this.start = function(opts){
       opts = opts || {};
-      var authorizations_hiddens = PrivateData.get('hidden_authorizations').split(',');
+      var authorizations_hiddens = (PrivateData.get('hidden_authorizations') || "").split(',');
 
       if(authorizations_hiddens.indexOf("AuthorizationVisit") == -1 && authorizations_hiddens.indexOf("AuthorizationEmployee") == -1){
         var hammertime = new Hammer($('.list.authorizations.families')[0]);
