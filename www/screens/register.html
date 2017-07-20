@@ -52,7 +52,7 @@
       <label for="password_confirmation">REPITA CONTRASEÑA</label>
       <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
     </div>
-    <button class="btn btn-block btn-orange" type="button" onclick="cs.submit();" id="submit">CONTINUAR</button>
+    <button class="btn btn-block btn-orange" type="submit" onclick="cs.submit();" id="submit">CONTINUAR</button>
     <h5 onclick="cs.back();">Volver</h5>
   </form>
 </div>
@@ -71,6 +71,7 @@
       Extends.name('#name, #last_name');
 
       $('form').submit(function(){
+        cs.submit();
         return false;
       });
 
@@ -153,7 +154,7 @@
         },
         callback : function(data, success){
           console.log(data);
-          if(success){
+          if(success && data.data != false){
             if(data.data.errors && Object.keys(data.data.errors).length > 0){
               if(data.data.errors.email){
                 if(data.data.errors.email[0] == "Ya en uso"){

@@ -5991,3 +5991,54 @@ button.btn.btn-orange:disabled{
 .app>.content .page .set-registration-code input{
   text-transform: uppercase;
 }
+
+.app>.content .page .request-registration-code{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .request-registration-code .checked-data{
+  width: 100%;
+  background-color: #40bbea;
+  color: #fff;
+  font-size: 14px;
+  padding: 20px;
+  display: none;
+}
+
+
+.app>.content .page .request-registration-code .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .request-registration-code h5{
+  color: #999;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.app>.content .page .request-registration-code b{
+  color: #ffa400 !important;
+}
+
+.app>.content .page .request-registration-code button{
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  color: #999;
+  margin-top: 20px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .request-registration-code input{
+  text-transform: uppercase;
+}

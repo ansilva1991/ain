@@ -1,0 +1,92 @@
+<div class="request-registration-code">
+  <form class="form-horizontal">
+    <div class="form-group not_editable">
+      <label for="client">Consorcio o Barrio</label>
+      <input type="text" name="client" id="client" class="form-control">
+      <label for="group">Identificador de Unidad</label>
+      <input type="text" name="group" id="group" class="form-control">
+      <label for="email">Email alternativo</label>
+      <input type="email" name="email" id="email" class="form-control">
+      <label for="phone">Teléfono de contacto</label>
+      <input type="tel" name="phone" id="phone" class="form-control">
+      <h5>El email y teléfono ingresados sólo se utilizarán para comunicar el código de inicio.</h5>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.go_to;
+    this.is_processing = false;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.go_to = opts.go_to;
+
+      $('.request-registration-code form').submit(function(){
+        cs.submit();
+        return false;
+      });
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.request-registration-code');
+      });
+
+      app.pageLoading('hide');
+    }
+
+    this.submit = function(){
+      if(this.is_processing){ return false; }
+
+      var form = Extends.serializeForm('.request-registration-code form');
+
+      if(form.client.length == 0 || !form.client.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+        Alert.open('Consorcio o Barrio','Debes ingresar un consorcio válido para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.group.length == 0 || !form.group.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+        Alert.open('Identificador de Unidad','Debes ingresar una unidad válida para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.email.length == 0 || !form.email.match(/^([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+$/i)){
+        Alert.open('Email','Debes ingresar un email válido para continuar.','Aceptar');
+        return false;
+      }
+
+      if(form.phone.length == 0 || !form.phone.match(/^([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+$/i)){
+        Alert.open('Teléfono','Debes ingresar un teléfono válido para continuar.','Aceptar');
+        return false;
+      }
+
+      $('#submit-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('#submit-button').removeClass('text');
+
+      this.is_processing = true;
+
+      Server.send({
+        route : [Server.serverUrl(PrivateData.get('type_server')),'app','request_registration_code'],
+        data : form,
+        callback : function(data, success){
+          console.log(data);
+          if(success){
+            Alert.open('Solicitud','En breve nos comunicaremos.','Aceptar');
+            cs.back();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+          }
+
+          cs.is_processing = false;
+          $('#submit-button').html("Listo <i class='fa fa-check'></i>");
+          $('#submit-button').addClass('text');
+        }
+      });
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.SET_REGISTRATION_CODE);
+    };
+  }
+</script>
