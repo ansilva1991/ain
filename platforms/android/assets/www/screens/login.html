@@ -1,77 +1,75 @@
-<div class="forgot-password layer">
-  <form>
-    <div class="row">
-      <div class="cell">
-        <span onclick="cs.dev();" class="icon-people-bubble"></span>
+<div class="first-screen-layers">
+  <div class="first-screen layer">
+    <div class="table">
+      <div class="row">
+        <div class="cell"></div>
       </div>
-    </div>
-    <div class="row">
-      <div class="cell">
-        <h4>Se enviará un email con intrucciones para recuperar su contraseña.<br>Cualquier duda o consulta comunícate a soporte@accessin.net</h4>
-        <div class="input">
-          <label>EMAIL</label>
-          <input type="email" id="email" name="email">
-        </div>
-        <button class="btn btn-block btn-orange" type="submit" id="submit">Recuperar contraseña</button>
-        <h5 onclick="cs.forgotPasswordBack();">Volver</h5>
-      </div>
-    </div>
-  </form>
-</div>
-
-<div class="login layer init">
-  <form>
-    <div class="row logo">
-      <div class="cell">
-        <span class="icon-people-bubble login-logo"></span>
-        <span class="icon-accessin"></span>
-      </div>
-    </div>
-    <div class="row form">
-      <div class="cell">
-        <div class="input">
-          <label>EMAIL</label>
-          <input type="email" id="email" name="email">
-        </div>
-        <div class="password">
-          <div class="row">
-            <div class="cell">
-              <div class="input">
-                <label>CONTRASEÑA</label>
-                <input type="password" id="password" name="password">
-              </div>
-            </div>
-            <div class="cell">
-              <button onclick="cs.forgotPassword();" type="button">Olvidé mi contraseña</button>
-            </div>
+      <div class="row">
+        <div class="cell">
+          <div class="content-first-screen">
+            <span class="icon-people-bubble"></span>
+            <h4>Bienvenido a AccessIn</h4>
+            <h5>Toda tu comunidad en la palma de tu mano.</h5>
+            <button class="btn btn-block btn-white" type="button" onclick="cs.register();">Aún no estoy registrado</button>
+            <button class="btn btn-block btn-line" type="button" onclick="cs.activeLogin();">Ya estoy registrado</button>
           </div>
         </div>
-        <button class="btn btn-block btn-orange" type="submit" id="submit">INGRESAR</button>
-        <h5 onclick="cs.registerCode();">¿Primera vez en AccessIN?</h5>
+      </div>
+      <div class="row">
+        <div class="cell"></div>
       </div>
     </div>
-  </form>
-</div>
+  </div>
 
-<div class="register-code layer">
-  <form>
-    <div class="row">
-      <div class="cell">
-        <span class="icon-people-bubble"></span>
+  <div class="login layer">
+    <div class="table">
+      <div class="row">
+        <div class="cell"></div>
       </div>
-    </div>
-    <div class="row">
-      <div class="cell">
-        <h4>Bienvenido a AccessIn, ingresa por favor el código propocionado por tu Administrador.</h4>
-        <div class="input">
-          <label>CÓDIGO</label>
-          <input type="text" id="code" maxlength="8" size="8" name="code">
+      <div class="row">
+        <div class="cell">
+          <form class="content-first-screen">
+            <span class="icon-people-bubble"></span>
+            <h4>Iniciar sesión en AccessIn</h4>
+            <h6>EMAIL</h6>
+            <input type="email" name="email">
+            <h6>CONTRASEÑA</h6>
+            <input type="password" name="password">
+            <button class="btn btn-block btn-text" type="button" onclick="cs.activeForgotPassword();">¿Olvidaste tu contraseña?</button>
+            <button class="btn btn-block btn-login" type="submit" id="submit">Iniciar Sesión</button>
+            <button class="btn btn-block btn-text" type="button" onclick="cs.back();">VOLVER</button>
+          </form>
         </div>
-        <button class="btn btn-block btn-orange" type="submit" id="submit">PROCESAR</button>
-        <h5 onclick="cs.registerCodeBack();">Volver</h5>
+      </div>
+      <div class="row">
+        <div class="cell"></div>
       </div>
     </div>
-  </form>
+  </div>
+
+  <div class="forgot-password layer">
+    <div class="table">
+      <div class="row">
+        <div class="cell"></div>
+      </div>
+      <div class="row">
+        <div class="cell">
+          <form class="content-first-screen">
+            <span class="icon-people-bubble"></span>
+            <h4>Recuperar contraseña</h4>
+            <h5>Se enviará un email con intrucciones para recuperar tu contraseña.</h5>
+            <h6>EMAIL</h6>
+            <input type="email" name="email">
+            <button class="btn btn-block btn-forgot-password" type="submit" id="submit">Recuperar contraseña</button>
+            <button class="btn btn-block btn-text" type="button" onclick="cs.back();">VOLVER</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -79,8 +77,10 @@
     this.dev_count = 0;
     this.is_processing = false;
     this.email_login = undefined;
+    this.password_login = undefined;
     this.one_signal_ids;
     this.type_server = "real";
+    this.status = "first_screen";
 
     this.start = function(opts){
       opts = opts || {};
@@ -99,23 +99,13 @@
         return false;
       });
 
-      $('.register-code form').submit(function(){
-        cs.processRegister();
-        return false;
-      });
+      app.pageLoading('hide');
 
       if(opts.success_register){
-        $('.login').toggleClass('init');
-
-        Alert.open('Bienvenido','Ingresa con tus datos para comenzar a disfrutar de AccessIn.','Aceptar');
-
-      }else{
         setTimeout(function(){
-          $('.login').toggleClass('init');
-        },2000);
+          Alert.open('Bienvenido','Ingresa con tus datos para comenzar a disfrutar de AccessIn.','Aceptar');
+        },200);
       }
-
-      app.pageLoading('hide');
     }
 
     this.processLogin = function(){
@@ -132,19 +122,24 @@
         this.type_server = 'test';
       }
 
+      document.activeElement.blur();
+      $("input").blur();
+
       $('.login #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
       $('.login #submit').prop('disabled', true);
       this.is_processing = true;
       this.email_login = form.email;
+      this.password_login = form.password;
 
       PrivateData.clear();
       PrivateData.set('is_login',false);
+      PrivateData.set('type_server',this.type_server);
 
       var ids = this.oneSignalReady();
 
       if(ids){
         Server.send({
-          route : [Server.serverUrl(this.type_server),'app','login'],
+          route : [Server.serverUrl(this.type_server),'app','new_login'],
           data : {
             login: form,
             device: {
@@ -179,14 +174,31 @@
                 Alert.open('Datos incorrectos','El email y la contraseña no son correctos.','Aceptar');
               }else{
                 console.log(data);
-                PrivateData.set('country_server_id',data.auths[0].id);
-                PrivateData.set('country_server_url',data.auths[0].host);
+
+                var real_auths = [];
+
+                for(var i in data.auths){
+                  if(!data.auths[i].auths[0].false_auth){
+                    real_auths.push(data.auths[i]);
+                  }
+                }
+
+                console.log(real_auths)
+
                 PrivateData.set('email_logined',cs.email_login);
-                PrivateData.set('current_person_id',data.auths[0].auths[0].person_id);
                 PrivateData.set('is_login',true);
                 PrivateData.set('logined_version',app.VERSION);
+                if(real_auths.length > 0){
+                  PrivateData.set('country_server_id',real_auths[0].id);
+                  PrivateData.set('country_server_url',real_auths[0].host);
+                  PrivateData.set('current_person_id',real_auths[0].auths[0].person_id);
 
-                app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
+                  app.loadScreen(app.SCREENS.SELECT_AUTH, real_auths);
+                }else{
+                  PrivateData.set('password_logined',cs.password_login);
+
+                  app.loadScreen(app.SCREENS.SET_REGISTRATION_CODE);
+                }
               }
             }else{
               Alert.open('Lo sentimos','Ocurrió un error, intenta nuevamente por favor.','Aceptar');
@@ -202,6 +214,9 @@
 
     this.processForgotPassword = function(){
       var form = Extends.serializeForm('.forgot-password form');
+
+      document.activeElement.blur();
+      $("input").blur();
 
       $('.forgot-password #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
       $('.forgot-password #submit').prop('disabled', true);
@@ -228,39 +243,6 @@
       })
     }
 
-    this.processRegister = function(){
-      var form = Extends.serializeForm('.register-code form');
-
-      $('.register-code #submit').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
-      $('.register-code #submit').prop('disabled', true);
-      this.is_processing = true;
-
-      Server.send({
-        route : [Server.serverUrl(),'app','register_code'],
-        data : form,
-        callback : function(data, success){
-          if(success){
-            if(data.status == 'success'){
-              console.log(data);
-              app.loadScreen(app.SCREENS.REGISTER_TERMS_AND_CONDITIONS,{
-                code: data.data.code,
-                country_server_id: data.data.id,
-                person: data.data.data.person
-              });
-            }else{
-              Alert.open('Código incorrecto','El código ingresado es incorrecto o ya está en uso.','Aceptar');
-            }
-          }else{
-            Alert.open('Lo sentimos','Ocurrió un error intenta nuevamente por favor.','Aceptar');
-          }
-
-          cs.is_processing = false;
-          $('.register-code #submit').html('PROCESAR');
-          $('.register-code #submit').prop('disabled', false);
-        }
-      })
-    }
-
     this.oneSignalReady = function(){
       if(this.one_signal_ids){
         return this.one_signal_ids;
@@ -281,24 +263,30 @@
       }
     }
 
-    this.forgotPassword = function(){
-      if(this.is_processing){ return false; }
-      $('.layer').addClass('active-forgot-password');
-    }
+    this.activeLogin = function(){
+      $('.app>.content .page .layer').addClass('active-login');
+      this.status = "login";
+    };
 
-    this.forgotPasswordBack = function(){
-      if(this.is_processing){ return false; }
-      $('.layer').removeClass('active-forgot-password');
-    }
+    this.activeForgotPassword = function(){
+      $('.app>.content .page .layer').addClass('active-forgot-password');
+      this.status = "forgot_password";
+    };
 
-    this.registerCode = function(){
-      if(this.is_processing){ return false; }
-      $('.layer').addClass('active-register-code');
-    }
+    this.back = function(){
+      if(this.status == "login"){
+        $('.app>.content .page .layer').removeClass('active-login');
+        this.status = "first_screen";
+      }else if(this.status == "forgot_password"){
+        $('.app>.content .page .layer').removeClass('active-forgot-password');
+        this.status = "login";
+      }else{
+        navigator.app.exitApp();
+      }
+    };
 
-    this.registerCodeBack = function(){
-      if(this.is_processing){ return false; }
-      $('.layer').removeClass('active-register-code');
+    this.register = function(){
+      app.loadScreen(app.SCREENS.REGISTER_TERMS_AND_CONDITIONS);
     }
 
     this.dev = function(){

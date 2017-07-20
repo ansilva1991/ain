@@ -44,6 +44,27 @@ app.SCREENS = {
     html: "dashboard",
     section_name: "<span class='dashboard-icon icon-people-bubble'></span><span class='dashboard-text'>Inicio</span>"
   },
+  SET_REGISTRATION_CODE: {
+    icon_left: [
+    {
+      icon: "chevron-left",
+      func: function(){
+        cs.back();
+      }
+    }
+    ],
+    icon_right: [
+    {
+      text: "Listo <i class='fa fa-check'></i>",
+      func: function(){
+        cs.submit();
+      },
+      id: 'submit-button'
+    }
+    ],
+    section_name: "Nueva Unidad",
+    html: "set_registration_code"
+  },
   DEPRECATED: {
     html: "deprecated",
     header: false

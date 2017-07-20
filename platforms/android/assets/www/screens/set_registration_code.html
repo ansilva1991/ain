@@ -1,0 +1,145 @@
+<div class="set-registration-code">
+  <form class="form-horizontal">
+    <div class="form-group not_editable">
+      <h5>El código inicial es una forma de autenticación de tu identidad como propietario de la unidad. La obtención del código, procesamiento del mismo y posterior uso de la aplicación es <b>GRATUITO</b>.</h5>
+      <label for="code">Ingresa tu código</label>
+      <input type="text" name="code" id="code" class="form-control">
+      <button type="button">¿Cómo obtengo mi código?</button>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.go_to;
+    this.is_processing = false;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.go_to = opts.go_to;
+
+      $('.set-registration-code form').submit(function(){
+        cs.submit();
+        return false;
+      });
+
+      $('#real_id').keydown(function(e){
+        if(e.keyCode == 9 || e.keyCode == 13){
+          cs.submit();
+        }
+      });
+
+      $(window).resize(function(){
+        Extends.scrollToInputFocus('.set-registration-code');
+      });
+
+      app.liActive('authorizations');
+      app.pageLoading('hide');
+
+      cs.started = true;
+    }
+
+
+    this.submit = function(){
+      if(this.is_processing){ return false; }
+
+      var form = Extends.serializeForm('.set-registration-code form');
+
+      form.code = form.code.toUpperCase();
+
+      console.log(form);
+
+      if(form.code.length == 0 || !form.code.match(/^[A-Z0-9]{2}\-[A-Z0-9]{5}$/)){
+        Alert.open('Código','Ingresa un código válido para continuar.','Aceptar');
+        return false;
+      }
+
+      this.code = form.code;
+
+      $('#submit-button').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+      $('#submit-button').removeClass('text');
+
+      this.is_processing = true;
+
+      var ids = this.oneSignalReady();
+
+      if(ids){
+        Server.send({
+          route : [Server.serverUrl(PrivateData.get('type_server')),'app','new_registration_code'],
+          data : {
+            email: PrivateData.get('email_logined'),
+            password: PrivateData.get('password_logined'),
+            registration_code: form.code,
+            device: {
+              model: device.model,
+              platform: device.platform,
+              version: device.version,
+              uuid: localStorage.uuid,
+              one_signal_push_token: ids.pushToken,
+              one_signal_user_id: ids.userId,
+              original_uuid: device.uuid
+            }
+          },
+          callback : function(data, success){
+            console.log(data);
+            if(success){
+
+              if(data.data.status == "success" && data.data.auth_code != undefined){
+                var data = data.data;
+
+                PrivateData.set('country_server_id',data.country_server_id);
+                PrivateData.set('country_server_url',data.country_server_url);
+                PrivateData.set('current_person_id',data.person_id);
+                PrivateData.set('current_auth_code',data.auth_code);
+                PrivateData.set('current_server_portal',data.url_server_for_app);
+                PrivateData.set('current_group_id',data.group_id);
+                PrivateData.set('current_authorizations_number',1);
+
+                app.resetConfig();
+                app.updateConfig(function(){
+                  app.updateMenuInfo();
+                  app.loadScreen(app.SCREENS.WELCOME);
+                });
+
+              }else{
+                Alert.open('Código','El código ingresado es incorrecto, esta vencido o ya está en uso.','Aceptar');
+              }
+            }else{
+              Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
+            }
+
+            cs.is_processing = false;
+            $('#submit-button').html("Listo <i class='fa fa-check'></i>");
+            $('#submit-button').addClass('text');
+          }
+        });
+      }
+    };
+
+    this.oneSignalReady = function(){
+      if(this.one_signal_ids){
+        return this.one_signal_ids;
+      }else{
+        if(app.onesignal_active && window.plugins.OneSignal && window.plugins.OneSignal.startInit){
+          window.plugins.OneSignal.getIds(function(ids){
+            cs.one_signal_ids = ids;
+            cs.submit();
+          });
+          return false;
+        }else{
+          return {
+            pushToken: "",
+            userId: ""
+          };
+        }
+
+      }
+    }
+
+    this.back = function(){
+      PrivateData.clear();
+      app.loadScreen(app.SCREENS.LOGIN);
+    };
+  }
+</script>

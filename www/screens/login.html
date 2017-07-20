@@ -9,7 +9,7 @@
           <div class="content-first-screen">
             <span class="icon-people-bubble"></span>
             <h4>Bienvenido a AccessIn</h4>
-            <h5>El agua nos une, el futuro también.</h5>
+            <h5>Toda tu comunidad en la palma de tu mano.</h5>
             <button class="btn btn-block btn-white" type="button" onclick="cs.register();">Aún no estoy registrado</button>
             <button class="btn btn-block btn-line" type="button" onclick="cs.activeLogin();">Ya estoy registrado</button>
           </div>
@@ -77,6 +77,7 @@
     this.dev_count = 0;
     this.is_processing = false;
     this.email_login = undefined;
+    this.password_login = undefined;
     this.one_signal_ids;
     this.type_server = "real";
     this.status = "first_screen";
@@ -99,6 +100,12 @@
       });
 
       app.pageLoading('hide');
+
+      if(opts.success_register){
+        setTimeout(function(){
+          Alert.open('Bienvenido','Ingresa con tus datos para comenzar a disfrutar de AccessIn.','Aceptar');
+        },200);
+      }
     }
 
     this.processLogin = function(){
@@ -122,15 +129,17 @@
       $('.login #submit').prop('disabled', true);
       this.is_processing = true;
       this.email_login = form.email;
+      this.password_login = form.password;
 
       PrivateData.clear();
       PrivateData.set('is_login',false);
+      PrivateData.set('type_server',this.type_server);
 
       var ids = this.oneSignalReady();
 
       if(ids){
         Server.send({
-          route : [Server.serverUrl(this.type_server),'app','login'],
+          route : [Server.serverUrl(this.type_server),'app','new_login'],
           data : {
             login: form,
             device: {
@@ -165,14 +174,31 @@
                 Alert.open('Datos incorrectos','El email y la contraseña no son correctos.','Aceptar');
               }else{
                 console.log(data);
-                PrivateData.set('country_server_id',data.auths[0].id);
-                PrivateData.set('country_server_url',data.auths[0].host);
+
+                var real_auths = [];
+
+                for(var i in data.auths){
+                  if(!data.auths[i].auths[0].false_auth){
+                    real_auths.push(data.auths[i]);
+                  }
+                }
+
+                console.log(real_auths)
+
                 PrivateData.set('email_logined',cs.email_login);
-                PrivateData.set('current_person_id',data.auths[0].auths[0].person_id);
                 PrivateData.set('is_login',true);
                 PrivateData.set('logined_version',app.VERSION);
+                if(real_auths.length > 0){
+                  PrivateData.set('country_server_id',real_auths[0].id);
+                  PrivateData.set('country_server_url',real_auths[0].host);
+                  PrivateData.set('current_person_id',real_auths[0].auths[0].person_id);
 
-                app.loadScreen(app.SCREENS.SELECT_AUTH, data.auths);
+                  app.loadScreen(app.SCREENS.SELECT_AUTH, real_auths);
+                }else{
+                  PrivateData.set('password_logined',cs.password_login);
+
+                  app.loadScreen(app.SCREENS.SET_REGISTRATION_CODE);
+                }
               }
             }else{
               Alert.open('Lo sentimos','Ocurrió un error, intenta nuevamente por favor.','Aceptar');
