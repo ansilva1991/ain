@@ -52,7 +52,7 @@
       <label for="password_confirmation">REPITA CONTRASEÑA</label>
       <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
     </div>
-    <button class="btn btn-block btn-orange" type="button" onclick="cs.submit();" id="submit">CONTINUAR</button>
+    <button class="btn btn-block btn-orange" type="submit" onclick="cs.submit();" id="submit">CONTINUAR</button>
     <h5 onclick="cs.back();">Volver</h5>
   </form>
 </div>
@@ -71,16 +71,17 @@
       Extends.name('#name, #last_name');
 
       $('form').submit(function(){
+        cs.submit();
         return false;
       });
 
-      $('#name').val(opts.person.name || "");
+      /*$('#name').val(opts.person.name || "");
       $('#last_name').val(opts.person.last_name || "");
       $('#real_id').val(opts.person.real_id || "");
       $('#birthdate').val(opts.person.birthdate || "");
       $('#phone').val(opts.person.phone || "");
       $('#email').val(opts.person.email || "");
-      $('#sex [data-n="' + opts.person.sex + '"]').addClass('checked');
+      $('#sex [data-n="' + opts.person.sex + '"]').addClass('checked');*/
 
       Extends.inputRadios('.form-radios');
 
@@ -146,15 +147,14 @@
       this.is_processing = true;
 
       Server.send({
-        route : [Server.serverUrl(),'app','register'],
+        route : [Server.serverUrl(),'app','new_register'],
         data : {
-          code: this.init_opts.code,
-          country_server_id: this.init_opts.country_server_id,
+          country_server_id: 1,
           person: form
         },
         callback : function(data, success){
           console.log(data);
-          if(success){
+          if(success && data.data != false){
             if(data.data.errors && Object.keys(data.data.errors).length > 0){
               if(data.data.errors.email){
                 if(data.data.errors.email[0] == "Ya en uso"){

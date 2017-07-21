@@ -1,9 +1,9 @@
 var app = {
-  VERSION: 228,
+  VERSION: 229,
   PORTAL_VERSION: 224,
   MINIUM_VERSION_LOGUINED: 222,
   ENV: "production",
-  DEV_IP: "10.0.200.23",
+  DEV_IP: "127.0.0.1",
   onesignal_active: true,
   load_screen_ajax: false,
   current_screen: false,
@@ -110,6 +110,8 @@ var app = {
           }
 
         });
+      }else if(PrivateData.get('password_logined')){
+        app.loadScreen(app.SCREENS.SET_REGISTRATION_CODE);
       }else{
         app.loadScreen(app.SCREENS.SELECT_AUTH);
       }
@@ -657,8 +659,10 @@ var PrivateData = {
     current_auth_code: "mkemd",
     current_server_portal: "spkmk",
     email_logined: "eljjh",
+    password_logined: "elbjh",
     is_login: "evjjh",
     is_demo: "diskk",
+    type_server: "uiskk",
     logined_version: "lvsyd",
     current_person_id: "evjjc",
     current_person_full_name: "esjjc",

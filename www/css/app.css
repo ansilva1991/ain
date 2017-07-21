@@ -542,19 +542,30 @@ button.btn.btn-orange:disabled{
   text-transform: uppercase;
 }
 
-.login{
+.app>.content .page .first-screen-layers{
   width: 100%;
+  height: 100%;
   position: fixed;
   top: 0px;
   bottom: 0px;
   left: 0px;
   right: 0px;
-  background-color: #ff9900;
+  background-color: #ffa400;
+  background-image: url(../img/back_gradient_login.png);
+  background-size: 100% 100%;
+}
+
+.app>.content .page .first-screen{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   text-align: center;
   overflow-x: hidden;
   overflow-y: auto;
-  background-image: url(../img/back_gradient_login.png);
-  background-size: 100% 100%;
 
   -webkit-transition: -webkit-transform 200ms ease, bottom 200ms ease;
   -moz-transition: -moz-transform 200ms ease, bottom 200ms ease;
@@ -569,212 +580,316 @@ button.btn.btn-orange:disabled{
   transform: translate3d(0,0,0);
 }
 
-.login form{
-  width: 80%;
-  height: 100%;
-  margin: auto;
-  min-height: 500px;
-  left: 10%;
-  position: absolute;
-}
-
-.login form>.row.logo{
+.app>.content .page .first-screen .table{
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0px;
-}
-
-.login form>.row.logo>.cell{
-  width: 100%;
-  height: 100%;
-  padding-bottom: 284px;
-
-  -webkit-transition: padding-bottom 1000ms ease;
-  -moz-transition: padding-bottom 1000ms ease;
-  -ms-transition: padding-bottom 1000ms ease;
-  -o-transition: padding-bottom 1000ms ease;
-  transition: padding-bottom 1000ms ease;
-}
-
-.login.init form>.row.logo>.cell span.icon-people-bubble{
-  font-size: 170px;
-  margin-top: -160px;
-}
-
-.login.init form>.row.logo>.cell span.icon-accessin{
-  opacity: 1;
-}
-
-.login form span.login-logo{
-  width: 100%;
-  position: relative;
-  top: 50%;
-  margin-top: -75px;
-  text-align: center;
-  color: #fff;
-  font-size: 150px;
-  display: block;
-
-  -webkit-transition: margin-top 1000ms ease, font-size 1000ms ease;
-  -moz-transition: margin-top 1000ms ease, font-size 1000ms ease;
-  -ms-transition: margin-top 1000ms ease, font-size 1000ms ease;
-  -o-transition: margin-top 1000ms ease, font-size 1000ms ease;
-  transition: margin-top 1000ms ease, font-size 1000ms ease;
-}
-
-.login form span.icon-accessin{
-  width: 100%;
-  position: relative;
-  top: 50%;
-  opacity: 0;
-  font-size: 260px;
-  margin-top: -75px;
-  text-align: center;
-  color: #fff;
-  display: block;
-
-  -webkit-transition: opacity 1000ms ease;
-  -moz-transition: opacity 1000ms ease;
-  -ms-transition: opacity 1000ms ease;
-  -o-transition: opacity 1000ms ease;
-  transition: opacity 1000ms ease;
-}
-
-.login.init form>.row.logo .cell{
-  padding: 0px;
-}
-
-.login.init form>.row.form{
-  bottom: -300px;
-}
-
-.login form>.row.form .cell{
-  width: 100%;
-  margin: auto;
-  max-width: 500px;
-}
-
-.login form>.row.form{
-  width: 100%;
-  position: absolute;
-  bottom: 0px;
-
-  -webkit-transition: bottom 1000ms ease;
-  -moz-transition: bottom 1000ms ease;
-  -ms-transition: bottom 1000ms ease;
-  -o-transition: bottom 1000ms ease;
-  transition: bottom 1000ms ease;
-}
-
-@media screen and (min-height: 700px){
-  .login form>.row.form{
-    bottom: 50px;
-  }
-}
-
-@media screen and (min-height: 900px){
-  .login form>.row.form{
-    bottom: 100px;
-  }
-}
-
-
-.login form .input{
-  width: 100%;
-  height: 55px;
-  overflow: hidden;
-}
-
-.login form input{
-  width: 100%;
-  height: 35px;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #fff;
-  line-height: 30px;
-  font-size: 16px;
-  color: #fff;
-  outline: none;
-  border-radius: 0px;
-}
-
-.login form label{
-  width: 100%;
-  text-align: left;
-  color: #fff;
-  font-size: 16px;
-  display: block;
-}
-
-.login form .password{
-  width: 100%;
-  height: 50px;
   display: table;
-  margin-top: 20px;
-  border-bottom: 1px solid #fff;
 }
 
-.login form .password .row{
+.app>.content .page .first-screen .table .row{
   display: table-row;
 }
 
-.login form .password .cell{
-  height: 50px;
-  padding: 0px;
-  margin: 0px;
+.app>.content .page .first-screen .table .cell{
   display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .first-screen .content-first-screen{
+  text-align: center;
   width: 100%;
-  vertical-align: top;
+  padding-left: 50px;
+  padding-right: 50px;
+  max-width: 500px;
+  margin: auto;
 }
 
-.login form .password input{
-  border: none;
+.app>.content .page .first-screen .content-first-screen span{
+  font-size: 110px;
+  color: #fff;
+  margin-bottom: 40px;
+  display: block;
 }
 
-.login form .password button{
-  width: 100px;
-  height: 49px;
+.app>.content .page .first-screen .content-first-screen h4{
+  font-size: 26px;
+  font-weight: 800;
+  text-align: left;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.app>.content .page .first-screen .content-first-screen h5{
+  font-size: 18px;
+  text-align: left;
+  margin-top: 0px;
+  color: #fff;
+  font-weight: 300;
+}
+
+.app>.content .page .first-screen .content-first-screen .btn-white{
+  background-color: #fff;
+  color: #ffa400;
+  margin-top: 0px;
+  margin-bottom: 15px;
+  padding: 0px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.app>.content .page .first-screen .content-first-screen .btn-line{
   background-color: transparent;
-  border: none;
-  font-size: 16px;
+  border: 1px #fff solid;
   color: #fff;
   padding: 0px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
-
-.login form button.btn{
-  margin-top: 40px;
-  text-transform: uppercase;
-}
-
-.login form h5{
-  font-size: 16px;
-  color: #fff;
-  padding-bottom: 30px;
-  margin-bottom: 0px;
-}
-
-.forgot-password{
+.app>.content .page .login{
   width: 100%;
+  height: 100%;
   position: fixed;
   top: 0px;
   bottom: 0px;
   left: 0px;
   right: 0px;
-  background-color: #fff;
   text-align: center;
   overflow-x: hidden;
   overflow-y: auto;
-  background-image: url(../img/back_gradient_login.png);
   background-size: 100% 100%;
 
-  -webkit-transition: -webkit-transform 200ms ease;
-  -moz-transition: -moz-transform 200ms ease;
-  -ms-transition: -ms-transform 200ms ease;
-  -o-transition: -o-transform 200ms ease;
-  transition: transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease, bottom 200ms ease;
+  -moz-transition: -moz-transform 200ms ease, bottom 200ms ease;
+  -ms-transition: -ms-transform 200ms ease, bottom 200ms ease;
+  -o-transition: -o-transform 200ms ease, bottom 200ms ease;
+  transition: transform 200ms ease, bottom 200ms ease;
 
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
+}
+
+.app>.content .page .login .table{
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+.app>.content .page .login .table .row{
+  display: table-row;
+}
+
+.app>.content .page .login .table .cell{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .login .content-first-screen{
+  text-align: center;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  max-width: 500px;
+  margin: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.app>.content .page .login .content-first-screen span{
+  font-size: 50px;
+  color: #fff;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.app>.content .page .login .content-first-screen h4{
+  font-size: 26px;
+  font-weight: 800;
+  text-align: left;
+  margin-bottom: 30px;
+  margin-top: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.app>.content .page .login .content-first-screen input{
+  width: 100%;
+  background-color: transparent;
+  border-bottom: 1px #fff solid;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #fff;
+  padding-bottom: 5px;
+}
+
+.app>.content .page .login .content-first-screen input:focus{
+  outline: none;
+  border-bottom: 1px #fff solid;
+}
+
+.app>.content .page .login .content-first-screen h6{
+  color: #fff;
+  margin: 0px;
+  margin-top: 20px;
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .login .content-first-screen a{
+  font-size: 12px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.app>.content .page .login .content-first-screen .btn-text{
+  background: transparent;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.app>.content .page .login .content-first-screen .btn-login{
+  background-color: #ffa400;
+  font-size: 18px;
+  margin-top: 25px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.app>.content .page .forgot-password{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-size: 100% 100%;
+
+  -webkit-transition: -webkit-transform 200ms ease, bottom 200ms ease;
+  -moz-transition: -moz-transform 200ms ease, bottom 200ms ease;
+  -ms-transition: -ms-transform 200ms ease, bottom 200ms ease;
+  -o-transition: -o-transform 200ms ease, bottom 200ms ease;
+  transition: transform 200ms ease, bottom 200ms ease;
+
+  -webkit-transform: translate3d(200%,0,0);
+  -moz-transform: translate3d(200%,0,0);
+  -ms-transform: translate3d(200%,0,0);
+  -o-transform: translate3d(200%,0,0);
+  transform: translate3d(200%,0,0);
+}
+
+.app>.content .page .forgot-password .table{
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+.app>.content .page .forgot-password .table .row{
+  display: table-row;
+}
+
+.app>.content .page .forgot-password .table .cell{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.app>.content .page .forgot-password .content-first-screen{
+  text-align: center;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  max-width: 500px;
+  margin: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.app>.content .page .forgot-password .content-first-screen span{
+  font-size: 70px;
+  color: #fff;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.app>.content .page .forgot-password .content-first-screen h4{
+  font-size: 26px;
+  font-weight: 800;
+  text-align: left;
+  margin-bottom: 10px;
+  margin-top: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.app>.content .page .forgot-password .content-first-screen h5{
+  font-size: 18px;
+  text-align: left;
+  margin-top: 0px;
+  color: #fff;
+  font-weight: 300;
+}
+
+.app>.content .page .forgot-password .content-first-screen input{
+  width: 100%;
+  background-color: transparent;
+  border-bottom: 1px #fff solid;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #fff;
+  padding-bottom: 5px;
+}
+
+.app>.content .page .forgot-password .content-first-screen input:focus{
+  outline: none;
+  border-bottom: 1px #fff solid;
+}
+
+.app>.content .page .forgot-password .content-first-screen h6{
+  color: #fff;
+  margin: 0px;
+  margin-top: 20px;
+  text-align: left;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.app>.content .page .forgot-password .content-first-screen a{
+  font-size: 12px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.app>.content .page .forgot-password .content-first-screen .btn-text{
+  background: transparent;
+  font-size: 12px;
+  margin-top: 0px;
+}
+
+.app>.content .page .forgot-password .content-first-screen .btn-forgot-password{
+  background-color: #ffa400;
+  font-size: 16px;
+  margin-top: 25px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.app>.content .page .first-screen.active-login{
   -webkit-transform: translate3d(-100%,0,0);
   -moz-transform: translate3d(-100%,0,0);
   -ms-transform: translate3d(-100%,0,0);
@@ -782,91 +897,44 @@ button.btn.btn-orange:disabled{
   transform: translate3d(-100%,0,0);
 }
 
-.forgot-password form{
-  width: 80%;
-  height: 100%;
-  margin: auto;
-  max-width: 400px;
-  display: table;
+.app>.content .page .login.active-login{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
 }
 
-.forgot-password form>.row{
-  display: table-row;
-  height: 100%;
+.app>.content .page .forgot-password.active-login{
+  -webkit-transform: translate3d(100%,0,0);
+  -moz-transform: translate3d(100%,0,0);
+  -ms-transform: translate3d(100%,0,0);
+  -o-transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
 }
 
-.forgot-password form>.row>.cell{
-  display: table-cell;
-  height: 100%;
-  vertical-align: middle;
+.app>.content .page .first-screen.active-forgot-password{
+  -webkit-transform: translate3d(-200%,0,0);
+  -moz-transform: translate3d(-200%,0,0);
+  -ms-transform: translate3d(-200%,0,0);
+  -o-transform: translate3d(-200%,0,0);
+  transform: translate3d(-200%,0,0);
 }
 
-.forgot-password form span.icon-people-bubble{
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  font-size: 150px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: block;
+.app>.content .page .login.active-forgot-password{
+  -webkit-transform: translate3d(-100%,0,0);
+  -moz-transform: translate3d(-100%,0,0);
+  -ms-transform: translate3d(-100%,0,0);
+  -o-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
 }
 
-.forgot-password form .input{
-  width: 100%;
-  height: 55px;
-  overflow: hidden;
-}
-
-.forgot-password form input{
-  width: 100%;
-  height: 35px;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #fff;
-  line-height: 30px;
-  font-size: 12px;
-  color: #fff;
-  outline: none;
-  border-radius: 0px;
-}
-
-.forgot-password form label{
-  width: 100%;
-  text-align: left;
-  color: #fff;
-  font-size: 16px;
-  display: block;
-}
-
-.forgot-password form button.btn{
-  margin-top: 10px;
-  text-transform: uppercase;
-}
-
-.forgot-password form h4{
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 30px;
-  display: block;
-}
-
-.forgot-password form h5{
-  font-size: 16px;
-  color: #fff;
-  padding-bottom: 60px;
-  margin-bottom: 0px;
-}
-
-@media screen and (min-height: 700px){
-  .forgot-password form h5{
-    bottom: 80px;
-  }
-}
-
-@media screen and (min-height: 900px){
-  .forgot-password form h5{
-    margin-bottom: 130px;
-  }
+.app>.content .page .forgot-password.active-forgot-password{
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
 }
 
 .register-code{
@@ -1111,6 +1179,7 @@ button.btn.btn-orange:disabled{
   width: 33.333333333333333%;
   display: table-cell;
   overflow: hidden;
+  font-size: 15px;
 }
 
 .register form>.form-group .form-radios .radio .circle{
@@ -5870,4 +5939,106 @@ button.btn.btn-orange:disabled{
   font-size: 17px;
   text-transform: uppercase;
   color: #777;
+}
+
+.app>.content .page .set-registration-code{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .set-registration-code .checked-data{
+  width: 100%;
+  background-color: #40bbea;
+  color: #fff;
+  font-size: 14px;
+  padding: 20px;
+  display: none;
+}
+
+
+.app>.content .page .set-registration-code .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .set-registration-code h5{
+  color: #999;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.app>.content .page .set-registration-code b{
+  color: #ffa400 !important;
+}
+
+.app>.content .page .set-registration-code button{
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  color: #999;
+  margin-top: 20px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .set-registration-code input{
+  text-transform: uppercase;
+}
+
+.app>.content .page .request-registration-code{
+  width: 100%;
+  position: fixed;
+  top: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.app>.content .page .request-registration-code .checked-data{
+  width: 100%;
+  background-color: #40bbea;
+  color: #fff;
+  font-size: 14px;
+  padding: 20px;
+  display: none;
+}
+
+
+.app>.content .page .request-registration-code .form-horizontal{
+  width: 90% !important;
+}
+
+.app>.content .page .request-registration-code h5{
+  color: #999;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.app>.content .page .request-registration-code b{
+  color: #ffa400 !important;
+}
+
+.app>.content .page .request-registration-code button{
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  color: #999;
+  margin-top: 20px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.app>.content .page .request-registration-code input{
+  text-transform: uppercase;
 }

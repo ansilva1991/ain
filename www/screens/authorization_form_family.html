@@ -297,6 +297,10 @@
                   Alert.open(U.t("screens.authorization_form_family.errors.is_owner.title"),U.t("screens.authorization_form_family.errors.is_owner.message"),U.t("screens.authorization_form_family.errors.is_owner.button"));
                 }
 
+                if(error == 'is_family'){
+                  Alert.open('Ups','Esta persona ya está vinculada a tu propiedad.','Aceptar');
+                }
+
                 if(error == 'is_visit'){
                   Alert.open(U.t("screens.authorization_form_family.errors.is_visit.title"),U.t("screens.authorization_form_family.errors.is_visit.message"),U.t("screens.authorization_form_family.errors.is_visit.button"));
                 }
