@@ -3,13 +3,12 @@
     <div class="form-group not_editable">
       <label for="client">Consorcio o Barrio</label>
       <input type="text" name="client" id="client" class="form-control">
-      <label for="group">Identificador de Unidad</label>
+      <label for="group">Unidad</label>
       <input type="text" name="group" id="group" class="form-control">
-      <label for="email">Email alternativo</label>
+      <label for="email">Email alternativo (Opcional)</label>
       <input type="email" name="email" id="email" class="form-control">
-      <label for="phone">Teléfono de contacto</label>
+      <label for="phone">Teléfono de contacto (Opcional)</label>
       <input type="tel" name="phone" id="phone" class="form-control">
-      <h5>El email y teléfono ingresados sólo se utilizarán para comunicar el código de inicio.</h5>
     </div>
   </form>
 </div>
@@ -47,17 +46,7 @@
       }
 
       if(form.group.length == 0 || !form.group.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
-        Alert.open('Identificador de Unidad','Debes ingresar una unidad válida para continuar.','Aceptar');
-        return false;
-      }
-
-      if(form.email.length == 0 || !form.email.match(/^([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+$/i)){
-        Alert.open('Email','Debes ingresar un email válido para continuar.','Aceptar');
-        return false;
-      }
-
-      if(form.phone.length == 0 || !form.phone.match(/^([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+$/i)){
-        Alert.open('Teléfono','Debes ingresar un teléfono válido para continuar.','Aceptar');
+        Alert.open('Unidad','Debes ingresar una unidad válida para continuar.','Aceptar');
         return false;
       }
 
