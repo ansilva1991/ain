@@ -1938,6 +1938,10 @@ button.btn.btn-orange:disabled{
   transition: none;
 }
 
+.app>.content .page .list.events.without-subheader{
+  top: 60px;
+}
+
 .app>.content .page .list.events>h5{
   width: 100%;
   color: #777;
@@ -2378,16 +2382,44 @@ button.btn.btn-orange:disabled{
   height: 60px;
   display: table-row;
 }
-.app>.content .page .event-calendar-day>.day-scroll .day .block.disabled .content{
-  background: #eee;
-  border-color: #ccc;
-  text-align: center;
-  color: #777;
-  font-size: 12px;
-  line-height: 60px;
-  text-transform: uppercase;
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block-text{
+  width: 100%;
+  height: 60px;
 }
 
+.app>.content .page .event-calendar-day>.day-scroll .day .block-text .table{
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block-text .table .row{
+  display: table-row;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block-text .table .row .cell{
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block-text.not_available .table .row .cell{
+  background-color: #eee;
+  color: #777;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block-text.others-events{
+  height: 40px;
+}
+
+.app>.content .page .event-calendar-day>.day-scroll .day .block-text.others-events .table .row .cell{
+  background-color: #ffa400;
+  color: #fff;
+}
 
 .app>.content .page .event-calendar-day>.day-scroll .day .block .label{
   display: table-cell;
@@ -2552,7 +2584,7 @@ button.btn.btn-orange:disabled{
   overflow: auto;
 }
 
-.app>.content .page .event-form form>h5{
+.app>.content .page .event-form form h5#none{
   width: 100%;
   color: #777;
   text-align: center;

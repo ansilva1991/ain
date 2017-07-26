@@ -55,15 +55,20 @@
     this.start = function(opts){
       opts = opts || {};
 
-      var hammertime = new Hammer($('.list.events.event_places')[0]);
-      hammertime.on('swipeleft', function(ev) {
-        cs.selectTab($('.sub-header .item')[1]);
-      });
+      if(PrivateData.get('module_events_guests_lists_active')){
+        var hammertime = new Hammer($('.list.events.event_places')[0]);
+        hammertime.on('swipeleft', function(ev) {
+          cs.selectTab($('.sub-header .item')[1]);
+        });
 
-      var hammertime = new Hammer($('.list.events.guest_lists')[0]);
-      hammertime.on('swiperight', function(ev) {
-        cs.selectTab($('.sub-header .item')[0]);
-      });
+        var hammertime = new Hammer($('.list.events.guest_lists')[0]);
+        hammertime.on('swiperight', function(ev) {
+          cs.selectTab($('.sub-header .item')[0]);
+        });
+      }else{
+        $('.sub-header').hide();
+        $('.app>.content .page .list.events').addClass('without-subheader');
+      }
 
       if(opts.open_in){
         cs.selectTab($('.sub-header .item')[opts.open_in]);

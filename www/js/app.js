@@ -1,9 +1,9 @@
 var app = {
-  VERSION: 229,
-  PORTAL_VERSION: 224,
+  VERSION: 230,
+  PORTAL_VERSION: 229,
   MINIUM_VERSION_LOGUINED: 222,
   ENV: "production",
-  DEV_IP: "127.0.0.1",
+  DEV_IP: "192.168.1.15",
   onesignal_active: true,
   load_screen_ajax: false,
   current_screen: false,
@@ -269,6 +269,12 @@ var app = {
       $('.app>.menu .content [data-module="electronic_keys"]').show();
     }
 
+    if(PrivateData.get('module_authorizations_active')){
+      $('.app>.menu .content [data-module="authorizations"] .label').html("Autorizaciones");
+    }else{
+      $('.app>.menu .content [data-module="authorizations"] .label').html("Mi Cuenta");
+    }
+
     if(PrivateData.get('current_authorizations_number') < 2){
       $('.app>.menu .content .header #btn_select_auth').hide();
     }else{
@@ -325,6 +331,8 @@ var app = {
             PrivateData.set('current_group_identificator_one',data.current_group_identificator_one);
             PrivateData.set('current_group_identificator_others',data.current_group_identificator_others);
             PrivateData.set('module_expense_active',data.module_expense_active);
+            PrivateData.set('module_events_guests_lists_active',data.module_events_guests_lists_active);
+            PrivateData.set('module_authorizations_active',data.module_authorizations_active);
             PrivateData.set('module_guard_active',data.module_guard_active);
             PrivateData.set('module_events_active',data.module_events_active);
             PrivateData.set('hidden_authorizations',data.hidden_authorizations);
@@ -679,19 +687,37 @@ var PrivateData = {
     hidden_authorizations: "kkwue",
     last_config_sync: "lcsyd",
     last_update_popup: "vcsyd",
+    module_authorizations_active: "aeadd",
     module_expense_active: "meadd",
     module_guard_active: "mgadd",
     module_events_active: "mevad",
+    module_events_guests_lists_active: "muvad",
     module_electronic_keys_active: "mqrac",
     time_zone_offset: "tzofs",
     debug_weinre_ip: "weine"
   },
-  booleans : ["is_login","is_demo"],
+  booleans : [
+    "is_login",
+    "is_demo",
+    "module_expense_active",
+    "module_guard_active",
+    "module_events_active",
+    "module_events_guests_lists_active",
+    "module_electronic_keys_active"
+  ],
+  defaults: {
+    module_authorizations_active: true,
+    module_events_guests_lists_active: true
+  },
   get : function(key){
-    if(PrivateData.booleans.indexOf(key) > -1){
-      return localStorage[PrivateData.hide_fields[key]] ? Security.decrypt(localStorage[PrivateData.hide_fields[key]]) : false;
+    if(PrivateData.hide_fields[key] in localStorage){
+      if(PrivateData.booleans.indexOf(key) > -1){
+        return localStorage[PrivateData.hide_fields[key]] ? Security.decrypt(localStorage[PrivateData.hide_fields[key]]) : false;
+      }else{
+        return localStorage[PrivateData.hide_fields[key]] ? Security.decrypt(localStorage[PrivateData.hide_fields[key]]) : undefined;
+      }
     }else{
-      return localStorage[PrivateData.hide_fields[key]] ? Security.decrypt(localStorage[PrivateData.hide_fields[key]]) : undefined;
+      return PrivateData.defaults[key];
     }
   },
   set : function(key,value){
