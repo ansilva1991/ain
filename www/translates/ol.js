@@ -11,6 +11,17 @@ locales["ol"] = {
       }
     }
   },
+  menu_lateral: {
+    events: "Eventos",
+    communications: "Comunicaciones",
+    expenses: "Expensas",
+    guard: "Portería",
+    authorizations: "Autorizaciones",
+    my_account: "Mi Cuenta",
+    electronic_keys: "Mis Llaves",
+    useful_info: "Información Útil",
+    configuration: "Configuración"
+  },
   screens: {
     welcome: {
       authorizations: {
