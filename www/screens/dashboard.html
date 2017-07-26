@@ -41,7 +41,7 @@
       Portería
     </div>
   </div>
-  <div class="item" onclick="app.selectLiMenu(app.SCREENS.AUTHORIZATIONS);">
+  <div class="item" onclick="app.selectLiMenu(app.SCREENS.AUTHORIZATIONS);" data-module="authorizations">
     <div class="icon">
       <span class="icon-authorizations"></span>
     </div>
@@ -78,6 +78,10 @@
 
       if(!PrivateData.get('module_electronic_keys_active')){
         $('.dashboard [data-module="electronic_keys"]').remove();
+      }
+
+      if(!PrivateData.get('module_authorizations_active')){
+        $('.dashboard [data-module="authorizations"] .text').html('Mi Cuenta');
       }
 
       if(!app.load_with_notification){

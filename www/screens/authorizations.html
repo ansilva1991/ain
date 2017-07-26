@@ -82,6 +82,13 @@
       opts = opts || {};
       var authorizations_hiddens = (PrivateData.get('hidden_authorizations') || "").split(',');
 
+      if(!PrivateData.get('module_authorizations_active')){
+        app.loadScreen(app.SCREENS.AUTHORIZATION_FORM_FAMILY,{
+          person_id: PrivateData.get('current_person_id')
+        });
+        return false;
+      }
+
       if(authorizations_hiddens.indexOf("AuthorizationVisit") == -1 && authorizations_hiddens.indexOf("AuthorizationEmployee") == -1){
         var hammertime = new Hammer($('.list.authorizations.families')[0]);
         hammertime.on('swipeleft', function(ev) {

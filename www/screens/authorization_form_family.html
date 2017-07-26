@@ -342,7 +342,11 @@
     };
 
     this.back = function(){
-      app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+      if(PrivateData.get('module_authorizations_active')){
+        app.loadScreen(app.SCREENS.AUTHORIZATIONS);
+      }else{
+        app.loadScreen(app.SCREENS.DASHBOARD);
+      }
     };
 
     this.avatarFrom = function(type){

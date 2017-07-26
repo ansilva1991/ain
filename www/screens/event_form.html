@@ -23,7 +23,7 @@
     <div class="form-group cancel-event-button">
       <button type="button" onclick="cs.cancelEvent();" class="btn btn-orange btn-block text-uppercase">Cancelar Evento</button>
     </div>
-    <div class="form-group">
+    <div class="form-group guests_hide">
       <label for="allow_guests_previous_minutes">Permitir ingresar a los invitados</label>
       <select class="form-control" name="allow_guests_previous_minutes" id="allow_guests_previous_minutes">
         <option value="15">15 Minutos antes de la fecha de inicio del evento</option>
@@ -40,19 +40,21 @@
       <label for="price">Precio Estimado</label>
       <input type="text" class="form-control" id="estimated_price">
     </div>
-    <legend>INVITADOS (<span id="total_guests">0</span>/<span id="max_people">0</span>)</legend>
-    <h5 id="none">Sin invitados agregados a la lista.</h5>
-    <div id="example" style="display: none;">
-      <input type="hidden" id="name">
-      <input type="hidden" id="last_name">
-      <input type="hidden" id="real_id">
-      <input type="hidden" id="id">
-      <input type="hidden" id="erased">
-      <h4 id="label_full_name"></h4>
-      <h5 id="label_real_id"></h5>
+    <div class="guests_hide">
+      <legend>INVITADOS (<span id="total_guests">0</span>/<span id="max_people">0</span>)</legend>
+      <h5 id="none">Sin invitados agregados a la lista.</h5>
+      <div id="example" style="display: none;">
+        <input type="hidden" id="name">
+        <input type="hidden" id="last_name">
+        <input type="hidden" id="real_id">
+        <input type="hidden" id="id">
+        <input type="hidden" id="erased">
+        <h4 id="label_full_name"></h4>
+        <h5 id="label_real_id"></h5>
+      </div>
     </div>
   </form>
-  <div class="new-guests-buttons">
+  <div class="new-guests-buttons guests_hide">
     <div class="backdrop" onclick="cs.closeMenuNew();"></div>
     <button class="new" onclick="cs.openMenuNew();">
       <i class="fa fa-plus"></i>
@@ -102,17 +104,21 @@
         Extends.scrollToInputFocus('.event-form');
       });
 
-      $('.guest').longTap(function(){
-        cs.selectItem($(this).data('id'));
-      });
-
-      $('.guest').tap(function(){
-        if(cs.mode == 'select'){
+      if(PrivateData.get('module_events_guests_lists_active')){
+        $('.guest').longTap(function(){
           cs.selectItem($(this).data('id'));
-        }else if(cs.mode == 'list'){
-          app.loadScreen(app.SCREENS.EVENT_GUEST_FORM);
-        }
-      });
+        });
+
+        $('.guest').tap(function(){
+          if(cs.mode == 'select'){
+            cs.selectItem($(this).data('id'));
+          }else if(cs.mode == 'list'){
+            app.loadScreen(app.SCREENS.EVENT_GUEST_FORM);
+          }
+        });
+      }else{
+        $('.guests_hide').hide();
+      }
 
       app.liActive('events');
 
@@ -270,7 +276,7 @@
       var form = this.getList();
 
       if(this.countGuests() > this.event_place_max_people){
-        Alert.open('Invitados','No se permite reservar un evento con más de ' + this.event_place_max_people + ' invitados en ' + this.event_place_name + '.','Aceptar');
+        Alert.open('Invitados','Máximo de invitados superado.','Aceptar');
         return false;
       }
 
@@ -288,13 +294,17 @@
         callback : function(data, success){
           console.log(data);
           if(success){
-            if(data.event){
+            if(Object.keys(data.event).length == 0){
               app.loadScreen(app.SCREENS.EVENTS_CALENDAR_DAY,{
                 event_place_id: cs.event_place_id,
                 selected_day: new Date(cs.date + 'T00:00:00' + PrivateData.get('time_zone_offset'))
               });
             }else{
-              Alert.open('Fecha del evento','La fecha ingresada se encuentra ocupada por otro evento.','Aceptar');
+              if(data.event.init_date && data.event.init_date.indexOf("max") > -1){
+                Alert.open('Fecha del evento','Supero la cantidad máxima de reservas permitidas por día.','Aceptar');
+              }else if(data.event["guests.real_id"] && data.event["guests.real_id"].indexOf("valid_real_id") > -1){
+                Alert.open('Invitados','Los invitados deben ser residentes registrados en el sistema.','Aceptar');
+              }
             }
           }else{
             Alert.open('Lo Sentimos','Ocurrió un error al intentar enviar los datos, por favor intenta nuevamente.','Aceptar');
@@ -386,7 +396,7 @@
     };
 
     this.countGuests = function(){
-      var total = 0;
+      var total = 1;
       $('.guest').each(function(){
         if($(this).find('#erased').val() != "true"){
           total++;
