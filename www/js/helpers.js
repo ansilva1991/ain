@@ -2,28 +2,13 @@ var HelperExpenses = {
   entry_type : function(entry){
     switch(entry.type){
       case 'GroupCurrentAccountEntryPayout':
-          return entry.benefit ? "Beneficio" : "Pago"
+          return entry.benefit ? U.t("models.group_current_account_entry.types.GroupCurrentAccountEntryPayoutBenefit") : U.t("models.group_current_account_entry.types.GroupCurrentAccountEntryPayout");
         break;
       case 'GroupCurrentAccountEntryExpensesSurcharge':
-        return 'Recargo Expensas (' + parseFloat(entry.description).toFixed(2) + '%)'
+        return U.t("models.group_current_account_entry.types.GroupCurrentAccountEntryExpensesSurcharge",{ percetange: parseFloat(entry.description).toFixed(2) });
         break;
-      case 'GroupCurrentAccountEntryExpenses':
-        return "Expensas";
-        break;
-      case 'GroupCurrentAccountEntryPenalty':
-        return "Multa";
-        break;
-      case 'GroupCurrentAccountEntryEvent':
-        return "Reserva de Evento";
-        break;
-      case 'GroupCurrentAccountEntryInterest':
-        return "Intereses por deuda";
-        break;
-      case 'GroupCurrentAccountEntryInit':
-        return "Saldo inicial";
-        break;
-      case 'GroupCurrentAccountEntryOther':
-        return "Otros";
+      default:
+        return U.t("models.group_current_account_entry.types." + entry.type);
         break;
     }
   },
@@ -39,7 +24,7 @@ var HelperExpenses = {
         return Extends.formatDate(new Date(entry.description + "T00:00:00" + PrivateData.get('time_zone_offset')),'%mname del %yyyy');
         break;
       case 'GroupCurrentAccountEntryEvent':
-        return "Evento #" + entry.vinculated_to.id;
+        return U.t("models.group_current_account_entry.description.GroupCurrentAccountEntryEvent",{ id: entry.vinculated_to.id });
         break;
       default:
         return entry.description

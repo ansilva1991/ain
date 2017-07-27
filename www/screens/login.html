@@ -155,6 +155,14 @@
           callback : function(data, success){
             if(success){
               console.log(data);
+
+              if(data.go_to_test){
+                cs.type_server = 'test';
+                PrivateData.set('type_server',cs.type_server);
+                cs.processLogin();
+                return false;
+              }
+
               if(data.demo){
                 PrivateData.set('is_demo', true);
                 PrivateData.set('is_login',true);
@@ -223,10 +231,18 @@
       this.is_processing = true;
 
       Server.send({
-        route : [Server.serverUrl(),'app','request_reset_password'],
+        route : [Server.serverUrl(cs.type_server),'app','request_reset_password'],
         data : form,
         callback : function(data, success){
           if(success){
+
+            if(data.go_to_test){
+              cs.type_server = 'test';
+              PrivateData.set('type_server',cs.type_server);
+              cs.processForgotPassword();
+              return false;
+            }
+
             if(data.status == 'success'){
               Alert.open('Exitosamente','Se envió un email con instrucciones para recuperar su contraseña.','Aceptar');
             }else{
@@ -286,13 +302,13 @@
     };
 
     this.register = function(){
-      $('#btn_register').html('<i class="fa fa-spin fa-circle-o-notch"></i>');
+      /*$('#btn_register').html('<i class="fa fa-spin fa-circle-o-notch"></i>');
       cordova.InAppBrowser.open('http://accessin.net/sign_in?f=1&from_app=1', '_system');
 
       setTimeout(function(){
         $('#btn_register').html('Aún no estoy registrado');
-      },2000);
-      //app.loadScreen(app.SCREENS.REGISTER_TERMS_AND_CONDITIONS);
+      },2000);*/
+      app.loadScreen(app.SCREENS.REGISTER_TERMS_AND_CONDITIONS);
     }
 
     this.dev = function(){

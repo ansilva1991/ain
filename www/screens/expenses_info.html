@@ -1,7 +1,7 @@
 <div class="expenses-info">
   <form class="form-horizontal">
     <div class="form-group">
-      <label for="name">EXPENSAS</label>
+      <label for="name"><span data-t="screens.expenses_info.expenses_real_date_label"></span></label>
       <input type="text" id="expenses_real_date" class="form-control" readonly>
     </div>
     <legend>RECARGOS</legend>
@@ -22,6 +22,8 @@
 
       this.expenses_id = opts.expenses_id;
       this.back_to = opts.back_to;
+
+      U.translate_screen(".app .content .page");
 
       app.liActive('expenses');
 

@@ -1,10 +1,10 @@
 var app = {
-  VERSION: 230,
+  VERSION: 231,
   PORTAL_VERSION: 229,
   MINIUM_VERSION_LOGUINED: 222,
-  ENV: "production",
-  DEV_IP: "192.168.1.15",
-  onesignal_active: true,
+  ENV: "development",
+  DEV_IP: "127.0.0.1",
+  onesignal_active: false,
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -249,31 +249,39 @@ var app = {
       $('.app>.menu .content [data-module="expenses"]').hide();
     }else{
       $('.app>.menu .content [data-module="expenses"]').show();
+      $('.app>.menu .content [data-module="expenses"] .label').html(U.t("menu_lateral.expenses"));
     }
 
     if(!PrivateData.get('module_guard_active')){
       $('.app>.menu .content [data-module="guard"]').hide();
     }else{
       $('.app>.menu .content [data-module="guard"]').show();
+      $('.app>.menu .content [data-module="guard"] .label').html(U.t("menu_lateral.guard"));
     }
 
     if(!PrivateData.get('module_events_active')){
       $('.app>.menu .content [data-module="events"]').hide();
     }else{
       $('.app>.menu .content [data-module="events"]').show();
+      $('.app>.menu .content [data-module="events"] .label').html(U.t("menu_lateral.events"));
     }
 
     if(!PrivateData.get('module_electronic_keys_active')){
       $('.app>.menu .content [data-module="electronic_keys"]').hide();
     }else{
       $('.app>.menu .content [data-module="electronic_keys"]').show();
+      $('.app>.menu .content [data-module="electronic_keys"] .label').html(U.t("menu_lateral.electronic_keys"));
     }
 
     if(PrivateData.get('module_authorizations_active')){
-      $('.app>.menu .content [data-module="authorizations"] .label').html("Autorizaciones");
+      $('.app>.menu .content [data-module="authorizations"] .label').html(U.t("menu_lateral.authorizations"));
     }else{
-      $('.app>.menu .content [data-module="authorizations"] .label').html("Mi Cuenta");
+      $('.app>.menu .content [data-module="authorizations"] .label').html(U.t("menu_lateral.my_account"));
     }
+
+    $('.app>.menu .content [data-module="communications"] .label').html(U.t("menu_lateral.communications"));
+    $('.app>.menu .content [data-module="useful_info"] .label').html(U.t("menu_lateral.useful_info"));
+    $('.app>.menu .content [data-module="configuration"] .label').html(U.t("menu_lateral.configuration"));
 
     if(PrivateData.get('current_authorizations_number') < 2){
       $('.app>.menu .content .header #btn_select_auth').hide();
@@ -516,7 +524,11 @@ var app = {
       }
     }
 
-    $('.header .section-name').html(x_screen.section_name || "");
+    if(x_screen.section_name_translate){
+      $('.header .section-name').html(U.t(x_screen.section_name_translate));
+    }else{
+      $('.header .section-name').html(x_screen.section_name || "");
+    }
 
     $('.app .content .loading').show();
 
@@ -610,6 +622,13 @@ var NewUpdate = {
 var Alert = {
   callback : function(){},
   open : function(title,msg,button,callback){
+
+    if(title.constructor == Object){
+      msg = title.message;
+      button = title.button;
+      title = title.title;
+    }
+
     $('.modal-alert h4 span').html(title);
     $('.modal-alert p').html(msg);
     $('.modal-alert button').html(button);

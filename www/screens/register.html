@@ -61,6 +61,7 @@
   function c(){
     this.init_opts = {};
     this.is_processing = false;
+    this.auto_create_group = false;
 
     this.start = function(opts){
       this.init_opts = opts;
@@ -147,14 +148,24 @@
       this.is_processing = true;
 
       Server.send({
-        route : [Server.serverUrl(),'app','new_register'],
+        route : [Server.serverUrl(cs.type_server),'app','new_register'],
         data : {
           country_server_id: 1,
-          person: form
+          person: form,
+          opts: { auto_create_group: this.auto_create_group }
         },
         callback : function(data, success){
           console.log(data);
           if(success && data.data != false){
+
+            if(data.go_to_test){
+              cs.type_server = 'test';
+              cs.auto_create_group = true;
+              PrivateData.set('type_server',cs.type_server);
+              cs.submit();
+              return false;
+            }
+
             if(data.data.errors && Object.keys(data.data.errors).length > 0){
               if(data.data.errors.email){
                 if(data.data.errors.email[0] == "Ya en uso"){

@@ -274,7 +274,7 @@ app.SCREENS = {
       }
     }
     ],
-    section_name: "Eventos",
+    section_name_translate: "menu_lateral.events",
     html: "events"
   },
   EVENT_GUEST_LIST_FORM: {
@@ -368,7 +368,7 @@ app.SCREENS = {
       id: 'submit-button'
     }
     ],
-    section_name: "Evento",
+    section_name_translate: "menu_lateral.events",
     html: "event_form"
   },
   IMPORT_GUESTS_LIST: {
@@ -447,7 +447,7 @@ app.SCREENS = {
         }
       }
     ],
-    section_name: "EXPENSAS",
+    section_name_translate: "menu_lateral.expenses",
     html: "expenses_show_full"
   },
   EXPENSES_SHOW_PDF: {
@@ -459,7 +459,7 @@ app.SCREENS = {
       }
     }
     ],
-    section_name: "EXPENSAS",
+    section_name_translate: "menu_lateral.expenses",
     html: "expenses_show_pdf"
   },
   EXPENSES_SHOW_NOTHING: {
@@ -479,7 +479,7 @@ app.SCREENS = {
         }
       }
     ],
-    section_name: "EXPENSAS",
+    section_name_translate: "menu_lateral.expenses",
     html: "expenses_show_nothing"
   },
   EXPENSES_SHOW_FIXED_VALUE: {
@@ -499,7 +499,7 @@ app.SCREENS = {
         }
       }
     ],
-    section_name: "EXPENSAS",
+    section_name_translate: "menu_lateral.expenses",
     html: "expenses_show_fixed_value"
   },
   EXPENSES_SHOW_PER_METER: {
@@ -519,7 +519,7 @@ app.SCREENS = {
         }
       }
     ],
-    section_name: "EXPENSAS",
+    section_name_translate: "menu_lateral.expenses",
     html: "expenses_show_per_meter"
   },
   EXPENSES_INFO: {

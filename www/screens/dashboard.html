@@ -6,7 +6,7 @@
       <span class="icon-keys"></span>
     </div>
     <div class="text">
-      Mis Llaves
+      <span data-t="menu_lateral.electronic_keys"></span>
     </div>
   </div>
   <div class="item" onclick="app.selectLiMenu(app.SCREENS.EVENTS);" data-module="events">
@@ -14,7 +14,7 @@
       <span class="icon-events"></span>
     </div>
     <div class="text">
-      Eventos
+      <span data-t="menu_lateral.events"></span>
     </div>
   </div>
   <div class="item" onclick="app.selectLiMenu(app.SCREENS.COMMUNICATIONS);">
@@ -22,7 +22,7 @@
       <span class="icon-communications"></span>
     </div>
     <div class="text">
-      Comunicaciones
+      <span data-t="menu_lateral.communications"></span>
     </div>
   </div>
   <div class="item" onclick="app.selectLiMenu(app.SCREENS.EXPENSES);" data-module="expenses">
@@ -30,7 +30,7 @@
       <span class="icon-expenses"></span>
     </div>
     <div class="text">
-      Expensas
+      <span data-t="menu_lateral.expenses"></span>
     </div>
   </div>
   <div class="item" onclick="app.selectLiMenu(app.SCREENS.GUARD);" data-module="guard">
@@ -38,7 +38,7 @@
       <span class="icon-guard"></span>
     </div>
     <div class="text">
-      Portería
+      <span data-t="menu_lateral.guard"></span>
     </div>
   </div>
   <div class="item" onclick="app.selectLiMenu(app.SCREENS.AUTHORIZATIONS);" data-module="authorizations">
@@ -46,7 +46,7 @@
       <span class="icon-authorizations"></span>
     </div>
     <div class="text">
-      Autorizaciones
+      <span data-t="menu_lateral.authorizations"></span>
     </div>
   </div>
   <div class="item" onclick="app.selectLiMenu(app.SCREENS.USEFUL_INFO);">
@@ -54,7 +54,7 @@
       <span class="icon-informacion"></span>
     </div>
     <div class="text">
-      Información Útil
+      <span data-t="menu_lateral.useful_info"></span>
     </div>
   </div>
 </div>
@@ -63,6 +63,8 @@
     this.dev_count = 0;
     this.is_dashboard = false;
     this.start = function(){
+
+      U.translate_screen(".app .content .page");
 
       if(!PrivateData.get('module_expense_active')){
         $('.dashboard [data-module="expenses"]').remove();
@@ -81,7 +83,7 @@
       }
 
       if(!PrivateData.get('module_authorizations_active')){
-        $('.dashboard [data-module="authorizations"] .text').html('Mi Cuenta');
+        $('.dashboard [data-module="authorizations"] .text').html(U.t("menu_lateral.my_account"));
       }
 
       if(!app.load_with_notification){

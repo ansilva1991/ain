@@ -1,14 +1,14 @@
 if(!(typeof locales !== 'undefined')){ var locales = {}; }
-locales["ol"] = {
+locales["sp"] = {
   actions: {
-    cancel_event: "Cancelar Evento"
+    cancel_event: "Cancelar Actividad"
   },
   models: {
     authorization: {
       types: {
-        AuthorizationOwnerGroup: "Olegario",
-        AuthorizationFamilyWithAccess: "Olegarios Acceso",
-        AuthorizationFamily: "Olegarios",
+        AuthorizationOwnerGroup: "Miembro",
+        AuthorizationFamilyWithAccess: "Familiar con Acceso",
+        AuthorizationFamily: "Familiar",
         AuthorizationVisit: "Visita",
         AuthorizationEmployee: "Empleado"
       }
@@ -17,16 +17,16 @@ locales["ol"] = {
       types: {
         GroupCurrentAccountEntryPayout: "Pago",
         GroupCurrentAccountEntryPayoutBenefit: "Benefio",
-        GroupCurrentAccountEntryExpensesSurcharge: "Recargo Expensas (%{percentage} %)",
-        GroupCurrentAccountEntryExpenses: "Expensas",
+        GroupCurrentAccountEntryExpensesSurcharge: "Recargo Abono (%{percentage} %)",
+        GroupCurrentAccountEntryExpenses: "Abono",
         GroupCurrentAccountEntryPenalty: "Multa",
-        GroupCurrentAccountEntryEvent: "Reserva de Evento",
+        GroupCurrentAccountEntryEvent: "Reserva de Actividad",
         GroupCurrentAccountEntryInterest: "Intereses por deuda",
         GroupCurrentAccountEntryInit: "Saldo inicial",
         GroupCurrentAccountEntryOther: "Otros"
       },
       description: {
-        GroupCurrentAccountEntryEvent: "Evento #%{id}"
+        GroupCurrentAccountEntryEvent: "Actividad #%{id}"
       }
     },
     event: {
@@ -35,9 +35,9 @@ locales["ol"] = {
     }
   },
   menu_lateral: {
-    events: "Eventos",
+    events: "Actividades",
     communications: "Comunicaciones",
-    expenses: "Expensas",
+    expenses: "Abonos",
     guard: "Portería",
     authorizations: "Autorizaciones",
     my_account: "Mi Cuenta",
@@ -48,15 +48,15 @@ locales["ol"] = {
   screens: {
     welcome: {
       events: {
-        title: "EVENTOS",
-        description: "Gestiona eventos en tu propiedad y espacios comunes, crea listas de invitados y recibe confirmaciones de reservas."
+        title: "ACTIVIDADES",
+        description: "Gestiona actividades en tu propiedad y espacios comunes, crea listas de invitados y recibe confirmaciones de reservas."
       },
       authorizations: {
-        description: "Autoriza el ingreso de olegarios, visitas y empleados. Proporciona ingreso al sistema a la persona que desees.<br><br><b>¡Accede a todo esto y mucho más al instante!</b>"
+        description: "Autoriza el ingreso de familiares, visitas y empleados. Proporciona ingreso al sistema a la persona que desees.<br><br><b>¡Accede a todo esto y mucho más al instante!</b>"
       },
       expenses: {
-        title: "EXPENSAS",
-        description: "Puedes recibir expensas, visualizar saldos, ver el historial de pagos, intereses y cargos extras. Además, puedes ver reportes y estadísticas."
+        title: "ABONOS",
+        description: "Puedes recibir abonos, visualizar saldos, ver el historial de pagos, intereses y cargos extras. Además, puedes ver reportes y estadísticas."
       }
     },
     configurations: {
@@ -67,7 +67,7 @@ locales["ol"] = {
     },
     authorizations: {
       menu: {
-        residents: "Olegarios",
+        residents: "Residentes",
         visits: "Visitas",
         employees: "Empleados"
       },
@@ -76,7 +76,7 @@ locales["ol"] = {
         empty_employees: "No se encontraron empleados autorizados a tu propiedad."
       },
       add: {
-        family: "Agregar Olegarios",
+        family: "Agregar Familiar",
         visit: "Agregar Visita",
         employee: "Agregar Empleado"
       }
@@ -84,13 +84,13 @@ locales["ol"] = {
     authorization_form_employee: {
       errors: {
         is_owner: {
-          title: "Olegario",
-          message: "Esta persona ya es olegario.",
+          title: "Propietario",
+          message: "Esta persona ya es propietario.",
           button: "Aceptar"
         },
         is_family: {
-          title: "Olegarios",
-          message: "Esta persona ya es olegarios.",
+          title: "Familiar",
+          message: "Esta persona ya es familiar.",
           button: "Aceptar"
         },
         is_visit: {
@@ -99,25 +99,25 @@ locales["ol"] = {
           button: "Aceptar"
         },
         taken: {
-          title: "Olegario",
-          message: "Esta persona ya es olegarios.",
+          title: "Propietario",
+          message: "Esta persona ya es familiar.",
           button: "Aceptar"
         }
       }
     },
     authorization_form_family: {
-      title_owner: "Olegario",
-      title: "Olegarios",
-      alert_family_with_access: "<h5>Se le enviará una notificación al email ingresado con las instrucciones de uso.</h5><h5>Al permitirle acceso al sistema, podra gestionar visitas y empleados, crear eventos, enviar y responder comunicaciones, entre otras funciones.</h5><h5>Recuerda que todas las gestiones realizadas por los miembros de tu equipo serán tu responsabilidad y sujetos a la normativa vigente del consorcio</h5>",
+      title_owner: "Propietario",
+      title: "Familiar",
+      alert_family_with_access: "<h5>Se le enviará una notificación al email ingresado con las instrucciones de uso.</h5><h5>Al permitirle acceso al sistema, podra gestionar visitas y empleados, crear eventos, enviar y responder comunicaciones, entre otras funciones.</h5><h5>Recuerda que todas las gestiones realizadas por los miembros de tu familia serán tu responsabilidad y sujetos a la normativa vigente del consorcio</h5>",
       errors: {
         is_owner: {
-          title: "Olegario",
-          message: "Esta persona ya es olegario.",
+          title: "Propietario",
+          message: "Esta persona ya es propietario.",
           button: "Aceptar"
         },
         is_family: {
-          title: "Olegarios",
-          message: "Esta persona ya es olegarios.",
+          title: "Familiar",
+          message: "Esta persona ya es familiar.",
           button: "Aceptar"
         },
         is_visit: {
@@ -126,8 +126,8 @@ locales["ol"] = {
           button: "Aceptar"
         },
         taken: {
-          title: "Olegario",
-          message: "Esta persona ya es olegarios.",
+          title: "Propietario",
+          message: "Esta persona ya es familiar.",
           button: "Aceptar"
         }
       }
@@ -135,13 +135,13 @@ locales["ol"] = {
     authorization_form_visit: {
       errors: {
         is_owner: {
-          title: "Olegario",
-          message: "Esta persona ya es olegario.",
+          title: "Propietario",
+          message: "Esta persona ya es propietario.",
           button: "Aceptar"
         },
         is_family: {
-          title: "Olegarios",
-          message: "Esta persona ya es olegarios.",
+          title: "Familiar",
+          message: "Esta persona ya es familiar.",
           button: "Aceptar"
         },
         is_visit: {
@@ -150,8 +150,8 @@ locales["ol"] = {
           button: "Aceptar"
         },
         taken: {
-          title: "Olegario",
-          message: "Esta persona ya es olegarios.",
+          title: "Propietario",
+          message: "Esta persona ya es familiar.",
           button: "Aceptar"
         }
       }

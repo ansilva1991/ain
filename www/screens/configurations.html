@@ -3,8 +3,8 @@
     <div class="input">
       <div class="content">
         <div class="label">
-          <h4>Liquidación de expensas</h4>
-          <h5>Enviarme una alerta cuando se liquiden expensas</h5>
+          <h4><span data-t="screens.configurations.expenses_notifications.title"></span></h4>
+          <h5><span data-t="screens.configurations.expenses_notifications.help"></span></h5>
         </div>
         <div class="checkbox for_tap">
           <input type="checkbox" name="notificate_new_expenses" id="notificate_new_expenses">
@@ -52,6 +52,8 @@
     this.start = function(){
 
       Extends.inputCheckBox();
+
+      U.translate_screen(".app .content .page");
 
       app.liActive('configurations');
       this.getInfo(function(){
