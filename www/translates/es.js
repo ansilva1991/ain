@@ -1,5 +1,8 @@
 if(!(typeof locales !== 'undefined')){ var locales = {}; }
 locales["es"] = {
+  actions: {
+    cancel_event: "Cancelar Evento"
+  },
   models: {
     authorization: {
       types: {
@@ -9,6 +12,26 @@ locales["es"] = {
         AuthorizationVisit: "Visita",
         AuthorizationEmployee: "Empleado"
       }
+    },
+    group_current_account_entry: {
+      types: {
+        GroupCurrentAccountEntryPayout: "Pago",
+        GroupCurrentAccountEntryPayoutBenefit: "Benefio",
+        GroupCurrentAccountEntryExpensesSurcharge: "Recargo Expensas (%{percentage} %)",
+        GroupCurrentAccountEntryExpenses: "Expensas",
+        GroupCurrentAccountEntryPenalty: "Multa",
+        GroupCurrentAccountEntryEvent: "Reserva de Evento",
+        GroupCurrentAccountEntryInterest: "Intereses por deuda",
+        GroupCurrentAccountEntryInit: "Saldo inicial",
+        GroupCurrentAccountEntryOther: "Otros"
+      },
+      description: {
+        GroupCurrentAccountEntryEvent: "Evento #%{id}"
+      }
+    },
+    event: {
+      allow_guests_previous_minutes: "Permitir ingresar a los invitados",
+      allow_guests_previous_minutes_options: "%{minutes} antes de la fecha de inicio del evento"
     }
   },
   menu_lateral: {
@@ -24,8 +47,22 @@ locales["es"] = {
   },
   screens: {
     welcome: {
+      events: {
+        title: "EVENTOS",
+        description: "Gestiona eventos en tu propiedad y espacios comunes, crea listas de invitados y recibe confirmaciones de reservas."
+      },
       authorizations: {
         description: "Autoriza el ingreso de familiares, visitas y empleados. Proporciona ingreso al sistema a la persona que desees.<br><br><b>¡Accede a todo esto y mucho más al instante!</b>"
+      },
+      expenses: {
+        title: "EXPENSAS",
+        description: "Puedes recibir expensas, visualizar saldos, ver el historial de pagos, intereses y cargos extras. Además, puedes ver reportes y estadísticas."
+      }
+    },
+    configurations: {
+      expenses_notifications: {
+        title: "Liquidación de expensas",
+        help: "Enviarme una alerta cuando se liquiden expensas"
       }
     },
     authorizations: {
@@ -118,6 +155,50 @@ locales["es"] = {
           button: "Aceptar"
         }
       }
+    },
+    event_form: {
+      confirm: {
+        cancel_event: {
+          title: "Cancelar Evento",
+          msg: "¿Desea continuar?",
+          success_button: "Continuar",
+          cancel_button: "Cancelar"
+        }
+      },
+      errors: {
+        limit_per_day: {
+          title: "Fecha del evento",
+          message: "Supero la cantidad máxima de reservas permitidas por día.",
+          button: "Aceptar"
+        },
+        guests: {
+          valid_real_id: {
+            title: "Invitados",
+            message: "Todos los invitados deben tener DNI y ser residentes registrados en el sistema.",
+            button: "Aceptar"
+          },
+          taken: {
+            title: "Invitados",
+            message: "Dos o más invitados tienen el mismo DNI.",
+            button: "Aceptar"
+          },
+          only_residents: {
+            title: "Invitados",
+            message: "Los invitados deben ser residentes registrados en el sistema.",
+            button: "Aceptar"
+          }
+        }
+      }
+    },
+    expenses_info: {
+      expenses_real_date_label: "EXPENSAS"
+    },
+    expenses_show_fixed_value: {
+      total_expenses_label: "Expensas %{date}"
+    },
+    expenses_show_full: {
+      total_expenses_label: "Expensas %{date}",
+      section_name: "Exp. %{date}"
     }
   }
 };

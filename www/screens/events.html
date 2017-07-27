@@ -12,6 +12,9 @@
 <div class="list events event_places insta-move">
   <div id="example" class="item" style="display: none;">
     <h4 id="name"></h4>
+    <div class="downloading-image">
+      <i class="fa fa-spin fa-circle-o-notch"></i>
+    </div>
   </div>
 </div>
 <div class="list events guest_lists insta-move">
@@ -99,9 +102,13 @@
               tmp.attr('data-id', event_place.id);
 
               if(event_place.in_house){
-                tmp.addClass('back-house');
+                tmp.css({
+                  'background-image' : 'url(img/back_event_place_house.jpg)'
+                });
               }else{
-                tmp.addClass('back-' + event_place.type);
+                tmp.css({
+                  'background-image' : 'url(img/back_event_place_' + event_place.type + '.jpg)'
+                });
               }
 
               tmp.find('#name').html(HelperEvents.event_place_name(event_place.name));

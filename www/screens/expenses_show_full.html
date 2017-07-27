@@ -142,8 +142,8 @@
             $('#end_total').html(data.total_expenses.toFixed(2));
             $('.end-total b').html(PrivateData.get('current_group_identificator'));
 
-            $('#total_expenses_label').html('Expensas ' + Extends.formatDate(new Date(data.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%mabbr. del %yyyy'));
-            $('.header .section-name').html('Expensas ' + Extends.formatDate(new Date(data.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%mabbr. %yyyy'));
+            $('#total_expenses_label').html(U.t("screens.expenses_show_full.total_expenses_label", { date: Extends.formatDate(new Date(data.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%mabbr. del %yyyy') }));
+            $('.header .section-name').html(U.t("screens.expenses_show_full.section_name", { date: Extends.formatDate(new Date(data.real_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%mabbr. del %yyyy') }));
 
             cs.impute_date = new Date(data.impute_date + "T00:00:00" + PrivateData.get('time_zone_offset'));
             cs.callback_get_entry();

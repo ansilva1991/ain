@@ -21,19 +21,19 @@
       <input type="text" class="form-control" id="status">
     </div>
     <div class="form-group cancel-event-button">
-      <button type="button" onclick="cs.cancelEvent();" class="btn btn-orange btn-block text-uppercase">Cancelar Evento</button>
+      <button type="button" onclick="cs.cancelEvent();" class="btn btn-orange btn-block text-uppercase"><span data-t="actions.cancel_event"></span></button>
     </div>
     <div class="form-group guests_hide">
-      <label for="allow_guests_previous_minutes">Permitir ingresar a los invitados</label>
+      <label for="allow_guests_previous_minutes"><span data-t="models.event.allow_guests_previous_minutes"></span></label>
       <select class="form-control" name="allow_guests_previous_minutes" id="allow_guests_previous_minutes">
-        <option value="15">15 Minutos antes de la fecha de inicio del evento</option>
-        <option value="30">30 Minutos antes de la fecha de inicio del evento</option>
-        <option selected="selected" value="60">1 Hora antes de la fecha de inicio del evento</option>
-        <option value="120">2 Horas antes de la fecha de inicio del evento</option>
-        <option value="180">3 Horas antes de la fecha de inicio del evento</option>
-        <option value="240">4 Horas antes de la fecha de inicio del evento</option>
-        <option value="300">5 Horas antes de la fecha de inicio del evento</option>
-        <option value="360">6 Horas antes de la fecha de inicio del evento</option>
+        <option value="15">15 Minutos</option>
+        <option value="30">30 Minutos</option>
+        <option selected="selected" value="60">1 Hora</option>
+        <option value="120">2 Horas</option>
+        <option value="180">3 Horas</option>
+        <option value="240">4 Horas</option>
+        <option value="300">5 Horas</option>
+        <option value="360">6 Horas</option>
       </select>
     </div>
     <div class="form-group">
@@ -120,6 +120,7 @@
         $('.guests_hide').hide();
       }
 
+      U.translate_screen(".app .content .page");
       app.liActive('events');
 
       if(opts.list){
@@ -301,9 +302,13 @@
               });
             }else{
               if(data.event.init_date && data.event.init_date.indexOf("max") > -1){
-                Alert.open('Fecha del evento','Supero la cantidad máxima de reservas permitidas por día.','Aceptar');
+                Alert.open(U.t("screens.event_form.errors.limit_per_day"));
+              }else if(data.event["guests.identity"] && data.event["guests.identity"].indexOf("taken") > -1){
+                Alert.open(U.t("screens.event_form.errors.guests.taken"));
+              }else if(data.event["guests.real_id"] && data.event["guests.real_id"].indexOf("only_residents") > -1){
+                Alert.open(U.t("screens.event_form.errors.guests.only_residents"));
               }else if(data.event["guests.real_id"] && data.event["guests.real_id"].indexOf("valid_real_id") > -1){
-                Alert.open('Invitados','Los invitados deben ser residentes registrados en el sistema.','Aceptar');
+                Alert.open(U.t("screens.event_form.errors.guests.valid_real_id"));
               }
             }
           }else{
@@ -412,10 +417,10 @@
 
     this.cancelEvent = function(){
       Confirm.open({
-        title: "Cancelar Evento",
-        msg: "¿Desea continuar?",
-        success_button: "Continuar",
-        cancel_button: "Cancelar",
+        title: U.t("screens.event_form.confirm.cancel_event.title"),
+        msg: U.t("screens.event_form.confirm.cancel_event.msg"),
+        success_button: U.t("screens.event_form.confirm.cancel_event.success_button"),
+        cancel_button: U.t("screens.event_form.confirm.cancel_event.cancel_button"),
         callback_success: function(){
 
           app.pageLoading('show');

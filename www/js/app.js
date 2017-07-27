@@ -2,7 +2,7 @@ var app = {
   VERSION: 231,
   PORTAL_VERSION: 229,
   MINIUM_VERSION_LOGUINED: 222,
-  ENV: "production",
+  ENV: "development",
   DEV_IP: "127.0.0.1",
   onesignal_active: false,
   load_screen_ajax: false,
@@ -524,7 +524,11 @@ var app = {
       }
     }
 
-    $('.header .section-name').html(x_screen.section_name || "");
+    if(x_screen.section_name_translate){
+      $('.header .section-name').html(U.t(x_screen.section_name_translate));
+    }else{
+      $('.header .section-name').html(x_screen.section_name || "");
+    }
 
     $('.app .content .loading').show();
 
@@ -618,6 +622,13 @@ var NewUpdate = {
 var Alert = {
   callback : function(){},
   open : function(title,msg,button,callback){
+
+    if(title.constructor == Object){
+      msg = title.message;
+      button = title.button;
+      title = title.title;
+    }
+
     $('.modal-alert h4 span').html(title);
     $('.modal-alert p').html(msg);
     $('.modal-alert button').html(button);

@@ -1,5 +1,5 @@
 var U = {
-  t : function(path){
+  t : function(path, values){
     path = path.split('.');
     var language = PrivateData.get("current_language") || "es";
     if(locales.hasOwnProperty(language)){
@@ -13,6 +13,12 @@ var U = {
         object = object[path[i]]
       }else{
         return "translation missing: " + language + "." + path.join('.');
+      }
+    }
+
+    if(values != undefined){
+      for(var i in values){
+        object = object.replace('%{' + i + '}', values[i]);
       }
     }
 
