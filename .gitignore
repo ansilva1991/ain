@@ -1,5 +1,6 @@
 /hooks/*
 /plugins/*
+/platforms/*
 /platforms/browser/
 /platforms/android/build/
 /platforms/android/.gradle/*
