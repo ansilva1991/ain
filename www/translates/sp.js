@@ -49,7 +49,7 @@ locales["sp"] = {
     welcome: {
       events: {
         title: "ACTIVIDADES",
-        description: "Gestiona actividades en tu propiedad y espacios comunes, crea listas de invitados y recibe confirmaciones de reservas."
+        description: "Gestiona tus actividades, cancela, reserva y recibe confirmaciones de reservas."
       },
       authorizations: {
         description: "Autoriza el ingreso de familiares, visitas y empleados. Proporciona ingreso al sistema a la persona que desees.<br><br><b>¡Accede a todo esto y mucho más al instante!</b>"
@@ -61,13 +61,13 @@ locales["sp"] = {
     },
     configurations: {
       expenses_notifications: {
-        title: "Liquidación de expensas",
-        help: "Enviarme una alerta cuando se liquiden expensas"
+        title: "Liquidación de abonos",
+        help: "Enviarme una alerta cuando se liquiden abonos"
       }
     },
     authorizations: {
       menu: {
-        residents: "Residentes",
+        residents: "Miembros",
         visits: "Visitas",
         employees: "Empleados"
       },
@@ -76,7 +76,7 @@ locales["sp"] = {
         empty_employees: "No se encontraron empleados autorizados a tu propiedad."
       },
       add: {
-        family: "Agregar Familiar",
+        family: "Agregar Miembro",
         visit: "Agregar Visita",
         employee: "Agregar Empleado"
       }
@@ -159,7 +159,7 @@ locales["sp"] = {
     event_form: {
       confirm: {
         cancel_event: {
-          title: "Cancelar Evento",
+          title: "Cancelar Actividad",
           msg: "¿Desea continuar?",
           success_button: "Continuar",
           cancel_button: "Cancelar"
@@ -167,7 +167,7 @@ locales["sp"] = {
       },
       errors: {
         limit_per_day: {
-          title: "Fecha del evento",
+          title: "Fecha de la actividad",
           message: "Supero la cantidad máxima de reservas permitidas por día.",
           button: "Aceptar"
         },
@@ -191,14 +191,14 @@ locales["sp"] = {
       }
     },
     expenses_info: {
-      expenses_real_date_label: "EXPENSAS"
+      expenses_real_date_label: "ABONOS"
     },
     expenses_show_fixed_value: {
-      total_expenses_label: "Expensas %{date}"
+      total_expenses_label: "Abono %{date}"
     },
     expenses_show_full: {
-      total_expenses_label: "Expensas %{date}",
-      section_name: "Exp. %{date}"
+      total_expenses_label: "Abono %{date}",
+      section_name: "Abono %{date}"
     }
   }
 };
