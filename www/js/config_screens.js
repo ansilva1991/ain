@@ -83,7 +83,7 @@ app.SCREENS = {
       id: 'submit-button'
     }
     ],
-    section_name: "Solicitar mi código",
+    section_name: "Solicitar código",
     html: "request_registration_code"
   },
   DEPRECATED: {

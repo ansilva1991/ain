@@ -40,12 +40,12 @@
 
       var form = Extends.serializeForm('.request-registration-code form');
 
-      if(form.client.length == 0 || !form.client.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+      if(form.client.length == 0){
         Alert.open('Consorcio o Barrio','Debes ingresar un consorcio válido para continuar.','Aceptar');
         return false;
       }
 
-      if(form.group.length == 0 || !form.group.match(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/)){
+      if(form.group.length == 0){
         Alert.open('Unidad','Debes ingresar una unidad válida para continuar.','Aceptar');
         return false;
       }
@@ -57,7 +57,10 @@
 
       Server.send({
         route : [Server.serverUrl(PrivateData.get('type_server')),'app','request_registration_code'],
-        data : form,
+        data : {
+          email: PrivateData.get('email_logined'),
+          data : form
+        },
         callback : function(data, success){
           console.log(data);
           if(success){
