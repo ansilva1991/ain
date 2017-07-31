@@ -124,6 +124,7 @@
         if(app.onesignal_active && window.plugins.OneSignal && window.plugins.OneSignal.startInit){
           window.plugins.OneSignal.getIds(function(ids){
             cs.one_signal_ids = ids;
+            cs.is_processing = false;
             cs.submit();
           });
           return false;

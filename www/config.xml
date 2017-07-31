@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.accessin.app" version="2.3.2" versionCode="20032" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.accessin.app" version="2.3.3" versionCode="20033" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>AccessIn</name>
     <description>
         Administración de barrios privados

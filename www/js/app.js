@@ -1,9 +1,9 @@
 var app = {
-  VERSION: 232,
+  VERSION: 233,
   PORTAL_VERSION: 229,
   MINIUM_VERSION_LOGUINED: 222,
   ENV: "production",
-  DEV_IP: "127.0.0.1",
+  DEV_IP: "10.0.200.40",
   onesignal_active: true,
   load_screen_ajax: false,
   current_screen: false,
