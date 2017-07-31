@@ -85,7 +85,7 @@
             console.log(data);
             if(success){
 
-              if(data.data.status == "success" && data.data.auth_code != undefined){
+              if(data.data && data.data.status == "success" && data.data.auth_code != undefined){
                 var data = data.data;
 
                 PrivateData.set('country_server_id',data.country_server_id);
