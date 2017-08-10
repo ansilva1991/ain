@@ -1,10 +1,10 @@
 var app = {
-  VERSION: 234,
+  VERSION: 235,
   PORTAL_VERSION: 229,
   MINIUM_VERSION_LOGUINED: 222,
-  ENV: "production",
+  ENV: "development",
   DEV_IP: "10.0.200.40",
-  onesignal_active: true,
+  onesignal_active: false,
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},
@@ -179,6 +179,8 @@ var app = {
       app.closeContextMenu();
     }else if(cs && cs.back){
       cs.back();
+    }else if(cs && !cs.is_dashboard){
+      app.loadScreen(app.SCREENS.DASHBOARD);
     }else{
       navigator.app.exitApp();
     }

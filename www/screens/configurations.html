@@ -42,6 +42,20 @@
         </div>
       </div>
     </div>
+    <div class="input" data-module="guard">
+      <div class="content">
+        <div class="label">
+          <h4>Notificación en ingresos</h4>
+          <h5>Enviarme una alerta cuando alguien no autorizado ingrese a mi propiedad.</h5>
+        </div>
+        <div class="checkbox for_tap">
+          <input type="checkbox" name="notificate_new_guard_record_in_not_authorized" id="notificate_new_guard_record_in_not_authorized">
+          <div class="box">
+            <div class="pointer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
 <script type="text/javascript">
@@ -82,6 +96,10 @@
               $('#notificate_new_communication_message').prop('checked',true).change();
             }
 
+            if(data.config.notificate_new_guard_record_in_not_authorized){
+              $('#notificate_new_guard_record_in_not_authorized').prop('checked',true).change();
+            }
+
             cs.callback_get_info();
           }else{
             Alert.open('Lo Sentimos','Ocurrió un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
@@ -106,7 +124,8 @@
           config: {
             notificate_new_expenses: $('#notificate_new_expenses').is(':checked'),
             notificate_new_communication: $('#notificate_new_communication').is(':checked'),
-            notificate_new_communication_message: $('#notificate_new_communication_message').is(':checked')
+            notificate_new_communication_message: $('#notificate_new_communication_message').is(':checked'),
+            notificate_new_guard_record_in_not_authorized: $('#notificate_new_guard_record_in_not_authorized').is(':checked')
           }
         },
         callback : function(data, success){
