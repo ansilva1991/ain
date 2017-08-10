@@ -9,7 +9,7 @@
       <input type="text" class="form-control" readonly id="operator">
     </div>
     <div class="form-group">
-      <label for="person_full_name">PERSONA</label>
+      <label for="person_full_name">NOMBRE COMPLETO</label>
       <input type="text" class="form-control" readonly id="person_full_name">
     </div>
     <div class="form-group">
@@ -25,8 +25,24 @@
       <input type="text" class="form-control" readonly id="type">
     </div>
     <div class="form-group">
-      <label for="responsible">AUTORIZADO POR</label>
+      <label for="responsible">AUTORIZADO TELEFÓNICAMENTE POR</label>
       <input type="text" class="form-control" readonly id="responsible">
+    </div>
+    <div class="form-group">
+      <label for="type">DOMINIO DEL VEHÍCULO</label>
+      <input type="text" class="form-control" readonly id="vehicle_domain">
+    </div>
+    <div class="form-group">
+      <label for="type">TIPO DEL VEHÍCULO</label>
+      <input type="text" class="form-control" readonly id="vehicle_type">
+    </div>
+    <div class="form-group">
+      <label for="type">MARCA DEL VEHÍCULO</label>
+      <input type="text" class="form-control" readonly id="vehicle_brand">
+    </div>
+    <div class="form-group">
+      <label for="type">COLOR DEL VEHÍCULO</label>
+      <input type="text" class="form-control" readonly id="vehicle_color">
     </div>
     <div class="form-group">
       <label for="accompanist">ACOMPAÑANTES</label>
@@ -74,6 +90,30 @@
             $('#date').val(Extends.formatDate(new Date(data.record.date),'%dd de %mabbr. del %yyyy a las %hh:%ii hrs'));
             $('#accompanist').val(data.record.accompanist == 0 ? 'Sin acompañantes' : data.record.accompanist);
             $('#responsible').val(data.record.responsible || "Administración");
+
+            if(data.record.vehicle.domain && data.record.vehicle.domain != ""){
+              $('#vehicle_domain').val(data.record.vehicle.domain);
+            }else{
+              $('#vehicle_domain').parent().hide();
+            }
+
+            if(data.record.vehicle.type && data.record.vehicle.type != ""){
+              $('#vehicle_type').val(HelperGuard.guard_record_vehicle_type(data.record.vehicle.type));
+            }else{
+              $('#vehicle_type').parent().hide();
+            }
+
+            if(data.record.vehicle.brand && data.record.vehicle.brand != ""){
+              $('#vehicle_brand').val(data.record.vehicle.brand);
+            }else{
+              $('#vehicle_brand').parent().hide();
+            }
+
+            if(data.record.vehicle.color && data.record.vehicle.color != ""){
+              $('#vehicle_color').val(data.record.vehicle.color);
+            }else{
+              $('#vehicle_color').parent().hide();
+            }
 
             if(data.record.type == 'GuardRecordIn'){
               $('#type').val('INGRESO');

@@ -45,3 +45,9 @@ var HelperEvents = {
     return name == 'in_house' ? ('Mi ' + PrivateData.get('current_group_identificator_one')) : name;
   }
 }
+
+var HelperGuard = {
+  guard_record_vehicle_type : function(record_type){
+    return U.t("models.guard_record.vehicle_types." + record_type);
+  }
+}

@@ -32,6 +32,13 @@ locales["ol"] = {
     event: {
       allow_guests_previous_minutes: "Permitir ingresar a los invitados",
       allow_guests_previous_minutes_options: "%{minutes} antes de la fecha de inicio del evento"
+    },
+    guard_record: {
+      vehicle_types: {
+        car: "Automóvil",
+        motocycle: "Motocicleta",
+        other: "Otro"
+      }
     }
   },
   menu_lateral: {

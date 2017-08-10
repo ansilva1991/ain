@@ -3,7 +3,7 @@ var app = {
   PORTAL_VERSION: 229,
   MINIUM_VERSION_LOGUINED: 222,
   ENV: "development",
-  DEV_IP: "10.0.200.40",
+  DEV_IP: "127.0.0.1",
   onesignal_active: false,
   load_screen_ajax: false,
   current_screen: false,
@@ -76,6 +76,8 @@ var app = {
       MobileAccessibility.usePreferredTextZoom(false);
     }
 
+    app.init_plugin_notification_badge();
+
     $(window).resize(function(){
       app.windowResize();
     });
@@ -86,6 +88,20 @@ var app = {
     });
 
     app.redirect_to_appropiate_screen();
+  },
+  init_plugin_notification_badge: function(){
+    if(cordova.plugins && cordova.plugins.notification && cordova.plugins.notification.badge){
+      cordova.plugins.notification.badge.requestPermission(function(granted){
+        if(granted){
+          cordova.plugins.notification.badge.configure({ autoClear: true });
+          console.log('[PLUGIN] Notification Badge: Init');
+        }else{
+          console.log('[PLUGIN] Notification Badge: Not Permissions');
+        }
+      });
+    }else{
+      console.log('[PLUGIN] Notification Badge: Not Found');
+    }
   },
   redirect_to_appropiate_screen: function(){
     if(PrivateData.get('is_login')){
