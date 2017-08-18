@@ -1,0 +1,70 @@
+<div class="payment-methods-pago-mis-cuentas">
+  <img src="img/logo_pagomiscuentas.png">
+
+  <h3>Lee las siguientes instrucciones para realizar tu pago mediante PagoMisCuentas</h3>
+  <h5>1. Ingresa desde la opción PagoMisCuentas de tu HomeBanking</h5>
+  <h5>2. Ahora debes ingresar tu código de pago electrónico:</h5>
+  <button type="button" onclick="cs.copyPMC();">
+    <h4 id="link_code"></h4>
+    <h6>Copiar al portapapeles</h6>
+  </button>
+</div>
+
+<script type="text/javascript">
+  function c(){
+    this.expenses_id;
+    this.status = 0;
+
+    this.start = function(opts){
+      opts = opts || {};
+
+      this.expenses_id = opts.expenses_id;
+      this.back_to = opts.back_to;
+      this.payment_ticket_id = opts.payment_ticket_id;
+
+      app.liActive('expenses');
+
+      this.getInfo(function(){
+        app.pageLoading('hide');
+      })
+    }
+
+    this.getInfo = function(callback){
+      this.callback_get_info = callback;
+
+      Server.send({
+        route : [PrivateData.get('current_server_portal'),'app',"v" + app.PORTAL_VERSION,'group_current_accounts','payment_ticket_pago_mis_cuentas_info'],
+        data : {
+          payment_ticket_id: cs.payment_ticket_id
+        },
+        callback : function(data, success){
+          console.info(data);
+          if(success){
+
+            $('#link_code').html(data.link_code);
+
+            cs.link_code = data.link_code;
+
+            cs.callback_get_info();
+          }else{
+            Alert.open('Lo Sentimos','Ocurrió un error al intentar recibir los datos, por favor intenta nuevamente.','Aceptar');
+
+            app.loadScreen(app.SCREENS.EXPENSES);
+          }
+        }
+      });
+    };
+
+    this.back = function(){
+      app.loadScreen(app.SCREENS.EXPENSES_TICKET_PAYMENT);
+    };
+
+    this.copyPMC = function(){
+      cordova.plugins.clipboard.copy(cs.link_code, function(){
+        Alert.open('Código de pago','El código se copió en el portapapeles.','Continuar');
+      },function(){
+        Alert.open('Lo sentimos','Ocurrió un error al intentar copiar al portapapeles, intente nuevamente.','Acepta');
+      });
+    };
+  }
+</script>

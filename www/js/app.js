@@ -1,10 +1,10 @@
 var app = {
-  VERSION: 235,
+  VERSION: 236,
   PORTAL_VERSION: 229,
   MINIUM_VERSION_LOGUINED: 222,
-  ENV: "production",
+  ENV: "development",
   DEV_IP: "127.0.0.1",
-  onesignal_active: true,
+  onesignal_active: false,
   load_screen_ajax: false,
   current_screen: false,
   header_icon_clicks: {},

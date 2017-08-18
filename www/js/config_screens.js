@@ -633,6 +633,17 @@ app.SCREENS = {
     ],
     section_name: "Pagar",
     html: "payment_methods_siro"
+  },PAYMENT_METHODS_PAGO_MIS_CUENTAS: {
+    icon_left: [
+    {
+      icon: "chevron-left",
+      func: function(){
+        cs.back();
+      }
+    }
+    ],
+    section_name: "Pagar",
+    html: "payment_methods_pago_mis_cuentas"
   },
   ELECTRONIC_KEYS: {
     icon_left: [

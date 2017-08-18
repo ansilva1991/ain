@@ -31,6 +31,11 @@
 <script type="text/javascript">
   function c(){
     this.expenses_id;
+    this.payment_method_module_screens = {
+      "Siro" : app.SCREENS.PAYMENT_METHODS_SIRO,
+      "PagoMisCuentas" : app.SCREENS.PAYMENT_METHODS_PAGO_MIS_CUENTAS
+    };
+    this.current_payment_module = "";
 
     this.start = function(opts){
       opts = opts || {};
@@ -62,7 +67,10 @@
             $('#payment_ticket_id').html(Extends.numberToDigits(data.payment_ticket.id,5));
             $('#total').html(parseFloat(data.payment_ticket.total).toFixed(2));
             $('#block_date').html(Extends.formatDate(new Date(data.payment_ticket.block_date + "T00:00:00" + PrivateData.get('time_zone_offset')),'%yyyy/%mm/%dd'));
-            if(data.payment_ticket.payment_method_active){
+            if(data.payment_ticket.payment_method_module && cs.payment_method_module_screens[data.payment_ticket.payment_method_module]){
+
+              cs.current_payment_module = data.payment_ticket.payment_method_module;
+
               $('.expenses-ticket-payment').addClass('with_payment');
             }
 
@@ -119,7 +127,7 @@
     };
 
     this.pay = function(){
-      app.loadScreen(app.SCREENS.PAYMENT_METHODS_SIRO,{
+      app.loadScreen(cs.payment_method_module_screens[cs.current_payment_module],{
         payment_ticket_id : cs.payment_ticket_id
       });
     }
