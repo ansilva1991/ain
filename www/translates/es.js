@@ -50,7 +50,8 @@ locales["es"] = {
     my_account: "Mi Cuenta",
     electronic_keys: "Mis Llaves",
     useful_info: "Información Útil",
-    configuration: "Configuración"
+    configuration: "Configuración",
+    sign_out: "Cerrar Sesión"
   },
   screens: {
     welcome: {

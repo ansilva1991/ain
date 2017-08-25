@@ -237,7 +237,7 @@
 
     this.back = function(){
       if(this.status == "list"){
-        navigator.app.exitApp();
+        app.loadScreen(app.SCREENS.DASHBOARD);
       }else{
         this.endOpen();
       }

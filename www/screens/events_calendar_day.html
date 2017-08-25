@@ -163,6 +163,7 @@
             cs.event_place_allow_create_event_max_people = data.event_place.allow_create_event_max_people;
 
             var init_calendar = new Date(data.event_place.init_calendar);
+            var end_calendar = new Date(data.event_place.end_calendar);
 
             for(var i in data.event_place.interval_hours){
               var hour = data.event_place.interval_hours[i];
@@ -172,6 +173,14 @@
               tmp.removeAttr('id');
 
               if(date_block < init_calendar){
+                if(data.events[hour] == undefined){
+                  var tmp_disabled = $('#text_example').clone().appendTo(tmp.find('.content'));
+                  tmp_disabled.find('#text').html("No disponible");
+                  tmp_disabled.removeAttr('id');
+                  tmp_disabled.addClass('not_available');
+                  tmp_disabled.show();
+                }
+              }else if(date_block > end_calendar){
                 if(data.events[hour] == undefined){
                   var tmp_disabled = $('#text_example').clone().appendTo(tmp.find('.content'));
                   tmp_disabled.find('#text').html("No disponible");
